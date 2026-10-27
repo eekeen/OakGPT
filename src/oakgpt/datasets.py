@@ -81,7 +81,7 @@ def prepare_documents(
 
 
 def prepare_wikitext(raw: Path, output: Path, seed: int = 2026) -> dict[str, Any]:
-    import pyarrow.parquet as pq  # type: ignore[import-untyped]
+    import pyarrow.parquet as pq
 
     if output.exists():
         raise FileExistsError(output)

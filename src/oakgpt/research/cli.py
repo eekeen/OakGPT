@@ -4,6 +4,7 @@ from pathlib import Path
 
 from oakgpt.datasets import prepare_wikitext
 from oakgpt.research.experiments import run_suite
+from oakgpt.research.figures import plot_results
 from oakgpt.research.gpu import verify_gpu
 from oakgpt.research.quantization import run_quantization
 from oakgpt.research.statistics import prompt_summary
@@ -25,6 +26,10 @@ def main() -> None:
     gpu.add_argument("--preset", type=Path, default=Path("configs/train_rtx2060.json"))
     quant = commands.add_parser("quantization")
     quant.add_argument("--config", type=Path, required=True)
+    figures = commands.add_parser("figures")
+    figures.add_argument("--training", type=Path, required=True)
+    figures.add_argument("--quantization", type=Path, required=True)
+    figures.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.command == "prepare-wikitext":
         result = prepare_wikitext(args.raw, args.output, args.seed)
@@ -38,6 +43,8 @@ def main() -> None:
     elif args.command == "quantization":
         result = run_quantization(args.config)
         print(json.dumps(result["summaries"], indent=2))
+    elif args.command == "figures":
+        plot_results(args.training, args.quantization, args.output)
     else:
         print(
             json.dumps(

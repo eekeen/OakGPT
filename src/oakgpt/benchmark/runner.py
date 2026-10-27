@@ -91,6 +91,7 @@ def benchmark(
     repeats: int = 3,
     warmups: int = 1,
     gpu_index: int | None = None,
+    score_quality: bool = True,
 ) -> dict[str, Any]:
     if repeats < 1 or warmups < 0:
         raise ValueError("repeats must be positive; warmups must be non-negative")
@@ -109,7 +110,9 @@ def benchmark(
                     {
                         "sample_id": sample["id"],
                         "repeat": repeat,
-                        "quality_pass": quality_score(result["text"], sample),
+                        "quality_pass": quality_score(result["text"], sample)
+                        if score_quality
+                        else None,
                     }
                 )
                 records.append(result)
@@ -119,7 +122,9 @@ def benchmark(
 
     summary = {
         "requests": len(records),
-        "quality_pass_rate": statistics.mean(r["quality_pass"] for r in records),
+        "quality_pass_rate": statistics.mean(r["quality_pass"] for r in records)
+        if score_quality
+        else None,
         "latency_median_s": statistics.median(latencies),
         "latency_p95_s": latencies[math.ceil(0.95 * len(latencies)) - 1],
         "aggregate_tokens_per_second": sum(r["generated_tokens"] for r in records) / sum(latencies),
@@ -133,6 +138,7 @@ def benchmark(
         "generation": asdict(config),
         "warmups": warmups,
         "repeats": repeats,
+        "quality_scored": score_quality,
         "memory": memory.result(),
         "summary": summary,
         "records": records,

@@ -10,15 +10,21 @@ def prompt_summary(report: dict[str, Any]) -> dict[str, Any]:
     for record in report["records"]:
         by_prompt.setdefault(record["sample_id"], []).append(record)
     scores = [
-        statistics.mean(float(r["quality_pass"]) for r in rows) for rows in by_prompt.values()
+        statistics.mean(float(r["quality_pass"]) for r in rows if r["quality_pass"] is not None)
+        for rows in by_prompt.values()
+        if any(r["quality_pass"] is not None for r in rows)
     ]
     rng = random.Random(2026)
-    bootstrap = sorted(statistics.mean(rng.choices(scores, k=len(scores))) for _ in range(2000))
+    bootstrap = (
+        sorted(statistics.mean(rng.choices(scores, k=len(scores))) for _ in range(2000))
+        if scores
+        else []
+    )
     summary: dict[str, Any] = {
-        "unique_prompts": len(scores),
+        "unique_prompts": len(by_prompt),
         "requests": len(report["records"]),
-        "prompt_macro_accuracy": statistics.mean(scores),
-        "prompt_bootstrap_ci95": [bootstrap[49], bootstrap[1949]],
+        "prompt_macro_accuracy": statistics.mean(scores) if scores else None,
+        "prompt_bootstrap_ci95": [bootstrap[49], bootstrap[1949]] if bootstrap else None,
         "resampling_unit": "prompt; repeats averaged before resampling",
     }
     for field in ("ttft_s", "decode_tokens_per_second", "latency_s"):

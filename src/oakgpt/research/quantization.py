@@ -127,6 +127,7 @@ def run_quantization(path: Path) -> dict[str, Any]:
                         repeats=1,
                         warmups=1,
                         gpu_index=0,
+                        score_quality=settings.get("score_quality", True),
                     )
                     reports[f"{round_index}:{name}:{workload}"] = report
             order.append({"round": round_index, "model": name})
@@ -143,6 +144,7 @@ def run_quantization(path: Path) -> dict[str, Any]:
     comparisons = {
         workload: paired_quality(combined[f"Q4_K_M:{workload}"], combined[f"Q8_0:{workload}"])
         for workload in spec["workloads"]
+        if spec["workloads"][workload].get("score_quality", True)
     }
     result = {
         "environment": environment(),

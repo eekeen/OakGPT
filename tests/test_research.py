@@ -4,7 +4,7 @@ import pytest
 import torch
 
 from oakgpt.datasets import canonical, parse_articles, prepare_documents, spans
-from oakgpt.research.experiments import aggregate_runs
+from oakgpt.research.experiments import aggregate_runs, run_suite
 from oakgpt.research.statistics import paired_quality, prompt_summary
 from oakgpt.tokenization import Tokenizer
 from oakgpt.training.data import DocumentWindows
@@ -90,3 +90,46 @@ def test_seed_aggregation():
     assert group["validation_nll_sd"] > 0
     with pytest.raises(ValueError):
         aggregate_runs(rows + rows)
+
+
+@pytest.mark.integration
+def test_cpu_research_suite_and_document_training(tmp_path):
+    for name, text in [
+        ("train", "a little tree grows. " * 6),
+        ("validation", "a different forest. " * 3),
+        ("test", "a hidden meadow. " * 3),
+    ]:
+        (tmp_path / f"{name}.jsonl").write_text(json.dumps({"text": text}) + "\n")
+    config = {
+        "train_path": "train.jsonl",
+        "validation_path": "validation.jsonl",
+        "output_dir": "unused",
+        "data_format": "documents",
+        "steps": 2,
+        "batch_size": 1,
+        "eval_interval": 1,
+        "validation_max_windows": 2,
+        "model": {"d_model": 8, "n_heads": 2, "n_layers": 1, "context_length": 8},
+    }
+    (tmp_path / "base.json").write_text(json.dumps(config))
+    spec = {
+        "base_config": "base.json",
+        "output_dir": "suite",
+        "test_path": "test.jsonl",
+        "grid": {
+            "d_model": [8],
+            "n_layers": [1],
+            "positional_encoding": ["learned", "sinusoidal"],
+            "seed": [42, 43],
+        },
+    }
+    path = tmp_path / "suite.json"
+    path.write_text(json.dumps(spec))
+    result = run_suite(path)
+    assert len(result["runs"]) == 4
+    assert len(result["groups"]) == 2
+    assert len(result["selected_test_results"]) == 2
+    assert all(r["session"]["trained_tokens"] == 16 for r in result["runs"])
+    assert all(r["session"]["steps"][0]["grad_norm"] is not None for r in result["runs"])
+    with pytest.raises(FileExistsError):
+        run_suite(path)

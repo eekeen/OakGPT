@@ -56,6 +56,8 @@ class TrainConfig:
     grad_clip: float = 1.0
     eval_interval: int = 25
     cpu_threads: int = 2
+    data_format: Literal["text", "documents"] = "text"
+    validation_max_windows: int | None = None
 
     def __post_init__(self) -> None:
         if (
@@ -79,6 +81,10 @@ class TrainConfig:
             raise ValueError("device must be cpu or cuda")
         if self.precision == "fp16" and self.device != "cuda":
             raise ValueError("fp16 training requires CUDA")
+        if self.data_format not in ("text", "documents"):
+            raise ValueError("Unknown data_format")
+        if self.validation_max_windows is not None and self.validation_max_windows < 1:
+            raise ValueError("validation_max_windows must be positive or null")
 
     @classmethod
     def load(cls, path: Path) -> "TrainConfig":

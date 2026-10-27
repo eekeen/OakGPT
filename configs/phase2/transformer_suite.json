@@ -1,0 +1,6 @@
+{
+  "base_config": "train_wikitext_cuda.json",
+  "output_dir": "../../runs/phase2/transformer-suite",
+  "test_path": "../../data/external/wikitext2/prepared/test.jsonl",
+  "grid": {"n_layers": [2, 4], "d_model": [64, 128], "positional_encoding": ["learned", "sinusoidal"], "seed": [42, 43, 44]}
+}

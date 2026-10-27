@@ -1,0 +1,22 @@
+{
+  "original_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "converter_commit": "85cc432e2c8b92925f17dfb8937742541312f1d4",
+  "conversion": "BF16 safetensors -> F16 GGUF -> separate Q4_K_M and Q8_0; no imatrix",
+  "artifacts": [
+    {
+      "file": "phase2-Qwen3-1.7B-F16.gguf",
+      "sha256": "bb8feccbf2518a1e42cf7c593e861bc26f67f6e9aaf7e6d3962c30129a34b55d",
+      "bytes": 4069679008
+    },
+    {
+      "file": "phase2-Qwen3-1.7B-Q4_K_M.gguf",
+      "sha256": "f08493abe7a6566b9f4dc1106ff8ab238b3ee82189d6c42d0e7dbb1a50d751e5",
+      "bytes": 1282439072
+    },
+    {
+      "file": "phase2-Qwen3-1.7B-Q8_0.gguf",
+      "sha256": "99a05bf4126fd9173fd960b790a1ecf3c635db2903399566e03a226ee4b73e3d",
+      "bytes": 2165039008
+    }
+  ]
+}

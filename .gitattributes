@@ -1,3 +1,9 @@
 * text=auto eol=lf
 *.gguf -text
 *.pt -text
+reports/phase2/inputs/*.jsonl -text
+reports/phase2/*.json linguist-generated=true
+reports/phase2/quantization/** linguist-generated=true
+reports/phase2/conversion.log linguist-generated=true
+reports/phase2/figures/* linguist-generated=true
+output/pdf/* linguist-generated=true

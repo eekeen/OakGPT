@@ -1,0 +1,10 @@
+{
+  "output_dir": "../../runs/phase2/quantization",
+  "server_binary": "../../vendor/llama.cpp/llama-server.exe",
+  "models": {"Q4_K_M": "../../models/phase2-Qwen3-1.7B-Q4_K_M.gguf", "Q8_0": "../../models/phase2-Qwen3-1.7B-Q8_0.gguf"},
+  "rounds": 3,
+  "workloads": {
+    "short": {"dataset": "../../data/eval/heldout_reasoning_v1.jsonl", "max_new_tokens": 32},
+    "long": {"dataset": "../../data/eval/throughput_long_v1.jsonl", "max_new_tokens": 256, "score_quality": false}
+  }
+}

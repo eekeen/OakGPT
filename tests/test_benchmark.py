@@ -51,6 +51,29 @@ def test_report_and_dataset_validation(tmp_path):
     assert len(report["records"]) == 2
     assert report["memory"]["peak_bytes"] is None
     assert json.loads(output.read_text())["dataset"]["sha256"]
+    performance_only = benchmark(
+        FakeBackend(),
+        dataset,
+        tmp_path / "performance.json",
+        GenerationConfig(),
+        repeats=1,
+        score_quality=False,
+    )
+    assert performance_only["summary"]["quality_pass_rate"] is None
+    assert performance_only["records"][0]["quality_pass"] is None
+    crlf = tmp_path / "crlf.jsonl"
+    crlf.write_bytes(dataset.read_bytes().replace(b"\r\n", b"\n").replace(b"\n", b"\r\n"))
+    transport = benchmark(
+        FakeBackend(), crlf, tmp_path / "transport.json", GenerationConfig(), repeats=1
+    )
+    assert transport["dataset"]["canonical_sha256"] == report["dataset"]["canonical_sha256"]
+    lf = tmp_path / "lf.jsonl"
+    lf.write_bytes(dataset.read_bytes().replace(b"\r\n", b"\n"))
+    lf_report = benchmark(
+        FakeBackend(), lf, tmp_path / "lf-report.json", GenerationConfig(), repeats=1
+    )
+    assert lf_report["dataset"]["sha256"] != transport["dataset"]["sha256"]
+    assert lf_report["dataset"]["canonical_sha256"] == transport["dataset"]["canonical_sha256"]
     with pytest.raises(FileExistsError):
         benchmark(FakeBackend(), dataset, output, GenerationConfig())
     dataset.write_text(json.dumps(sample) + "\n" + json.dumps(sample))

@@ -67,6 +67,10 @@ def test_prompt_statistics_do_not_count_repeats_as_independent():
     assert summary["requests"] == 4
     assert summary["prompt_macro_accuracy"] == 0.5
     assert paired_quality(report, report)["difference_left_minus_right"] == 0
+    unscored = json.loads(json.dumps(report))
+    for record in unscored["records"]:
+        record["quality_pass"] = None
+    assert prompt_summary(unscored)["prompt_macro_accuracy"] is None
     changed = json.loads(json.dumps(report))
     changed["generation"]["max_new_tokens"] = 64
     with pytest.raises(ValueError):

@@ -51,6 +51,16 @@ def test_report_and_dataset_validation(tmp_path):
     assert len(report["records"]) == 2
     assert report["memory"]["peak_bytes"] is None
     assert json.loads(output.read_text())["dataset"]["sha256"]
+    performance_only = benchmark(
+        FakeBackend(),
+        dataset,
+        tmp_path / "performance.json",
+        GenerationConfig(),
+        repeats=1,
+        score_quality=False,
+    )
+    assert performance_only["summary"]["quality_pass_rate"] is None
+    assert performance_only["records"][0]["quality_pass"] is None
     with pytest.raises(FileExistsError):
         benchmark(FakeBackend(), dataset, output, GenerationConfig())
     dataset.write_text(json.dumps(sample) + "\n" + json.dumps(sample))

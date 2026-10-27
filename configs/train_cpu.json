@@ -1,0 +1,13 @@
+{
+  "train_path": "../data/train.txt",
+  "validation_path": "../data/validation.txt",
+  "output_dir": "../runs/cpu",
+  "tokenizer": "byte",
+  "model": {"context_length": 128, "d_model": 64, "n_heads": 4, "n_layers": 2, "dropout": 0.1},
+  "seed": 42,
+  "device": "cpu",
+  "steps": 50,
+  "batch_size": 4,
+  "eval_interval": 10,
+  "cpu_threads": 2
+}

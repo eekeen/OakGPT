@@ -1,0 +1,15 @@
+{
+  "train_path": "../data/train.txt",
+  "validation_path": "../data/validation.txt",
+  "output_dir": "../runs/rtx2060",
+  "tokenizer": "byte",
+  "model": {"context_length": 256, "d_model": 256, "n_heads": 8, "n_layers": 6, "dropout": 0.1},
+  "seed": 42,
+  "device": "cuda",
+  "precision": "fp16",
+  "steps": 200,
+  "batch_size": 2,
+  "gradient_accumulation": 8,
+  "eval_interval": 25,
+  "cpu_threads": 2
+}

@@ -1,0 +1,43 @@
+{
+  "config": {
+    "train_path": "D:\\Projects\\OakGPT\\data\\train.txt",
+    "validation_path": "D:\\Projects\\OakGPT\\data\\validation.txt",
+    "output_dir": "D:\\Projects\\OakGPT\\runs\\verified-cpu",
+    "tokenizer": "byte",
+    "model": {
+      "vocab_size": 259,
+      "context_length": 128,
+      "d_model": 64,
+      "n_heads": 4,
+      "n_layers": 2,
+      "ff_multiplier": 4,
+      "dropout": 0.1,
+      "positional_encoding": "learned"
+    },
+    "seed": 42,
+    "device": "cpu",
+    "precision": "fp32",
+    "steps": 50,
+    "batch_size": 4,
+    "gradient_accumulation": 1,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.1,
+    "grad_clip": 1.0,
+    "eval_interval": 10,
+    "cpu_threads": 2
+  },
+  "data_hashes": {
+    "train": "4dd71e4c9497100b6e3364030f04c7ffda8639acbf5b9f61e815a8f19d7360f1",
+    "validation": "d19696816071c154ddd05e042731c7169336936424da319b7e2cbec5a05c72a0"
+  },
+  "environment": {
+    "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "logical_cpu_count": 16,
+    "torch": "2.9.1",
+    "git_revision": "9a12d1350f886f6c04a6246be54c25f4f8115e43",
+    "git_dirty": false
+  },
+  "resumed_from": "None"
+}

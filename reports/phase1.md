@@ -52,8 +52,8 @@ substantive comparison against Qwen.
 | --- | --- | --- | --- |
 | CPU-SMOKE | Does the full scratch pipeline execute? | CPU fixture train/generate/benchmark | See verification log |
 | RESUME | Does resumed optimization preserve the trajectory? | Bit-exact CPU state comparison | Automated integration test |
-| GPU-TRAIN | Is the fp16 preset stable on RTX 2060? | 200 steps, validation, memory record | Hardware verification required |
-| QWEN-LOCAL | Does real quantized inference stream correctly? | Pinned GGUF, local server | See verification log |
+| GPU-TRAIN | Is the fp16 preset stable on RTX 2060? | 200 steps, validation, memory record | Not run: CPU PyTorch installed |
+| QWEN-LOCAL | Does real quantized inference stream correctly? | Pinned Q8_0, RTX 2060, 29/29 layers | Executed; raw evidence retained |
 | QUANT | What is the quality/latency cost of quantization? | Matched Q4_K_M/Q8_0 runs | Planned |
 
 ## Threats to validity

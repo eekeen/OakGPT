@@ -9,6 +9,45 @@ Phase 1 is an engineering baseline, not a claim to have trained a capable assist
 The included tiny original corpora exercise the pipeline; they are far too small for
 useful general language modeling. No model weights are included or downloaded implicitly.
 
+## Phase 2 research workflow
+
+Phase 2 adds a separately installed CUDA environment, physical fp16 training/resume
+verification, pinned WikiText document preprocessing, a 24-run architecture/seed study,
+and matched Q4_K_M/Q8_0 quantization experiments. Phase 1 evidence is immutable.
+See [the scientific protocol](docs/phase2-methodology.md) for definitions and limitations.
+
+```powershell
+.\.venv\Scripts\python -m pip install -e ".[dev,research]"
+powershell -NoProfile -File scripts/acquire_phase2.ps1 -Dataset
+.\.venv\Scripts\python -m oakgpt.research.cli prepare-wikitext --raw data/external/wikitext2/raw --output data/external/wikitext2/prepared
+powershell -NoProfile -File scripts/setup_cuda.ps1
+.\.venv-cuda\Scripts\python -m oakgpt.research.cli verify-gpu --output runs/phase2/gpu-verification
+.\.venv-cuda\Scripts\python -m oakgpt.research.cli suite --config configs/phase2/transformer_suite.json
+```
+
+The CUDA setup helper is specifically pinned for Windows x64 / Python 3.11. CPU CI
+does not install CUDA, download data or run large experiments. Preprocessing and unit
+tests work on CPU. All experiment outputs refuse overwriting; use a new output directory
+for subsequent runs. The data is Wikipedia-derived CC BY-SA/GFDL, independently of code licensing.
+
+Matched quantization starts from the original weights (approximately 4.1 GB download),
+not a requantized Phase 1 Q8 file. Setup needs additional local disk space:
+
+```powershell
+powershell -NoProfile -File scripts/acquire_phase2.ps1 -Qwen
+git clone --depth 1 --branch b11930 https://github.com/ggml-org/llama.cpp.git vendor/llama.cpp-source
+py -3.11 -m venv --system-site-packages .venv-convert
+.\.venv-convert\Scripts\python -m pip install transformers==4.57.1 sentencepiece==0.2.2
+powershell -NoProfile -File scripts/quantize_phase2.ps1
+.\.venv\Scripts\python -m oakgpt.research.cli quantization --config configs/phase2/quantization_suite.json
+```
+
+Conversion uses the existing CPU PyTorch/NumPy/safetensors installation; install these
+in `.venv-convert` if unavailable. This is the tested Qwen conversion environment,
+not support for every model handled by upstream's broader conversion requirements.
+Run GPU training and quantization benchmarks sequentially. The runner starts/stops its
+own loopback server on port 18081, validates model paths and retains commands/startup logs.
+
 ## Quick start: native Windows, CPU
 
 Python 3.11 or 3.12 and Git are sufficient. Run these commands in PowerShell from the

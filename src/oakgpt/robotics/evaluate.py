@@ -102,12 +102,34 @@ def run_study(config_path: Path) -> dict[str, Any]:
     spool = resolve(spec["spool"])
     all_records = []
     planners = ["baseline", *spec["models"]]
+    order = spec.get("planner_order", planners)
+    if len(order) != len(planners) or set(order) != set(planners):
+        raise ValueError("planner_order must be an exact permutation of configured planners")
     metadata = {}
+    write_new_json(
+        root / "start.json",
+        {
+            "environment": environment(),
+            "spec": spec,
+            "spec_sha256": sha256(config_path),
+            "dataset_sha256": sha256(dataset),
+            "started_at_ns": time.time_ns(),
+            "runtime_source_hashes": {
+                name: sha256(resolve(name)) for name in spec.get("runtime_sources", [])
+            },
+        },
+    )
 
     def evaluate(name: str, planner: Any) -> None:
         for row in rows:
             print(f"{name}: {row['id']}", flush=True)
-            record = {**row, "planner": name, "accepted": False, "execution": None}
+            record = {
+                **row,
+                "planner": name,
+                "accepted": False,
+                "execution": None,
+                "validation_latency_s": None,
+            }
             started = time.perf_counter()
             try:
                 raw, proposal = planner(row["instruction"])
@@ -142,7 +164,9 @@ def run_study(config_path: Path) -> dict[str, Any]:
                             receiver_now_ms=receiver_clock(spec["clock_command"]),
                         )
                         record["mission"] = mission
+                        dispatch_start = time.perf_counter()
                         record["execution"] = wait_mission(mission, spool)
+                        record["dispatch_roundtrip_s"] = time.perf_counter() - dispatch_start
             except (ValueError, RuntimeError, TimeoutError, OSError) as error:
                 if isinstance(error, ProposalError):
                     record["raw_output"] = error.raw
@@ -156,8 +180,11 @@ def run_study(config_path: Path) -> dict[str, Any]:
             all_records.append(record)
             write_new_json(root / f"{name}-{row['id']}.json", record)
 
-    evaluate("baseline", deterministic)
-    for name, model in spec["models"].items():
+    for name in order:
+        if name == "baseline":
+            evaluate(name, deterministic)
+            continue
+        model = spec["models"][name]
         with local_server(
             resolve(spec["server_binary"]),
             resolve(model),

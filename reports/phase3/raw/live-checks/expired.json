@@ -1,0 +1,33 @@
+{
+  "case": "expired",
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-0d909dee51ad44e3",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793116645738,
+    "expires_at_ms": 1793116825738,
+    "instruction": "Go to dock",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  },
+  "result": {
+    "status": "rejected",
+    "reason": "mission_expired_or_future",
+    "mission_id": null,
+    "execution_seconds": 0.019262970075942576,
+    "events": [
+      {
+        "event": "rejected",
+        "mission_id": null,
+        "wall_time_ns": 1793116845831271772,
+        "sim_time_ns": 833950000000,
+        "reason": "mission_expired_or_future"
+      }
+    ]
+  }
+}

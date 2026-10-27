@@ -1,0 +1,43 @@
+{
+  "status": "failed",
+  "reason": "scan_watchdog",
+  "mission_id": "m-59c7d84b036b46c0",
+  "execution_seconds": 6.12987363000866,
+  "events": [
+    {
+      "event": "accepted",
+      "mission_id": "m-59c7d84b036b46c0",
+      "wall_time_ns": 1793116670473919769,
+      "sim_time_ns": 676510000000
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-59c7d84b036b46c0",
+      "wall_time_ns": 1793116670481095289,
+      "sim_time_ns": 676510000000,
+      "index": 0,
+      "action": "navigate"
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-59c7d84b036b46c0",
+      "wall_time_ns": 1793116670488599399,
+      "sim_time_ns": 676550000000,
+      "distance_remaining": 0.0
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-59c7d84b036b46c0",
+      "wall_time_ns": 1793116676547167289,
+      "sim_time_ns": 682610000000,
+      "distance_remaining": 0.19571052491664886
+    },
+    {
+      "event": "failed",
+      "mission_id": "m-59c7d84b036b46c0",
+      "wall_time_ns": 1793116676568881769,
+      "sim_time_ns": 682640000000,
+      "reason": "scan_watchdog"
+    }
+  ]
+}

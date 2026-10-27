@@ -1,0 +1,113 @@
+{
+  "id": "valid-00",
+  "category": "valid",
+  "instruction": "Go to dock.",
+  "expected_accept": true,
+  "expected_steps": [
+    {
+      "action": "navigate",
+      "destination": "dock",
+      "duration_s": 0
+    }
+  ],
+  "planner": "baseline",
+  "accepted": true,
+  "execution": null,
+  "raw_output": "{\"schema_version\": 1, \"decision\": \"accept\", \"reason\": \"ok\", \"steps\": [{\"action\": \"navigate\", \"destination\": \"dock\", \"duration_s\": 0}]}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "accept",
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  },
+  "schema_valid": true,
+  "inference_latency_s": 0.0005856000352650881,
+  "validation_latency_s": 0.16079300013370812,
+  "validation": {
+    "accepted": true,
+    "frame_id": "map",
+    "mission_id": "m-3412112582b94adf",
+    "navigation_timeout_s": 30,
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0,
+        "pose": {
+          "x": 0.0,
+          "y": 0.0,
+          "yaw": 0.0
+        }
+      }
+    ]
+  },
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-3412112582b94adf",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793115738400,
+    "expires_at_ms": 1793115918400,
+    "instruction": "Go to dock.",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  },
+  "reset": {
+    "mission": {
+      "schema_version": 1,
+      "mission_id": "m-35829267fac14ef7",
+      "policy_id": "oak-room-v1",
+      "issued_at_ms": 1793115738702,
+      "expires_at_ms": 1793115918702,
+      "instruction": "Go to dock",
+      "steps": [
+        {
+          "action": "navigate",
+          "destination": "dock",
+          "duration_s": 0
+        }
+      ]
+    },
+    "result": {
+      "status": "failed",
+      "reason": "Nav2 rejected goal",
+      "mission_id": "m-35829267fac14ef7",
+      "execution_seconds": 0.043541550054214895,
+      "events": [
+        {
+          "event": "accepted",
+          "mission_id": "m-35829267fac14ef7",
+          "wall_time_ns": 1793115738803759373,
+          "sim_time_ns": 643150000000
+        },
+        {
+          "event": "step_started",
+          "mission_id": "m-35829267fac14ef7",
+          "wall_time_ns": 1793115738809974773,
+          "sim_time_ns": 643150000000,
+          "index": 0,
+          "action": "navigate"
+        },
+        {
+          "event": "failed",
+          "mission_id": "m-35829267fac14ef7",
+          "wall_time_ns": 1793115738811763163,
+          "sim_time_ns": 643190000000,
+          "reason": "Nav2 rejected goal"
+        }
+      ]
+    }
+  },
+  "error": "Environment reset failed; study aborted"
+}

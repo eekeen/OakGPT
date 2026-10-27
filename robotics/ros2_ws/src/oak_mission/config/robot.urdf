@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<robot name="oak_robot">
+  <link name="base_link"/><link name="base_scan"/>
+  <joint name="laser_fixed" type="fixed"><parent link="base_link"/><child link="base_scan"/>
+    <origin xyz="0 0 0.15" rpy="0 0 0"/></joint>
+</robot>

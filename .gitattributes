@@ -1,9 +1,15 @@
 * text=auto eol=lf
 *.gguf -text
 *.pt -text
+*.pdf binary
 reports/phase2/inputs/*.jsonl -text
 reports/phase2/*.json linguist-generated=true
 reports/phase2/quantization/** linguist-generated=true
 reports/phase2/conversion.log linguist-generated=true
 reports/phase2/figures/* linguist-generated=true
 output/pdf/* linguist-generated=true
+*.pgm -text
+cpp/third_party/* linguist-vendored=true
+reports/phase3/raw/** -text -whitespace linguist-generated=true
+reports/phase3/followup/** -text -whitespace linguist-generated=true
+reports/phase3/figures/* -whitespace linguist-generated=true

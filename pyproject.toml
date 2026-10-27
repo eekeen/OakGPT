@@ -19,6 +19,7 @@ report = ["reportlab>=4,<6", "pymupdf>=1.24,<2"]
 [project.scripts]
 oakgpt = "oakgpt.cli:main"
 oakgpt-research = "oakgpt.research.cli:main"
+oakgpt-robot = "oakgpt.robotics.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -26,6 +27,7 @@ where = ["src"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+extend-exclude = ["reports/phase3/raw"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]

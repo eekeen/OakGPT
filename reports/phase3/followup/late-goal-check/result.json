@@ -1,0 +1,110 @@
+{
+  "fixture": "delayed acceptance, fake action server, real ROS transport",
+  "acceptance_delay_s": 7,
+  "result": {
+    "status": "failed",
+    "reason": "ROS action/service timeout",
+    "mission_id": "m-a1aae5bec0da4605",
+    "execution_seconds": 5.047449570032768,
+    "events": [
+      {
+        "event": "accepted",
+        "mission_id": "m-a1aae5bec0da4605",
+        "wall_time_ns": 1793117560696507648,
+        "sim_time_ns": 24180000000
+      },
+      {
+        "event": "watchdog_armed",
+        "mission_id": "m-a1aae5bec0da4605",
+        "wall_time_ns": 1793117560699188208,
+        "sim_time_ns": 24220000000
+      },
+      {
+        "event": "step_started",
+        "mission_id": "m-a1aae5bec0da4605",
+        "wall_time_ns": 1793117560707035668,
+        "sim_time_ns": 24220000000,
+        "index": 0,
+        "action": "navigate"
+      },
+      {
+        "event": "failed",
+        "mission_id": "m-a1aae5bec0da4605",
+        "wall_time_ns": 1793117565708579838,
+        "sim_time_ns": 29230000000,
+        "reason": "ROS action/service timeout"
+      }
+    ]
+  },
+  "server_events": [
+    {
+      "event": "goal_requested",
+      "time": 1793117560.7095828
+    },
+    {
+      "event": "late_goal_accepted",
+      "time": 1793117567.7098246
+    },
+    {
+      "event": "late_goal_canceled",
+      "time": 1793117567.811661
+    }
+  ],
+  "watchdog_events": [
+    {
+      "event": "startup_cancel",
+      "wall_time_ns": 1793117557578606778,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793117565878602258,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793117566078648138,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793117566278566938,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793117566478682658,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793117566678655368,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793117566878615118,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793117567078598448,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793117567278565578,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793117567478600928,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793117567678590918,
+      "canceling": 0
+    }
+  ]
+}

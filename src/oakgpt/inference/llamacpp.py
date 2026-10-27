@@ -16,6 +16,7 @@ class LlamaCppBackend:
         timeout: float = 120,
         prompt_format: str = "qwen3",
         identity: dict[str, Any] | None = None,
+        json_schema: dict[str, Any] | None = None,
     ) -> None:
         parsed = urlsplit(url)
         if (
@@ -34,6 +35,7 @@ class LlamaCppBackend:
         self.timeout = timeout
         self.prompt_format = prompt_format
         self.identity = identity or {}
+        self.json_schema = json_schema
         # Never route local prompts through environment-configured HTTP proxies.
         self.opener = build_opener(ProxyHandler({}))
 
@@ -88,6 +90,8 @@ class LlamaCppBackend:
             "cache_prompt": False,
             "return_tokens": True,
         }
+        if self.json_schema is not None:
+            payload["json_schema"] = self.json_schema
         request = Request(
             self.url + "/completion",
             data=json.dumps(payload).encode(),

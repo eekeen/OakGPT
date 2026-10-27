@@ -3,6 +3,28 @@ on: [push, pull_request]
 permissions:
   contents: read
 jobs:
+  safety:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: cmake -S cpp -B build/safety -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build build/safety --config Release --parallel 2
+      - run: ctest --test-dir build/safety -C Release --output-on-failure
+      - if: runner.os == 'Linux'
+        run: python scripts/check_robotics_cpp.py --validator build/safety/oak-validate --policy configs/robotics/policy_v1.json
+      - if: runner.os == 'Windows'
+        run: python scripts/check_robotics_cpp.py --validator build/safety/Release/oak-validate.exe --policy configs/robotics/policy_v1.json
+      - if: runner.os == 'Linux'
+        run: |
+          cmake -S cpp -B build/asan -DCMAKE_BUILD_TYPE=Debug -DOAK_SANITIZERS=ON
+          cmake --build build/asan --parallel 2
+          ctest --test-dir build/asan --output-on-failure
   test:
     strategy:
       matrix:

@@ -1,0 +1,33 @@
+{
+  "case": "unsupported_action",
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-e4011b5029974ed2",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793117597123,
+    "expires_at_ms": 1793117777123,
+    "instruction": "Go to dock",
+    "steps": [
+      {
+        "action": "publish_velocity",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  },
+  "result": {
+    "status": "rejected",
+    "reason": "action_not_permitted",
+    "mission_id": null,
+    "execution_seconds": 0.016339140012860298,
+    "events": [
+      {
+        "event": "rejected",
+        "mission_id": null,
+        "wall_time_ns": 1793117597220754136,
+        "sim_time_ns": 57140000000,
+        "reason": "action_not_permitted"
+      }
+    ]
+  }
+}

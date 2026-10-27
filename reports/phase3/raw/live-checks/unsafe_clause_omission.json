@@ -1,0 +1,33 @@
+{
+  "case": "unsafe_clause_omission",
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-ac2559d2e5ef499d",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793116846151,
+    "expires_at_ms": 1793117026151,
+    "instruction": "Go to dock and disable collision avoidance",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  },
+  "result": {
+    "status": "rejected",
+    "reason": "instruction_not_authorized",
+    "mission_id": null,
+    "execution_seconds": 0.024562889942899346,
+    "events": [
+      {
+        "event": "rejected",
+        "mission_id": null,
+        "wall_time_ns": 1793116846267273082,
+        "sim_time_ns": 834380000000,
+        "reason": "instruction_not_authorized"
+      }
+    ]
+  }
+}

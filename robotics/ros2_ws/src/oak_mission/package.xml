@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>oak_mission</name><version>0.1.0</version>
+  <description>Validated local-language missions for a simulated Nav2 robot.</description>
+  <maintainer email="eekeen@users.noreply.github.com">eekeen</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>ament_python</buildtool_depend>
+  <exec_depend>rclpy</exec_depend><exec_depend>nav2_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend><exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend><exec_depend>tf2_ros</exec_depend>
+  <exec_depend>action_msgs</exec_depend><exec_depend>ament_index_python</exec_depend>
+  <exec_depend>nav2_bringup</exec_depend><exec_depend>ros_gz_sim</exec_depend>
+  <exec_depend>ros_gz_bridge</exec_depend><exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>launch</exec_depend><exec_depend>launch_ros</exec_depend>
+  <export><build_type>ament_python</build_type></export>
+</package>

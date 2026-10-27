@@ -38,7 +38,7 @@ def main():
             "seed": args.seed,
             "planner_orders": orders,
             "environment": environment(),
-            "purpose": "Final Phase 3 reproduction; repeated scenarios are paired, not new examples",
+            "purpose": "Final-runtime reproduction; repeated scenarios remain paired",
             "historical_study_sha256": sha256(root / "reports/phase3/raw/study.json"),
         },
     )

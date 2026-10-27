@@ -44,6 +44,7 @@ class MissionExecutor(Node):
         self.active_mission = None
         self.acknowledged_lease = None
         self.watchdog_ready = False
+        self.watchdog_received = 0.0
         self.create_subscription(
             Bool,
             "oak/watchdog_ready",
@@ -57,12 +58,15 @@ class MissionExecutor(Node):
         self.scan = None
         self.scan_received = 0.0
         self.create_subscription(LaserScan, "scan", self.receive_scan, qos_profile_sensor_data)
-        self.faulted = bool(list((spool / "inflight").glob("*.json")))
+        self.faulted = bool(list((spool / "inflight").glob("*.json"))) or bool(
+            self.ledger.execute("SELECT 1 FROM missions WHERE status='inflight' LIMIT 1").fetchone()
+        )
         self.current = None
         self.history = []
         self.last_feedback = 0.0
 
     def watchdog_status(self, message):
+        self.watchdog_received = time.monotonic()
         if self.watchdog_ready and not message.data:
             self.faulted = True
         self.watchdog_ready = message.data
@@ -157,14 +161,49 @@ class MissionExecutor(Node):
             self.last_feedback = time.monotonic()
 
     def live(self, mission):
-        if self.faulted or not self.watchdog_ready:
+        if self.faulted or not self.watchdog_ready or time.monotonic() - self.watchdog_received > 1:
+            self.faulted = True
             raise RuntimeError("watchdog_not_ready_or_faulted")
+        if not self.spool.is_dir():
+            self.faulted = True
+            raise RuntimeError("spool_unavailable")
         if (self.spool / "STOP").exists():
             raise RuntimeError("operator_stop")
         if time.time_ns() // 1000000 >= mission["expires_at_ms"]:
             raise TimeoutError("mission_expired")
         if time.monotonic() - self.scan_received > 2:
+            self.faulted = True
             raise RuntimeError("scan_watchdog")
+        scan_age = (
+            self.get_clock().now() - Time.from_msg(self.scan.header.stamp)
+        ).nanoseconds / 1e9
+        if not -0.2 <= scan_age <= 1:
+            self.faulted = True
+            raise RuntimeError("scan_timestamp_watchdog")
+        if (
+            self.scan.header.frame_id != "base_scan"
+            or not 0 < len(self.scan.ranges) <= 4096
+            or not math.isfinite(self.scan.range_min)
+            or not math.isfinite(self.scan.range_max)
+            or not 0 < self.scan.range_min < self.scan.range_max
+            or not any(
+                math.isfinite(r) and self.scan.range_min <= r <= self.scan.range_max
+                for r in self.scan.ranges
+            )
+        ):
+            self.faulted = True
+            raise RuntimeError("scan_invalid")
+        try:
+            transform = self.tf.lookup_transform("map", "base_link", Time())
+            tf_age = (
+                self.get_clock().now() - Time.from_msg(transform.header.stamp)
+            ).nanoseconds / 1e9
+            if not -0.2 <= tf_age <= 1:
+                raise RuntimeError("tf_timestamp_watchdog")
+        except (TransformException, RuntimeError) as error:
+            self.get_logger().error(f"TF watchdog: {error}")
+            self.faulted = True
+            raise RuntimeError("tf_watchdog") from None
 
     def navigate(self, step, mission, timeout):
         if not self.navigation.wait_for_server(timeout_sec=3):
@@ -195,6 +234,9 @@ class MissionExecutor(Node):
         try:
             while not result.done():
                 self.live(mission)
+                if not self.navigation.server_is_ready():
+                    self.faulted = True
+                    raise RuntimeError("navigation_server_lost")
                 if time.monotonic() > deadline:
                     raise TimeoutError("navigation_deadline")
                 rclpy.spin_once(self, timeout_sec=0.05)
@@ -333,6 +375,7 @@ def main():
                 node.get_clock().now().nanoseconds == 0
                 or node.scan is None
                 or not node.watchdog_ready
+                or not node.tf.can_transform("map", "base_link", Time())
             ):
                 continue
             for path in sorted((args.spool / "pending").glob("*.json")):

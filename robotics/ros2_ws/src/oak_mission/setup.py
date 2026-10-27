@@ -16,6 +16,8 @@ setup(
         "console_scripts": [
             "mission_executor = oak_mission.executor:main",
             "mission_watchdog = oak_mission.watchdog:main",
+            "velocity_guard = oak_mission.velocity_guard:main",
+            "mission_observer = oak_mission.observer:main",
         ]
     },
 )

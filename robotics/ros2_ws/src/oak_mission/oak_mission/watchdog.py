@@ -27,6 +27,7 @@ class Watchdog(Node):
         self.expires = 0
         self.last = 0
         self.pending = None
+        self.pending_since = 0.0
         self.initialized = False
         self.latched = False
         self.create_timer(0.1, self.check)
@@ -69,7 +70,24 @@ class Watchdog(Node):
         )
         if expired:
             self.latched = True
+        self.ready.publish(
+            Bool(data=self.initialized and not self.latched and self.client.service_is_ready())
+        )
         if self.pending is not None:
+            if not self.pending.done() and time.monotonic() - self.pending_since > 2:
+                self.latched = True
+                self.pending = None
+                self.publisher.publish(
+                    String(
+                        data=json.dumps(
+                            {
+                                "event": "cancel_timeout",
+                                "wall_time_ns": time.time_ns(),
+                            }
+                        )
+                    )
+                )
+                return
             if self.pending.done():
                 try:
                     response = self.pending.result()
@@ -98,6 +116,7 @@ class Watchdog(Node):
             return
         if (not self.initialized or self.latched) and self.client.service_is_ready():
             self.pending = self.client.call_async(CancelGoal.Request())
+            self.pending_since = time.monotonic()
             if self.latched:
                 self.ready.publish(Bool(data=False))
 

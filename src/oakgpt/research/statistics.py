@@ -29,6 +29,17 @@ def prompt_summary(report: dict[str, Any]) -> dict[str, Any]:
         ]
         summary[field + "_prompt_median"] = statistics.median(medians) if medians else None
         summary[field + "_prompt_sd"] = statistics.stdev(medians) if len(medians) > 1 else None
+        rounds: dict[int, list[float]] = {}
+        for record in report["records"]:
+            if record[field] is not None:
+                rounds.setdefault(record.get("round", record.get("repeat", 0)), []).append(
+                    float(record[field])
+                )
+        round_medians = [statistics.median(values) for _, values in sorted(rounds.items())]
+        summary[field + "_round_medians"] = round_medians
+        summary[field + "_round_median_sd"] = (
+            statistics.stdev(round_medians) if len(round_medians) > 1 else None
+        )
     return summary
 
 

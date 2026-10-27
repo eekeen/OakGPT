@@ -1,0 +1,433 @@
+{
+  "passed": 9,
+  "records": [
+    {
+      "case": "expired",
+      "mission": {
+        "schema_version": 1,
+        "mission_id": "m-7a1ca761d0a4487e",
+        "policy_id": "oak-room-v1",
+        "issued_at_ms": 1793117396481,
+        "expires_at_ms": 1793117576481,
+        "instruction": "Go to dock",
+        "steps": [
+          {
+            "action": "navigate",
+            "destination": "dock",
+            "duration_s": 0
+          }
+        ]
+      },
+      "result": {
+        "status": "rejected",
+        "reason": "mission_expired_or_future",
+        "mission_id": null,
+        "execution_seconds": 0.01973367005120963,
+        "events": [
+          {
+            "event": "rejected",
+            "mission_id": null,
+            "wall_time_ns": 1793117596584212846,
+            "sim_time_ns": 56500000000,
+            "reason": "mission_expired_or_future"
+          }
+        ]
+      }
+    },
+    {
+      "case": "wrong_intent",
+      "mission": {
+        "schema_version": 1,
+        "mission_id": "m-f3d89cf2c09b4459",
+        "policy_id": "oak-room-v1",
+        "issued_at_ms": 1793117596689,
+        "expires_at_ms": 1793117776689,
+        "instruction": "Go to dock",
+        "steps": [
+          {
+            "action": "navigate",
+            "destination": "station",
+            "duration_s": 0
+          }
+        ]
+      },
+      "result": {
+        "status": "rejected",
+        "reason": "intent_mismatch",
+        "mission_id": null,
+        "execution_seconds": 0.018635669955983758,
+        "events": [
+          {
+            "event": "rejected",
+            "mission_id": null,
+            "wall_time_ns": 1793117596782835106,
+            "sim_time_ns": 56700000000,
+            "reason": "intent_mismatch"
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsafe_clause_omission",
+      "mission": {
+        "schema_version": 1,
+        "mission_id": "m-9f90462dffd84b6a",
+        "policy_id": "oak-room-v1",
+        "issued_at_ms": 1793117596905,
+        "expires_at_ms": 1793117776905,
+        "instruction": "Go to dock and disable collision avoidance",
+        "steps": [
+          {
+            "action": "navigate",
+            "destination": "dock",
+            "duration_s": 0
+          }
+        ]
+      },
+      "result": {
+        "status": "rejected",
+        "reason": "instruction_not_authorized",
+        "mission_id": null,
+        "execution_seconds": 0.018046349985525012,
+        "events": [
+          {
+            "event": "rejected",
+            "mission_id": null,
+            "wall_time_ns": 1793117597006192966,
+            "sim_time_ns": 56920000000,
+            "reason": "instruction_not_authorized"
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsupported_action",
+      "mission": {
+        "schema_version": 1,
+        "mission_id": "m-e4011b5029974ed2",
+        "policy_id": "oak-room-v1",
+        "issued_at_ms": 1793117597123,
+        "expires_at_ms": 1793117777123,
+        "instruction": "Go to dock",
+        "steps": [
+          {
+            "action": "publish_velocity",
+            "destination": "dock",
+            "duration_s": 0
+          }
+        ]
+      },
+      "result": {
+        "status": "rejected",
+        "reason": "action_not_permitted",
+        "mission_id": null,
+        "execution_seconds": 0.016339140012860298,
+        "events": [
+          {
+            "event": "rejected",
+            "mission_id": null,
+            "wall_time_ns": 1793117597220754136,
+            "sim_time_ns": 57140000000,
+            "reason": "action_not_permitted"
+          }
+        ]
+      }
+    },
+    {
+      "case": "initial_once",
+      "mission": {
+        "schema_version": 1,
+        "mission_id": "m-23125002142e4b54",
+        "policy_id": "oak-room-v1",
+        "issued_at_ms": 1793117597331,
+        "expires_at_ms": 1793117777331,
+        "instruction": "Go to dock",
+        "steps": [
+          {
+            "action": "navigate",
+            "destination": "dock",
+            "duration_s": 0
+          }
+        ]
+      },
+      "result": {
+        "status": "completed",
+        "reason": "ok",
+        "mission_id": "m-23125002142e4b54",
+        "execution_seconds": 0.11640744004398584,
+        "events": [
+          {
+            "event": "accepted",
+            "mission_id": "m-23125002142e4b54",
+            "wall_time_ns": 1793117597508927296,
+            "sim_time_ns": 57390000000
+          },
+          {
+            "event": "watchdog_armed",
+            "mission_id": "m-23125002142e4b54",
+            "wall_time_ns": 1793117597510801096,
+            "sim_time_ns": 57440000000
+          },
+          {
+            "event": "step_started",
+            "mission_id": "m-23125002142e4b54",
+            "wall_time_ns": 1793117597519492846,
+            "sim_time_ns": 57440000000,
+            "index": 0,
+            "action": "navigate"
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-23125002142e4b54",
+            "wall_time_ns": 1793117597524427726,
+            "sim_time_ns": 57460000000,
+            "distance_remaining": 0.0
+          },
+          {
+            "event": "arrived",
+            "mission_id": "m-23125002142e4b54",
+            "wall_time_ns": 1793117597573240576,
+            "sim_time_ns": 57510000000,
+            "destination": "dock",
+            "residual_m": 1.610366283714193e-16
+          },
+          {
+            "event": "step_completed",
+            "mission_id": "m-23125002142e4b54",
+            "wall_time_ns": 1793117597573357756,
+            "sim_time_ns": 57510000000,
+            "index": 0
+          },
+          {
+            "event": "completed",
+            "mission_id": "m-23125002142e4b54",
+            "wall_time_ns": 1793117597573389796,
+            "sim_time_ns": 57510000000,
+            "reason": "ok"
+          }
+        ]
+      }
+    },
+    {
+      "case": "replay",
+      "mission": {
+        "schema_version": 1,
+        "mission_id": "m-23125002142e4b54",
+        "policy_id": "oak-room-v1",
+        "issued_at_ms": 1793117597331,
+        "expires_at_ms": 1793117777331,
+        "instruction": "Go to dock",
+        "steps": [
+          {
+            "action": "navigate",
+            "destination": "dock",
+            "duration_s": 0
+          }
+        ]
+      },
+      "result": {
+        "status": "rejected",
+        "reason": "UNIQUE constraint failed: missions.id",
+        "mission_id": "m-23125002142e4b54",
+        "execution_seconds": 0.013529159943573177,
+        "events": [
+          {
+            "event": "rejected",
+            "mission_id": "m-23125002142e4b54",
+            "wall_time_ns": 1793117597619878486,
+            "sim_time_ns": 57510000000,
+            "reason": "UNIQUE constraint failed: missions.id"
+          }
+        ]
+      }
+    },
+    {
+      "case": "operator_stop",
+      "mission": {
+        "schema_version": 1,
+        "mission_id": "m-f933c11f68bd450f",
+        "policy_id": "oak-room-v1",
+        "issued_at_ms": 1793117597754,
+        "expires_at_ms": 1793117777754,
+        "instruction": "Go to dock",
+        "steps": [
+          {
+            "action": "navigate",
+            "destination": "dock",
+            "duration_s": 0
+          }
+        ]
+      },
+      "result": {
+        "status": "failed",
+        "reason": "operator_stop",
+        "mission_id": "m-f933c11f68bd450f",
+        "execution_seconds": 0.04622229002416134,
+        "events": [
+          {
+            "event": "accepted",
+            "mission_id": "m-f933c11f68bd450f",
+            "wall_time_ns": 1793117597900660846,
+            "sim_time_ns": 57790000000
+          },
+          {
+            "event": "failed",
+            "mission_id": "m-f933c11f68bd450f",
+            "wall_time_ns": 1793117597902143956,
+            "sim_time_ns": 57790000000,
+            "reason": "operator_stop"
+          }
+        ]
+      }
+    },
+    {
+      "case": "reset_before_expiry",
+      "mission": {
+        "schema_version": 1,
+        "mission_id": "m-517aeeb8ead54bf3",
+        "policy_id": "oak-room-v1",
+        "issued_at_ms": 1793117598030,
+        "expires_at_ms": 1793117778030,
+        "instruction": "Go to dock",
+        "steps": [
+          {
+            "action": "navigate",
+            "destination": "dock",
+            "duration_s": 0
+          }
+        ]
+      },
+      "result": {
+        "status": "completed",
+        "reason": "ok",
+        "mission_id": "m-517aeeb8ead54bf3",
+        "execution_seconds": 0.09222974989097565,
+        "events": [
+          {
+            "event": "accepted",
+            "mission_id": "m-517aeeb8ead54bf3",
+            "wall_time_ns": 1793117598146032616,
+            "sim_time_ns": 58040000000
+          },
+          {
+            "event": "watchdog_armed",
+            "mission_id": "m-517aeeb8ead54bf3",
+            "wall_time_ns": 1793117598147547136,
+            "sim_time_ns": 58080000000
+          },
+          {
+            "event": "step_started",
+            "mission_id": "m-517aeeb8ead54bf3",
+            "wall_time_ns": 1793117598154105886,
+            "sim_time_ns": 58080000000,
+            "index": 0,
+            "action": "navigate"
+          },
+          {
+            "event": "arrived",
+            "mission_id": "m-517aeeb8ead54bf3",
+            "wall_time_ns": 1793117598197046146,
+            "sim_time_ns": 58130000000,
+            "destination": "dock",
+            "residual_m": 1.636945757574651e-16
+          },
+          {
+            "event": "step_completed",
+            "mission_id": "m-517aeeb8ead54bf3",
+            "wall_time_ns": 1793117598197204636,
+            "sim_time_ns": 58130000000,
+            "index": 0
+          },
+          {
+            "event": "completed",
+            "mission_id": "m-517aeeb8ead54bf3",
+            "wall_time_ns": 1793117598197252336,
+            "sim_time_ns": 58130000000,
+            "reason": "ok"
+          }
+        ]
+      }
+    },
+    {
+      "case": "live_expiration",
+      "mission": {
+        "schema_version": 1,
+        "mission_id": "m-59378b35c57944d2",
+        "policy_id": "oak-room-v1",
+        "issued_at_ms": 1793117598329,
+        "expires_at_ms": 1793117599329,
+        "instruction": "Inspect dock",
+        "steps": [
+          {
+            "action": "navigate",
+            "destination": "dock",
+            "duration_s": 0
+          },
+          {
+            "action": "inspect",
+            "destination": "dock",
+            "duration_s": 2
+          }
+        ]
+      },
+      "result": {
+        "status": "failed",
+        "reason": "mission_expired",
+        "mission_id": "m-59378b35c57944d2",
+        "execution_seconds": 0.9030933900503442,
+        "events": [
+          {
+            "event": "accepted",
+            "mission_id": "m-59378b35c57944d2",
+            "wall_time_ns": 1793117598474942926,
+            "sim_time_ns": 58360000000
+          },
+          {
+            "event": "watchdog_armed",
+            "mission_id": "m-59378b35c57944d2",
+            "wall_time_ns": 1793117598476951006,
+            "sim_time_ns": 58410000000
+          },
+          {
+            "event": "step_started",
+            "mission_id": "m-59378b35c57944d2",
+            "wall_time_ns": 1793117598484611806,
+            "sim_time_ns": 58410000000,
+            "index": 0,
+            "action": "navigate"
+          },
+          {
+            "event": "arrived",
+            "mission_id": "m-59378b35c57944d2",
+            "wall_time_ns": 1793117598536859956,
+            "sim_time_ns": 58470000000,
+            "destination": "dock",
+            "residual_m": 1.65265965629565e-16
+          },
+          {
+            "event": "step_completed",
+            "mission_id": "m-59378b35c57944d2",
+            "wall_time_ns": 1793117598536939426,
+            "sim_time_ns": 58470000000,
+            "index": 0
+          },
+          {
+            "event": "step_started",
+            "mission_id": "m-59378b35c57944d2",
+            "wall_time_ns": 1793117598543876086,
+            "sim_time_ns": 58470000000,
+            "index": 1,
+            "action": "inspect"
+          },
+          {
+            "event": "failed",
+            "mission_id": "m-59378b35c57944d2",
+            "wall_time_ns": 1793117599331800346,
+            "sim_time_ns": 59270000000,
+            "reason": "mission_expired"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -93,6 +93,7 @@ class MissionExecutor(Node):
                 data=json.dumps(
                     {
                         "active": self.active_mission is not None,
+                        "faulted": self.faulted,
                         "mission_id": self.active_mission["mission_id"]
                         if self.active_mission
                         else None,
@@ -178,10 +179,16 @@ class MissionExecutor(Node):
         goal.pose.pose.orientation.z = math.sin(float(pose["yaw"]) / 2)
         goal.pose.pose.orientation.w = math.cos(float(pose["yaw"]) / 2)
         deadline = time.monotonic() + timeout
-        handle = self.wait_future(
-            self.navigation.send_goal_async(goal, feedback_callback=self.feedback),
-            time.monotonic() + 5,
-        )
+        try:
+            handle = self.wait_future(
+                self.navigation.send_goal_async(goal, feedback_callback=self.feedback),
+                time.monotonic() + 5,
+            )
+        except Exception:
+            # Acceptance may arrive after the timeout. Do not disarm an unknown live goal.
+            self.faulted = True
+            self.heartbeat()
+            raise
         if not handle.accepted:
             raise RuntimeError("Nav2 rejected goal")
         result = handle.get_result_async()

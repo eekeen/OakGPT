@@ -38,6 +38,10 @@ class Watchdog(Node):
             value = json.loads(message.data)
             if type(value["active"]) is not bool or type(value["expires_at_ms"]) is not int:
                 raise ValueError("heartbeat_types")
+            if type(value.get("faulted")) is not bool:
+                raise ValueError("heartbeat_fault_type")
+            if value["faulted"]:
+                self.latched = True
             if value["active"] and not re.fullmatch("m-[0-9a-f]{16}", value["mission_id"]):
                 raise ValueError("heartbeat_identity")
             if value["active"] and value["expires_at_ms"] > time.time_ns() // 1000000 + 180000:

@@ -27,6 +27,9 @@ def main():
     study = json.loads((root / "raw/study.json").read_text(encoding="utf-8"))
     faults = json.loads((root / "raw/live-checks/summary.json").read_text(encoding="utf-8"))
     heartbeat = json.loads((root / "raw/watchdog-check.json").read_text(encoding="utf-8"))
+    late_goal = json.loads((root / "followup/late-goal-check-v2/result.json").read_text())
+    assert late_goal["result"]["status"] == "failed"
+    assert any(e["event"] == "late_goal_canceled" for e in late_goal["server_events"])
     summaries = study["summaries"]
     statements = []
     for name, s in summaries.items():
@@ -108,6 +111,10 @@ def main():
         (
             "",
             "The 180-case nominal study used core commit 2376066 with documentation/test work in progress. Subsequent fault injection exposed a race when the executor was suspended before its first active heartbeat. The watchdog did not observe a live lease, so the first fault check failed. The final implementation requires acknowledgement of the exact mission ID and expiration before any navigation dispatch. The successful suspension test and nine live checks verify this revision separately. Nominal timing measurements were not rerun after that barrier was added and must not be presented as final-revision latency measurements. Failed fault logs and the original mission result are retained.",
+        ),
+        (
+            "",
+            "A further review hardened uncertain goal acceptance: executor faults remain visible in inactive heartbeats, keeping independent cancellation latched. A namespaced ROS fixture delayed acceptance seven seconds, beyond the five-second executor bound. The executor failed closed and the watchdog subsequently cancelled the late accepted goal. This fixture used an explicit fake action server with no motor publisher; it is not a scored navigation trial. Nine actual Gazebo regression checks passed again. The first fixture stopped observing before acknowledgement delivery; its failed assertion and the corrected rerun are both retained in the separate follow-up archive. Original nominal records were not rewritten.",
         ),
         (
             "VII. REPRODUCIBILITY AND NEXT WORK",

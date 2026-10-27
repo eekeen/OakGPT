@@ -118,8 +118,10 @@ A separate wall-clock watchdog cancels all navigation goals on lost active heart
 goals before readiness. Before dispatch, the executor must receive acknowledgement of
 its exact mission ID and expiration from the watchdog. This closes the failure window
 before the first periodic heartbeat; a publish alone did not suffice in fault testing.
-Cancellation failure latches the executor. This reduces risk
-from executor failure; it is not redundant physical braking. The ROS graph, installed
+Cancellation failure latches the executor. An explicit fault flag keeps the watchdog latched even after
+the executor stops reporting an active mission; uncertain goal acceptance cannot disarm
+cancellation. The delayed-acceptance ROS fixture tests that race independently of navigation.
+The watchdog does not provide redundant physical braking. The ROS graph, installed
 binaries, policy, spool directory permissions and operator are trusted. There is no DDS
 authentication, hostile-local-user defense, hard real-time scheduling, physical e-stop,
 formal proof, dynamic-obstacle guarantee or real-robot approval. Network isolation is

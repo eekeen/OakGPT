@@ -1,0 +1,35 @@
+{
+  "status": "failed",
+  "reason": "ROS action/service timeout",
+  "mission_id": "m-a1aae5bec0da4605",
+  "execution_seconds": 5.047449570032768,
+  "events": [
+    {
+      "event": "accepted",
+      "mission_id": "m-a1aae5bec0da4605",
+      "wall_time_ns": 1793117560696507648,
+      "sim_time_ns": 24180000000
+    },
+    {
+      "event": "watchdog_armed",
+      "mission_id": "m-a1aae5bec0da4605",
+      "wall_time_ns": 1793117560699188208,
+      "sim_time_ns": 24220000000
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-a1aae5bec0da4605",
+      "wall_time_ns": 1793117560707035668,
+      "sim_time_ns": 24220000000,
+      "index": 0,
+      "action": "navigate"
+    },
+    {
+      "event": "failed",
+      "mission_id": "m-a1aae5bec0da4605",
+      "wall_time_ns": 1793117565708579838,
+      "sim_time_ns": 29230000000,
+      "reason": "ROS action/service timeout"
+    }
+  ]
+}

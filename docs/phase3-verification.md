@@ -79,6 +79,18 @@ figures describe the earlier nominal core, while the fault records verify the re
 Keep that distinction in any portfolio claims. The final expiration test intentionally
 latched the watchdog; all project ROS/Gazebo processes were stopped after verification.
 
+Final review additionally identified uncertainty when a Nav2 acceptance response arrives
+after the executor timeout. The executor now latches a fault and propagates it even in
+idle heartbeats, so cancellation continues. A namespaced ROS action-server fixture delayed
+acceptance by seven seconds (beyond the five-second executor bound); the result failed
+as expected and the watchdog subsequently acknowledged cancellation of the late goal.
+This fixture publishes no velocities and is **not** a scored Gazebo navigation mission.
+Nine live Gazebo checks passed again with this protocol. The first fixture assertion
+stopped observation before the asynchronous cancellation response arrived; the server
+had cancelled already. The observation condition was corrected, the rerun passed, and
+both records are retained in [follow-up evidence](../reports/phase3/followup/README.md).
+The original raw archive and its manifest were not rewritten.
+
 Earlier setup failures are retained too: Windows/WSL clock skew caused an expired mission;
 the receiver-clock handshake fixed it. An orphaned Gazebo server caused conflicting
 simulation clocks and a first-reset rejection, so that attempt aborted and was excluded

@@ -42,6 +42,7 @@ def run_suite(path: Path) -> dict[str, Any]:
             config.data_format,
         )
         full_validation = evaluate(backend.model, validation, config.batch_size, backend.device)
+        del backend
         session = json.loads((last.parent / f"session-1-{config.steps}.json").read_text())
         metrics = [
             json.loads(line) for line in (last.parent / "metrics.jsonl").read_text().splitlines()

@@ -111,7 +111,8 @@ def plot_results(training: Path, quantization: Path, output: Path) -> None:
                 "training": str(training),
                 "quantization": str(quantization),
                 "bands": "sample SD over independent training seeds",
-                "quant_bars": "median across prompt-wise timing medians; see raw rounds for variability",
+                "quant_bars": "median across prompt-wise timing medians; "
+                "see raw rounds for variability",
             },
             indent=2,
         ),

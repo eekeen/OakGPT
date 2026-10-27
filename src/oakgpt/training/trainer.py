@@ -60,6 +60,8 @@ def train(config: TrainConfig, resume: Path | None = None) -> Path:
     device = torch.device(config.device)
     if device.type == "cuda" and not torch.cuda.is_available():
         raise RuntimeError("CUDA unavailable; use a CPU config or install a CUDA PyTorch wheel")
+    if device.type == "cuda":
+        torch.cuda.empty_cache()
     output = Path(config.output_dir)
     output.mkdir(parents=True, exist_ok=True)
     if resume is None and (output / "last.pt").exists():

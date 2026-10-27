@@ -13,9 +13,11 @@ dependencies = ["torch>=2.6,<3"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.11,<1", "mypy>=1.15,<2", "build>=1,<2"]
+research = ["pyarrow>=18,<24", "matplotlib>=3.9,<4"]
 
 [project.scripts]
 oakgpt = "oakgpt.cli:main"
+oakgpt-research = "oakgpt.research.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

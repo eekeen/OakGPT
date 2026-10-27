@@ -1,0 +1,17 @@
+{
+  "train_path": "../../data/external/wikitext2/prepared/train.jsonl",
+  "validation_path": "../../data/external/wikitext2/prepared/validation.jsonl",
+  "output_dir": "../../runs/phase2/training",
+  "data_format": "documents",
+  "tokenizer": "byte",
+  "model": {"context_length": 128, "d_model": 64, "n_heads": 4, "n_layers": 2, "dropout": 0.1},
+  "seed": 42,
+  "device": "cuda",
+  "precision": "fp16",
+  "steps": 80,
+  "batch_size": 4,
+  "gradient_accumulation": 2,
+  "eval_interval": 20,
+  "validation_max_windows": 64,
+  "cpu_threads": 2
+}

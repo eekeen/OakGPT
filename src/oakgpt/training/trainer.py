@@ -4,20 +4,21 @@ import json
 import math
 import os
 import random
+import time
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
 import torch
 from torch.amp.grad_scaler import GradScaler
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Subset
 
 from oakgpt.config import TrainConfig
 from oakgpt.model import TransformerLM
 from oakgpt.provenance import environment, sha256
 from oakgpt.tokenization import Tokenizer
 from oakgpt.training.checkpoint import load_checkpoint, save_checkpoint
-from oakgpt.training.data import TokenWindows
+from oakgpt.training.data import DocumentWindows, TokenWindows, load_windows, read_documents
 
 
 def seed_everything(seed: int) -> None:
@@ -32,13 +33,18 @@ def seed_everything(seed: int) -> None:
 
 @torch.no_grad()
 def evaluate(
-    model: TransformerLM, data: TokenWindows, batch_size: int, device: torch.device
+    model: TransformerLM,
+    data: TokenWindows | DocumentWindows,
+    batch_size: int,
+    device: torch.device,
+    max_windows: int | None = None,
 ) -> dict[str, float | int]:
     previous = model.training
     model.eval()
     total_loss, count = 0.0, 0
     try:
-        for inputs, targets in DataLoader(data, batch_size=batch_size, shuffle=False):
+        selected = Subset(data, range(min(max_windows, len(data)))) if max_windows else data
+        for inputs, targets in DataLoader(selected, batch_size=batch_size, shuffle=False):
             loss = model.loss(inputs.to(device), targets.to(device))
             total_loss += float(loss) * targets.numel()
             count += targets.numel()
@@ -61,15 +67,13 @@ def train(config: TrainConfig, resume: Path | None = None) -> Path:
     train_path, val_path = Path(config.train_path), Path(config.validation_path)
     if train_path.resolve() == val_path.resolve() or sha256(train_path) == sha256(val_path):
         raise ValueError("Training and validation corpora must be distinct")
-    train_text, val_text = (p.read_text(encoding="utf-8") for p in (train_path, val_path))
-    tokenizer = Tokenizer.fit(config.tokenizer, train_text)
+    train_documents = read_documents(train_path, config.data_format)
+    tokenizer = Tokenizer.fit(config.tokenizer, "\n".join(train_documents))
     config.model.vocab_size = tokenizer.vocab_size
-    train_data = TokenWindows(
-        tokenizer.encode(train_text, bos=True, eos=True), config.model.context_length
+    train_data = load_windows(
+        train_path, tokenizer, config.model.context_length, config.data_format
     )
-    val_data = TokenWindows(
-        tokenizer.encode(val_text, bos=True, eos=True), config.model.context_length
-    )
+    val_data = load_windows(val_path, tokenizer, config.model.context_length, config.data_format)
     model = TransformerLM(config.model).to(device)
     optimizer = torch.optim.AdamW(
         model.parameters(), lr=config.learning_rate, weight_decay=config.weight_decay
@@ -81,6 +85,8 @@ def train(config: TrainConfig, resume: Path | None = None) -> Path:
     if resume:
         state = load_checkpoint(resume)
         previous = dict(state["config"])
+        previous.setdefault("data_format", "text")
+        previous.setdefault("validation_max_windows", None)
         current = config.to_dict()
         for key in ("steps", "output_dir", "eval_interval"):
             previous.pop(key)
@@ -108,7 +114,13 @@ def train(config: TrainConfig, resume: Path | None = None) -> Path:
     (output / "tokenizer.json").write_text(json.dumps(tokenizer.to_dict()), encoding="utf-8")
     if device.type == "cuda":
         torch.cuda.reset_peak_memory_stats(device)
+        torch.cuda.synchronize(device)
+    session_start = time.perf_counter()
+    compute_seconds = 0.0
+    skipped_updates = 0
+    step_records = []
     for step in range(start + 1, config.steps + 1):
+        step_start = time.perf_counter()
         model.train()
         optimizer.zero_grad(set_to_none=True)
         train_loss = 0.0
@@ -125,16 +137,40 @@ def train(config: TrainConfig, resume: Path | None = None) -> Path:
             # PyTorch's scaled tensor backward method is not fully typed upstream.
             scaler.scale(loss).backward()  # type: ignore[no-untyped-call]
         scaler.unscale_(optimizer)
-        torch.nn.utils.clip_grad_norm_(
+        grad_norm = torch.nn.utils.clip_grad_norm_(
             model.parameters(), config.grad_clip, error_if_nonfinite=config.precision == "fp32"
         )
+        scale_before = scaler.get_scale()
         scaler.step(optimizer)
         scaler.update()
+        scale_after = scaler.get_scale()
+        skipped_updates += int(scale_after < scale_before)
+        if not math.isfinite(train_loss):
+            raise FloatingPointError(f"Nonfinite loss at step {step}")
+        if device.type == "cuda":
+            torch.cuda.synchronize(device)
+        elapsed = time.perf_counter() - step_start
+        compute_seconds += elapsed
+        step_record: dict[str, Any] = {
+            "step": step,
+            "train_nll": train_loss,
+            "seconds": elapsed,
+            "grad_norm": float(grad_norm),
+            "scale_before": scale_before,
+            "scale_after": scale_after,
+            "optimizer_update": scale_after >= scale_before,
+        }
+        # Nonfinite gradients are expected to be skipped by GradScaler, but never JSON NaN.
+        if not math.isfinite(float(grad_norm)):
+            step_record["grad_norm"] = None
+        step_records.append(step_record)
         if step % config.eval_interval == 0 or step == config.steps:
             # DataLoader iterator creation consumes RNG even without shuffle.
             # Preserve it so validation frequency cannot alter the training trajectory.
             rng = torch.get_rng_state()
-            metrics = evaluate(model, val_data, config.batch_size, device)
+            metrics = evaluate(
+                model, val_data, config.batch_size, device, config.validation_max_windows
+            )
             torch.set_rng_state(rng)
             improved = float(metrics["nll"]) < best
             best = min(best, float(metrics["nll"]))
@@ -145,6 +181,9 @@ def train(config: TrainConfig, resume: Path | None = None) -> Path:
                 "cuda_peak_allocated_bytes": torch.cuda.max_memory_allocated(device)
                 if device.type == "cuda"
                 else None,
+                "compute_seconds": compute_seconds,
+                "gradient_scale": scale_after,
+                "skipped_updates_session": skipped_updates,
             }
             with (output / "metrics.jsonl").open("a", encoding="utf-8") as stream:
                 stream.write(json.dumps(record) + "\n")
@@ -167,4 +206,35 @@ def train(config: TrainConfig, resume: Path | None = None) -> Path:
             if improved:
                 save_checkpoint(output / "best.pt", state)
             print(json.dumps(record))
+    if device.type == "cuda":
+        torch.cuda.synchronize(device)
+    trained_tokens = (
+        (config.steps - start)
+        * config.batch_size
+        * config.gradient_accumulation
+        * config.model.context_length
+    )
+    summary = {
+        "config": config.to_dict(),
+        "environment": environment(),
+        "data_hashes": data_hashes,
+        "start_step": start,
+        "end_step": config.steps,
+        "session_seconds": time.perf_counter() - session_start,
+        "compute_seconds": compute_seconds,
+        "trained_tokens": trained_tokens,
+        "tokens_per_compute_second": trained_tokens / compute_seconds,
+        "skipped_updates": skipped_updates,
+        "cuda_peak_allocated_bytes": torch.cuda.max_memory_allocated(device)
+        if device.type == "cuda"
+        else None,
+        "cuda_peak_reserved_bytes": torch.cuda.max_memory_reserved(device)
+        if device.type == "cuda"
+        else None,
+        "steps": step_records,
+    }
+    with (output / f"session-{start + 1}-{config.steps}.json").open(
+        "x", encoding="utf-8"
+    ) as stream:
+        json.dump(summary, stream, indent=2, allow_nan=False)
     return output / "last.pt"

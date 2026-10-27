@@ -57,6 +57,11 @@ performance-only workloads produce null quality scores.
 The complete suite in the CUDA environment also passed: 27 passed, 1 skipped (the
 externally configured live-server test). The separate matched inference experiment
 exercised the real server extensively. Wheel and source distribution builds pass.
+The installed wheel also passed in the clean CPU environment: 26 passed, 2 skipped,
+one optional-NumPy warning, and `pip check` passed. Its first invocation accidentally
+inherited `OAKGPT_TEST_CUDA=1` from the preceding CUDA test and failed the expected CUDA
+availability assertion on a CPU wheel. Clearing that flag resolved the test configuration;
+no model implementation change was needed. The import path points to the wheel installation.
 
 The CUDA and conversion environments intentionally reuse system-site packages. Their
 freezes include unrelated host packages; an existing TensorFlow/NumPy incompatibility

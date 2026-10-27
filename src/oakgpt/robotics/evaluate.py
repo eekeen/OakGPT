@@ -135,7 +135,7 @@ def run_study(config_path: Path) -> dict[str, Any]:
                         record["reset"] = {"mission": reset, "result": reset_result}
                         if reset_result["status"] != "completed":
                             raise RuntimeError("Environment reset failed; study aborted")
-                        # Refresh the receiver lease after reset, not before LLM or navigation latency.
+                        # Refresh the receiver lease after the excluded reset completes.
                         mission = envelope(
                             row["instruction"],
                             proposal,

@@ -2,6 +2,7 @@
 
 import hashlib
 import importlib.metadata
+import os
 import platform
 import subprocess
 import sys
@@ -29,6 +30,7 @@ def environment() -> dict[str, Any]:
         "python": sys.version,
         "platform": platform.platform(),
         "processor": platform.processor(),
+        "logical_cpu_count": os.cpu_count(),
         "torch": importlib.metadata.version("torch"),
         "git_revision": revision,
         "git_dirty": dirty,

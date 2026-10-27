@@ -60,7 +60,7 @@ The [local backend guide](docs/llamacpp.md) covers installation, integrity and C
 With a downloaded Q8_0 file at the path below:
 
 ```powershell
-llama-server.exe -m models/Qwen3-1.7B-Q8_0.gguf -c 2048 -b 256 -ub 128 -ngl 99 --host 127.0.0.1 --port 8080 --parallel 1
+llama-server.exe -m models/Qwen3-1.7B-Q8_0.gguf -c 2048 -b 256 -ub 128 -ngl 99 --host 127.0.0.1 --port 18080 --parallel 1
 .\.venv\Scripts\oakgpt generate --config configs/benchmark_qwen3.json --prompt "Explain causal attention briefly."
 .\.venv\Scripts\oakgpt benchmark --config configs/benchmark_qwen3.json --output runs/qwen3-benchmark.json
 ```

@@ -39,7 +39,7 @@ Do not count the opt-in CUDA test as executed while it is skipped.
 For a separately started real llama.cpp server:
 
 ```powershell
-$env:OAKGPT_LLAMA_URL = 'http://127.0.0.1:8080'
+$env:OAKGPT_LLAMA_URL = 'http://127.0.0.1:18080'
 .\.venv\Scripts\python -m pytest -m hardware -k live
 ```
 

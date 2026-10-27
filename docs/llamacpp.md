@@ -23,7 +23,7 @@ The server must be started separately; errors are surfaced, never replaced by mo
 ```powershell
 Get-FileHash models/Qwen3-1.7B-Q8_0.gguf -Algorithm SHA256
 vendor/llama.cpp/llama-server.exe --version
-vendor/llama.cpp/llama-server.exe -m models/Qwen3-1.7B-Q8_0.gguf -c 2048 -b 256 -ub 128 -ngl 99 --host 127.0.0.1 --port 8080 --parallel 1
+vendor/llama.cpp/llama-server.exe -m models/Qwen3-1.7B-Q8_0.gguf -c 2048 -b 256 -ub 128 -ngl 99 --host 127.0.0.1 --port 18080 --parallel 1
 ```
 
 The config records an expected build; record the actual `--version` output alongside

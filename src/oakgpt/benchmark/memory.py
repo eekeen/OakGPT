@@ -10,6 +10,7 @@ class VramSampler:
         self.interval = interval
         self.samples: list[int] = []
         self.error: str | None = None
+        self.device_info: str | None = None
         self._stop = threading.Event()
         self._thread: threading.Thread | None = None
 
@@ -38,6 +39,20 @@ class VramSampler:
 
     def __enter__(self) -> "VramSampler":
         if self.gpu_index is not None:
+            try:
+                self.device_info = subprocess.check_output(
+                    [
+                        "nvidia-smi",
+                        f"--id={self.gpu_index}",
+                        "--query-gpu=name,driver_version,memory.total",
+                        "--format=csv,noheader",
+                    ],
+                    text=True,
+                    timeout=5,
+                    stderr=subprocess.DEVNULL,
+                ).strip()
+            except (OSError, subprocess.SubprocessError) as exc:
+                self.error = str(exc)
             self._sample()
             if not self.error:
                 self._thread = threading.Thread(target=self._run, daemon=True)
@@ -53,6 +68,7 @@ class VramSampler:
         return {
             "scope": "device-wide sampled usage, including other processes",
             "gpu_index": self.gpu_index,
+            "device_name_driver_total_memory": self.device_info,
             "requested_interval_s": self.interval,
             "samples": len(self.samples),
             "baseline_bytes": self.samples[0] if self.samples else None,

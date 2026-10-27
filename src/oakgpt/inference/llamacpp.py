@@ -12,7 +12,7 @@ from oakgpt.inference.base import GenerationConfig, TokenEvent
 class LlamaCppBackend:
     def __init__(
         self,
-        url: str = "http://127.0.0.1:8080",
+        url: str = "http://127.0.0.1:18080",
         timeout: float = 120,
         prompt_format: str = "qwen3",
         identity: dict[str, Any] | None = None,

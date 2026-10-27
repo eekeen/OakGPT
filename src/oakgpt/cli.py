@@ -30,7 +30,7 @@ def backend_from_config(path: Path) -> tuple[InferenceBackend, dict[str, Any]]:
             identity["gguf_sha256"] = sha256(model)
             identity["gguf_filename"] = model.name
         return LlamaCppBackend(
-            backend.get("url", "http://127.0.0.1:8080"),
+            backend.get("url", "http://127.0.0.1:18080"),
             backend.get("timeout", 120),
             backend.get("prompt_format", "qwen3"),
             identity,

@@ -1,0 +1,14 @@
+{
+  "backend": {
+    "type": "llamacpp",
+    "url": "http://127.0.0.1:18080",
+    "model_path": "../models/Qwen3-1.7B-Q8_0.gguf",
+    "prompt_format": "qwen3",
+    "identity": {"model": "Qwen/Qwen3-1.7B-GGUF", "quantization": "Q8_0", "expected_server_build": "b11930", "model_revision": "90862c4b9d2787eaed51d12237eafdfe7c5f6077"}
+  },
+  "generation": {"max_new_tokens": 64, "temperature": 0.0, "seed": 42},
+  "dataset": "../data/eval/local_smoke_v1.jsonl",
+  "warmups": 1,
+  "repeats": 3,
+  "gpu_index": 0
+}

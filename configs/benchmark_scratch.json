@@ -1,0 +1,7 @@
+{
+  "backend": {"type": "scratch", "checkpoint": "../runs/cpu/best.pt", "device": "cpu"},
+  "generation": {"max_new_tokens": 32, "temperature": 0.0, "seed": 42},
+  "dataset": "../data/eval/local_smoke_v1.jsonl",
+  "warmups": 1,
+  "repeats": 3
+}

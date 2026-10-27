@@ -1,7 +1,9 @@
 """Invoke the independent validator without a shell, locally or through a fixed WSL command."""
 
 import json
+import re
 import subprocess
+import time
 from pathlib import Path
 from typing import Any
 
@@ -33,7 +35,7 @@ def submit_spool(mission: dict[str, Any], spool: Path) -> Path:
     pending = spool / "pending"
     pending.mkdir(parents=True, exist_ok=True)
     name = mission["mission_id"]
-    if not isinstance(name, str) or not __import__("re").fullmatch(r"m-[0-9a-f]{16}", name):
+    if not isinstance(name, str) or not re.fullmatch(r"m-[0-9a-f]{16}", name):
         raise ValueError("Invalid mission identity")
     temporary = pending / (name + ".tmp")
     destination = pending / (name + ".json")
@@ -43,3 +45,18 @@ def submit_spool(mission: dict[str, Any], spool: Path) -> Path:
         json.dump(mission, stream, ensure_ascii=False, allow_nan=False)
     temporary.replace(destination)
     return destination
+
+
+def receiver_clock(command: list[str]) -> int:
+    started = time.monotonic()
+    result = subprocess.run(
+        command, text=True, encoding="utf-8", capture_output=True, timeout=5, check=True
+    )
+    value = strict_json(result.stdout)
+    if (
+        time.monotonic() - started > 1
+        or not isinstance(value, dict)
+        or type(value.get("now_ms")) is not int
+    ):
+        raise RuntimeError("Receiver clock handshake failed or exceeded one second")
+    return int(value["now_ms"])

@@ -30,7 +30,7 @@
       <collision name="c"><geometry><box><size>0.2 8.2 1</size></box></geometry></collision>
       <visual name="v"><geometry><box><size>0.2 8.2 1</size></box></geometry></visual></link></model>
     <model name="oak_robot"><pose>0 0 0.12 0 0 0</pose>
-      <link name="base_link"><inertial><mass>4</mass><inertia><ixx>0.04</ixx><iyy>0.04</iyy><izz>0.06</izz></inertia></inertial>
+      <link name="base_link"><inertial><pose>-0.04 0 0 0 0 0</pose><mass>4</mass><inertia><ixx>0.04</ixx><iyy>0.04</iyy><izz>0.06</izz></inertia></inertial>
         <collision name="body"><geometry><box><size>0.30 0.25 0.12</size></box></geometry></collision>
         <visual name="body"><geometry><box><size>0.30 0.25 0.12</size></box></geometry></visual>
         <sensor name="laser" type="gpu_lidar"><pose>0 0 0.15 0 0 0</pose>

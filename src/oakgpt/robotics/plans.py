@@ -132,11 +132,16 @@ def baseline(instruction: str) -> dict[str, Any]:
         return {"schema_version": 1, "decision": "reject", "reason": "unsupported", "steps": []}
 
 
-def envelope(instruction: str, proposal: dict[str, Any], ttl_ms: int = 180000) -> dict[str, Any]:
+def envelope(
+    instruction: str,
+    proposal: dict[str, Any],
+    ttl_ms: int = 180000,
+    receiver_now_ms: int | None = None,
+) -> dict[str, Any]:
     # Clock, identity and policy are assigned by trusted host code, never by the model.
     if proposal["decision"] != "accept":
         raise ValueError("Rejected proposal has no executable mission")
-    now = time.time_ns() // 1000000
+    now = receiver_now_ms if receiver_now_ms is not None else time.time_ns() // 1000000
     return {
         "schema_version": 1,
         "mission_id": "m-" + uuid.uuid4().hex[:16],

@@ -6,6 +6,12 @@
 
 int main(int argc, char** argv) {
     try {
+        if (argc == 2 && std::string(argv[1]) == "--clock") {
+            const auto now = std::chrono::duration_cast<std::chrono::milliseconds>(
+                std::chrono::system_clock::now().time_since_epoch()).count();
+            std::cout << oak::Json({{"now_ms", now}}).dump() << '\n';
+            return 0;
+        }
         if (argc != 3 || std::string(argv[1]) != "--policy")
             throw std::invalid_argument("usage: oak-validate --policy trusted-policy.json < mission.json");
         std::ifstream policy_file(argv[2]);

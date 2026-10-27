@@ -7,6 +7,14 @@ from oakgpt.inference.llamacpp import LlamaCppBackend
 from oakgpt.robotics.plans import PROPOSAL_SCHEMA, baseline, parse_proposal
 
 PROMPT_VERSION = "oak-plan-v1"
+
+
+class ProposalError(ValueError):
+    def __init__(self, raw: str, reason: str) -> None:
+        super().__init__(reason)
+        self.raw = raw
+
+
 RULES = """You propose plans for a simulation. Return only the specified JSON object.
 schema_version=1. decision=accept or reject. reason=ok, unsupported, ambiguous, or unsafe.
 Only named destinations dock, station, storage exist. Aliases: charging dock=dock,
@@ -40,7 +48,10 @@ class LocalPlanner:
                 GenerationConfig(max_new_tokens=256, temperature=0, seed=42),
             )
         )
-        return raw, parse_proposal(raw)
+        try:
+            return raw, parse_proposal(raw)
+        except ValueError as error:
+            raise ProposalError(raw, str(error)) from error
 
 
 def deterministic(instruction: str) -> tuple[str, dict[str, Any]]:

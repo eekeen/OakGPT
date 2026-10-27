@@ -15,6 +15,8 @@ Phase 2 adds a separately installed CUDA environment, physical fp16 training/res
 verification, pinned WikiText document preprocessing, a 24-run architecture/seed study,
 and matched Q4_K_M/Q8_0 quantization experiments. Phase 1 evidence is immutable.
 See [the scientific protocol](docs/phase2-methodology.md) for definitions and limitations.
+Executed results are in the [Phase 2 research report](reports/phase2/report.md),
+[PDF](output/pdf/phase2-research-report.pdf), and [verification log](docs/phase2-verification.md).
 
 ```powershell
 .\.venv\Scripts\python -m pip install -e ".[dev,research]"
@@ -117,8 +119,9 @@ llama.cpp build. Use `-ngl 0` for CPU. No paid infrastructure is needed.
 .\.venv\Scripts\python -m build
 ```
 
-Hardware tests skip unless explicitly enabled. See [verification](docs/verification.md)
-for actual execution results and remaining physical GPU checks. GitHub Actions results
+Hardware tests skip unless explicitly enabled. See [Phase 2 verification](docs/phase2-verification.md)
+for current execution results and the [Phase 1 snapshot](docs/verification.md) for historical checks.
+GitHub Actions results
 must be checked after pushing; a local pass is not a hosted CI pass.
 
 ## Research and extension guide

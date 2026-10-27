@@ -36,6 +36,7 @@ def main() -> None:
     q4, q8 = quant["summaries"]["Q4_K_M:short"], quant["summaries"]["Q8_0:short"]
     long4, long8 = quant["summaries"]["Q4_K_M:long"], quant["summaries"]["Q8_0:long"]
     delta = quant["paired_quality"]["short"]
+    failure_analysis = json.loads((root / "failure_analysis.json").read_text(encoding="utf-8"))
     paragraphs = [
         (
             "Abstract",
@@ -134,6 +135,46 @@ def main() -> None:
             "[4] PyTorch, Automatic Mixed Precision documentation and previous-version installation index. Training environment: 2.9.1+cu126. Exact package freezes accompany evidence.",
         ),
     ]
+    diagnostic = []
+    for name in ["Q4_K_M", "Q8_0"]:
+        failures = failure_analysis[name]["failures_round0"]
+        if failures:
+            example = failures[0]
+            diagnostic.append(
+                f"{name}: accepted {example['accepted']!r}, actual "
+                f"{example['actual'][:100]!r} (example {example['id']})."
+            )
+    insertion = next(i for i, item in enumerate(paragraphs) if item[0].startswith("VI."))
+    paragraphs.insert(
+        insertion,
+        (
+            "",
+            "Observed strict-scoring failures include "
+            + " ".join(diagnostic)
+            + " Correct numerical content with extra expression text fails the "
+            "frozen answer-only contract. This score must not be relabeled arithmetic reasoning "
+            "accuracy. Raw failures and category scores are retained without changing references.",
+        ),
+    )
+    peaks = {
+        name: max(
+            item["memory"]["peak_bytes"] for item in failure_analysis[name]["memory_and_lengths"]
+        )
+        / 2**20
+        for name in ["Q4_K_M", "Q8_0"]
+    }
+    paragraphs.insert(
+        insertion + 1,
+        (
+            "",
+            f"Across recorded workloads and rounds, sampled "
+            f"device-wide peaks were {peaks['Q4_K_M']:.0f} MiB for Q4 and {peaks['Q8_0']:.0f} MiB "
+            f"for Q8, including desktop allocations. Long-decode round-median sample SDs were "
+            f"{long4['decode_tokens_per_second_round_median_sd']:.2f}/{long8['decode_tokens_per_second_round_median_sd']:.2f} "
+            "tokens/s. These three-round descriptive spreads do not establish stable population "
+            "confidence intervals. Per-round baselines and actual generated lengths are archived.",
+        ),
+    )
     markdown = [
         "# OakGPT: Local GPU Training and Controlled Language-Model Evaluation",
         "",

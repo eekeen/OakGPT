@@ -1,0 +1,1178 @@
+{
+  "Q4_K_M": {
+    "categories_round0": {
+      "arithmetic": {
+        "unique_prompts": 24,
+        "accuracy": 0.041666666666666664
+      },
+      "reading": {
+        "unique_prompts": 12,
+        "accuracy": 1.0
+      },
+      "string_transform": {
+        "unique_prompts": 12,
+        "accuracy": 0.0
+      }
+    },
+    "identical_greedy_text_across_rounds": true,
+    "failures_round0": [
+      {
+        "id": "add-00",
+        "prompt": "Compute 23 + 18. Reply with only the integer.",
+        "accepted": [
+          "41"
+        ],
+        "actual": "23 + 18 = 41",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-01",
+        "prompt": "Compute 34 + 27. Reply with only the integer.",
+        "accepted": [
+          "61"
+        ],
+        "actual": "34 + 27 = 61",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-02",
+        "prompt": "Compute 45 + 16. Reply with only the integer.",
+        "accepted": [
+          "61"
+        ],
+        "actual": "45 + 16 = 61",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-03",
+        "prompt": "Compute 62 + 29. Reply with only the integer.",
+        "accepted": [
+          "91"
+        ],
+        "actual": "62 + 29 = 91",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-04",
+        "prompt": "Compute 17 + 38. Reply with only the integer.",
+        "accepted": [
+          "55"
+        ],
+        "actual": "17 + 38 = 55",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-05",
+        "prompt": "Compute 81 + 12. Reply with only the integer.",
+        "accepted": [
+          "93"
+        ],
+        "actual": "81 + 12 = 93\n\nThe answer is **93**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-06",
+        "prompt": "Compute 56 + 37. Reply with only the integer.",
+        "accepted": [
+          "93"
+        ],
+        "actual": "56 + 37 = 93",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-07",
+        "prompt": "Compute 29 + 64. Reply with only the integer.",
+        "accepted": [
+          "93"
+        ],
+        "actual": "29 + 64 = 93",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-08",
+        "prompt": "Compute 72 + 19. Reply with only the integer.",
+        "accepted": [
+          "91"
+        ],
+        "actual": "72 + 19 = 91",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-09",
+        "prompt": "Compute 48 + 35. Reply with only the integer.",
+        "accepted": [
+          "83"
+        ],
+        "actual": "48 + 35 = 83",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-10",
+        "prompt": "Compute 91 + 26. Reply with only the integer.",
+        "accepted": [
+          "117"
+        ],
+        "actual": "91 + 26 = 117",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-11",
+        "prompt": "Compute 67 + 24. Reply with only the integer.",
+        "accepted": [
+          "91"
+        ],
+        "actual": "67 + 24 = 91",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-00",
+        "prompt": "Compute 9 times 4. Reply with only the integer.",
+        "accepted": [
+          "36"
+        ],
+        "actual": "9 × 4 = 36\n\nThe integer is **36**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-02",
+        "prompt": "Compute 12 times 6. Reply with only the integer.",
+        "accepted": [
+          "72"
+        ],
+        "actual": "12 × 6 = 72\n\nThe integer is **72**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-03",
+        "prompt": "Compute 11 times 8. Reply with only the integer.",
+        "accepted": [
+          "88"
+        ],
+        "actual": "11 × 8 = 88\n\n**Answer: 88**",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-04",
+        "prompt": "Compute 13 times 3. Reply with only the integer.",
+        "accepted": [
+          "39"
+        ],
+        "actual": "13 × 3 = 39\n\nThe integer is **39**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-05",
+        "prompt": "Compute 14 times 5. Reply with only the integer.",
+        "accepted": [
+          "70"
+        ],
+        "actual": "14 × 5 = 70\n\nInteger: **70**",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-06",
+        "prompt": "Compute 16 times 4. Reply with only the integer.",
+        "accepted": [
+          "64"
+        ],
+        "actual": "16 × 4 = 64\n\nAnswer: 64",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-07",
+        "prompt": "Compute 7 times 9. Reply with only the integer.",
+        "accepted": [
+          "63"
+        ],
+        "actual": "7 × 9 = 63\n\nAnswer: **63**",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-08",
+        "prompt": "Compute 15 times 6. Reply with only the integer.",
+        "accepted": [
+          "90"
+        ],
+        "actual": "15 × 6 = 90",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-09",
+        "prompt": "Compute 18 times 3. Reply with only the integer.",
+        "accepted": [
+          "54"
+        ],
+        "actual": "18 × 3 = 54\n\nThe integer is **54**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-10",
+        "prompt": "Compute 17 times 4. Reply with only the integer.",
+        "accepted": [
+          "68"
+        ],
+        "actual": "17 × 4 = 68\n\nAnswer: **68**",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-11",
+        "prompt": "Compute 19 times 2. Reply with only the integer.",
+        "accepted": [
+          "38"
+        ],
+        "actual": "19 × 2 = 38\n\nInteger: **38**",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "transform-00",
+        "prompt": "Write the word saffron backwards. Reply with only the reversed word.",
+        "accepted": [
+          "norffas"
+        ],
+        "actual": "nromracaf",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-01",
+        "prompt": "Write the word harbor backwards. Reply with only the reversed word.",
+        "accepted": [
+          "robrah"
+        ],
+        "actual": "rehoboh",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-02",
+        "prompt": "Write the word quartz backwards. Reply with only the reversed word.",
+        "accepted": [
+          "ztrauq"
+        ],
+        "actual": "yticrQ",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-03",
+        "prompt": "Write the word velvet backwards. Reply with only the reversed word.",
+        "accepted": [
+          "tevlev"
+        ],
+        "actual": "elvet",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-04",
+        "prompt": "Write the word meadow backwards. Reply with only the reversed word.",
+        "accepted": [
+          "wodaem"
+        ],
+        "actual": "yadmee",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-05",
+        "prompt": "Write the word cobalt backwards. Reply with only the reversed word.",
+        "accepted": [
+          "tlaboc"
+        ],
+        "actual": "ltaocb",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-06",
+        "prompt": "Write the word lantern backwards. Reply with only the reversed word.",
+        "accepted": [
+          "nretnal"
+        ],
+        "actual": "nartel lan",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-07",
+        "prompt": "Write the word willow backwards. Reply with only the reversed word.",
+        "accepted": [
+          "wolliw"
+        ],
+        "actual": "lloowil",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-08",
+        "prompt": "Write the word compass backwards. Reply with only the reversed word.",
+        "accepted": [
+          "ssapmoc"
+        ],
+        "actual": "scepmiracab",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-09",
+        "prompt": "Write the word thimble backwards. Reply with only the reversed word.",
+        "accepted": [
+          "elbmiht"
+        ],
+        "actual": "limerick",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-10",
+        "prompt": "Write the word badger backwards. Reply with only the reversed word.",
+        "accepted": [
+          "regdab"
+        ],
+        "actual": "debagr",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-11",
+        "prompt": "Write the word ribbon backwards. Reply with only the reversed word.",
+        "accepted": [
+          "nobbir"
+        ],
+        "actual": "nibbrI",
+        "label": "incorrect_or_noncompliant"
+      }
+    ],
+    "memory_and_lengths": [
+      {
+        "report": "quantization\\round-0-Q4_K_M\\long.json",
+        "memory": {
+          "scope": "device-wide sampled usage, including other processes",
+          "gpu_index": 0,
+          "device_name_driver_total_memory": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB",
+          "requested_interval_s": 0.1,
+          "samples": 80,
+          "baseline_bytes": 2832203776,
+          "peak_bytes": 2837446656,
+          "error": null,
+          "enabled": true
+        },
+        "generated_lengths": [
+          256,
+          256,
+          256,
+          256
+        ]
+      },
+      {
+        "report": "quantization\\round-0-Q4_K_M\\short.json",
+        "memory": {
+          "scope": "device-wide sampled usage, including other processes",
+          "gpu_index": 0,
+          "device_name_driver_total_memory": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB",
+          "requested_interval_s": 0.1,
+          "samples": 77,
+          "baseline_bytes": 2850029568,
+          "peak_bytes": 2850029568,
+          "error": null,
+          "enabled": true
+        },
+        "generated_lengths": [
+          11,
+          11,
+          11,
+          11,
+          11,
+          20,
+          11,
+          11,
+          11,
+          11,
+          12,
+          11,
+          18,
+          3,
+          19,
+          18,
+          19,
+          17,
+          16,
+          16,
+          10,
+          19,
+          17,
+          17,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          5,
+          4,
+          4,
+          3,
+          5,
+          5,
+          5,
+          5,
+          7,
+          4,
+          4,
+          5
+        ]
+      },
+      {
+        "report": "quantization\\round-1-Q4_K_M\\long.json",
+        "memory": {
+          "scope": "device-wide sampled usage, including other processes",
+          "gpu_index": 0,
+          "device_name_driver_total_memory": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB",
+          "requested_interval_s": 0.1,
+          "samples": 78,
+          "baseline_bytes": 2832203776,
+          "peak_bytes": 2836398080,
+          "error": null,
+          "enabled": true
+        },
+        "generated_lengths": [
+          256,
+          256,
+          256,
+          256
+        ]
+      },
+      {
+        "report": "quantization\\round-1-Q4_K_M\\short.json",
+        "memory": {
+          "scope": "device-wide sampled usage, including other processes",
+          "gpu_index": 0,
+          "device_name_driver_total_memory": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB",
+          "requested_interval_s": 0.1,
+          "samples": 46,
+          "baseline_bytes": 2836398080,
+          "peak_bytes": 2836398080,
+          "error": null,
+          "enabled": true
+        },
+        "generated_lengths": [
+          11,
+          11,
+          11,
+          11,
+          11,
+          20,
+          11,
+          11,
+          11,
+          11,
+          12,
+          11,
+          18,
+          3,
+          19,
+          18,
+          19,
+          17,
+          16,
+          16,
+          10,
+          19,
+          17,
+          17,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          5,
+          4,
+          4,
+          3,
+          5,
+          5,
+          5,
+          5,
+          7,
+          4,
+          4,
+          5
+        ]
+      },
+      {
+        "report": "quantization\\round-2-Q4_K_M\\long.json",
+        "memory": {
+          "scope": "device-wide sampled usage, including other processes",
+          "gpu_index": 0,
+          "device_name_driver_total_memory": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB",
+          "requested_interval_s": 0.1,
+          "samples": 79,
+          "baseline_bytes": 2836398080,
+          "peak_bytes": 2836398080,
+          "error": null,
+          "enabled": true
+        },
+        "generated_lengths": [
+          256,
+          256,
+          256,
+          256
+        ]
+      },
+      {
+        "report": "quantization\\round-2-Q4_K_M\\short.json",
+        "memory": {
+          "scope": "device-wide sampled usage, including other processes",
+          "gpu_index": 0,
+          "device_name_driver_total_memory": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB",
+          "requested_interval_s": 0.1,
+          "samples": 47,
+          "baseline_bytes": 2862612480,
+          "peak_bytes": 2862612480,
+          "error": null,
+          "enabled": true
+        },
+        "generated_lengths": [
+          11,
+          11,
+          11,
+          11,
+          11,
+          20,
+          11,
+          11,
+          11,
+          11,
+          12,
+          11,
+          18,
+          3,
+          19,
+          18,
+          19,
+          17,
+          16,
+          16,
+          10,
+          19,
+          17,
+          17,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          5,
+          4,
+          4,
+          3,
+          5,
+          5,
+          5,
+          5,
+          7,
+          4,
+          4,
+          5
+        ]
+      }
+    ]
+  },
+  "Q8_0": {
+    "categories_round0": {
+      "arithmetic": {
+        "unique_prompts": 24,
+        "accuracy": 0.041666666666666664
+      },
+      "reading": {
+        "unique_prompts": 12,
+        "accuracy": 1.0
+      },
+      "string_transform": {
+        "unique_prompts": 12,
+        "accuracy": 0.0
+      }
+    },
+    "identical_greedy_text_across_rounds": true,
+    "failures_round0": [
+      {
+        "id": "add-00",
+        "prompt": "Compute 23 + 18. Reply with only the integer.",
+        "accepted": [
+          "41"
+        ],
+        "actual": "23 + 18 = 41",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-01",
+        "prompt": "Compute 34 + 27. Reply with only the integer.",
+        "accepted": [
+          "61"
+        ],
+        "actual": "34 + 27 = 61",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-02",
+        "prompt": "Compute 45 + 16. Reply with only the integer.",
+        "accepted": [
+          "61"
+        ],
+        "actual": "45 + 16 = 61",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-03",
+        "prompt": "Compute 62 + 29. Reply with only the integer.",
+        "accepted": [
+          "91"
+        ],
+        "actual": "62 + 29 = 91",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-04",
+        "prompt": "Compute 17 + 38. Reply with only the integer.",
+        "accepted": [
+          "55"
+        ],
+        "actual": "17 + 38 = 55",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-05",
+        "prompt": "Compute 81 + 12. Reply with only the integer.",
+        "accepted": [
+          "93"
+        ],
+        "actual": "81 + 12 = 93\n\nThe integer is **93**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-06",
+        "prompt": "Compute 56 + 37. Reply with only the integer.",
+        "accepted": [
+          "93"
+        ],
+        "actual": "56 + 37 = 93",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-07",
+        "prompt": "Compute 29 + 64. Reply with only the integer.",
+        "accepted": [
+          "93"
+        ],
+        "actual": "29 + 64 = 93",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-08",
+        "prompt": "Compute 72 + 19. Reply with only the integer.",
+        "accepted": [
+          "91"
+        ],
+        "actual": "72 + 19 = 91",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-09",
+        "prompt": "Compute 48 + 35. Reply with only the integer.",
+        "accepted": [
+          "83"
+        ],
+        "actual": "48 + 35 = 83",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-10",
+        "prompt": "Compute 91 + 26. Reply with only the integer.",
+        "accepted": [
+          "117"
+        ],
+        "actual": "91 + 26 = 117",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "add-11",
+        "prompt": "Compute 67 + 24. Reply with only the integer.",
+        "accepted": [
+          "91"
+        ],
+        "actual": "67 + 24 = 91",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-00",
+        "prompt": "Compute 9 times 4. Reply with only the integer.",
+        "accepted": [
+          "36"
+        ],
+        "actual": "9 × 4 = 36\n\nThe integer is **36**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-02",
+        "prompt": "Compute 12 times 6. Reply with only the integer.",
+        "accepted": [
+          "72"
+        ],
+        "actual": "12 × 6 = 72\n\nThe integer is **72**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-03",
+        "prompt": "Compute 11 times 8. Reply with only the integer.",
+        "accepted": [
+          "88"
+        ],
+        "actual": "11 × 8 = 88",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-04",
+        "prompt": "Compute 13 times 3. Reply with only the integer.",
+        "accepted": [
+          "39"
+        ],
+        "actual": "13 × 3 = 39\n\nThe integer is **39**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-05",
+        "prompt": "Compute 14 times 5. Reply with only the integer.",
+        "accepted": [
+          "70"
+        ],
+        "actual": "14 × 5 = 70\n\nThe integer is **70**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-06",
+        "prompt": "Compute 16 times 4. Reply with only the integer.",
+        "accepted": [
+          "64"
+        ],
+        "actual": "16 × 4 = 64\n\nThe integer is **64**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-07",
+        "prompt": "Compute 7 times 9. Reply with only the integer.",
+        "accepted": [
+          "63"
+        ],
+        "actual": "7 × 9 = 63",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-08",
+        "prompt": "Compute 15 times 6. Reply with only the integer.",
+        "accepted": [
+          "90"
+        ],
+        "actual": "15 × 6 = 90\n\nThe integer is **90**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-09",
+        "prompt": "Compute 18 times 3. Reply with only the integer.",
+        "accepted": [
+          "54"
+        ],
+        "actual": "18 × 3 = 54\n\nThe integer is **54**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-10",
+        "prompt": "Compute 17 times 4. Reply with only the integer.",
+        "accepted": [
+          "68"
+        ],
+        "actual": "17 × 4 = 68\n\nAnswer: 68",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "multiply-11",
+        "prompt": "Compute 19 times 2. Reply with only the integer.",
+        "accepted": [
+          "38"
+        ],
+        "actual": "19 × 2 = 38\n\nThe integer is **38**.",
+        "label": "possible_format_failure"
+      },
+      {
+        "id": "transform-00",
+        "prompt": "Write the word saffron backwards. Reply with only the reversed word.",
+        "accepted": [
+          "norffas"
+        ],
+        "actual": "nroocasaf",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-01",
+        "prompt": "Write the word harbor backwards. Reply with only the reversed word.",
+        "accepted": [
+          "robrah"
+        ],
+        "actual": "rehgohar",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-02",
+        "prompt": "Write the word quartz backwards. Reply with only the reversed word.",
+        "accepted": [
+          "ztrauq"
+        ],
+        "actual": "tsuqri",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-03",
+        "prompt": "Write the word velvet backwards. Reply with only the reversed word.",
+        "accepted": [
+          "tevlev"
+        ],
+        "actual": "etvel",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-04",
+        "prompt": "Write the word meadow backwards. Reply with only the reversed word.",
+        "accepted": [
+          "wodaem"
+        ],
+        "actual": "dewyam",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-05",
+        "prompt": "Write the word cobalt backwards. Reply with only the reversed word.",
+        "accepted": [
+          "tlaboc"
+        ],
+        "actual": "tnilatocb",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-06",
+        "prompt": "Write the word lantern backwards. Reply with only the reversed word.",
+        "accepted": [
+          "nretnal"
+        ],
+        "actual": "nartel",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-07",
+        "prompt": "Write the word willow backwards. Reply with only the reversed word.",
+        "accepted": [
+          "wolliw"
+        ],
+        "actual": "lloiw",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-08",
+        "prompt": "Write the word compass backwards. Reply with only the reversed word.",
+        "accepted": [
+          "ssapmoc"
+        ],
+        "actual": "smapmoc",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-09",
+        "prompt": "Write the word thimble backwards. Reply with only the reversed word.",
+        "accepted": [
+          "elbmiht"
+        ],
+        "actual": "elbimth",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-10",
+        "prompt": "Write the word badger backwards. Reply with only the reversed word.",
+        "accepted": [
+          "regdab"
+        ],
+        "actual": "degrab",
+        "label": "incorrect_or_noncompliant"
+      },
+      {
+        "id": "transform-11",
+        "prompt": "Write the word ribbon backwards. Reply with only the reversed word.",
+        "accepted": [
+          "nobbir"
+        ],
+        "actual": "nibbrI",
+        "label": "incorrect_or_noncompliant"
+      }
+    ],
+    "memory_and_lengths": [
+      {
+        "report": "quantization\\round-0-Q8_0\\long.json",
+        "memory": {
+          "scope": "device-wide sampled usage, including other processes",
+          "gpu_index": 0,
+          "device_name_driver_total_memory": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB",
+          "requested_interval_s": 0.1,
+          "samples": 111,
+          "baseline_bytes": 3562012672,
+          "peak_bytes": 3563061248,
+          "error": null,
+          "enabled": true
+        },
+        "generated_lengths": [
+          256,
+          256,
+          256,
+          256
+        ]
+      },
+      {
+        "report": "quantization\\round-0-Q8_0\\short.json",
+        "memory": {
+          "scope": "device-wide sampled usage, including other processes",
+          "gpu_index": 0,
+          "device_name_driver_total_memory": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB",
+          "requested_interval_s": 0.1,
+          "samples": 56,
+          "baseline_bytes": 3573547008,
+          "peak_bytes": 3574595584,
+          "error": null,
+          "enabled": true
+        },
+        "generated_lengths": [
+          11,
+          11,
+          11,
+          11,
+          11,
+          20,
+          11,
+          11,
+          11,
+          11,
+          12,
+          11,
+          18,
+          3,
+          19,
+          10,
+          19,
+          19,
+          19,
+          9,
+          19,
+          19,
+          16,
+          19,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          6,
+          5,
+          5,
+          3,
+          5,
+          6,
+          4,
+          4,
+          5,
+          5,
+          4,
+          5
+        ]
+      },
+      {
+        "report": "quantization\\round-1-Q8_0\\long.json",
+        "memory": {
+          "scope": "device-wide sampled usage, including other processes",
+          "gpu_index": 0,
+          "device_name_driver_total_memory": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB",
+          "requested_interval_s": 0.1,
+          "samples": 109,
+          "baseline_bytes": 3562012672,
+          "peak_bytes": 3562012672,
+          "error": null,
+          "enabled": true
+        },
+        "generated_lengths": [
+          256,
+          256,
+          256,
+          256
+        ]
+      },
+      {
+        "report": "quantization\\round-1-Q8_0\\short.json",
+        "memory": {
+          "scope": "device-wide sampled usage, including other processes",
+          "gpu_index": 0,
+          "device_name_driver_total_memory": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB",
+          "requested_interval_s": 0.1,
+          "samples": 59,
+          "baseline_bytes": 3556769792,
+          "peak_bytes": 3562012672,
+          "error": null,
+          "enabled": true
+        },
+        "generated_lengths": [
+          11,
+          11,
+          11,
+          11,
+          11,
+          20,
+          11,
+          11,
+          11,
+          11,
+          12,
+          11,
+          18,
+          3,
+          19,
+          10,
+          19,
+          19,
+          19,
+          9,
+          19,
+          19,
+          16,
+          19,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          6,
+          5,
+          5,
+          3,
+          5,
+          6,
+          4,
+          4,
+          5,
+          5,
+          4,
+          5
+        ]
+      },
+      {
+        "report": "quantization\\round-2-Q8_0\\long.json",
+        "memory": {
+          "scope": "device-wide sampled usage, including other processes",
+          "gpu_index": 0,
+          "device_name_driver_total_memory": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB",
+          "requested_interval_s": 0.1,
+          "samples": 111,
+          "baseline_bytes": 3562012672,
+          "peak_bytes": 3568304128,
+          "error": null,
+          "enabled": true
+        },
+        "generated_lengths": [
+          256,
+          256,
+          256,
+          256
+        ]
+      },
+      {
+        "report": "quantization\\round-2-Q8_0\\short.json",
+        "memory": {
+          "scope": "device-wide sampled usage, including other processes",
+          "gpu_index": 0,
+          "device_name_driver_total_memory": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB",
+          "requested_interval_s": 0.1,
+          "samples": 58,
+          "baseline_bytes": 3562012672,
+          "peak_bytes": 3563061248,
+          "error": null,
+          "enabled": true
+        },
+        "generated_lengths": [
+          11,
+          11,
+          11,
+          11,
+          11,
+          20,
+          11,
+          11,
+          11,
+          11,
+          12,
+          11,
+          18,
+          3,
+          19,
+          10,
+          19,
+          19,
+          19,
+          9,
+          19,
+          19,
+          16,
+          19,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          6,
+          5,
+          5,
+          3,
+          5,
+          6,
+          4,
+          4,
+          5,
+          5,
+          4,
+          5
+        ]
+      }
+    ]
+  }
+}

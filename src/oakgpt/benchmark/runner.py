@@ -1,3 +1,4 @@
+import hashlib
 import json
 import re
 import statistics
@@ -132,7 +133,16 @@ def benchmark(
     report = {
         "schema_version": 1,
         "created_utc": datetime.now(UTC).isoformat(),
-        "dataset": {"path": str(dataset), "sha256": sha256(dataset), "samples": len(samples)},
+        "dataset": {
+            "path": str(dataset),
+            "sha256": sha256(dataset),
+            "samples": len(samples),
+            "canonical_sha256": hashlib.sha256(
+                json.dumps(
+                    samples, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+                ).encode("utf-8")
+            ).hexdigest(),
+        },
         "environment": environment(),
         "backend": metadata,
         "generation": asdict(config),

@@ -1,0 +1,2128 @@
+{
+  "environment": {
+    "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "logical_cpu_count": 16,
+    "torch": "2.9.1+cu126",
+    "cuda_runtime": "12.6",
+    "cudnn": 91002,
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "git_revision": "4e7ddd0b450e0892098836f321364ae2410f2115",
+    "git_dirty": false
+  },
+  "checks": {
+    "fp16_autocast_forward_backward": true,
+    "finite_losses": true,
+    "finite_restored_parameters": true,
+    "grad_scaler_enabled": true,
+    "bit_exact_resume_parameters": true,
+    "matching_resumed_scaler": true
+  },
+  "initial_checkpoint_scaler": {
+    "scale": 65536.0,
+    "growth_factor": 2.0,
+    "backoff_factor": 0.5,
+    "growth_interval": 2000,
+    "_growth_tracker": 4
+  },
+  "memory": {
+    "scope": "device-wide sampled usage, including other processes",
+    "gpu_index": 0,
+    "device_name_driver_total_memory": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB",
+    "requested_interval_s": 0.1,
+    "samples": 317,
+    "baseline_bytes": 1392508928,
+    "peak_bytes": 1938817024,
+    "error": null,
+    "enabled": true
+  },
+  "sessions": {
+    "full": {
+      "config": {
+        "train_path": "D:\\Projects\\OakGPT\\data\\train.txt",
+        "validation_path": "D:\\Projects\\OakGPT\\data\\validation.txt",
+        "output_dir": "D:\\Projects\\OakGPT\\runs\\phase2\\gpu-verification\\full",
+        "tokenizer": "byte",
+        "model": {
+          "vocab_size": 259,
+          "context_length": 32,
+          "d_model": 32,
+          "n_heads": 4,
+          "n_layers": 2,
+          "ff_multiplier": 4,
+          "dropout": 0.1,
+          "positional_encoding": "learned"
+        },
+        "seed": 42,
+        "device": "cuda",
+        "precision": "fp16",
+        "steps": 8,
+        "batch_size": 2,
+        "gradient_accumulation": 2,
+        "learning_rate": 0.0003,
+        "weight_decay": 0.1,
+        "grad_clip": 1.0,
+        "eval_interval": 4,
+        "cpu_threads": 2,
+        "data_format": "text",
+        "validation_max_windows": null
+      },
+      "environment": {
+        "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+        "platform": "Windows-10-10.0.19045-SP0",
+        "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+        "logical_cpu_count": 16,
+        "torch": "2.9.1+cu126",
+        "cuda_runtime": "12.6",
+        "cudnn": 91002,
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2060",
+        "git_revision": "4e7ddd0b450e0892098836f321364ae2410f2115",
+        "git_dirty": false
+      },
+      "data_hashes": {
+        "train": "4dd71e4c9497100b6e3364030f04c7ffda8639acbf5b9f61e815a8f19d7360f1",
+        "validation": "d19696816071c154ddd05e042731c7169336936424da319b7e2cbec5a05c72a0"
+      },
+      "start_step": 0,
+      "end_step": 8,
+      "session_seconds": 1.0749739999882877,
+      "compute_seconds": 0.8782008998095989,
+      "trained_tokens": 1024,
+      "tokens_per_compute_second": 1166.0202127121613,
+      "skipped_updates": 0,
+      "cuda_peak_allocated_bytes": 69264896,
+      "cuda_peak_reserved_bytes": 71303168,
+      "steps": [
+        {
+          "step": 1,
+          "train_nll": 5.552276611328125,
+          "seconds": 0.7371369998436421,
+          "grad_norm": 1.9828945398330688,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 2,
+          "train_nll": 5.54840087890625,
+          "seconds": 0.02098809997551143,
+          "grad_norm": 1.8168007135391235,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 3,
+          "train_nll": 5.50128173828125,
+          "seconds": 0.0204284000210464,
+          "grad_norm": 1.9456218481063843,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 4,
+          "train_nll": 5.486846923828125,
+          "seconds": 0.01834800001233816,
+          "grad_norm": 1.9713538885116577,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 5,
+          "train_nll": 5.47613525390625,
+          "seconds": 0.020712400088086724,
+          "grad_norm": 2.028658151626587,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 6,
+          "train_nll": 5.440277099609375,
+          "seconds": 0.02120469999499619,
+          "grad_norm": 2.1102118492126465,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 7,
+          "train_nll": 5.425811767578125,
+          "seconds": 0.02065199986100197,
+          "grad_norm": 1.751433253288269,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 8,
+          "train_nll": 5.407928466796875,
+          "seconds": 0.01873030001297593,
+          "grad_norm": 1.9557230472564697,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        }
+      ]
+    },
+    "resumed": {
+      "config": {
+        "train_path": "D:\\Projects\\OakGPT\\data\\train.txt",
+        "validation_path": "D:\\Projects\\OakGPT\\data\\validation.txt",
+        "output_dir": "D:\\Projects\\OakGPT\\runs\\phase2\\gpu-verification\\split",
+        "tokenizer": "byte",
+        "model": {
+          "vocab_size": 259,
+          "context_length": 32,
+          "d_model": 32,
+          "n_heads": 4,
+          "n_layers": 2,
+          "ff_multiplier": 4,
+          "dropout": 0.1,
+          "positional_encoding": "learned"
+        },
+        "seed": 42,
+        "device": "cuda",
+        "precision": "fp16",
+        "steps": 8,
+        "batch_size": 2,
+        "gradient_accumulation": 2,
+        "learning_rate": 0.0003,
+        "weight_decay": 0.1,
+        "grad_clip": 1.0,
+        "eval_interval": 4,
+        "cpu_threads": 2,
+        "data_format": "text",
+        "validation_max_windows": null
+      },
+      "environment": {
+        "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+        "platform": "Windows-10-10.0.19045-SP0",
+        "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+        "logical_cpu_count": 16,
+        "torch": "2.9.1+cu126",
+        "cuda_runtime": "12.6",
+        "cudnn": 91002,
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2060",
+        "git_revision": "4e7ddd0b450e0892098836f321364ae2410f2115",
+        "git_dirty": false
+      },
+      "data_hashes": {
+        "train": "4dd71e4c9497100b6e3364030f04c7ffda8639acbf5b9f61e815a8f19d7360f1",
+        "validation": "d19696816071c154ddd05e042731c7169336936424da319b7e2cbec5a05c72a0"
+      },
+      "start_step": 4,
+      "end_step": 8,
+      "session_seconds": 0.20643800008110702,
+      "compute_seconds": 0.08279159967787564,
+      "trained_tokens": 512,
+      "tokens_per_compute_second": 6184.202286126639,
+      "skipped_updates": 0,
+      "cuda_peak_allocated_bytes": 70121984,
+      "cuda_peak_reserved_bytes": 71303168,
+      "steps": [
+        {
+          "step": 5,
+          "train_nll": 5.47613525390625,
+          "seconds": 0.01923389988951385,
+          "grad_norm": 2.028658151626587,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 6,
+          "train_nll": 5.440277099609375,
+          "seconds": 0.019969800021499395,
+          "grad_norm": 2.1102118492126465,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 7,
+          "train_nll": 5.425811767578125,
+          "seconds": 0.022485099965706468,
+          "grad_norm": 1.751433253288269,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 8,
+          "train_nll": 5.407928466796875,
+          "seconds": 0.021102799801155925,
+          "grad_norm": 1.9557230472564697,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        }
+      ]
+    },
+    "preset": {
+      "config": {
+        "train_path": "D:\\Projects\\OakGPT\\data\\train.txt",
+        "validation_path": "D:\\Projects\\OakGPT\\data\\validation.txt",
+        "output_dir": "D:\\Projects\\OakGPT\\runs\\phase2\\gpu-verification\\preset",
+        "tokenizer": "byte",
+        "model": {
+          "vocab_size": 259,
+          "context_length": 256,
+          "d_model": 256,
+          "n_heads": 8,
+          "n_layers": 6,
+          "ff_multiplier": 4,
+          "dropout": 0.1,
+          "positional_encoding": "learned"
+        },
+        "seed": 42,
+        "device": "cuda",
+        "precision": "fp16",
+        "steps": 200,
+        "batch_size": 2,
+        "gradient_accumulation": 8,
+        "learning_rate": 0.0003,
+        "weight_decay": 0.1,
+        "grad_clip": 1.0,
+        "eval_interval": 25,
+        "cpu_threads": 2,
+        "data_format": "text",
+        "validation_max_windows": null
+      },
+      "environment": {
+        "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+        "platform": "Windows-10-10.0.19045-SP0",
+        "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+        "logical_cpu_count": 16,
+        "torch": "2.9.1+cu126",
+        "cuda_runtime": "12.6",
+        "cudnn": 91002,
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2060",
+        "git_revision": "4e7ddd0b450e0892098836f321364ae2410f2115",
+        "git_dirty": false
+      },
+      "data_hashes": {
+        "train": "4dd71e4c9497100b6e3364030f04c7ffda8639acbf5b9f61e815a8f19d7360f1",
+        "validation": "d19696816071c154ddd05e042731c7169336936424da319b7e2cbec5a05c72a0"
+      },
+      "start_step": 0,
+      "end_step": 200,
+      "session_seconds": 41.059210899984464,
+      "compute_seconds": 39.976470600115135,
+      "trained_tokens": 819200,
+      "tokens_per_compute_second": 20492.054143410063,
+      "skipped_updates": 0,
+      "cuda_peak_allocated_bytes": 237089792,
+      "cuda_peak_reserved_bytes": 262144000,
+      "steps": [
+        {
+          "step": 1,
+          "train_nll": 5.551482200622559,
+          "seconds": 0.2034400999546051,
+          "grad_norm": 7.735489368438721,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 2,
+          "train_nll": 4.778717517852783,
+          "seconds": 0.19175320002250373,
+          "grad_norm": 4.385329723358154,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 3,
+          "train_nll": 4.465932846069336,
+          "seconds": 0.25396439991891384,
+          "grad_norm": 3.3587169647216797,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 4,
+          "train_nll": 4.303822994232178,
+          "seconds": 0.19848200003616512,
+          "grad_norm": 3.1242525577545166,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 5,
+          "train_nll": 4.238378047943115,
+          "seconds": 0.19624509988352656,
+          "grad_norm": 3.008486747741699,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 6,
+          "train_nll": 4.1737165451049805,
+          "seconds": 0.200009600026533,
+          "grad_norm": 2.9395527839660645,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 7,
+          "train_nll": 4.05056095123291,
+          "seconds": 0.18937100004404783,
+          "grad_norm": 2.901332378387451,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 8,
+          "train_nll": 3.976064682006836,
+          "seconds": 0.21216330002062023,
+          "grad_norm": 2.766813278198242,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 9,
+          "train_nll": 3.8994522094726562,
+          "seconds": 0.2074090999085456,
+          "grad_norm": 2.6062984466552734,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 10,
+          "train_nll": 3.816511631011963,
+          "seconds": 0.1751703000627458,
+          "grad_norm": 2.4748053550720215,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 11,
+          "train_nll": 3.7279114723205566,
+          "seconds": 0.2017329998780042,
+          "grad_norm": 2.3841328620910645,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 12,
+          "train_nll": 3.6456942558288574,
+          "seconds": 0.1940985000692308,
+          "grad_norm": 2.2965610027313232,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 13,
+          "train_nll": 3.573441982269287,
+          "seconds": 0.19055439997464418,
+          "grad_norm": 2.109471321105957,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 14,
+          "train_nll": 3.487858295440674,
+          "seconds": 0.18756409990601242,
+          "grad_norm": 2.085846185684204,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 15,
+          "train_nll": 3.365725517272949,
+          "seconds": 0.2075124999973923,
+          "grad_norm": 2.115908145904541,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 16,
+          "train_nll": 5.386059284210205,
+          "seconds": 0.1981110000051558,
+          "grad_norm": 110.74622344970703,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 17,
+          "train_nll": 3.3441234827041626,
+          "seconds": 0.20719549991190434,
+          "grad_norm": 8.620904922485352,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 18,
+          "train_nll": 3.2200818061828613,
+          "seconds": 0.21075369999743998,
+          "grad_norm": 3.065577983856201,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 19,
+          "train_nll": 3.1354639530181885,
+          "seconds": 0.17253239988349378,
+          "grad_norm": 1.972342848777771,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 20,
+          "train_nll": 3.1023740768432617,
+          "seconds": 0.18689109990373254,
+          "grad_norm": 2.778585433959961,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 21,
+          "train_nll": 3.0312676429748535,
+          "seconds": 0.179020999930799,
+          "grad_norm": 1.9789369106292725,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 22,
+          "train_nll": 2.9895371198654175,
+          "seconds": 0.19197260006330907,
+          "grad_norm": 1.956620693206787,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 23,
+          "train_nll": 2.9082318544387817,
+          "seconds": 0.18775929999537766,
+          "grad_norm": 1.9487403631210327,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 24,
+          "train_nll": 2.9034650325775146,
+          "seconds": 0.19825039990246296,
+          "grad_norm": 3.281909704208374,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 25,
+          "train_nll": 2.842272639274597,
+          "seconds": 0.19267679983749986,
+          "grad_norm": 1.5484377145767212,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 26,
+          "train_nll": 2.7946219444274902,
+          "seconds": 0.19781689997762442,
+          "grad_norm": 2.162738561630249,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 27,
+          "train_nll": 2.7392531633377075,
+          "seconds": 0.20425850013270974,
+          "grad_norm": 1.647497534751892,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 28,
+          "train_nll": 2.70889812707901,
+          "seconds": 0.21967630018480122,
+          "grad_norm": 1.897778034210205,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 29,
+          "train_nll": 2.6340242624282837,
+          "seconds": 0.2095796000212431,
+          "grad_norm": 1.623738169670105,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 30,
+          "train_nll": 2.5858423709869385,
+          "seconds": 0.2385177998803556,
+          "grad_norm": 2.2735133171081543,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 31,
+          "train_nll": 2.5525496006011963,
+          "seconds": 0.24117020005360246,
+          "grad_norm": 1.5547765493392944,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 32,
+          "train_nll": 2.5030527114868164,
+          "seconds": 0.23529019998386502,
+          "grad_norm": 1.9364618062973022,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 33,
+          "train_nll": 2.4460472464561462,
+          "seconds": 0.2297539000865072,
+          "grad_norm": 1.5815891027450562,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 34,
+          "train_nll": 2.4259936809539795,
+          "seconds": 0.19861650001257658,
+          "grad_norm": 1.7529830932617188,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 35,
+          "train_nll": 2.3627471327781677,
+          "seconds": 0.21421730006113648,
+          "grad_norm": 1.937260627746582,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 36,
+          "train_nll": 2.3361093401908875,
+          "seconds": 0.2124032999854535,
+          "grad_norm": 1.641244649887085,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 37,
+          "train_nll": 2.2818081378936768,
+          "seconds": 0.19359120004810393,
+          "grad_norm": 2.186878204345703,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 38,
+          "train_nll": 2.2461978793144226,
+          "seconds": 0.20005749980919063,
+          "grad_norm": 1.493680477142334,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 39,
+          "train_nll": 2.188881576061249,
+          "seconds": 0.17958770017139614,
+          "grad_norm": 1.9436001777648926,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 40,
+          "train_nll": 2.14142107963562,
+          "seconds": 0.17924520000815392,
+          "grad_norm": 2.930558681488037,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 41,
+          "train_nll": 2.1434366106987,
+          "seconds": 0.18417239980772138,
+          "grad_norm": 1.5384947061538696,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 42,
+          "train_nll": 2.077016234397888,
+          "seconds": 0.19582060002721846,
+          "grad_norm": 2.4323225021362305,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 43,
+          "train_nll": 2.035429298877716,
+          "seconds": 0.20402880012989044,
+          "grad_norm": 2.4452261924743652,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 44,
+          "train_nll": 2.046885132789612,
+          "seconds": 0.20282460004091263,
+          "grad_norm": 2.4480438232421875,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 45,
+          "train_nll": 1.963732123374939,
+          "seconds": 0.21545889996923506,
+          "grad_norm": 1.8937623500823975,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 46,
+          "train_nll": 1.9177683591842651,
+          "seconds": 0.2017634001094848,
+          "grad_norm": 1.5722445249557495,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 47,
+          "train_nll": 1.8921351730823517,
+          "seconds": 0.2012895999941975,
+          "grad_norm": 2.8562138080596924,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 48,
+          "train_nll": 1.8651993870735168,
+          "seconds": 0.18828709982335567,
+          "grad_norm": 1.943316102027893,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 49,
+          "train_nll": 1.8687741458415985,
+          "seconds": 0.19022560003213584,
+          "grad_norm": 3.1325876712799072,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 50,
+          "train_nll": 1.8009883761405945,
+          "seconds": 0.20275460020639002,
+          "grad_norm": 1.9586163759231567,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 51,
+          "train_nll": 1.7445527911186218,
+          "seconds": 0.2263039001263678,
+          "grad_norm": 3.208047866821289,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 52,
+          "train_nll": 1.7242101728916168,
+          "seconds": 0.22381450003013015,
+          "grad_norm": 2.1466481685638428,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 53,
+          "train_nll": 1.7240192592144012,
+          "seconds": 0.22086370014585555,
+          "grad_norm": 3.0543737411499023,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 54,
+          "train_nll": 1.6181671023368835,
+          "seconds": 0.22119349986314774,
+          "grad_norm": 2.154749870300293,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 55,
+          "train_nll": 1.6329424381256104,
+          "seconds": 0.22551649995148182,
+          "grad_norm": 2.978611946105957,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 56,
+          "train_nll": 1.6220346689224243,
+          "seconds": 0.22095829993486404,
+          "grad_norm": 2.9097676277160645,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 57,
+          "train_nll": 1.5679587423801422,
+          "seconds": 0.2182686000596732,
+          "grad_norm": 2.2478280067443848,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 58,
+          "train_nll": 1.4705547988414764,
+          "seconds": 0.20444910018704832,
+          "grad_norm": 3.0474889278411865,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 59,
+          "train_nll": 1.5229608416557312,
+          "seconds": 0.22458530007861555,
+          "grad_norm": 2.6548879146575928,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 60,
+          "train_nll": 1.463656634092331,
+          "seconds": 0.21669080015271902,
+          "grad_norm": 2.840553045272827,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 61,
+          "train_nll": 1.4327989220619202,
+          "seconds": 0.20174730010330677,
+          "grad_norm": 2.763826608657837,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 62,
+          "train_nll": 1.369892656803131,
+          "seconds": 0.1862234000582248,
+          "grad_norm": 2.619197130203247,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 63,
+          "train_nll": 1.3531816005706787,
+          "seconds": 0.19206460006535053,
+          "grad_norm": 3.5466575622558594,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 64,
+          "train_nll": 1.3423689901828766,
+          "seconds": 0.2056736999657005,
+          "grad_norm": 2.618985414505005,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 65,
+          "train_nll": 1.300709530711174,
+          "seconds": 0.19382150005549192,
+          "grad_norm": 4.548155784606934,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 66,
+          "train_nll": 1.2436978965997696,
+          "seconds": 0.19610369997099042,
+          "grad_norm": 3.6338794231414795,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 67,
+          "train_nll": 1.2442648857831955,
+          "seconds": 0.20240710000507534,
+          "grad_norm": 5.31439208984375,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 68,
+          "train_nll": 1.2497003823518753,
+          "seconds": 0.17320289998315275,
+          "grad_norm": 4.122824192047119,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 69,
+          "train_nll": 1.2024073004722595,
+          "seconds": 0.18558950000442564,
+          "grad_norm": 4.09948205947876,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 70,
+          "train_nll": 1.1526919603347778,
+          "seconds": 0.20154789998196065,
+          "grad_norm": 3.266059160232544,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 71,
+          "train_nll": 1.1099618524312973,
+          "seconds": 0.1693043999839574,
+          "grad_norm": 3.430992841720581,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 72,
+          "train_nll": 1.0648402869701385,
+          "seconds": 0.20113619999028742,
+          "grad_norm": 2.985046863555908,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 73,
+          "train_nll": 1.0464363992214203,
+          "seconds": 0.17974269995465875,
+          "grad_norm": 2.9036829471588135,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 74,
+          "train_nll": 1.0325161069631577,
+          "seconds": 0.19370669987984002,
+          "grad_norm": 2.4571022987365723,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 75,
+          "train_nll": 0.9830273240804672,
+          "seconds": 0.20785010000690818,
+          "grad_norm": 3.05519700050354,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 76,
+          "train_nll": 0.9549422711133957,
+          "seconds": 0.20056480006314814,
+          "grad_norm": 2.513535976409912,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 77,
+          "train_nll": 0.8886556476354599,
+          "seconds": 0.1821268000639975,
+          "grad_norm": 2.5852458477020264,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 78,
+          "train_nll": 0.9137302488088608,
+          "seconds": 0.17074319999665022,
+          "grad_norm": 2.807786226272583,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 79,
+          "train_nll": 0.8569638133049011,
+          "seconds": 0.1788693000562489,
+          "grad_norm": 3.270871877670288,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 80,
+          "train_nll": 0.8358771950006485,
+          "seconds": 0.18760319985449314,
+          "grad_norm": 2.877209424972534,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 81,
+          "train_nll": 0.785401776432991,
+          "seconds": 0.17746099992655218,
+          "grad_norm": 2.426792860031128,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 82,
+          "train_nll": 0.8063123375177383,
+          "seconds": 0.17321659997105598,
+          "grad_norm": 3.2863962650299072,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 83,
+          "train_nll": 0.7469538897275925,
+          "seconds": 0.1908249999396503,
+          "grad_norm": 2.2004075050354004,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 84,
+          "train_nll": 0.7046757787466049,
+          "seconds": 0.1910943000111729,
+          "grad_norm": 2.182615041732788,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 85,
+          "train_nll": 0.6836925894021988,
+          "seconds": 0.19582090014591813,
+          "grad_norm": 2.285515785217285,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 86,
+          "train_nll": 0.6176723092794418,
+          "seconds": 0.20113719999790192,
+          "grad_norm": 2.3015246391296387,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 87,
+          "train_nll": 0.6315190345048904,
+          "seconds": 0.22207910008728504,
+          "grad_norm": 2.9262378215789795,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 88,
+          "train_nll": 0.5892947018146515,
+          "seconds": 0.20471509988419712,
+          "grad_norm": 3.0300631523132324,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 89,
+          "train_nll": 0.5658873319625854,
+          "seconds": 0.18535610008984804,
+          "grad_norm": 2.7404563426971436,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 90,
+          "train_nll": 0.5557356774806976,
+          "seconds": 0.1885838001035154,
+          "grad_norm": 3.330632448196411,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 91,
+          "train_nll": 0.5320703536272049,
+          "seconds": 0.18936710013076663,
+          "grad_norm": 3.5402345657348633,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 92,
+          "train_nll": 0.5220963582396507,
+          "seconds": 0.18953069997951388,
+          "grad_norm": 3.219411849975586,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 93,
+          "train_nll": 0.4781457930803299,
+          "seconds": 0.19813180016353726,
+          "grad_norm": 3.0639679431915283,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 94,
+          "train_nll": 0.4606185033917427,
+          "seconds": 0.18305340013466775,
+          "grad_norm": 2.9840800762176514,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 95,
+          "train_nll": 0.46212463825941086,
+          "seconds": 0.19474630011245608,
+          "grad_norm": 3.9210317134857178,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 96,
+          "train_nll": 0.44161977618932724,
+          "seconds": 0.18408929998986423,
+          "grad_norm": 2.814192771911621,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 97,
+          "train_nll": 0.41085800528526306,
+          "seconds": 0.2033919000532478,
+          "grad_norm": 3.065690517425537,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 98,
+          "train_nll": 0.3961401730775833,
+          "seconds": 0.2013745999429375,
+          "grad_norm": 2.791145086288452,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 99,
+          "train_nll": 0.3712969198822975,
+          "seconds": 0.19505779980681837,
+          "grad_norm": 2.838634490966797,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 100,
+          "train_nll": 0.3836904242634773,
+          "seconds": 0.18263429985381663,
+          "grad_norm": 2.8542399406433105,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 101,
+          "train_nll": 0.36319316923618317,
+          "seconds": 0.18139999988488853,
+          "grad_norm": 2.33678936958313,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 102,
+          "train_nll": 0.35180139541625977,
+          "seconds": 0.1825272999703884,
+          "grad_norm": 2.8080034255981445,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 103,
+          "train_nll": 0.33447836339473724,
+          "seconds": 0.16680629993788898,
+          "grad_norm": 2.1955485343933105,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 104,
+          "train_nll": 0.3153475597500801,
+          "seconds": 0.2105622999370098,
+          "grad_norm": 2.955946683883667,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 105,
+          "train_nll": 0.3000413328409195,
+          "seconds": 0.19668569997884333,
+          "grad_norm": 2.1762797832489014,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 106,
+          "train_nll": 0.2863858789205551,
+          "seconds": 0.18896980001591146,
+          "grad_norm": 2.5417163372039795,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 107,
+          "train_nll": 0.2612671032547951,
+          "seconds": 0.19088919996283948,
+          "grad_norm": 1.7973904609680176,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 108,
+          "train_nll": 0.2729577347636223,
+          "seconds": 0.1881075999699533,
+          "grad_norm": 1.7099570035934448,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 109,
+          "train_nll": 0.26422709971666336,
+          "seconds": 0.20210219989530742,
+          "grad_norm": 2.476844549179077,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 110,
+          "train_nll": 0.24845848232507706,
+          "seconds": 0.19383740006014705,
+          "grad_norm": 1.7995479106903076,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 111,
+          "train_nll": 0.24317217618227005,
+          "seconds": 0.1836383999325335,
+          "grad_norm": 2.160545825958252,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 112,
+          "train_nll": 0.2447219118475914,
+          "seconds": 0.190785399870947,
+          "grad_norm": 2.5554471015930176,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 113,
+          "train_nll": 0.2283167615532875,
+          "seconds": 0.19644720014184713,
+          "grad_norm": 1.989011287689209,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 114,
+          "train_nll": 0.2210664004087448,
+          "seconds": 0.1775317001156509,
+          "grad_norm": 2.370610237121582,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 115,
+          "train_nll": 0.21756040304899216,
+          "seconds": 0.19322600006125867,
+          "grad_norm": 2.1931583881378174,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 116,
+          "train_nll": 0.1923917979001999,
+          "seconds": 0.2058198000304401,
+          "grad_norm": 1.8210108280181885,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 117,
+          "train_nll": 0.19128147512674332,
+          "seconds": 0.1822625999338925,
+          "grad_norm": 2.073748826980591,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 118,
+          "train_nll": 0.19332946091890335,
+          "seconds": 0.2002242999151349,
+          "grad_norm": 2.101799488067627,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 119,
+          "train_nll": 0.17460766434669495,
+          "seconds": 0.19457719987258315,
+          "grad_norm": 1.7756489515304565,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 120,
+          "train_nll": 0.16722197085618973,
+          "seconds": 0.18294019997119904,
+          "grad_norm": 1.60344660282135,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 121,
+          "train_nll": 0.1517377644777298,
+          "seconds": 0.19050960009917617,
+          "grad_norm": 1.3589205741882324,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 122,
+          "train_nll": 0.16330642253160477,
+          "seconds": 0.182317900005728,
+          "grad_norm": 1.6633416414260864,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 123,
+          "train_nll": 0.14476700872182846,
+          "seconds": 0.18905969988554716,
+          "grad_norm": 1.495564579963684,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 124,
+          "train_nll": 0.14884258061647415,
+          "seconds": 0.1973489997908473,
+          "grad_norm": 1.845061182975769,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 125,
+          "train_nll": 0.13434236496686935,
+          "seconds": 0.20354370004497468,
+          "grad_norm": 1.175276517868042,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 126,
+          "train_nll": 0.126859150826931,
+          "seconds": 0.17959129996597767,
+          "grad_norm": 1.2735284566879272,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 127,
+          "train_nll": 0.11151409894227982,
+          "seconds": 0.18304319982416928,
+          "grad_norm": 0.9959864616394043,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 128,
+          "train_nll": 0.11920168995857239,
+          "seconds": 0.1694557999726385,
+          "grad_norm": 1.2667393684387207,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 129,
+          "train_nll": 0.1206090897321701,
+          "seconds": 0.16826940001919866,
+          "grad_norm": 1.623057246208191,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 130,
+          "train_nll": 0.11664657667279243,
+          "seconds": 0.19552999990992248,
+          "grad_norm": 1.2412006855010986,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 131,
+          "train_nll": 0.10286373272538185,
+          "seconds": 0.19919089996255934,
+          "grad_norm": 0.9599560499191284,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 132,
+          "train_nll": 0.09891990199685097,
+          "seconds": 0.18941820017062128,
+          "grad_norm": 1.3627548217773438,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 133,
+          "train_nll": 0.0973067581653595,
+          "seconds": 0.22358450014144182,
+          "grad_norm": 1.2262299060821533,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 134,
+          "train_nll": 0.10737442970275879,
+          "seconds": 0.19485499989241362,
+          "grad_norm": 1.4556924104690552,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 135,
+          "train_nll": 0.09551756456494331,
+          "seconds": 0.20147490012459457,
+          "grad_norm": 1.4924297332763672,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 136,
+          "train_nll": 0.09163101762533188,
+          "seconds": 0.2026416000444442,
+          "grad_norm": 1.1971137523651123,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 137,
+          "train_nll": 0.08509647101163864,
+          "seconds": 0.1886015001218766,
+          "grad_norm": 1.1460137367248535,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 138,
+          "train_nll": 0.09217733144760132,
+          "seconds": 0.19425250007770956,
+          "grad_norm": 1.05898118019104,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 139,
+          "train_nll": 0.08802366629242897,
+          "seconds": 0.20648910012096167,
+          "grad_norm": 1.1380276679992676,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 140,
+          "train_nll": 0.08436853066086769,
+          "seconds": 0.19825259991921484,
+          "grad_norm": 1.1817190647125244,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 141,
+          "train_nll": 0.08269304037094116,
+          "seconds": 0.1967697001527995,
+          "grad_norm": 1.2155379056930542,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 142,
+          "train_nll": 0.0796639434993267,
+          "seconds": 0.1906137999612838,
+          "grad_norm": 1.1883913278579712,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 143,
+          "train_nll": 0.08586136624217033,
+          "seconds": 0.19802569993771613,
+          "grad_norm": 1.3497934341430664,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 144,
+          "train_nll": 0.07629814371466637,
+          "seconds": 0.20252119982615113,
+          "grad_norm": 1.2041716575622559,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 145,
+          "train_nll": 0.08343667164444923,
+          "seconds": 0.19847730011679232,
+          "grad_norm": 1.3875243663787842,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 146,
+          "train_nll": 0.09359421208500862,
+          "seconds": 0.19611049978993833,
+          "grad_norm": 2.3648862838745117,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 147,
+          "train_nll": 0.07623082026839256,
+          "seconds": 0.21637110016308725,
+          "grad_norm": 1.3524088859558105,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 148,
+          "train_nll": 0.07061737775802612,
+          "seconds": 0.19907910004258156,
+          "grad_norm": 1.1927343606948853,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 149,
+          "train_nll": 0.07225972041487694,
+          "seconds": 0.27381469984538853,
+          "grad_norm": 1.6912384033203125,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 150,
+          "train_nll": 0.08793393895030022,
+          "seconds": 0.2356893999967724,
+          "grad_norm": 1.94234037399292,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 151,
+          "train_nll": 0.07559116557240486,
+          "seconds": 0.2534690999891609,
+          "grad_norm": 1.5319745540618896,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 152,
+          "train_nll": 0.06317198276519775,
+          "seconds": 0.20865499996580184,
+          "grad_norm": 1.1977250576019287,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 153,
+          "train_nll": 0.06954421475529671,
+          "seconds": 0.2265616999939084,
+          "grad_norm": 1.3877201080322266,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 154,
+          "train_nll": 0.06504004076123238,
+          "seconds": 0.20090769999660552,
+          "grad_norm": 1.6248860359191895,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 155,
+          "train_nll": 0.06011933088302612,
+          "seconds": 0.1999117999803275,
+          "grad_norm": 1.0780526399612427,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 156,
+          "train_nll": 0.06428594700992107,
+          "seconds": 0.21722149988636374,
+          "grad_norm": 1.240004301071167,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 157,
+          "train_nll": 0.061257265508174896,
+          "seconds": 0.24566680006682873,
+          "grad_norm": 1.3380204439163208,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 158,
+          "train_nll": 0.06650843098759651,
+          "seconds": 0.19070450006984174,
+          "grad_norm": 1.5556758642196655,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 159,
+          "train_nll": 0.05225716903805733,
+          "seconds": 0.2170573000330478,
+          "grad_norm": 0.9143221974372864,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 160,
+          "train_nll": 0.05275525897741318,
+          "seconds": 0.18357610004022717,
+          "grad_norm": 1.0340282917022705,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 161,
+          "train_nll": 0.061374809592962265,
+          "seconds": 0.17935379990376532,
+          "grad_norm": 1.4012929201126099,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 162,
+          "train_nll": 0.056180013343691826,
+          "seconds": 0.1751315000001341,
+          "grad_norm": 1.1885472536087036,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 163,
+          "train_nll": 0.05764937773346901,
+          "seconds": 0.2038693001959473,
+          "grad_norm": 1.1822712421417236,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 164,
+          "train_nll": 0.06413682922720909,
+          "seconds": 0.20796549995429814,
+          "grad_norm": 1.3040339946746826,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 165,
+          "train_nll": 0.054492853581905365,
+          "seconds": 0.20410880004055798,
+          "grad_norm": 1.1765401363372803,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 166,
+          "train_nll": 0.04754786193370819,
+          "seconds": 0.19915200001560152,
+          "grad_norm": 0.8895231485366821,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 167,
+          "train_nll": 0.05665641650557518,
+          "seconds": 0.2121311998926103,
+          "grad_norm": 1.310248613357544,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 168,
+          "train_nll": 0.05616401135921478,
+          "seconds": 0.20064010005444288,
+          "grad_norm": 1.209220290184021,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 169,
+          "train_nll": 0.05383860692381859,
+          "seconds": 0.19489930011332035,
+          "grad_norm": 1.455692172050476,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 170,
+          "train_nll": 0.04481835849583149,
+          "seconds": 0.20554169989190996,
+          "grad_norm": 0.8028111457824707,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 171,
+          "train_nll": 0.052861716598272324,
+          "seconds": 0.18153629987500608,
+          "grad_norm": 1.0852069854736328,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 172,
+          "train_nll": 0.049260376021265984,
+          "seconds": 0.19884860003367066,
+          "grad_norm": 1.1265404224395752,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 173,
+          "train_nll": 0.05396823771297932,
+          "seconds": 0.22701509995386004,
+          "grad_norm": 1.3241803646087646,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 174,
+          "train_nll": 0.050652969628572464,
+          "seconds": 0.22749459999613464,
+          "grad_norm": 1.2888184785842896,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 175,
+          "train_nll": 0.04815765842795372,
+          "seconds": 0.1915072000119835,
+          "grad_norm": 0.89960116147995,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 176,
+          "train_nll": 0.04016823135316372,
+          "seconds": 0.20415640017017722,
+          "grad_norm": 0.7046475410461426,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 177,
+          "train_nll": 0.05527935363352299,
+          "seconds": 0.21406350005418062,
+          "grad_norm": 1.7050257921218872,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 178,
+          "train_nll": 0.049348095431923866,
+          "seconds": 0.21742939995601773,
+          "grad_norm": 1.0718225240707397,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 179,
+          "train_nll": 0.04142812825739384,
+          "seconds": 0.18755119992420077,
+          "grad_norm": 0.9696411490440369,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 180,
+          "train_nll": 0.04614328593015671,
+          "seconds": 0.19973929994739592,
+          "grad_norm": 1.0657448768615723,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 181,
+          "train_nll": 0.043149931356310844,
+          "seconds": 0.2403748999349773,
+          "grad_norm": 0.7407363653182983,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 182,
+          "train_nll": 0.0464666411280632,
+          "seconds": 0.18211750010959804,
+          "grad_norm": 0.950326681137085,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 183,
+          "train_nll": 0.046422336250543594,
+          "seconds": 0.1846047998405993,
+          "grad_norm": 1.0768369436264038,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 184,
+          "train_nll": 0.045772744342684746,
+          "seconds": 0.20992649998515844,
+          "grad_norm": 1.1572057008743286,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 185,
+          "train_nll": 0.03714036010205746,
+          "seconds": 0.21591520006768405,
+          "grad_norm": 0.8319928050041199,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 186,
+          "train_nll": 0.039521558210253716,
+          "seconds": 0.17902750009670854,
+          "grad_norm": 1.0537290573120117,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 187,
+          "train_nll": 0.03901191987097263,
+          "seconds": 0.2165704001672566,
+          "grad_norm": 1.082432508468628,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 188,
+          "train_nll": 0.042702095583081245,
+          "seconds": 0.2030015999916941,
+          "grad_norm": 1.5916311740875244,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 189,
+          "train_nll": 0.05126664787530899,
+          "seconds": 0.2295919000171125,
+          "grad_norm": 1.2717552185058594,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 190,
+          "train_nll": 0.04515081271529198,
+          "seconds": 0.19952999986708164,
+          "grad_norm": 1.3016948699951172,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 191,
+          "train_nll": 0.04266735538840294,
+          "seconds": 0.1992934001609683,
+          "grad_norm": 1.274059772491455,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 192,
+          "train_nll": 0.03619523346424103,
+          "seconds": 0.19707629992626607,
+          "grad_norm": 0.8655239939689636,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 193,
+          "train_nll": 0.03515387512743473,
+          "seconds": 0.19461450004018843,
+          "grad_norm": 0.8685624599456787,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 194,
+          "train_nll": 0.04344288446009159,
+          "seconds": 0.21696579991839826,
+          "grad_norm": 1.1576119661331177,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 195,
+          "train_nll": 0.03083181194961071,
+          "seconds": 0.19091730006039143,
+          "grad_norm": 0.6229328513145447,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 196,
+          "train_nll": 0.03776978701353073,
+          "seconds": 0.20138689992018044,
+          "grad_norm": 1.093815565109253,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 197,
+          "train_nll": 0.03379637375473976,
+          "seconds": 0.194684199988842,
+          "grad_norm": 0.7560809254646301,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 198,
+          "train_nll": 0.04067095369100571,
+          "seconds": 0.20025300001725554,
+          "grad_norm": 1.1763896942138672,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 199,
+          "train_nll": 0.03364061750471592,
+          "seconds": 0.2171028999146074,
+          "grad_norm": 0.8527664542198181,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        },
+        {
+          "step": 200,
+          "train_nll": 0.03536592423915863,
+          "seconds": 0.2140246001072228,
+          "grad_norm": 0.9401822090148926,
+          "scale_before": 65536.0,
+          "scale_after": 65536.0,
+          "optimizer_update": true
+        }
+      ]
+    }
+  }
+}

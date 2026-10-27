@@ -70,5 +70,6 @@ def main() -> None:
             values.get("repeats", 3),
             values.get("warmups", 1),
             values.get("gpu_index"),
+            score_quality=values.get("score_quality", True),
         )
         print(json.dumps(report["summary"], indent=2))

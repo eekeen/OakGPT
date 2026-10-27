@@ -50,7 +50,9 @@ def prompt_summary(report: dict[str, Any]) -> dict[str, Any]:
 
 
 def paired_quality(left: dict[str, Any], right: dict[str, Any]) -> dict[str, Any]:
-    if left["dataset"]["sha256"] != right["dataset"]["sha256"]:
+    left_hash = left["dataset"].get("canonical_sha256", left["dataset"]["sha256"])
+    right_hash = right["dataset"].get("canonical_sha256", right["dataset"]["sha256"])
+    if left_hash != right_hash:
         raise ValueError("Paired comparisons require identical dataset hashes")
     if left["generation"] != right["generation"]:
         raise ValueError("Paired comparisons require identical generation settings")

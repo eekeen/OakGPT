@@ -1,5 +1,6 @@
 """Copy executed evidence only; never alter the Phase 1 results directory."""
 
+import hashlib
 import json
 import shutil
 import subprocess
@@ -10,7 +11,9 @@ from oakgpt.provenance import sha256
 
 def main() -> None:
     destination = Path("reports/phase2")
-    destination.mkdir(parents=True, exist_ok=True)
+    if destination.exists():
+        raise FileExistsError(destination)
+    destination.mkdir(parents=True)
     for source, name in [
         ("runs/phase2/gpu-verification/verification.json", "gpu_verification.json"),
         ("runs/phase2/transformer-suite/suite.json", "transformer_suite.json"),
@@ -20,6 +23,30 @@ def main() -> None:
     ]:
         shutil.copyfile(source, destination / name)
     shutil.copytree("runs/phase2/quantization", destination / "quantization", dirs_exist_ok=False)
+    inputs = destination / "inputs"
+    inputs.mkdir()
+    input_records = []
+    for name in ["heldout_reasoning_v1.jsonl", "throughput_long_v1.jsonl"]:
+        raw_input = (Path("data/eval") / name).read_bytes()
+        (inputs / name).write_bytes(raw_input)
+        samples = [json.loads(line) for line in raw_input.decode("utf-8").splitlines()]
+        input_records.append(
+            {
+                "file": name,
+                "measured_sha256": hashlib.sha256(raw_input).hexdigest(),
+                "lf_sha256": hashlib.sha256(raw_input.replace(b"\r\n", b"\n")).hexdigest(),
+                "canonical_sha256": hashlib.sha256(
+                    json.dumps(
+                        samples, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+                    ).encode()
+                ).hexdigest(),
+                "measured_line_endings": "CRLF" if b"\r\n" in raw_input else "LF",
+                "samples": len(samples),
+            }
+        )
+    (inputs / "input_manifest.json").write_text(
+        json.dumps(input_records, indent=2), encoding="utf-8", newline="\n"
+    )
     raw = Path("runs/phase2-quantize.log").read_bytes()
     encoding = "utf-16" if raw.startswith(b"\xff\xfe") else "utf-8"
     (destination / "conversion.log").write_text(raw.decode(encoding), encoding="utf-8")

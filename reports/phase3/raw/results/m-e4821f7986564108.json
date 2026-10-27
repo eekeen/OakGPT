@@ -1,0 +1,75 @@
+{
+  "status": "completed",
+  "reason": "ok",
+  "mission_id": "m-e4821f7986564108",
+  "execution_seconds": 2.5072230600053445,
+  "events": [
+    {
+      "event": "accepted",
+      "mission_id": "m-e4821f7986564108",
+      "wall_time_ns": 1793116346576343266,
+      "sim_time_ns": 384870000000
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-e4821f7986564108",
+      "wall_time_ns": 1793116346583148526,
+      "sim_time_ns": 384870000000,
+      "index": 0,
+      "action": "navigate"
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-e4821f7986564108",
+      "wall_time_ns": 1793116346655657386,
+      "sim_time_ns": 384990000000,
+      "distance_remaining": 0.2500000596046448
+    },
+    {
+      "event": "arrived",
+      "mission_id": "m-e4821f7986564108",
+      "wall_time_ns": 1793116347025413116,
+      "sim_time_ns": 385360000000,
+      "destination": "dock",
+      "residual_m": 0.24125265792790468
+    },
+    {
+      "event": "step_completed",
+      "mission_id": "m-e4821f7986564108",
+      "wall_time_ns": 1793116347025568456,
+      "sim_time_ns": 385360000000,
+      "index": 0
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-e4821f7986564108",
+      "wall_time_ns": 1793116347031250426,
+      "sim_time_ns": 385360000000,
+      "index": 1,
+      "action": "inspect"
+    },
+    {
+      "event": "inspection_snapshot",
+      "mission_id": "m-e4821f7986564108",
+      "wall_time_ns": 1793116349041430936,
+      "sim_time_ns": 387380000000,
+      "destination": "dock",
+      "valid_ranges": 360,
+      "minimum_range_m": 3.665771007537842
+    },
+    {
+      "event": "step_completed",
+      "mission_id": "m-e4821f7986564108",
+      "wall_time_ns": 1793116349041635146,
+      "sim_time_ns": 387380000000,
+      "index": 1
+    },
+    {
+      "event": "completed",
+      "mission_id": "m-e4821f7986564108",
+      "wall_time_ns": 1793116349041763036,
+      "sim_time_ns": 387380000000,
+      "reason": "ok"
+    }
+  ]
+}

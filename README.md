@@ -9,6 +9,13 @@ Phase 1 is an engineering baseline, not a claim to have trained a capable assist
 The included tiny original corpora exercise the pipeline; they are far too small for
 useful general language modeling. No model weights are included or downloaded implicitly.
 
+Phase 3 now connects bounded JSON task plans to an independent C++ safety validator and
+an actual ROS2 Jazzy/Nav2/Gazebo demonstrator. [Setup](docs/robotics.md),
+[measured results and limitations](docs/phase3-verification.md), and the
+[research report](reports/phase3/report.md) distinguish nominal experiments from later
+fault-driven fixes. The 60-scenario study exposes frequent unsafe raw Qwen proposals;
+independent validation prevents their execution.
+
 ## Phase 2 research workflow
 
 Phase 2 adds a separately installed CUDA environment, physical fp16 training/resume
@@ -125,6 +132,12 @@ GitHub Actions results
 must be checked after pushing; a local pass is not a hosted CI pass.
 
 ## Research and extension guide
+
+Phase 3 implements a local robotic planning demonstrator with versioned JSON,
+independent C++17 authorization, a replay-protected ROS2 Jazzy mission executor,
+Nav2 and a fully local Gazebo Harmonic room. It includes 60 frozen scenarios and
+actual simulation evidence. Start with [robotics setup and safety contract](docs/robotics.md)
+and [Phase 3 verification](docs/phase3-verification.md). ROS is optional for CPU development.
 
 | Area | Documentation |
 | --- | --- |

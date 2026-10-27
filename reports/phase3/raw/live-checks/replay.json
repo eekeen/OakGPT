@@ -1,0 +1,33 @@
+{
+  "case": "replay",
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-5eed9399cd1349ae",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793116846558,
+    "expires_at_ms": 1793117026558,
+    "instruction": "Go to dock",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  },
+  "result": {
+    "status": "rejected",
+    "reason": "UNIQUE constraint failed: missions.id",
+    "mission_id": "m-5eed9399cd1349ae",
+    "execution_seconds": 0.015390360029414296,
+    "events": [
+      {
+        "event": "rejected",
+        "mission_id": "m-5eed9399cd1349ae",
+        "wall_time_ns": 1793116852080521942,
+        "sim_time_ns": 840170000000,
+        "reason": "UNIQUE constraint failed: missions.id"
+      }
+    ]
+  }
+}

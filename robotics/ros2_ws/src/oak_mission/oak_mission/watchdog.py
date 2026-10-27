@@ -1,6 +1,7 @@
 """Independent Nav2 action cancellation on lost executor heartbeat or expired mission."""
 
 import json
+import re
 import time
 
 import rclpy
@@ -20,6 +21,7 @@ class Watchdog(Node):
             "oak/watchdog_ready",
             QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL),
         )
+        self.lease = self.create_publisher(String, "oak/watchdog_lease", 10)
         self.create_subscription(String, "oak/heartbeat", self.receive, 10)
         self.active = False
         self.expires = 0
@@ -36,11 +38,24 @@ class Watchdog(Node):
             value = json.loads(message.data)
             if type(value["active"]) is not bool or type(value["expires_at_ms"]) is not int:
                 raise ValueError("heartbeat_types")
+            if value["active"] and not re.fullmatch("m-[0-9a-f]{16}", value["mission_id"]):
+                raise ValueError("heartbeat_identity")
             if value["active"] and value["expires_at_ms"] > time.time_ns() // 1000000 + 180000:
                 raise ValueError("heartbeat_expiry")
             self.active = value["active"]
             self.expires = value["expires_at_ms"]
             self.last = time.monotonic()
+            if self.active and self.initialized and not self.latched:
+                self.lease.publish(
+                    String(
+                        data=json.dumps(
+                            {
+                                "mission_id": value["mission_id"],
+                                "expires_at_ms": self.expires,
+                            }
+                        )
+                    )
+                )
         except (ValueError, TypeError, KeyError):
             self.latched = True
 
@@ -52,14 +67,22 @@ class Watchdog(Node):
             self.latched = True
         if self.pending is not None:
             if self.pending.done():
-                response = self.pending.result()
+                try:
+                    response = self.pending.result()
+                    canceling = len(response.goals_canceling)
+                except Exception as error:
+                    self.latched = True
+                    self.ready.publish(Bool(data=False))
+                    self.get_logger().error(f"Watchdog cancel service failed: {error}")
+                    self.pending = None
+                    return
                 self.publisher.publish(
                     String(
                         data=json.dumps(
                             {
                                 "event": "watchdog_stop" if self.latched else "startup_cancel",
                                 "wall_time_ns": time.time_ns(),
-                                "canceling": len(response.goals_canceling),
+                                "canceling": canceling,
                             }
                         )
                     )
@@ -82,7 +105,7 @@ def main():
         rclpy.spin(node)
     finally:
         node.destroy_node()
-        rclpy.shutdown()
+        rclpy.try_shutdown()
 
 
 if __name__ == "__main__":

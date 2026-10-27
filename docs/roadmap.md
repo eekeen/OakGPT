@@ -1,4 +1,32 @@
-# Next development phases
+# Roadmap
+
+Phase 1 implements scratch training and local inference. Phase 2 adds physical GPU
+verification, licensed data and controlled experiments. Phase 3 now implements bounded
+planning, C++ validation and actual ROS2 Jazzy/Nav2/Gazebo execution. LoRA remains deferred.
+Historical phase reports retain their original evidence.
+
+## Recommended next phase: reliability and broader evaluation
+
+Prioritize simulator ground-truth trajectory and stopping-distance checks, randomized
+cluttered worlds, independent simulator seeds, action-server outages, sensor/TF loss,
+watchdog failure, process restarts and long-duration replay tests. Automate optional ROS
+integration on a suitable Ubuntu runner while keeping CPU CI independent of ROS/models.
+
+Freeze a second independently authored instruction set before prompt refinement. Evaluate
+language coverage and abstention with paired comparisons and randomized timing order.
+The v1 grammar already has a perfect deterministic baseline; observed unsafe raw Qwen
+accepts do not justify expanding actuator authority. Keep current references immutable.
+
+Physical deployment requires a hardware e-stop, independent velocity deadman, measured
+stopping distance, authenticated ROS communication, operator arming and a new explicit
+threat analysis. The current executor remains simulation-only. Later LoRA research may
+test structured planning and abstention using original trainable weights and independent
+held-out requests, after measuring adapter feasibility on 6 GB VRAM.
+
+## Original planning notes (historical)
+
+The sequence below records the initial roadmap. Current phase boundaries follow the
+implemented user requests and verification documents above.
 
 ## Phase 2: credible data and LoRA
 

@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "decision",
+    "reason",
+    "steps"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "accept",
+        "reject"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "unsupported",
+        "ambiguous",
+        "unsafe"
+      ]
+    },
+    "steps": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "action",
+          "destination",
+          "duration_s"
+        ],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "inspect"
+            ]
+          },
+          "destination": {
+            "type": "string",
+            "enum": [
+              "dock",
+              "station",
+              "storage"
+            ]
+          },
+          "duration_s": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5
+          }
+        }
+      }
+    }
+  }
+}

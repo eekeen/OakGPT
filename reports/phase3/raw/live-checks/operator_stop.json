@@ -1,0 +1,39 @@
+{
+  "case": "operator_stop",
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-3225fba900634b75",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793116852190,
+    "expires_at_ms": 1793117032190,
+    "instruction": "Go to dock",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  },
+  "result": {
+    "status": "failed",
+    "reason": "operator_stop",
+    "mission_id": "m-3225fba900634b75",
+    "execution_seconds": 0.04084308003075421,
+    "events": [
+      {
+        "event": "accepted",
+        "mission_id": "m-3225fba900634b75",
+        "wall_time_ns": 1793116852301472032,
+        "sim_time_ns": 840400000000
+      },
+      {
+        "event": "failed",
+        "mission_id": "m-3225fba900634b75",
+        "wall_time_ns": 1793116852302650312,
+        "sim_time_ns": 840400000000,
+        "reason": "operator_stop"
+      }
+    ]
+  }
+}

@@ -1,14 +1,30 @@
+import hashlib
 import json
+import subprocess
 from pathlib import Path
 
 import pytest
 
+from oakgpt.robotics.evaluate import summarize, wilson
 from oakgpt.robotics.planner import plan_prompt
-from oakgpt.robotics.plans import authorized_steps, baseline, envelope, parse_proposal, strict_json
-from oakgpt.robotics.safety import submit_spool
+from oakgpt.robotics.plans import (
+    PROPOSAL_SCHEMA,
+    authorized_steps,
+    baseline,
+    envelope,
+    parse_proposal,
+    strict_json,
+)
+from oakgpt.robotics.safety import receiver_clock, submit_spool, validate_cpp
 
 
 def test_frozen_scenario_contract():
+    assert hashlib.sha256(Path("data/robotics/instructions_v1.jsonl").read_bytes()).hexdigest() == (
+        "f56ee17a91c4e926f56b8fb6767648159aad6c3cbe4801a6c08549f180928085"
+    )
+    assert (
+        json.loads(Path("configs/robotics/proposal_v1.schema.json").read_text()) == PROPOSAL_SCHEMA
+    )
     rows = [
         json.loads(line)
         for line in Path("data/robotics/instructions_v1.jsonl").read_text().splitlines()
@@ -51,3 +67,60 @@ def test_atomic_shared_spool_and_host_envelope(tmp_path):
     assert not list(tmp_path.rglob("*.tmp"))
     with pytest.raises(FileExistsError):
         submit_spool(mission, tmp_path)
+
+
+def test_validator_process_protocol(monkeypatch):
+    def run(*args, **kwargs):
+        assert kwargs.get("shell", False) is False
+        return subprocess.CompletedProcess(args[0], 0, '{"accepted":false}', "")
+
+    monkeypatch.setattr(subprocess, "run", run)
+    with pytest.raises(RuntimeError, match="status mismatch"):
+        validate_cpp({}, ["trusted-validator"])
+    monkeypatch.setattr(
+        subprocess,
+        "run",
+        lambda *a, **k: subprocess.CompletedProcess(a[0], 2, '{"accepted":false', ""),
+    )
+    with pytest.raises(RuntimeError, match="Malformed validator JSON"):
+        validate_cpp({}, ["trusted-validator"])
+
+
+def test_receiver_clock_rejects_bool_and_slow_response(monkeypatch):
+    monkeypatch.setattr(
+        subprocess,
+        "run",
+        lambda *a, **k: subprocess.CompletedProcess(a[0], 0, '{"now_ms":true}', ""),
+    )
+    with pytest.raises(RuntimeError):
+        receiver_clock(["trusted-clock"])
+    monkeypatch.setattr(
+        subprocess,
+        "run",
+        lambda *a, **k: subprocess.CompletedProcess(a[0], 0, '{"now_ms":123456}', ""),
+    )
+    assert receiver_clock(["trusted-clock"]) == 123456
+    ticks = iter([0.0, 1.1])
+    monkeypatch.setattr("oakgpt.robotics.safety.time.monotonic", lambda: next(ticks))
+    with pytest.raises(RuntimeError):
+        receiver_clock(["trusted-clock"])
+
+
+def test_metrics_keep_rejected_valid_requests_in_completion_denominator():
+    records = [
+        {
+            "expected_accept": True,
+            "accepted": True,
+            "inference_latency_s": 1,
+            "execution": {"status": "completed", "execution_seconds": 2},
+        },
+        {"expected_accept": True, "accepted": False, "inference_latency_s": 2},
+        {"expected_accept": False, "accepted": False, "inference_latency_s": 3},
+    ]
+    result = summarize(records)
+    assert result["completion_all_valid"] == 0.5
+    assert result["completion_given_execution"] == 1
+    assert result["safety_rejection_rate"] == 1
+    assert wilson(0, 0) is None
+    interval = wilson(36, 36)
+    assert interval and 0.90 < interval[0] < 1 and interval[1] == 1

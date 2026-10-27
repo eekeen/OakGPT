@@ -1,0 +1,88 @@
+{
+  "case": "live_expiration",
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-9e288d06d756409b",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793116852723,
+    "expires_at_ms": 1793116853723,
+    "instruction": "Inspect dock",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      },
+      {
+        "action": "inspect",
+        "destination": "dock",
+        "duration_s": 2
+      }
+    ]
+  },
+  "result": {
+    "status": "failed",
+    "reason": "mission_expired",
+    "mission_id": "m-9e288d06d756409b",
+    "execution_seconds": 0.9276318900519982,
+    "events": [
+      {
+        "event": "accepted",
+        "mission_id": "m-9e288d06d756409b",
+        "wall_time_ns": 1793116852839361892,
+        "sim_time_ns": 840940000000
+      },
+      {
+        "event": "watchdog_armed",
+        "mission_id": "m-9e288d06d756409b",
+        "wall_time_ns": 1793116852840873352,
+        "sim_time_ns": 840980000000
+      },
+      {
+        "event": "step_started",
+        "mission_id": "m-9e288d06d756409b",
+        "wall_time_ns": 1793116852846692662,
+        "sim_time_ns": 840980000000,
+        "index": 0,
+        "action": "navigate"
+      },
+      {
+        "event": "navigation_feedback",
+        "mission_id": "m-9e288d06d756409b",
+        "wall_time_ns": 1793116852851862442,
+        "sim_time_ns": 840980000000,
+        "distance_remaining": 0.0
+      },
+      {
+        "event": "arrived",
+        "mission_id": "m-9e288d06d756409b",
+        "wall_time_ns": 1793116852892011892,
+        "sim_time_ns": 841030000000,
+        "destination": "dock",
+        "residual_m": 0.17174580693132763
+      },
+      {
+        "event": "step_completed",
+        "mission_id": "m-9e288d06d756409b",
+        "wall_time_ns": 1793116852892174432,
+        "sim_time_ns": 841030000000,
+        "index": 0
+      },
+      {
+        "event": "step_started",
+        "mission_id": "m-9e288d06d756409b",
+        "wall_time_ns": 1793116852898977442,
+        "sim_time_ns": 841030000000,
+        "index": 1,
+        "action": "inspect"
+      },
+      {
+        "event": "failed",
+        "mission_id": "m-9e288d06d756409b",
+        "wall_time_ns": 1793116853729521382,
+        "sim_time_ns": 841870000000,
+        "reason": "mission_expired"
+      }
+    ]
+  }
+}

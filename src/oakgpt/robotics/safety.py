@@ -22,7 +22,10 @@ def validate_cpp(mission: dict[str, Any], command: list[str]) -> dict[str, Any]:
     )
     if result.returncode not in (0, 2):
         raise RuntimeError(f"Validator failed: {result.returncode}: {result.stderr[:500]}")
-    response = strict_json(result.stdout)
+    try:
+        response = strict_json(result.stdout)
+    except ValueError as error:
+        raise RuntimeError("Malformed validator JSON") from error
     if not isinstance(response, dict) or type(response.get("accepted")) is not bool:
         raise RuntimeError("Malformed validator response")
     if response["accepted"] != (result.returncode == 0):
@@ -49,14 +52,18 @@ def submit_spool(mission: dict[str, Any], spool: Path) -> Path:
 
 def receiver_clock(command: list[str]) -> int:
     started = time.monotonic()
-    result = subprocess.run(
-        command, text=True, encoding="utf-8", capture_output=True, timeout=5, check=True
-    )
-    value = strict_json(result.stdout)
+    try:
+        result = subprocess.run(
+            command, text=True, encoding="utf-8", capture_output=True, timeout=5, check=True
+        )
+        value = strict_json(result.stdout)
+    except (subprocess.SubprocessError, ValueError) as error:
+        raise RuntimeError("Receiver clock process/protocol failure") from error
     if (
         time.monotonic() - started > 1
         or not isinstance(value, dict)
         or type(value.get("now_ms")) is not int
+        or not 0 < value["now_ms"] < 9007199254740991
     ):
         raise RuntimeError("Receiver clock handshake failed or exceeded one second")
     return int(value["now_ms"])

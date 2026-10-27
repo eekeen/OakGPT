@@ -3,8 +3,11 @@ recursive-include configs *.json
 recursive-include data *.txt *.md *.jsonl
 prune data/external
 recursive-include docs *.md
-recursive-include reports *.md *.json *.jsonl *.txt *.log *.svg *.pdf *.png *.tex
-recursive-include scripts *.ps1 *.py
+recursive-include reports *.md *.json *.jsonl *.txt *.log *.svg *.pdf *.png *.tex *.py *.xml
+recursive-include scripts *.ps1 *.py *.sh
+recursive-include cpp *.cpp *.hpp *.h *.txt *.md LICENSE*
+recursive-include robotics *.py *.xml *.cfg *.sdf *.urdf *.yaml *.pgm *.md NAV2_LICENSE
+include robotics/ros2_ws/src/oak_mission/resource/oak_mission
 recursive-include output/pdf *.pdf
 recursive-include tests *.py
 include .github/workflows/ci.yml

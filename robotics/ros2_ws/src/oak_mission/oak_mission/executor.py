@@ -42,6 +42,7 @@ class MissionExecutor(Node):
         self.events = self.create_publisher(String, "oak/mission_events", 10)
         self.heartbeat_publisher = self.create_publisher(String, "oak/heartbeat", 10)
         self.active_mission = None
+        self.acknowledged_lease = None
         self.watchdog_ready = False
         self.create_subscription(
             Bool,
@@ -50,6 +51,7 @@ class MissionExecutor(Node):
             QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL),
         )
         self.create_timer(0.2, self.heartbeat)
+        self.create_subscription(String, "oak/watchdog_lease", self.lease_ack, 10)
         self.tf = Buffer()
         self.listener = TransformListener(self.tf, self)
         self.scan = None
@@ -65,12 +67,35 @@ class MissionExecutor(Node):
             self.faulted = True
         self.watchdog_ready = message.data
 
+    def lease_ack(self, message):
+        try:
+            self.acknowledged_lease = json.loads(message.data)
+        except ValueError:
+            self.faulted = True
+
+    def arm_watchdog(self, mission):
+        # A publish alone is insufficient: executor failure before delivery could orphan a goal.
+        # Require acknowledgement of this exact lease before sending any navigation action.
+        self.acknowledged_lease = None
+        self.heartbeat()
+        expected = {"mission_id": mission["mission_id"], "expires_at_ms": mission["expires_at_ms"]}
+        deadline = time.monotonic() + 3
+        while self.acknowledged_lease != expected:
+            self.live(mission)
+            if time.monotonic() >= deadline:
+                raise TimeoutError("watchdog_lease_not_acknowledged")
+            rclpy.spin_once(self, timeout_sec=0.05)
+        self.event("watchdog_armed")
+
     def heartbeat(self):
         self.heartbeat_publisher.publish(
             String(
                 data=json.dumps(
                     {
                         "active": self.active_mission is not None,
+                        "mission_id": self.active_mission["mission_id"]
+                        if self.active_mission
+                        else None,
                         "expires_at_ms": self.active_mission["expires_at_ms"]
                         if self.active_mission
                         else 0,
@@ -242,6 +267,7 @@ class MissionExecutor(Node):
             self.event("accepted")
             self.active_mission = mission
             status = "failed"
+            self.arm_watchdog(mission)
             for index, step in enumerate(decision["steps"]):
                 self.validate(mission)
                 self.live(mission)
@@ -307,7 +333,7 @@ def main():
     finally:
         node.ledger.close()
         node.destroy_node()
-        rclpy.shutdown()
+        rclpy.try_shutdown()
 
 
 if __name__ == "__main__":

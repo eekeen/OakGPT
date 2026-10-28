@@ -8,7 +8,7 @@ from pathlib import Path
 
 import rclpy
 from action_msgs.msg import GoalStatusArray
-from geometry_msgs.msg import PoseWithCovarianceStamped, Twist
+from geometry_msgs.msg import PoseWithCovarianceStamped, Twist, TwistStamped
 from rclpy.node import Node
 from std_msgs.msg import String
 from tf2_msgs.msg import TFMessage
@@ -25,6 +25,7 @@ class Observer(Node):
         self.create_subscription(TFMessage, "oak/ground_truth", self.truth, 100)
         self.create_subscription(PoseWithCovarianceStamped, "amcl_pose", self.estimate, 100)
         self.create_subscription(Twist, "cmd_vel", self.command, 100)
+        self.create_subscription(TwistStamped, "oak/leased_cmd_vel", self.leased_command, 100)
         self.create_subscription(
             Twist,
             "oak/nav_cmd_vel",
@@ -34,7 +35,7 @@ class Observer(Node):
         self.create_subscription(
             GoalStatusArray, "navigate_to_pose/_action/status", self.status, 100
         )
-        for topic in ["mission_events", "watchdog_events", "guard_events"]:
+        for topic in ["mission_events", "watchdog_events", "guard_events", "expiry_events"]:
             self.create_subscription(
                 String, "oak/" + topic, lambda m, name=topic: self.event(name, m), 100
             )
@@ -90,6 +91,15 @@ class Observer(Node):
 
     def command(self, message):
         self.write("command", vx=message.linear.x, wz=message.angular.z)
+
+    def leased_command(self, message):
+        self.write(
+            "leased_command",
+            frame_id=message.header.frame_id,
+            issued_boottime_ns=message.header.stamp.sec * 1000000000 + message.header.stamp.nanosec,
+            vx=message.twist.linear.x,
+            wz=message.twist.angular.z,
+        )
 
     def status(self, message):
         self.write(

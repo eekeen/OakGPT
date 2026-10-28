@@ -1,0 +1,5 @@
+<library path="oak_progress_trace">
+  <class name="oak_nav_trace::ProgressTrace" type="oak_nav_trace::ProgressTrace" base_class_type="nav2_core::ProgressChecker">
+    <description>Delegates every check/reset to Nav2 SimpleProgressChecker and records its actual protected state.</description>
+  </class>
+</library>

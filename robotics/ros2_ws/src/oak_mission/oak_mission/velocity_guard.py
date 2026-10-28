@@ -3,9 +3,10 @@
 import json
 import math
 import time
+import uuid
 
 import rclpy
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Twist, TwistStamped
 from lifecycle_msgs.srv import GetState
 from rclpy.node import Node
 from rclpy.qos import DurabilityPolicy, QoSProfile
@@ -17,7 +18,13 @@ from oak_mission.guard_rules import command_allowed
 class VelocityGuard(Node):
     def __init__(self):
         super().__init__("oak_velocity_guard")
-        self.publisher = self.create_publisher(Twist, "cmd_vel", 10)
+        self.leased_output = self.declare_parameter("leased_output", False).value
+        self.publisher = self.create_publisher(
+            TwistStamped if self.leased_output else Twist,
+            "oak/leased_cmd_vel" if self.leased_output else "cmd_vel",
+            10,
+        )
+        self.epoch, self.sequence, self.command_boottime_ns = uuid.uuid4().hex, 0, 0
         self.events = self.create_publisher(String, "oak/guard_events", 10)
         self.command = Twist()
         self.command_at = self.heartbeat_at = self.watchdog_at = 0.0
@@ -77,6 +84,8 @@ class VelocityGuard(Node):
             )
             return
         self.command, self.command_at = message, time.monotonic()
+        if self.leased_output:
+            self.command_boottime_ns = time.clock_gettime_ns(time.CLOCK_BOOTTIME)
 
     def receive_heartbeat(self, message):
         try:
@@ -119,21 +128,39 @@ class VelocityGuard(Node):
             else "controller_unavailable"
             if not self.controller_ready or now - self.controller_at > 0.5
             else "watchdog_unavailable"
-            if not self.ready or now - self.watchdog_at > 0.5
+            if not self.ready or now - self.watchdog_at > (0.2 if self.leased_output else 0.5)
             else "no_active_lease"
             if not self.active
             or now - self.heartbeat_at > 0.5
             or time.time_ns() // 1000000 >= self.expires
             else "command_timeout"
-            if now - self.command_at > 0.25
+            if now - self.command_at > (0.15 if self.leased_output else 0.25)
             else "forwarding"
         )
-        self.publisher.publish(self.command if reason == "forwarding" else Twist())
+        self.publish_command(reason == "forwarding")
         if reason != self.reason:
             self.events.publish(
                 String(data=json.dumps({"event": reason, "wall_time_ns": time.time_ns()}))
             )
             self.reason = reason
+
+    def publish_command(self, forwarding):
+        command = self.command if forwarding else Twist()
+        if self.leased_output:
+            message = TwistStamped()
+            self.sequence += 1
+            message.header.frame_id = f"oak-boottime-v1/{self.epoch}/{self.sequence}"
+            # Preserve upstream receipt time: forwarding a cached command cannot renew it.
+            issued = (
+                self.command_boottime_ns
+                if forwarding
+                else time.clock_gettime_ns(time.CLOCK_BOOTTIME)
+            )
+            message.header.stamp.sec, message.header.stamp.nanosec = divmod(issued, 1000000000)
+            message.twist = command
+            self.publisher.publish(message)
+        else:
+            self.publisher.publish(command)
 
 
 def main():
@@ -142,7 +169,8 @@ def main():
     try:
         rclpy.spin(node)
     finally:
-        node.publisher.publish(Twist())
+        if rclpy.ok():
+            node.publish_command(False)
         node.destroy_node()
         rclpy.try_shutdown()
 

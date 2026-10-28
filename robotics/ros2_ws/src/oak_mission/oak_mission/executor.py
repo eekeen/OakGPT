@@ -193,6 +193,7 @@ class MissionExecutor(Node):
         ):
             self.faulted = True
             raise RuntimeError("scan_invalid")
+        tf_age = None
         try:
             transform = self.tf.lookup_transform("map", "base_link", Time())
             tf_age = (
@@ -201,7 +202,7 @@ class MissionExecutor(Node):
             if not -0.2 <= tf_age <= 1:
                 raise RuntimeError("tf_timestamp_watchdog")
         except (TransformException, RuntimeError) as error:
-            self.get_logger().error(f"TF watchdog: {error}")
+            self.get_logger().error(f"TF watchdog: {error}; latest TF age={tf_age} s")
             self.faulted = True
             raise RuntimeError("tf_watchdog") from None
 
@@ -369,8 +370,15 @@ def main():
     rclpy.init(args=ros_args)
     node = MissionExecutor(args.spool, args.validator, args.policy)
     try:
+        next_poll = 0.0
         while rclpy.ok():
-            rclpy.spin_once(node, timeout_sec=0.1)
+            # Mounted Windows directory polling on every ROS callback can starve
+            # TF subscriptions. Drain callbacks promptly; inspect the spool at 10 Hz.
+            rclpy.spin_once(node, timeout_sec=0.01)
+            now = time.monotonic()
+            if now < next_poll:
+                continue
+            next_poll = now + 0.1
             if (
                 node.get_clock().now().nanoseconds == 0
                 or node.scan is None

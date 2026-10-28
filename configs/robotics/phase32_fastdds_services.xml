@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+  <profiles>
+    <!-- Bound the service-response discovery wait. Topic/actuator QoS is unchanged.
+         RMW_FASTRTPS_USE_QOS_FROM_XML remains 0, preserving ROS memory/publication defaults. -->
+    <publisher profile_name="service">
+      <qos>
+        <reliability>
+          <kind>RELIABLE</kind>
+          <max_blocking_time><sec>1</sec><nanosec>0</nanosec></max_blocking_time>
+        </reliability>
+      </qos>
+    </publisher>
+  </profiles>
+</dds>

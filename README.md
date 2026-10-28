@@ -146,6 +146,14 @@ See the [reproduction guide](docs/phase31-reproduction.md) and
 [measured reliability report](reports/phase31/report.md). The original reports and
 experiments remain intact; missing or failed executions are retained explicitly.
 
+Phase 3.2 adds a native Gazebo command-expiry plugin, owned-process cleanup,
+navigation diagnostics and a frozen paired twelve-world study. Corrected parameters
+complete 33/36 planned missions versus 29/36 for original parameters; the small-sample
+uncertainty interval includes zero. A protective expiry trip still causes one mission
+failure. Actual-motion faults, unavailable injections and follow-ups are preserved.
+See [verification](docs/phase32-verification.md), [reproduction](docs/phase32-reproduction.md)
+and the [measured report](reports/phase32/report.md). These are simulation observations.
+
 | Area | Documentation |
 | --- | --- |
 | Implementation and interfaces | [Architecture](docs/architecture.md) |

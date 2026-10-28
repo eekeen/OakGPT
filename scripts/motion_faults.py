@@ -67,6 +67,7 @@ def trial(args, kind):
                         wsl_path(root / "trajectory.jsonl"),
                         "--armed",
                         wsl_path(root / "INJECTOR_ARMED.json"),
+                        *(["--active-capture"] if args.active_capture else []),
                     ],
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE,
@@ -136,6 +137,8 @@ def trial(args, kind):
                 injection += ["--motion-trace", wsl_path(root / "trajectory.jsonl")]
                 response = subprocess.check_output(injection, text=True, timeout=10)
             stop["injection"] = json.loads(response)
+            if args.active_capture and kind in {"stale_command", "replayed_command"}:
+                stop["nonzero_payload"] = abs(stop["injection"]["vx"]) > 0.01
             before = stop["injection"]["before_monotonic_ns"]
             time.sleep(4)
             rows = [
@@ -170,6 +173,7 @@ def main():
     parser.add_argument("--freeze", type=Path)
     parser.add_argument("--fastdds-profile", type=Path)
     parser.add_argument("--overlay", type=Path)
+    parser.add_argument("--active-capture", action="store_true")
     parser.add_argument(
         "--cases",
         nargs="+",
@@ -220,6 +224,7 @@ def main():
         args.output / "protocol.json",
         {
             "cases": args.cases,
+            "active_capture": args.active_capture,
             "environment": environment(),
             "world_sha256": sha256(args.world / "world.json"),
             "install": args.install,

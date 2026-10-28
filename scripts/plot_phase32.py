@@ -26,6 +26,49 @@ def save(fig, output, name):
     plt.close(fig)
 
 
+def architecture(output):
+    fig, ax = plt.subplots(figsize=(7.2, 2.7), constrained_layout=True)
+    ax.set(xlim=(0, 10), ylim=(0, 4))
+    ax.axis("off")
+    nodes = [
+        (0.8, 3, "Untrusted\nplanner"),
+        (3.0, 3, "C++ mission\nauthorization"),
+        (5.2, 3, "ROS executor\n+ watchdog"),
+        (7.4, 3, "Nav2\naction server"),
+        (9.3, 1.6, "ROS velocity\nguard"),
+        (6.8, 0.4, "Stamped-command\nbridge"),
+        (4.0, 0.4, "Native Gazebo\n200 ms expiry"),
+        (1.2, 0.4, "Gazebo\ndifferential drive"),
+    ]
+    for x, y, label in nodes:
+        ax.text(
+            x,
+            y,
+            label,
+            ha="center",
+            va="center",
+            fontsize=8,
+            bbox={"boxstyle": "round,pad=.4", "fc": "#eef4f7", "ec": "#176d90"},
+        )
+    for a, b in zip(nodes, nodes[1:], strict=False):
+        ax.annotate(
+            "",
+            xy=b[:2],
+            xytext=a[:2],
+            arrowprops={"arrowstyle": "->", "color": "0.5", "shrinkA": 38, "shrinkB": 38},
+        )
+    ax.text(
+        3.8,
+        1.65,
+        "Independent Gazebo pose observer\ncompares AMCL and sampled motion",
+        ha="center",
+        va="center",
+        fontsize=8,
+    )
+    ax.set_title("Implemented command path; local transports trusted, simulation only")
+    save(fig, output, "architecture")
+
+
 def scene(ax, spec):
     for obstacle in spec["obstacles"]:
         ax.add_patch(
@@ -217,6 +260,29 @@ def heldout(source, output, summary):
     ax.legend(fontsize=7)
     ax.grid(alpha=0.2)
     save(fig, output, "localization-error")
+    fig, ax = plt.subplots(figsize=(7.2, 2.5), constrained_layout=True)
+    for variant, color in COLORS.items():
+        errors = sorted(
+            match["position_error_m"]
+            for path in (held / variant).glob("*/result.json")
+            for match in json.loads(path.read_text())["localization"].get("matches", [])
+        )
+        if errors:
+            ax.step(
+                errors,
+                np.arange(1, len(errors) + 1) / len(errors),
+                where="post",
+                color=color,
+                label=f"{variant.split('_')[0]}: {len(errors)} matches",
+            )
+    ax.set(
+        xlabel="AMCL position error against sampled truth (m)",
+        ylabel="empirical cumulative fraction",
+        title="Pooled error distribution; correlated samples, unequal mission durations",
+    )
+    ax.legend(fontsize=7)
+    ax.grid(alpha=0.2)
+    save(fig, output, "localization-error-distribution")
 
 
 def faults(source, output, summary):
@@ -230,11 +296,21 @@ def faults(source, output, summary):
         "simulator_process_stall",
     ]
     fig, ax = plt.subplots(figsize=(7.2, 2.9), constrained_layout=True)
+    marked_missing, marked_unsettled = False, False
     for session, (_name, cohort) in enumerate(summary["faults"].items()):
         for trial in cohort["trials"]:
             x = cases.index(trial["case"]) + (session - 1) * 0.13
             if not trial["eligible"]:
-                ax.plot(x, 0.95, "x", color="0.4")
+                ax.plot(
+                    x,
+                    1.02,
+                    "x",
+                    color="0.4",
+                    transform=ax.get_xaxis_transform(),
+                    clip_on=False,
+                    label="unavailable; no latency" if not marked_missing else None,
+                )
+                marked_missing = True
             elif trial["response"]["settled"]:
                 ax.plot(
                     x,
@@ -244,7 +320,16 @@ def faults(source, output, summary):
                     color=COLORS["corrected_nav2"],
                 )
             else:
-                ax.plot(x, 0.95, "^", color=COLORS["original_nav2"])
+                ax.plot(
+                    x,
+                    1.02,
+                    "^",
+                    color=COLORS["original_nav2"],
+                    transform=ax.get_xaxis_transform(),
+                    clip_on=False,
+                    label="not settled; no onset" if not marked_unsettled else None,
+                )
+                marked_unsettled = True
     ax.axhline(
         0.5,
         color=COLORS["original_nav2"],
@@ -266,8 +351,15 @@ def faults(source, output, summary):
     )
     ax.set(
         ylabel="settling onset (simulated seconds)",
-        title="Three independent process sessions per fault; simulation only",
     )
+    ax.set_title("Three independent process sessions per fault; simulation only", pad=18)
+    observed = [
+        t["response"]["stop_latency_sim_s"]
+        for c in summary["faults"].values()
+        for t in c["trials"]
+        if t["eligible"] and t["response"]["settled"]
+    ]
+    ax.set_ylim(0, max([0.6, *[v + 0.1 for v in observed]]))
     ax.legend(fontsize=7)
     ax.grid(axis="y", alpha=0.2)
     save(fig, output, "fault-settling")
@@ -318,10 +410,62 @@ def faults(source, output, summary):
     save(fig, output, "guard-crash-speed")
 
 
+def corrected_failure(source, output, summary):
+    failures = [
+        r for r in summary["navigation_failure_analysis"] if r["variant"] == "corrected_nav2"
+    ]
+    fig, axes = plt.subplots(1, 3, figsize=(7.2, 2.8), constrained_layout=True)
+    if not failures:
+        for ax in axes:
+            ax.axis("off")
+        axes[1].text(0.5, 0.5, "No corrected failure observed", ha="center")
+    else:
+        failure = failures[0]  # Explicit post hoc rule: first canonical world/mission.
+        root = source / "held-out-v1/corrected_nav2" / failure["world"]
+        spec = json.loads((root / "world/world.json").read_text())
+        first, last = failure["window_wall_ns"]
+        observed = [r for r in rows(root / "trajectory.jsonl") if first <= r["wall_ns"] <= last]
+        truth = [r for r in observed if r["kind"] == "truth"]
+        trace = [r for r in rows(root / "navigation.jsonl") if first <= r["wall_ns"] <= last]
+        paths = [r for r in trace if r["kind"] == "path" and r["topic"] == "/plan"]
+        scene(axes[0], spec)
+        if truth:
+            axes[0].plot([r["x"] for r in truth], [r["y"] for r in truth], label="truth")
+            target = failure["target"]
+            axes[1].plot(
+                [(r["sim_ns"] - truth[0]["sim_ns"]) / 1e9 for r in truth],
+                [math.hypot(r["x"] - target["x"], r["y"] - target["y"]) for r in truth],
+            )
+        if paths and paths[-1]["points"]:
+            points = np.asarray(paths[-1]["points"])
+            axes[0].plot(points[:, 0], points[:, 1], "--", label="last global plan")
+        axes[0].legend(fontsize=6)
+        axes[1].axhline(0.25, linestyle=":", color="0.4", label="Nav2 XY tolerance")
+        axes[1].axhline(0.35, linestyle="--", color="0.6", label="truth arrival criterion")
+        axes[1].set(
+            xlabel="simulation time since first pose (s)", ylabel="truth-target distance (m)"
+        )
+        axes[1].legend(fontsize=6)
+        for kind, label in [("nav_command", "Nav2 request"), ("command", "applied")]:
+            commands = [r for r in observed if r["kind"] == kind]
+            axes[2].plot(
+                [(r["wall_ns"] - first) / 1e9 for r in commands],
+                [r["vx"] for r in commands],
+                label=label,
+                linewidth=0.8,
+            )
+        axes[2].set(xlabel="receiver wall time since acceptance (s)", ylabel="linear command (m/s)")
+        axes[2].legend(fontsize=6)
+        for ax in axes[1:]:
+            ax.grid(alpha=0.2)
+        fig.suptitle(f"Post hoc illustration: {failure['world']} / {failure['reason']}", fontsize=9)
+    save(fig, output, "corrected-failure")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--source", type=Path, default=Path("runs/phase32"))
-    parser.add_argument("--summary", type=Path, default=Path("reports/phase32/analysis.json"))
+    parser.add_argument("--summary", type=Path, default=Path("reports/phase32/analysis-final.json"))
     parser.add_argument("--output", type=Path, default=Path("reports/phase32/figures"))
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
@@ -329,9 +473,11 @@ def main():
         {"font.family": "serif", "font.size": 8, "axes.titlesize": 8, "svg.fonttype": "none"}
     )
     summary = json.loads(args.summary.read_text())
+    architecture(args.output)
     diagnostics(args.source, args.output)
     heldout(args.source, args.output, summary)
     faults(args.source, args.output, summary)
+    corrected_failure(args.source, args.output, summary)
 
 
 if __name__ == "__main__":

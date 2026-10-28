@@ -1,0 +1,87 @@
+{
+  "captured_utc": "2026-10-28T17:46:48.865099+00:00",
+  "environment": {
+    "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "logical_cpu_count": 16,
+    "torch": "2.9.1+cpu",
+    "cuda_runtime": null,
+    "cudnn": null,
+    "cuda_available": false,
+    "gpu": null,
+    "git_revision": "e7b8cd3d9e62fdef480fbc971852fd8c025fa935",
+    "git_dirty": true
+  },
+  "models_and_windows_binaries": {
+    "models\\phase2-Qwen3-1.7B-Q4_K_M.gguf": {
+      "sha256": "f08493abe7a6566b9f4dc1106ff8ab238b3ee82189d6c42d0e7dbb1a50d751e5",
+      "bytes": 1282439072
+    },
+    "models\\phase2-Qwen3-1.7B-Q8_0.gguf": {
+      "sha256": "99a05bf4126fd9173fd960b790a1ecf3c635db2903399566e03a226ee4b73e3d",
+      "bytes": 2165039008
+    },
+    "vendor\\llama.cpp\\llama-server.exe": {
+      "sha256": "90cb3aacac3d1a51e9642325dd06821da931a4ee5a609935c74db9102ef4f02e",
+      "bytes": 9216
+    }
+  },
+  "gpu_inventory": {
+    "command": [
+      "nvidia-smi",
+      "--query-gpu=name,driver_version,memory.total",
+      "--format=csv,noheader"
+    ],
+    "exit_code": 0,
+    "stdout": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB\n",
+    "stderr": ""
+  },
+  "llama_version": {
+    "command": [
+      "vendor\\llama.cpp\\llama-server.exe",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "version: 0.7.0-dev (build 11930, commit 85cc432e2)\nbuilt with Clang 20.1.8 for Windows x86_64\n"
+  },
+  "ros_packages": {
+    "command": [
+      "wsl.exe",
+      "-d",
+      "Ubuntu-24.04",
+      "--",
+      "dpkg-query",
+      "-W",
+      "ros-jazzy-nav2-bringup",
+      "ros-jazzy-nav2-controller",
+      "ros-jazzy-nav2-regulated-pure-pursuit-controller",
+      "ros-jazzy-nav2-mppi-controller",
+      "ros-jazzy-rclpy",
+      "ros-jazzy-rmw-fastrtps-cpp",
+      "ros-jazzy-fastrtps",
+      "ros-jazzy-ros-gz-bridge",
+      "ros-jazzy-gz-sim-vendor"
+    ],
+    "exit_code": 0,
+    "stdout": "ros-jazzy-fastrtps\t2.14.6-1noble.20260901.222814\nros-jazzy-gz-sim-vendor\t0.0.13-1noble.20260905.073557\nros-jazzy-nav2-bringup\t1.3.13-1noble.20261006.042503\nros-jazzy-nav2-controller\t1.3.13-1noble.20260921.031754\nros-jazzy-nav2-mppi-controller\t1.3.13-1noble.20260921.031754\nros-jazzy-nav2-regulated-pure-pursuit-controller\t1.3.13-1noble.20260921.031808\nros-jazzy-rclpy\t7.1.12-1noble.20260902.053513\nros-jazzy-rmw-fastrtps-cpp\t8.4.4-1noble.20260902.041916\nros-jazzy-ros-gz-bridge\t1.0.24-1noble.20260905.070149\n",
+    "stderr": ""
+  },
+  "linux_binaries": {
+    "command": [
+      "wsl.exe",
+      "-d",
+      "Ubuntu-24.04",
+      "--",
+      "sha256sum",
+      "/home/eekeen/projects/oak-build/oak-validate",
+      "/home/eekeen/projects/oak-expiry-build/liboak_command_expiry.so",
+      "/home/eekeen/projects/oak-ros-phase32-v5/oak_nav_trace/lib/liboak_progress_trace.so"
+    ],
+    "exit_code": 0,
+    "stdout": "b66f081c68cd4275229fc87a030d9b209498a1e84ccb9605483af730c1009ae2  /home/eekeen/projects/oak-build/oak-validate\n827023e7d3cf92768710efc3aab6c05b26437eca060d955eedbd4db286785eba  /home/eekeen/projects/oak-expiry-build/liboak_command_expiry.so\n6cd9c3305b1a255ff7bd6a6678870a0668475715888d4defce3245d579394eae  /home/eekeen/projects/oak-ros-phase32-v5/oak_nav_trace/lib/liboak_progress_trace.so\n",
+    "stderr": ""
+  },
+  "note": "Version/hash inventory only; no new model inference or GPU training is implied."
+}

@@ -1,0 +1,3893 @@
+{
+  "original_nav2": {
+    "worlds": [
+      {
+        "world": "block-1218189281",
+        "seed": 1218189281,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.22,
+        "command_abs_wz_max": 0.8
+      },
+      {
+        "world": "block-1773753764",
+        "seed": 1773753764,
+        "environment_failure": null,
+        "all_completed": false,
+        "command_abs_vx_max": 0.22,
+        "command_abs_wz_max": 0.5059278011322021
+      },
+      {
+        "world": "block-465863172",
+        "seed": 465863172,
+        "environment_failure": null,
+        "all_completed": false,
+        "command_abs_vx_max": 0.22,
+        "command_abs_wz_max": 0.7563074827194214
+      },
+      {
+        "world": "block-488809489",
+        "seed": 488809489,
+        "environment_failure": null,
+        "all_completed": false,
+        "command_abs_vx_max": 0.22,
+        "command_abs_wz_max": 0.7942531704902649
+      },
+      {
+        "world": "empty-1218189281",
+        "seed": 1218189281,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.22,
+        "command_abs_wz_max": 0.8
+      },
+      {
+        "world": "empty-1773753764",
+        "seed": 1773753764,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.22,
+        "command_abs_wz_max": 0.8
+      },
+      {
+        "world": "empty-465863172",
+        "seed": 465863172,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.22,
+        "command_abs_wz_max": 0.8
+      },
+      {
+        "world": "empty-488809489",
+        "seed": 488809489,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.22,
+        "command_abs_wz_max": 0.8
+      },
+      {
+        "world": "wall-1218189281",
+        "seed": 1218189281,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.22,
+        "command_abs_wz_max": 0.8
+      },
+      {
+        "world": "wall-1773753764",
+        "seed": 1773753764,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.22,
+        "command_abs_wz_max": 0.8
+      },
+      {
+        "world": "wall-465863172",
+        "seed": 465863172,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.22,
+        "command_abs_wz_max": 0.8
+      },
+      {
+        "world": "wall-488809489",
+        "seed": 488809489,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.22,
+        "command_abs_wz_max": 0.8
+      }
+    ],
+    "missions": [
+      {
+        "world": "block-1218189281",
+        "family": "block",
+        "seed": 1218189281,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 19.825214309967123,
+        "navigation_time_sim_s": 19.76,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 496,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 2.5224084036404903,
+          "moving_time_sim_s": 18.279999999999788,
+          "arrival_position_error_m": 0.23794879662011328,
+          "minimum_circle_obstacle_clearance_m": 0.2112528934807176,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-1218189281",
+        "family": "block",
+        "seed": 1218189281,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 16.72720434004441,
+        "navigation_time_sim_s": 14.67,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 418,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 2.595222174533933,
+          "moving_time_sim_s": 14.519999999999866,
+          "arrival_position_error_m": 0.22086146411674534,
+          "minimum_circle_obstacle_clearance_m": 0.23744415259504112,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-1218189281",
+        "family": "block",
+        "seed": 1218189281,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 14.319670949946158,
+        "navigation_time_sim_s": 14.26,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 358,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.3651687512042696,
+          "moving_time_sim_s": 12.839999999999902,
+          "arrival_position_error_m": 0.030766480962015272,
+          "minimum_circle_obstacle_clearance_m": 0.02692572625934639,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-1773753764",
+        "family": "block",
+        "seed": 1773753764,
+        "instruction": "Go to station",
+        "status": "failed",
+        "reason": "navigation_deadline",
+        "execution_seconds": 30.09155238000676,
+        "navigation_time_sim_s": null,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 753,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.4836660024347097,
+          "moving_time_sim_s": 21.839999999999712,
+          "arrival_position_error_m": 0.40791018780686705,
+          "minimum_circle_obstacle_clearance_m": 0.31026736645589426,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-1773753764",
+        "family": "block",
+        "seed": 1773753764,
+        "instruction": "Inspect storage",
+        "status": "not_attempted",
+        "reason": "previous_mission_failed",
+        "truth_metrics": {
+          "available": false
+        }
+      },
+      {
+        "world": "block-1773753764",
+        "family": "block",
+        "seed": 1773753764,
+        "instruction": "Go to dock",
+        "status": "not_attempted",
+        "reason": "previous_mission_failed",
+        "truth_metrics": {
+          "available": false
+        }
+      },
+      {
+        "world": "block-465863172",
+        "family": "block",
+        "seed": 465863172,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 6.83324927999638,
+        "navigation_time_sim_s": 6.74,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 170,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.932679489910319,
+          "moving_time_sim_s": 6.1200000000000045,
+          "arrival_position_error_m": 0.2216219331726913,
+          "minimum_circle_obstacle_clearance_m": 0.16077942830923883,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-465863172",
+        "family": "block",
+        "seed": 465863172,
+        "instruction": "Inspect storage",
+        "status": "failed",
+        "reason": "navigation_deadline",
+        "execution_seconds": 30.0908030399587,
+        "navigation_time_sim_s": null,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 753,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 2.8112395510833292,
+          "moving_time_sim_s": 22.999999999999687,
+          "arrival_position_error_m": 0.39222084409121755,
+          "minimum_circle_obstacle_clearance_m": 0.15716589440954012,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-465863172",
+        "family": "block",
+        "seed": 465863172,
+        "instruction": "Go to dock",
+        "status": "not_attempted",
+        "reason": "previous_mission_failed",
+        "truth_metrics": {
+          "available": false
+        }
+      },
+      {
+        "world": "block-488809489",
+        "family": "block",
+        "seed": 488809489,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 5.1200299800839275,
+        "navigation_time_sim_s": 5.07,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 128,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.76475344409092,
+          "moving_time_sim_s": 4.400000000000003,
+          "arrival_position_error_m": 0.2373029827953284,
+          "minimum_circle_obstacle_clearance_m": 0.16671677639547763,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-488809489",
+        "family": "block",
+        "seed": 488809489,
+        "instruction": "Inspect storage",
+        "status": "failed",
+        "reason": "navigation_deadline",
+        "execution_seconds": 30.103790399967693,
+        "navigation_time_sim_s": null,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 753,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 2.712812660937479,
+          "moving_time_sim_s": 22.159999999999705,
+          "arrival_position_error_m": 0.40781406151885374,
+          "minimum_circle_obstacle_clearance_m": 0.16173642088777632,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-488809489",
+        "family": "block",
+        "seed": 488809489,
+        "instruction": "Go to dock",
+        "status": "not_attempted",
+        "reason": "previous_mission_failed",
+        "truth_metrics": {
+          "available": false
+        }
+      },
+      {
+        "world": "empty-1218189281",
+        "family": "empty",
+        "seed": 1218189281,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 4.023241200018674,
+        "navigation_time_sim_s": 3.96,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 101,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.8277386660147059,
+          "moving_time_sim_s": 3.9200000000000026,
+          "arrival_position_error_m": 0.2575016205027849,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-1218189281",
+        "family": "empty",
+        "seed": 1218189281,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 8.425947690033354,
+        "navigation_time_sim_s": 6.35,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 211,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.8940587270731911,
+          "moving_time_sim_s": 5.880000000000004,
+          "arrival_position_error_m": 0.12881327304254642,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-1218189281",
+        "family": "empty",
+        "seed": 1218189281,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 7.020630810060538,
+        "navigation_time_sim_s": 6.96,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 176,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.7479170560720346,
+          "moving_time_sim_s": 6.360000000000005,
+          "arrival_position_error_m": 0.2712332685819961,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-1773753764",
+        "family": "empty",
+        "seed": 1773753764,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 3.5163224999560043,
+        "navigation_time_sim_s": 3.46,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 88,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.712299854343399,
+          "moving_time_sim_s": 3.360000000000002,
+          "arrival_position_error_m": 0.2638546829758404,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-1773753764",
+        "family": "empty",
+        "seed": 1773753764,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 8.55686610005796,
+        "navigation_time_sim_s": 6.47,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 214,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.9800434109528022,
+          "moving_time_sim_s": 6.520000000000005,
+          "arrival_position_error_m": 0.21008959584095058,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-1773753764",
+        "family": "empty",
+        "seed": 1773753764,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 6.337197090033442,
+        "navigation_time_sim_s": 6.27,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 159,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.6494222349654927,
+          "moving_time_sim_s": 5.520000000000004,
+          "arrival_position_error_m": 0.24545279305073794,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-465863172",
+        "family": "empty",
+        "seed": 465863172,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 3.8810861100209877,
+        "navigation_time_sim_s": 3.34,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 98,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.6636513204053762,
+          "moving_time_sim_s": 3.200000000000002,
+          "arrival_position_error_m": 0.264720557831714,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-465863172",
+        "family": "empty",
+        "seed": 465863172,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 8.253766170004383,
+        "navigation_time_sim_s": 6.16,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 207,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.8777192253270439,
+          "moving_time_sim_s": 6.200000000000005,
+          "arrival_position_error_m": 0.1665454430315285,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-465863172",
+        "family": "empty",
+        "seed": 465863172,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 7.3327688100980595,
+        "navigation_time_sim_s": 7.27,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 184,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.7480706352671403,
+          "moving_time_sim_s": 6.480000000000005,
+          "arrival_position_error_m": 0.23945326700759093,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-488809489",
+        "family": "empty",
+        "seed": 488809489,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 3.225180419976823,
+        "navigation_time_sim_s": 3.17,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 81,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.6405836478529521,
+          "moving_time_sim_s": 3.080000000000002,
+          "arrival_position_error_m": 0.24515452046336858,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-488809489",
+        "family": "empty",
+        "seed": 488809489,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 8.427739950013347,
+        "navigation_time_sim_s": 6.35,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 211,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.9515415969019262,
+          "moving_time_sim_s": 6.360000000000005,
+          "arrival_position_error_m": 0.1980938272927235,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-488809489",
+        "family": "empty",
+        "seed": 488809489,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 6.30379737005569,
+        "navigation_time_sim_s": 6.25,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 158,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.6323538213390791,
+          "moving_time_sim_s": 5.480000000000004,
+          "arrival_position_error_m": 0.28065584922989273,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-1218189281",
+        "family": "wall",
+        "seed": 1218189281,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 16.52157432003878,
+        "navigation_time_sim_s": 16.46,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 413,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 2.101785435592038,
+          "moving_time_sim_s": 15.399999999999848,
+          "arrival_position_error_m": 0.2658687527974977,
+          "minimum_circle_obstacle_clearance_m": 0.29217314402055194,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-1218189281",
+        "family": "wall",
+        "seed": 1218189281,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 10.353928319993429,
+        "navigation_time_sim_s": 8.28,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 259,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.3496757618941948,
+          "moving_time_sim_s": 8.040000000000004,
+          "arrival_position_error_m": 0.2701533597382706,
+          "minimum_circle_obstacle_clearance_m": 0.25653396564809416,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-1218189281",
+        "family": "wall",
+        "seed": 1218189281,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 7.708472279948182,
+        "navigation_time_sim_s": 7.65,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 193,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.06600556818306,
+          "moving_time_sim_s": 7.320000000000006,
+          "arrival_position_error_m": 0.22046811739148756,
+          "minimum_circle_obstacle_clearance_m": 0.1539599974147888,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-1773753764",
+        "family": "wall",
+        "seed": 1773753764,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 9.423711179988459,
+        "navigation_time_sim_s": 9.36,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 236,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.2692754161245359,
+          "moving_time_sim_s": 8.839999999999987,
+          "arrival_position_error_m": 0.24073852966412823,
+          "minimum_circle_obstacle_clearance_m": 0.04356559429821985,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-1773753764",
+        "family": "wall",
+        "seed": 1773753764,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 9.22366871999111,
+        "navigation_time_sim_s": 7.15,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 231,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.0373802768618052,
+          "moving_time_sim_s": 6.960000000000005,
+          "arrival_position_error_m": 0.2907370681046028,
+          "minimum_circle_obstacle_clearance_m": 0.1022501429861912,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-1773753764",
+        "family": "wall",
+        "seed": 1773753764,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 8.83975184999872,
+        "navigation_time_sim_s": 8.78,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 221,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.3712349638399182,
+          "moving_time_sim_s": 8.639999999999992,
+          "arrival_position_error_m": 0.09381266485300177,
+          "minimum_circle_obstacle_clearance_m": 0.13159238276212595,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-465863172",
+        "family": "wall",
+        "seed": 465863172,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 30.071652480051853,
+        "navigation_time_sim_s": 30.01,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 752,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.3649809023271589,
+          "moving_time_sim_s": 13.759999999999883,
+          "arrival_position_error_m": 0.30873528782502746,
+          "minimum_circle_obstacle_clearance_m": 0.06370614048348386,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-465863172",
+        "family": "wall",
+        "seed": 465863172,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 10.917793620028533,
+        "navigation_time_sim_s": 8.85,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 273,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.0740038877672808,
+          "moving_time_sim_s": 8.359999999999998,
+          "arrival_position_error_m": 0.2529015346265333,
+          "minimum_circle_obstacle_clearance_m": 0.0643164203504887,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-465863172",
+        "family": "wall",
+        "seed": 465863172,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 8.626463099964894,
+        "navigation_time_sim_s": 8.56,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 216,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.326411691802875,
+          "moving_time_sim_s": 8.439999999999996,
+          "arrival_position_error_m": 0.10966783870864101,
+          "minimum_circle_obstacle_clearance_m": 0.12731159567220865,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-488809489",
+        "family": "wall",
+        "seed": 488809489,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 8.919709020061418,
+        "navigation_time_sim_s": 8.86,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 223,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.1370886198049392,
+          "moving_time_sim_s": 8.559999999999993,
+          "arrival_position_error_m": 0.30676151475663505,
+          "minimum_circle_obstacle_clearance_m": 0.057328395692536144,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-488809489",
+        "family": "wall",
+        "seed": 488809489,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 10.256222700001672,
+        "navigation_time_sim_s": 8.16,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 257,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.0952522828224693,
+          "moving_time_sim_s": 7.800000000000006,
+          "arrival_position_error_m": 0.20519452753464615,
+          "minimum_circle_obstacle_clearance_m": 0.0906559492781929,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-488809489",
+        "family": "wall",
+        "seed": 488809489,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 8.423974709934555,
+        "navigation_time_sim_s": 8.37,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 211,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.322034150018235,
+          "moving_time_sim_s": 8.319999999999999,
+          "arrival_position_error_m": 0.13584396000346993,
+          "minimum_circle_obstacle_clearance_m": 0.11894655566672105,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      }
+    ],
+    "planned": 36,
+    "completed": 29,
+    "attempted": 32,
+    "all_completed_worlds": 9,
+    "navigation_deadline_failures": 3,
+    "navigation_deadline_rate_planned": 0.08333333333333333,
+    "measured_circle_violation_missions": 0,
+    "contact_collision_rate": null,
+    "collision_measurement_limit": "No contact sensor; circle/box clearance is only a sampled geometric proxy",
+    "outcomes": {
+      "completed:ok": 29,
+      "failed:navigation_deadline": 3,
+      "not_attempted:previous_mission_failed": 4
+    },
+    "completed_with_measured_arrival": 29,
+    "completed_arrival_within_0_35m": 29,
+    "completed_navigation_sim_s": {
+      "n": 29,
+      "mean": 8.862068965517242,
+      "median": 7.27,
+      "minimum": 3.17,
+      "maximum": 30.01
+    },
+    "completed_execution_s": {
+      "n": 29,
+      "mean": 9.566097771736857,
+      "median": 8.427739950013347,
+      "minimum": 3.225180419976823,
+      "maximum": 30.071652480051853
+    },
+    "completed_path_m": {
+      "n": 29,
+      "mean": 1.138646945411503,
+      "median": 1.0373802768618052,
+      "minimum": 0.6323538213390791,
+      "maximum": 2.595222174533933
+    },
+    "arrival_error_m": {
+      "n": 29,
+      "mean": 0.2214121900869831,
+      "median": 0.23945326700759093,
+      "minimum": 0.030766480962015272,
+      "maximum": 0.30873528782502746
+    },
+    "minimum_observed_circle_clearance_m": 0.02692572625934639,
+    "localization_matched": 1029,
+    "localization_position_rmse_m": 0.042589175970884935,
+    "acceptance": {
+      "33_of_36_completed": false,
+      "95_percent_completed_truth_arrival": true,
+      "observed_circle_clearance_nonnegative": true,
+      "command_bounds": true
+    }
+  },
+  "corrected_nav2": {
+    "worlds": [
+      {
+        "world": "block-1218189281",
+        "seed": 1218189281,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.18,
+        "command_abs_wz_max": 0.6
+      },
+      {
+        "world": "block-1773753764",
+        "seed": 1773753764,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.18,
+        "command_abs_wz_max": 0.6
+      },
+      {
+        "world": "block-465863172",
+        "seed": 465863172,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.18,
+        "command_abs_wz_max": 0.6
+      },
+      {
+        "world": "block-488809489",
+        "seed": 488809489,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.18,
+        "command_abs_wz_max": 0.6
+      },
+      {
+        "world": "empty-1218189281",
+        "seed": 1218189281,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.18,
+        "command_abs_wz_max": 0.6
+      },
+      {
+        "world": "empty-1773753764",
+        "seed": 1773753764,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.18,
+        "command_abs_wz_max": 0.6
+      },
+      {
+        "world": "empty-465863172",
+        "seed": 465863172,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.18,
+        "command_abs_wz_max": 0.6
+      },
+      {
+        "world": "empty-488809489",
+        "seed": 488809489,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.18,
+        "command_abs_wz_max": 0.6
+      },
+      {
+        "world": "wall-1218189281",
+        "seed": 1218189281,
+        "environment_failure": null,
+        "all_completed": false,
+        "command_abs_vx_max": 0.18,
+        "command_abs_wz_max": 0.36000000000000004
+      },
+      {
+        "world": "wall-1773753764",
+        "seed": 1773753764,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.18,
+        "command_abs_wz_max": 0.6
+      },
+      {
+        "world": "wall-465863172",
+        "seed": 465863172,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.18,
+        "command_abs_wz_max": 0.6
+      },
+      {
+        "world": "wall-488809489",
+        "seed": 488809489,
+        "environment_failure": null,
+        "all_completed": true,
+        "command_abs_vx_max": 0.18,
+        "command_abs_wz_max": 0.6
+      }
+    ],
+    "missions": [
+      {
+        "world": "block-1218189281",
+        "family": "block",
+        "seed": 1218189281,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 10.307390309986658,
+        "navigation_time_sim_s": 10.26,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 258,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.2060288533833208,
+          "moving_time_sim_s": 7.2400000000000055,
+          "arrival_position_error_m": 0.24136118443393195,
+          "minimum_circle_obstacle_clearance_m": 0.1890619355551927,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-1218189281",
+        "family": "block",
+        "seed": 1218189281,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 19.93118300999049,
+        "navigation_time_sim_s": 17.86,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 498,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.7844987142792041,
+          "moving_time_sim_s": 10.679999999999948,
+          "arrival_position_error_m": 0.24034555148066075,
+          "minimum_circle_obstacle_clearance_m": 0.20410889811078978,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-1218189281",
+        "family": "block",
+        "seed": 1218189281,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 12.540123270009644,
+        "navigation_time_sim_s": 12.48,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 314,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.2597669804357798,
+          "moving_time_sim_s": 8.120000000000003,
+          "arrival_position_error_m": 0.24270746781291244,
+          "minimum_circle_obstacle_clearance_m": 0.22144025226234496,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-1773753764",
+        "family": "block",
+        "seed": 1773753764,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 6.723171179997735,
+        "navigation_time_sim_s": 6.64,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 168,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.8325062484337137,
+          "moving_time_sim_s": 5.200000000000004,
+          "arrival_position_error_m": 0.22892913587338534,
+          "minimum_circle_obstacle_clearance_m": 0.23149578252135053,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-1773753764",
+        "family": "block",
+        "seed": 1773753764,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 19.319801670033485,
+        "navigation_time_sim_s": 17.25,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 484,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.6783323373171093,
+          "moving_time_sim_s": 10.11999999999996,
+          "arrival_position_error_m": 0.19049455325678266,
+          "minimum_circle_obstacle_clearance_m": 0.22982887986639797,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-1773753764",
+        "family": "block",
+        "seed": 1773753764,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 9.729461340000853,
+        "navigation_time_sim_s": 9.67,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 243,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.6675124955952573,
+          "moving_time_sim_s": 4.440000000000003,
+          "arrival_position_error_m": 0.21315062403518248,
+          "minimum_circle_obstacle_clearance_m": 0.23021574133915432,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-465863172",
+        "family": "block",
+        "seed": 465863172,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 10.324676160002127,
+        "navigation_time_sim_s": 10.23,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 258,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.9974238737586022,
+          "moving_time_sim_s": 6.160000000000005,
+          "arrival_position_error_m": 0.1992438987528509,
+          "minimum_circle_obstacle_clearance_m": 0.17496231625172484,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-465863172",
+        "family": "block",
+        "seed": 465863172,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 17.64719549997244,
+        "navigation_time_sim_s": 15.57,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 442,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.6844506188790846,
+          "moving_time_sim_s": 9.959999999999964,
+          "arrival_position_error_m": 0.2176577144929478,
+          "minimum_circle_obstacle_clearance_m": 0.22788714994634926,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-465863172",
+        "family": "block",
+        "seed": 465863172,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 9.429853679961525,
+        "navigation_time_sim_s": 9.35,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 236,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.538228609755739,
+          "moving_time_sim_s": 3.440000000000002,
+          "arrival_position_error_m": 0.2326807533042515,
+          "minimum_circle_obstacle_clearance_m": 0.252674170032788,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-488809489",
+        "family": "block",
+        "seed": 488809489,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 9.32161653006915,
+        "navigation_time_sim_s": 9.26,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 233,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.8979490722313218,
+          "moving_time_sim_s": 5.600000000000004,
+          "arrival_position_error_m": 0.19027474488023383,
+          "minimum_circle_obstacle_clearance_m": 0.20693139079463604,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-488809489",
+        "family": "block",
+        "seed": 488809489,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 17.94708117004484,
+        "navigation_time_sim_s": 15.87,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 449,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.6766385635476644,
+          "moving_time_sim_s": 9.959999999999964,
+          "arrival_position_error_m": 0.19921895960405317,
+          "minimum_circle_obstacle_clearance_m": 0.2165964135695236,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "block-488809489",
+        "family": "block",
+        "seed": 488809489,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 9.311656050034799,
+        "navigation_time_sim_s": 9.25,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 232,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.5263720472110031,
+          "moving_time_sim_s": 3.5200000000000022,
+          "arrival_position_error_m": 0.22910027208466768,
+          "minimum_circle_obstacle_clearance_m": 0.24454495272088086,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-1218189281",
+        "family": "empty",
+        "seed": 1218189281,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 4.925514419912361,
+        "navigation_time_sim_s": 4.86,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 123,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.8213949522032004,
+          "moving_time_sim_s": 4.760000000000003,
+          "arrival_position_error_m": 0.26231398258919375,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-1218189281",
+        "family": "empty",
+        "seed": 1218189281,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 11.183183190063573,
+        "navigation_time_sim_s": 9.08,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 280,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.6728803850086179,
+          "moving_time_sim_s": 4.440000000000003,
+          "arrival_position_error_m": 0.22788714804088078,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-1218189281",
+        "family": "empty",
+        "seed": 1218189281,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 16.04058003006503,
+        "navigation_time_sim_s": 15.98,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 401,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.3939753761564914,
+          "moving_time_sim_s": 2.6800000000000015,
+          "arrival_position_error_m": 0.2779939238147961,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-1773753764",
+        "family": "empty",
+        "seed": 1773753764,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 5.0193602099316195,
+        "navigation_time_sim_s": 4.97,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 125,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.7415195076893666,
+          "moving_time_sim_s": 4.400000000000003,
+          "arrival_position_error_m": 0.24006244440258642,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-1773753764",
+        "family": "empty",
+        "seed": 1773753764,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 10.818647100008093,
+        "navigation_time_sim_s": 8.74,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 271,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.8830217300580305,
+          "moving_time_sim_s": 5.280000000000004,
+          "arrival_position_error_m": 0.20384787804233795,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-1773753764",
+        "family": "empty",
+        "seed": 1773753764,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 9.905347889987752,
+        "navigation_time_sim_s": 9.85,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 248,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.40673950753330534,
+          "moving_time_sim_s": 2.6000000000000014,
+          "arrival_position_error_m": 0.2634967707556859,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-465863172",
+        "family": "empty",
+        "seed": 465863172,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 4.0203193499473855,
+        "navigation_time_sim_s": 3.96,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 100,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.6551743633769942,
+          "moving_time_sim_s": 3.8400000000000025,
+          "arrival_position_error_m": 0.27318849789520916,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-465863172",
+        "family": "empty",
+        "seed": 465863172,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 10.836033480009064,
+        "navigation_time_sim_s": 8.75,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 271,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.6893701466356259,
+          "moving_time_sim_s": 4.120000000000003,
+          "arrival_position_error_m": 0.22620547428868362,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-465863172",
+        "family": "empty",
+        "seed": 465863172,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 18.362020589993335,
+        "navigation_time_sim_s": 18.3,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 460,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.36909689282753105,
+          "moving_time_sim_s": 2.5600000000000014,
+          "arrival_position_error_m": 0.28403949930539324,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-488809489",
+        "family": "empty",
+        "seed": 488809489,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 3.6228582900948822,
+        "navigation_time_sim_s": 3.56,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 91,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.5899093331828549,
+          "moving_time_sim_s": 3.5200000000000022,
+          "arrival_position_error_m": 0.29510102744026,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-488809489",
+        "family": "empty",
+        "seed": 488809489,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 10.055930400034413,
+        "navigation_time_sim_s": 7.96,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 252,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.7515818051677515,
+          "moving_time_sim_s": 4.480000000000003,
+          "arrival_position_error_m": 0.24485551288314017,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "empty-488809489",
+        "family": "empty",
+        "seed": 488809489,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 10.194983009947464,
+        "navigation_time_sim_s": 10.13,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 255,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.42786203052713806,
+          "moving_time_sim_s": 2.7200000000000015,
+          "arrival_position_error_m": 0.2546969796230368,
+          "minimum_circle_obstacle_clearance_m": null,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-1218189281",
+        "family": "wall",
+        "seed": 1218189281,
+        "instruction": "Go to station",
+        "status": "failed",
+        "reason": "navigation_deadline",
+        "execution_seconds": 30.099253410007805,
+        "navigation_time_sim_s": null,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 752,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.6580759504997397,
+          "moving_time_sim_s": 4.000000000000003,
+          "arrival_position_error_m": 0.6321223883424724,
+          "minimum_circle_obstacle_clearance_m": 0.20473395123236623,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-1218189281",
+        "family": "wall",
+        "seed": 1218189281,
+        "instruction": "Inspect storage",
+        "status": "not_attempted",
+        "reason": "previous_mission_failed",
+        "truth_metrics": {
+          "available": false
+        }
+      },
+      {
+        "world": "wall-1218189281",
+        "family": "wall",
+        "seed": 1218189281,
+        "instruction": "Go to dock",
+        "status": "not_attempted",
+        "reason": "previous_mission_failed",
+        "truth_metrics": {
+          "available": false
+        }
+      },
+      {
+        "world": "wall-1773753764",
+        "family": "wall",
+        "seed": 1773753764,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 14.724179730052128,
+        "navigation_time_sim_s": 14.66,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 368,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.4779824423096424,
+          "moving_time_sim_s": 9.479999999999974,
+          "arrival_position_error_m": 0.23363988949862213,
+          "minimum_circle_obstacle_clearance_m": 0.1680219467255021,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-1773753764",
+        "family": "wall",
+        "seed": 1773753764,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 11.936051459982991,
+        "navigation_time_sim_s": 9.86,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 299,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.7776105306979616,
+          "moving_time_sim_s": 5.040000000000004,
+          "arrival_position_error_m": 0.21612862221123572,
+          "minimum_circle_obstacle_clearance_m": 0.16851904787826874,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-1773753764",
+        "family": "wall",
+        "seed": 1773753764,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 9.722194020054303,
+        "navigation_time_sim_s": 9.67,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 243,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.6024340099375806,
+          "moving_time_sim_s": 4.240000000000003,
+          "arrival_position_error_m": 0.25970355030189296,
+          "minimum_circle_obstacle_clearance_m": 0.23085736350618694,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-465863172",
+        "family": "wall",
+        "seed": 465863172,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 11.713106790091842,
+        "navigation_time_sim_s": 11.66,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 293,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.216229407942364,
+          "moving_time_sim_s": 7.960000000000006,
+          "arrival_position_error_m": 0.29828761659527714,
+          "minimum_circle_obstacle_clearance_m": 0.16496794811988355,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-465863172",
+        "family": "wall",
+        "seed": 465863172,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 11.607651900034398,
+        "navigation_time_sim_s": 9.54,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 290,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.7286312825171974,
+          "moving_time_sim_s": 4.360000000000003,
+          "arrival_position_error_m": 0.2519015150202442,
+          "minimum_circle_obstacle_clearance_m": 0.19983020056197906,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-465863172",
+        "family": "wall",
+        "seed": 465863172,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 9.817140150000341,
+        "navigation_time_sim_s": 9.76,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 246,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.614464830921278,
+          "moving_time_sim_s": 4.400000000000003,
+          "arrival_position_error_m": 0.2500296995969035,
+          "minimum_circle_obstacle_clearance_m": 0.2263375248327054,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-488809489",
+        "family": "wall",
+        "seed": 488809489,
+        "instruction": "Go to station",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 13.612219559960067,
+        "navigation_time_sim_s": 13.56,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 341,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 1.4112883130450482,
+          "moving_time_sim_s": 8.959999999999985,
+          "arrival_position_error_m": 0.2718405642354556,
+          "minimum_circle_obstacle_clearance_m": 0.17397501435771043,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-488809489",
+        "family": "wall",
+        "seed": 488809489,
+        "instruction": "Inspect storage",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 11.943591749994084,
+        "navigation_time_sim_s": 9.86,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 299,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.783014229650101,
+          "moving_time_sim_s": 4.720000000000003,
+          "arrival_position_error_m": 0.22286137796982985,
+          "minimum_circle_obstacle_clearance_m": 0.19223428101569737,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      },
+      {
+        "world": "wall-488809489",
+        "family": "wall",
+        "seed": 488809489,
+        "instruction": "Go to dock",
+        "status": "completed",
+        "reason": "ok",
+        "execution_seconds": 10.437182910041884,
+        "navigation_time_sim_s": 10.37,
+        "truth_metrics": {
+          "available": true,
+          "truth_samples": 261,
+          "max_sample_gap_s": 0.04,
+          "path_length_m": 0.5369808809941633,
+          "moving_time_sim_s": 3.9200000000000026,
+          "arrival_position_error_m": 0.26307990479149285,
+          "minimum_circle_obstacle_clearance_m": 0.21121654633462836,
+          "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+        }
+      }
+    ],
+    "planned": 36,
+    "completed": 33,
+    "attempted": 34,
+    "all_completed_worlds": 11,
+    "navigation_deadline_failures": 1,
+    "navigation_deadline_rate_planned": 0.027777777777777776,
+    "measured_circle_violation_missions": 0,
+    "contact_collision_rate": null,
+    "collision_measurement_limit": "No contact sensor; circle/box clearance is only a sampled geometric proxy",
+    "outcomes": {
+      "completed:ok": 33,
+      "failed:navigation_deadline": 1,
+      "not_attempted:previous_mission_failed": 2
+    },
+    "completed_with_measured_arrival": 33,
+    "completed_arrival_within_0_35m": 33,
+    "completed_navigation_sim_s": {
+      "n": 33,
+      "mean": 10.568787878787878,
+      "median": 9.85,
+      "minimum": 3.56,
+      "maximum": 18.3
+    },
+    "completed_execution_s": {
+      "n": 33,
+      "mean": 11.30397897273669,
+      "median": 10.437182910041884,
+      "minimum": 3.6228582900948822,
+      "maximum": 19.93118300999049
+    },
+    "completed_path_m": {
+      "n": 33,
+      "mean": 0.8879051628245468,
+      "median": 0.7515818051677515,
+      "minimum": 0.36909689282753105,
+      "maximum": 1.7844987142792041
+    },
+    "arrival_error_m": {
+      "n": 33,
+      "mean": 0.24079777997921267,
+      "median": 0.24034555148066075,
+      "minimum": 0.19027474488023383,
+      "maximum": 0.29828761659527714
+    },
+    "minimum_observed_circle_clearance_m": 0.16496794811988355,
+    "localization_matched": 1222,
+    "localization_position_rmse_m": 0.042833303931466775,
+    "acceptance": {
+      "33_of_36_completed": true,
+      "95_percent_completed_truth_arrival": true,
+      "observed_circle_clearance_nonnegative": true,
+      "command_bounds": true
+    }
+  },
+  "paired_comparison": {
+    "start_seed_clusters": 4,
+    "completion_delta_percentage_points": 11.11111111111111,
+    "cluster_bootstrap_95_percentile_interval_pp": [
+      -19.444444444444446,
+      30.555555555555557
+    ],
+    "bootstrap_seed": 32,
+    "bootstrap_replicates": 10000,
+    "uncertainty_limit": "Four start-seed clusters shared across three layout families. Small-sample bootstrap is unstable and does not establish general reliability.",
+    "common_completed": [
+      {
+        "world": "block-1218189281",
+        "instruction": "Go to station",
+        "execution_delta_s": -9.517823999980465,
+        "path_delta_m": -1.3163795502571696
+      },
+      {
+        "world": "block-1218189281",
+        "instruction": "Inspect storage",
+        "execution_delta_s": 3.203978669946082,
+        "path_delta_m": -0.8107234602547286
+      },
+      {
+        "world": "block-1218189281",
+        "instruction": "Go to dock",
+        "execution_delta_s": -1.7795476799365133,
+        "path_delta_m": -0.10540177076848978
+      },
+      {
+        "world": "block-465863172",
+        "instruction": "Go to station",
+        "execution_delta_s": 3.491426880005747,
+        "path_delta_m": 0.06474438384828318
+      },
+      {
+        "world": "block-488809489",
+        "instruction": "Go to station",
+        "execution_delta_s": 4.2015865499852225,
+        "path_delta_m": 0.13319562814040176
+      },
+      {
+        "world": "empty-1218189281",
+        "instruction": "Go to station",
+        "execution_delta_s": 0.9022732198936865,
+        "path_delta_m": -0.006343713811505558
+      },
+      {
+        "world": "empty-1218189281",
+        "instruction": "Inspect storage",
+        "execution_delta_s": 2.7572355000302196,
+        "path_delta_m": -0.2211783420645732
+      },
+      {
+        "world": "empty-1218189281",
+        "instruction": "Go to dock",
+        "execution_delta_s": 9.019949220004492,
+        "path_delta_m": -0.3539416799155432
+      },
+      {
+        "world": "empty-1773753764",
+        "instruction": "Go to station",
+        "execution_delta_s": 1.5030377099756151,
+        "path_delta_m": 0.029219653345967544
+      },
+      {
+        "world": "empty-1773753764",
+        "instruction": "Inspect storage",
+        "execution_delta_s": 2.2617809999501333,
+        "path_delta_m": -0.0970216808947717
+      },
+      {
+        "world": "empty-1773753764",
+        "instruction": "Go to dock",
+        "execution_delta_s": 3.56815079995431,
+        "path_delta_m": -0.24268272743218733
+      },
+      {
+        "world": "empty-465863172",
+        "instruction": "Go to station",
+        "execution_delta_s": 0.1392332399263978,
+        "path_delta_m": -0.008476957028382026
+      },
+      {
+        "world": "empty-465863172",
+        "instruction": "Inspect storage",
+        "execution_delta_s": 2.5822673100046813,
+        "path_delta_m": -0.18834907869141804
+      },
+      {
+        "world": "empty-465863172",
+        "instruction": "Go to dock",
+        "execution_delta_s": 11.029251779895276,
+        "path_delta_m": -0.3789737424396093
+      },
+      {
+        "world": "empty-488809489",
+        "instruction": "Go to station",
+        "execution_delta_s": 0.3976778701180592,
+        "path_delta_m": -0.0506743146700972
+      },
+      {
+        "world": "empty-488809489",
+        "instruction": "Inspect storage",
+        "execution_delta_s": 1.6281904500210658,
+        "path_delta_m": -0.19995979173417466
+      },
+      {
+        "world": "empty-488809489",
+        "instruction": "Go to dock",
+        "execution_delta_s": 3.8911856398917735,
+        "path_delta_m": -0.20449179081194108
+      },
+      {
+        "world": "wall-1773753764",
+        "instruction": "Go to station",
+        "execution_delta_s": 5.30046855006367,
+        "path_delta_m": 0.2087070261851065
+      },
+      {
+        "world": "wall-1773753764",
+        "instruction": "Inspect storage",
+        "execution_delta_s": 2.712382739991881,
+        "path_delta_m": -0.25976974616384363
+      },
+      {
+        "world": "wall-1773753764",
+        "instruction": "Go to dock",
+        "execution_delta_s": 0.8824421700555831,
+        "path_delta_m": -0.7688009539023376
+      },
+      {
+        "world": "wall-465863172",
+        "instruction": "Go to station",
+        "execution_delta_s": -18.35854568996001,
+        "path_delta_m": -0.14875149438479496
+      },
+      {
+        "world": "wall-465863172",
+        "instruction": "Inspect storage",
+        "execution_delta_s": 0.6898582800058648,
+        "path_delta_m": -0.3453726052500834
+      },
+      {
+        "world": "wall-465863172",
+        "instruction": "Go to dock",
+        "execution_delta_s": 1.1906770500354469,
+        "path_delta_m": -0.711946860881597
+      },
+      {
+        "world": "wall-488809489",
+        "instruction": "Go to station",
+        "execution_delta_s": 4.692510539898649,
+        "path_delta_m": 0.27419969324010895
+      },
+      {
+        "world": "wall-488809489",
+        "instruction": "Inspect storage",
+        "execution_delta_s": 1.6873690499924123,
+        "path_delta_m": -0.3122380531723683
+      },
+      {
+        "world": "wall-488809489",
+        "instruction": "Go to dock",
+        "execution_delta_s": 2.0132082001073286,
+        "path_delta_m": -0.7850532690240718
+      }
+    ],
+    "common_completed_execution_delta_s": {
+      "n": 26,
+      "mean": 1.541931732687562,
+      "median": 2.137494600028731,
+      "minimum": -18.35854568996001,
+      "maximum": 11.029251779895276
+    },
+    "common_completed_path_delta_m": {
+      "n": 26,
+      "mean": -0.26178712303053153,
+      "median": -0.20222579127305787,
+      "minimum": -1.3163795502571696,
+      "maximum": 0.27419969324010895
+    },
+    "conditional_limit": "Travel comparisons condition on completion in both variants; survivorship bias prevents claiming unconditional speed improvement."
+  },
+  "navigation_failure_analysis": [
+    {
+      "variant": "original_nav2",
+      "world": "block-1773753764",
+      "instruction": "Go to station",
+      "reason": "navigation_deadline",
+      "target": {
+        "x": 0.8,
+        "y": 0.0,
+        "yaw": 0.0
+      },
+      "last_truth": {
+        "kind": "truth",
+        "wall_ns": 1793211180771529449,
+        "monotonic_ns": 1007941511961436,
+        "sim_ns": 35840000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.7988669694132727,
+        "y": -0.4079086142242195,
+        "yaw": -0.028027349456040684
+      },
+      "last_tf": {
+        "kind": "tf_pose",
+        "monotonic_ns": 1007941472031406,
+        "wall_ns": 1793211180731601309,
+        "x": 0.7936020397699104,
+        "y": -0.4054842443424743,
+        "yaw": 0.0048159144742910874,
+        "stamp_ns": 35760000000
+      },
+      "last_global_path_endpoint": [
+        0.8,
+        0.0
+      ],
+      "first_latch": null,
+      "largest_observed_lease_gap": {
+        "seconds": 0.08512236,
+        "before": {
+          "kind": "leased_command",
+          "wall_ns": 1793211173888873859,
+          "monotonic_ns": 1007934629305306,
+          "frame_id": "oak-boottime-v1/edc9bd7297c243868f70181ed09b8d77/1563",
+          "issued_boottime_ns": 1007934551892976,
+          "vx": -0.018191300332546234,
+          "wz": 0.014740408398211002
+        },
+        "after": {
+          "kind": "leased_command",
+          "wall_ns": 1793211173973996219,
+          "monotonic_ns": 1007934714427666,
+          "frame_id": "oak-boottime-v1/edc9bd7297c243868f70181ed09b8d77/1564",
+          "issued_boottime_ns": 1007934551892976,
+          "vx": -0.018191300332546234,
+          "wz": 0.014740408398211002
+        }
+      },
+      "last_nav_command": {
+        "kind": "nav_command",
+        "wall_ns": 1793211180773181039,
+        "monotonic_ns": 1007941513612756,
+        "vx": 0.018008191138505936,
+        "vy": 0.0,
+        "wz": 0.020899472758173943
+      },
+      "last_applied_command": {
+        "kind": "command",
+        "wall_ns": 1793211180769534779,
+        "monotonic_ns": 1007941509967216,
+        "vx": 0.0012905063340440392,
+        "wz": 0.010325445793569088
+      },
+      "last_progress": {
+        "kind": "progress_state",
+        "monotonic_ns": 1007941474298236,
+        "wall_ns": 1793211180733867959,
+        "data": {
+          "check": true,
+          "sim_ns": 35800000000,
+          "baseline_ns": 29600000000,
+          "baseline_x": 1.0104729238401573,
+          "baseline_y": -0.15109761843826142,
+          "x": 1.0249181042940592,
+          "y": -0.14964929231916113,
+          "distance_m": 0.014517606100630244,
+          "radius_m": 0.5,
+          "allowance_s": 10
+        }
+      },
+      "window_wall_ns": [
+        1793211147150329244,
+        1793211180774610599
+      ],
+      "missing_trajectory": false,
+      "missing_navigation_trace": false,
+      "interpretation_limit": "Post hoc descriptive trace, not a causal ablation"
+    },
+    {
+      "variant": "original_nav2",
+      "world": "block-465863172",
+      "instruction": "Inspect storage",
+      "reason": "navigation_deadline",
+      "target": {
+        "x": 0.0,
+        "y": 0.8,
+        "yaw": 1.5707963267948966
+      },
+      "last_truth": {
+        "kind": "truth",
+        "wall_ns": 1793211663706772427,
+        "monotonic_ns": 1008377859536446,
+        "sim_ns": 42840000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": -0.3898692588293097,
+        "y": 0.8428853303533032,
+        "yaw": 1.6120612330205286
+      },
+      "last_tf": {
+        "kind": "tf_pose",
+        "monotonic_ns": 1008377818851496,
+        "wall_ns": 1793211663666089277,
+        "x": -0.42194207286722174,
+        "y": 0.7927475598772831,
+        "yaw": 1.583864841961199,
+        "stamp_ns": 42760000000
+      },
+      "last_global_path_endpoint": [
+        0.0,
+        0.8
+      ],
+      "first_latch": null,
+      "largest_observed_lease_gap": {
+        "seconds": 0.05056722,
+        "before": {
+          "kind": "leased_command",
+          "wall_ns": 1793211641247694707,
+          "monotonic_ns": 1008355400458726,
+          "frame_id": "oak-boottime-v1/dc028666d5904e2983373aab3a5b0d53/1138",
+          "issued_boottime_ns": 1008355343466496,
+          "vx": 0.22,
+          "wz": -0.2328890860080719
+        },
+        "after": {
+          "kind": "leased_command",
+          "wall_ns": 1793211641298262197,
+          "monotonic_ns": 1008355451025946,
+          "frame_id": "oak-boottime-v1/dc028666d5904e2983373aab3a5b0d53/1139",
+          "issued_boottime_ns": 1008355343466496,
+          "vx": 0.22,
+          "wz": -0.2328890860080719
+        }
+      },
+      "last_nav_command": {
+        "kind": "nav_command",
+        "wall_ns": 1793211663712632687,
+        "monotonic_ns": 1008377865397696,
+        "vx": 0.006586679257452488,
+        "vy": 0.0,
+        "wz": -0.005608852487057447
+      },
+      "last_applied_command": {
+        "kind": "command",
+        "wall_ns": 1793211663715177527,
+        "monotonic_ns": 1008377867941726,
+        "vx": 0.006586679257452488,
+        "wz": -0.005608852487057447
+      },
+      "last_progress": {
+        "kind": "progress_state",
+        "monotonic_ns": 1008377770529596,
+        "wall_ns": 1793211663617767647,
+        "data": {
+          "check": true,
+          "sim_ns": 42750000000,
+          "baseline_ns": 35650000000,
+          "baseline_x": -0.6159206679734208,
+          "baseline_y": 0.48336302430904865,
+          "x": -0.6151207029294549,
+          "y": 0.48134074658407683,
+          "distance_m": 0.002174753151160991,
+          "radius_m": 0.5,
+          "allowance_s": 10
+        }
+      },
+      "window_wall_ns": [
+        1793211630102596616,
+        1793211663719129067
+      ],
+      "missing_trajectory": false,
+      "missing_navigation_trace": false,
+      "interpretation_limit": "Post hoc descriptive trace, not a causal ablation"
+    },
+    {
+      "variant": "original_nav2",
+      "world": "block-488809489",
+      "instruction": "Inspect storage",
+      "reason": "navigation_deadline",
+      "target": {
+        "x": 0.0,
+        "y": 0.8,
+        "yaw": 1.5707963267948966
+      },
+      "last_truth": {
+        "kind": "truth",
+        "wall_ns": 1793210757057935044,
+        "monotonic_ns": 1007560799945176,
+        "sim_ns": 40920000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": -0.4075280864855159,
+        "y": 0.8152698231148,
+        "yaw": 1.5835400664281742
+      },
+      "last_tf": {
+        "kind": "tf_pose",
+        "monotonic_ns": 1007560778960056,
+        "wall_ns": 1793210757036952354,
+        "x": -0.44542081323577476,
+        "y": 0.8204126903312929,
+        "yaw": 1.5741288661932273,
+        "stamp_ns": 40880000000
+      },
+      "last_global_path_endpoint": [
+        0.0,
+        0.8
+      ],
+      "first_latch": null,
+      "largest_observed_lease_gap": {
+        "seconds": 0.0845379,
+        "before": {
+          "kind": "leased_command",
+          "wall_ns": 1793210733823437358,
+          "monotonic_ns": 1007541150646936,
+          "frame_id": "oak-boottime-v1/e15eb85812e349cf9087250f467e1681/1177",
+          "issued_boottime_ns": 1007541086092366,
+          "vx": 0.21999810636043549,
+          "wz": -0.3462831974029541
+        },
+        "after": {
+          "kind": "leased_command",
+          "wall_ns": 1793210733907975438,
+          "monotonic_ns": 1007541235184836,
+          "frame_id": "oak-boottime-v1/e15eb85812e349cf9087250f467e1681/1178",
+          "issued_boottime_ns": 1007541166644526,
+          "vx": 0.2199995517730713,
+          "wz": -0.31084057688713074
+        }
+      },
+      "last_nav_command": {
+        "kind": "nav_command",
+        "wall_ns": 1793210757067352644,
+        "monotonic_ns": 1007560809363046,
+        "vx": 0.003740321844816208,
+        "vy": 0.0,
+        "wz": -0.010453070513904095
+      },
+      "last_applied_command": {
+        "kind": "command",
+        "wall_ns": 1793210757065764414,
+        "monotonic_ns": 1007560807774726,
+        "vx": 0.003740321844816208,
+        "wz": -0.010453070513904095
+      },
+      "last_progress": {
+        "kind": "progress_state",
+        "monotonic_ns": 1007560724844406,
+        "wall_ns": 1793210756982835894,
+        "data": {
+          "check": true,
+          "sim_ns": 40840000000,
+          "baseline_ns": 33110000000,
+          "baseline_x": -0.6852595061760423,
+          "baseline_y": 0.5304081831633735,
+          "x": -0.6921124587899554,
+          "y": 0.5516653897198021,
+          "distance_m": 0.022334542531943884,
+          "radius_m": 0.5,
+          "allowance_s": 10
+        }
+      },
+      "window_wall_ns": [
+        1793210723441069218,
+        1793210757072406414
+      ],
+      "missing_trajectory": false,
+      "missing_navigation_trace": false,
+      "interpretation_limit": "Post hoc descriptive trace, not a causal ablation"
+    },
+    {
+      "variant": "corrected_nav2",
+      "world": "wall-1218189281",
+      "instruction": "Go to station",
+      "reason": "navigation_deadline",
+      "target": {
+        "x": 0.8,
+        "y": 0.0,
+        "yaw": 0.0
+      },
+      "last_truth": {
+        "kind": "truth",
+        "wall_ns": 1793211320682383364,
+        "monotonic_ns": 1008067087172506,
+        "sim_ns": 35920000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.33186390603261606,
+        "y": 0.4247673614683125,
+        "yaw": 0.2414695386302584
+      },
+      "last_tf": {
+        "kind": "tf_pose",
+        "monotonic_ns": 1008067064363716,
+        "wall_ns": 1793211320659576374,
+        "x": 0.3393869815812003,
+        "y": 0.3822967532350966,
+        "yaw": 0.2506539548033172,
+        "stamp_ns": 35880000000
+      },
+      "last_global_path_endpoint": [
+        0.8,
+        0.0
+      ],
+      "first_latch": {
+        "kind": "expiry_events",
+        "wall_ns": 1793211291465370758,
+        "monotonic_ns": 1008041455186996,
+        "data": {
+          "reason": "command_expired",
+          "latched": true,
+          "boottime_ns": 1008041452855366,
+          "lifetime_ns": 200000000,
+          "sim_ns": 10290000000
+        }
+      },
+      "largest_observed_lease_gap": {
+        "seconds": 0.33738759,
+        "before": {
+          "kind": "leased_command",
+          "wall_ns": 1793211291291087738,
+          "monotonic_ns": 1008041280904246,
+          "frame_id": "oak-boottime-v1/ea769433950f4d4e9be14380c34359d1/619",
+          "issued_boottime_ns": 1008041250612316,
+          "vx": 0.18,
+          "wz": -0.31809958585058584
+        },
+        "after": {
+          "kind": "leased_command",
+          "wall_ns": 1793211291628475058,
+          "monotonic_ns": 1008041618291836,
+          "frame_id": "oak-boottime-v1/ea769433950f4d4e9be14380c34359d1/620",
+          "issued_boottime_ns": 1008041617641496,
+          "vx": 0.0,
+          "wz": 0.0
+        }
+      },
+      "last_nav_command": {
+        "kind": "nav_command",
+        "wall_ns": 1793211320685751344,
+        "monotonic_ns": 1008067090540576,
+        "vx": 0.18,
+        "vy": 0.0,
+        "wz": -0.2536677049261253
+      },
+      "last_applied_command": {
+        "kind": "command",
+        "wall_ns": 1793211320709644994,
+        "monotonic_ns": 1008067114435036,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      "last_progress": {
+        "kind": "progress_state",
+        "monotonic_ns": 1008067036642546,
+        "wall_ns": 1793211320631854844,
+        "data": {
+          "check": true,
+          "sim_ns": 35870000000,
+          "baseline_ns": 31470000000,
+          "baseline_x": 0.5630334768032379,
+          "baseline_y": 0.31878133508710627,
+          "x": 0.5630334768032379,
+          "y": 0.31878133508710627,
+          "distance_m": 0,
+          "radius_m": 0.1,
+          "allowance_s": 10
+        }
+      },
+      "window_wall_ns": [
+        1793211287085669708,
+        1793211320712182184
+      ],
+      "missing_trajectory": false,
+      "missing_navigation_trace": false,
+      "interpretation_limit": "Post hoc descriptive trace, not a causal ablation"
+    }
+  ],
+  "faults": {
+    "expiry-formal-s1": {
+      "trials": [
+        {
+          "case": "command_bridge_crash",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.1798987092790102,
+            "truth_age_s": 0.01616787,
+            "command_age_s": 0.00845487,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210033757777153,
+              "monotonic_ns": 1006909171461616,
+              "vx": 0.18,
+              "wz": -0.15648728016008348
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.36,
+            "confirmed_after_sim_s": 0.68,
+            "stop_path_m": 0.03632999850973649,
+            "stop_displacement_m": 0.03028192596604728,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "command_expired",
+          "all_observed_post_latch_commands_zero": null,
+          "max_post_fault_truth_monotonic_gap_s": 0.04576554,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210033183771823,
+            "monotonic_ns": 1006908597456826,
+            "goals": [
+              {
+                "id": "c6ab3fff6d484912bf32df6af827166d",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.34199604
+        },
+        {
+          "case": "guard_crash",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.17992275455671305,
+            "truth_age_s": 0.00577719,
+            "command_age_s": 0.00784584,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793209982527184168,
+              "monotonic_ns": 1006865109184666,
+              "vx": 0.18,
+              "wz": -0.1571102032183005
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.4,
+            "confirmed_after_sim_s": 0.72,
+            "stop_path_m": 0.04358122564191638,
+            "stop_displacement_m": 0.03741578938705209,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "command_expired",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.07419771,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793209981961489078,
+            "monotonic_ns": 1006864543489306,
+            "goals": [
+              {
+                "id": "d0386fca0d1c4409a0ed1b758a87a992",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.39411477
+        },
+        {
+          "case": "guard_suspend",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.179906258043219,
+            "truth_age_s": 0.01334511,
+            "command_age_s": 0.0058833,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210007910844315,
+              "monotonic_ns": 1006886908372036,
+              "vx": 0.18,
+              "wz": -0.14066660884533239
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.4,
+            "confirmed_after_sim_s": 0.72,
+            "stop_path_m": 0.04353014022652638,
+            "stop_displacement_m": 0.037480332347883366,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "command_expired",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.08098605,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210007286741475,
+            "monotonic_ns": 1006886284269466,
+            "goals": [
+              {
+                "id": "ae3053679ab64554b166a43726c00b7a",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.38432592
+        },
+        {
+          "case": "replayed_command",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.1502469515186639,
+            "truth_age_s": 0.01224243,
+            "command_age_s": 0.00420651,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210113637296458,
+              "monotonic_ns": 1006981883667256,
+              "vx": 0.18,
+              "wz": -0.19546830589250958
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.2,
+            "confirmed_after_sim_s": 0.52,
+            "stop_path_m": 0.009645806750908807,
+            "stop_displacement_m": 0.0032633894233399835,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {
+            "frame_id": "oak-boottime-v1/867565bde74d42f4ae84fe26733ac7b4/651",
+            "issued_boottime_ns": 1006981383378586,
+            "vx": 0.0,
+            "wz": 0.0
+          },
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "identity_or_replay",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.0765702,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210113483693818,
+            "monotonic_ns": 1006981730064526,
+            "goals": [
+              {
+                "id": "fd830ca923ba4bc690de8a56d2f9a0bb",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.18751293,
+          "payload_rejection_observed": true
+        },
+        {
+          "case": "simulator_process_stall",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.17989127350184742,
+            "truth_age_s": 0.03313395,
+            "command_age_s": 0.00450837,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210139295299463,
+              "monotonic_ns": 1007003958523006,
+              "vx": 0.18,
+              "wz": -0.15163184233360086
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.2,
+            "confirmed_after_sim_s": 0.52,
+            "stop_path_m": 0.013080385050525027,
+            "stop_displacement_m": 0.006893369177112928,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "update_gap",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.37102896,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210138822906833,
+            "monotonic_ns": 1007003486130556,
+            "goals": [
+              {
+                "id": "d1890cae953743e6ab94a9684c836fdd",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 1.16393886
+        },
+        {
+          "case": "stale_command",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.1254050781839153,
+            "truth_age_s": 0.02658555,
+            "command_age_s": 0.00841581,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210083450077089,
+              "monotonic_ns": 1006955280025996,
+              "vx": 0.18,
+              "wz": -0.19546830589250958
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.2,
+            "confirmed_after_sim_s": 0.52,
+            "stop_path_m": 0.01301688126827526,
+            "stop_displacement_m": 0.006845021709115107,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {
+            "frame_id": "oak-boottime-v1/d288c61f5e2b4a4da50bdc50114ab4dd/10622",
+            "issued_boottime_ns": 1006953807154026,
+            "vx": 0.0,
+            "wz": 0.0
+          },
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "invalid_command_age",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.04555071,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210083316979779,
+            "monotonic_ns": 1006955146928326,
+            "goals": [
+              {
+                "id": "a138a9a46df24194918bed096b88faec",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.17316882,
+          "payload_rejection_observed": true
+        },
+        {
+          "case": "watchdog_crash",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.1799001906575734,
+            "truth_age_s": 0.02741544,
+            "command_age_s": 0.00995418,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210054927046873,
+              "monotonic_ns": 1006930340731426,
+              "vx": 0.18,
+              "wz": -0.13942767390304725
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.4,
+            "confirmed_after_sim_s": 0.72,
+            "stop_path_m": 0.043527237886731414,
+            "stop_displacement_m": 0.037479124200271254,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": null,
+          "all_observed_post_latch_commands_zero": null,
+          "max_post_fault_truth_monotonic_gap_s": 0.07907436,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210055944846703,
+            "monotonic_ns": 1006931358530896,
+            "goals": [
+              {
+                "id": "8a59f1729a624a859d228cb75bc98387",
+                "status": 5
+              }
+            ]
+          },
+          "mission_result": {
+            "status": "failed",
+            "reason": "watchdog_not_ready_or_faulted",
+            "mission_id": "m-39b281eac6ed4665",
+            "execution_seconds": 1.644792029983364,
+            "events": [
+              {
+                "event": "accepted",
+                "mission_id": "m-39b281eac6ed4665",
+                "wall_time_ns": 1793210054361180333,
+                "sim_time_ns": 5830000000
+              },
+              {
+                "event": "watchdog_armed",
+                "mission_id": "m-39b281eac6ed4665",
+                "wall_time_ns": 1793210054365853043,
+                "sim_time_ns": 5890000000
+              },
+              {
+                "event": "step_started",
+                "mission_id": "m-39b281eac6ed4665",
+                "wall_time_ns": 1793210054380112823,
+                "sim_time_ns": 5890000000,
+                "index": 0,
+                "action": "navigate"
+              },
+              {
+                "event": "navigation_feedback",
+                "mission_id": "m-39b281eac6ed4665",
+                "wall_time_ns": 1793210054391217653,
+                "sim_time_ns": 5910000000,
+                "distance_remaining": 0.0
+              },
+              {
+                "event": "navigation_feedback",
+                "mission_id": "m-39b281eac6ed4665",
+                "wall_time_ns": 1793210055399324483,
+                "sim_time_ns": 6920000000,
+                "distance_remaining": 0.8457106947898865
+              },
+              {
+                "event": "failed",
+                "mission_id": "m-39b281eac6ed4665",
+                "wall_time_ns": 1793210055945354393,
+                "sim_time_ns": 7470000000,
+                "reason": "watchdog_not_ready_or_faulted"
+              }
+            ]
+          },
+          "settling_onset_monotonic_s": 0.37122831
+        }
+      ],
+      "eligible": 7,
+      "planned": 7,
+      "eligible_stopping_target_passes": 7,
+      "observed_active_goals_at_cutoff": 6
+    },
+    "expiry-formal-s2": {
+      "trials": [
+        {
+          "case": "command_bridge_crash",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.17992265939828486,
+            "truth_age_s": 0.00926649,
+            "command_age_s": 0.00145314,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210169454253151,
+              "monotonic_ns": 1007030534986516,
+              "vx": 0.18,
+              "wz": -0.15119885713499737
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.36,
+            "confirmed_after_sim_s": 0.68,
+            "stop_path_m": 0.03638380925937216,
+            "stop_displacement_m": 0.030218352654152215,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "command_expired",
+          "all_observed_post_latch_commands_zero": null,
+          "max_post_fault_truth_monotonic_gap_s": 0.04412844,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210168917928841,
+            "monotonic_ns": 1007029998662386,
+            "goals": [
+              {
+                "id": "1b0eba8119d34bb9ad5fee37874cd952",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.34927839
+        },
+        {
+          "case": "guard_crash",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.17989830309541502,
+            "truth_age_s": 0.02694033,
+            "command_age_s": 0.00906219,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210295481428567,
+              "monotonic_ns": 1007145809683276,
+              "vx": 0.18,
+              "wz": -0.1514972911752775
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.36,
+            "confirmed_after_sim_s": 0.68,
+            "stop_path_m": 0.03844018760175069,
+            "stop_displacement_m": 0.03208218541015518,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "command_expired",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.17771976,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210294925269697,
+            "monotonic_ns": 1007145253524496,
+            "goals": [
+              {
+                "id": "2e923c392d49464eab00be9676568d06",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.33200415
+        },
+        {
+          "case": "guard_suspend",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.17989186452833084,
+            "truth_age_s": 0.03213774,
+            "command_age_s": 0.00303543,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210319501832426,
+              "monotonic_ns": 1007166248172796,
+              "vx": 0.18,
+              "wz": -0.1522347726335094
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.4,
+            "confirmed_after_sim_s": 0.72,
+            "stop_path_m": 0.04352462929641134,
+            "stop_displacement_m": 0.037473574043947924,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "command_expired",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.05400567,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210319029049016,
+            "monotonic_ns": 1007165775390106,
+            "goals": [
+              {
+                "id": "dd8350678ed7459cac28cf93f4ad1dfd",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.3678993
+        },
+        {
+          "case": "replayed_command",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.15024694969048186,
+            "truth_age_s": 0.01546659,
+            "command_age_s": 0.00772605,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210248345390577,
+              "monotonic_ns": 1007102258450356,
+              "vx": 0.18,
+              "wz": -0.19546830589250958
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.2,
+            "confirmed_after_sim_s": 0.52,
+            "stop_path_m": 0.00964580673787535,
+            "stop_displacement_m": 0.0032633894139536533,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {
+            "frame_id": "oak-boottime-v1/a9f2bc647c9047a4aecb0bc0f84ecae3/602",
+            "issued_boottime_ns": 1007101797970306,
+            "vx": 0.0,
+            "wz": 0.0
+          },
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "identity_or_replay",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.04244139,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210248203625637,
+            "monotonic_ns": 1007102116685506,
+            "goals": [
+              {
+                "id": "5c8e8ba7098345d587540133131da0d3",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.18410103,
+          "payload_rejection_observed": true
+        },
+        {
+          "case": "simulator_process_stall",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.17990879678536026,
+            "truth_age_s": 0.00318132,
+            "command_age_s": 0.00559251,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210270148358937,
+              "monotonic_ns": 1007124061419256,
+              "vx": 0.18,
+              "wz": -0.13740382433452683
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.2,
+            "confirmed_after_sim_s": 0.52,
+            "stop_path_m": 0.007543721837163868,
+            "stop_displacement_m": 0.0015076367910213584,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "update_gap",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.04457097,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210269516832357,
+            "monotonic_ns": 1007123429891956,
+            "goals": [
+              {
+                "id": "cb96cbf51d984e9fa7445b6c8ca57890",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 1.1931219
+        },
+        {
+          "case": "stale_command",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.11947867647184482,
+            "truth_age_s": 0.01958328,
+            "command_age_s": 0.00116721,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210219001925476,
+              "monotonic_ns": 1007076499016836,
+              "vx": 0.18,
+              "wz": -0.19546830589250958
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.2,
+            "confirmed_after_sim_s": 0.52,
+            "stop_path_m": 0.01137132571977497,
+            "stop_displacement_m": 0.0046750150007628995,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {
+            "frame_id": "oak-boottime-v1/04864e664b854337bbd822db31f4e47f/10634",
+            "issued_boottime_ns": 1007075030200176,
+            "vx": 0.0,
+            "wz": 0.0
+          },
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "invalid_command_age",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.0472518,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210218828244646,
+            "monotonic_ns": 1007076325335916,
+            "goals": [
+              {
+                "id": "9d8aacfa0a39430fabaf2058b95b3cc2",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.18192969,
+          "payload_rejection_observed": true
+        },
+        {
+          "case": "watchdog_crash",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.17989647000031958,
+            "truth_age_s": 0.03999987,
+            "command_age_s": 0.00137718,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210190135303651,
+              "monotonic_ns": 1007051216037196,
+              "vx": 0.18,
+              "wz": -0.15017674060375383
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.4,
+            "confirmed_after_sim_s": 0.72,
+            "stop_path_m": 0.04767836328825607,
+            "stop_displacement_m": 0.04107758636932175,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": null,
+          "all_observed_post_latch_commands_zero": null,
+          "max_post_fault_truth_monotonic_gap_s": 0.04408992,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210191127124891,
+            "monotonic_ns": 1007052207858436,
+            "goals": [
+              {
+                "id": "700b81fcd01546a09a04184b60c5c833",
+                "status": 5
+              }
+            ]
+          },
+          "mission_result": {
+            "status": "failed",
+            "reason": "watchdog_not_ready_or_faulted",
+            "mission_id": "m-1ea942f829974ad5",
+            "execution_seconds": 1.5872958899708465,
+            "events": [
+              {
+                "event": "accepted",
+                "mission_id": "m-1ea942f829974ad5",
+                "wall_time_ns": 1793210189588772891,
+                "sim_time_ns": 5680000000
+              },
+              {
+                "event": "watchdog_armed",
+                "mission_id": "m-1ea942f829974ad5",
+                "wall_time_ns": 1793210189592622551,
+                "sim_time_ns": 5730000000
+              },
+              {
+                "event": "step_started",
+                "mission_id": "m-1ea942f829974ad5",
+                "wall_time_ns": 1793210189601171021,
+                "sim_time_ns": 5730000000,
+                "index": 0,
+                "action": "navigate"
+              },
+              {
+                "event": "navigation_feedback",
+                "mission_id": "m-1ea942f829974ad5",
+                "wall_time_ns": 1793210189611749891,
+                "sim_time_ns": 5750000000,
+                "distance_remaining": 0.0
+              },
+              {
+                "event": "navigation_feedback",
+                "mission_id": "m-1ea942f829974ad5",
+                "wall_time_ns": 1793210190615856491,
+                "sim_time_ns": 6750000000,
+                "distance_remaining": 0.8457106947898865
+              },
+              {
+                "event": "failed",
+                "mission_id": "m-1ea942f829974ad5",
+                "wall_time_ns": 1793210191126927791,
+                "sim_time_ns": 7270000000,
+                "reason": "watchdog_not_ready_or_faulted"
+              }
+            ]
+          },
+          "settling_onset_monotonic_s": 0.36040572
+        }
+      ],
+      "eligible": 7,
+      "planned": 7,
+      "eligible_stopping_target_passes": 7,
+      "observed_active_goals_at_cutoff": 6
+    },
+    "expiry-formal-s3": {
+      "trials": [
+        {
+          "case": "command_bridge_crash",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.17989928747275846,
+            "truth_age_s": 0.0170451,
+            "command_age_s": 0.00707121,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210497184933999,
+              "monotonic_ns": 1007326012951696,
+              "vx": 0.18,
+              "wz": -0.1511314980227479
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.4,
+            "confirmed_after_sim_s": 0.72,
+            "stop_path_m": 0.04352726406785341,
+            "stop_displacement_m": 0.037478418863935194,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "command_expired",
+          "all_observed_post_latch_commands_zero": null,
+          "max_post_fault_truth_monotonic_gap_s": 0.05585994,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210496634614329,
+            "monotonic_ns": 1007325462632206,
+            "goals": [
+              {
+                "id": "4fbf506bbd7f448f8c9c70c4e3b18500",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.38250684
+        },
+        {
+          "case": "guard_crash",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.17989488512905275,
+            "truth_age_s": 0.01449738,
+            "command_age_s": 0.00735714,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210447315966768,
+              "monotonic_ns": 1007283310256416,
+              "vx": 0.18,
+              "wz": -0.15203973909236065
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.36,
+            "confirmed_after_sim_s": 0.68,
+            "stop_path_m": 0.038439829805822716,
+            "stop_displacement_m": 0.03207970569390221,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "command_expired",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.05848713,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210446840581728,
+            "monotonic_ns": 1007282834871106,
+            "goals": [
+              {
+                "id": "10fa0f6723d94027ae753af76fac4e45",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.34471926
+        },
+        {
+          "case": "guard_suspend",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.17989673171896417,
+            "truth_age_s": 0.00718974,
+            "command_age_s": 0.00895104,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210471791308196,
+              "monotonic_ns": 1007304201977206,
+              "vx": 0.18,
+              "wz": -0.15465589803910848
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.4,
+            "confirmed_after_sim_s": 0.72,
+            "stop_path_m": 0.043526450003839506,
+            "stop_displacement_m": 0.037476850234817456,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "command_expired",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.36171693,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210471274453946,
+            "monotonic_ns": 1007303685122866,
+            "goals": [
+              {
+                "id": "e72a1fbedb5e427aaec217bd7092b756",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.39268413
+        },
+        {
+          "case": "replayed_command",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.09610759531134452,
+            "truth_age_s": 0.02426724,
+            "command_age_s": 0.00627057,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210400705807050,
+              "monotonic_ns": 1007240285009596,
+              "vx": 0.18,
+              "wz": -0.19546830589250958
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.24,
+            "confirmed_after_sim_s": 0.56,
+            "stop_path_m": 0.010602602928916708,
+            "stop_displacement_m": 0.003667590216547456,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {
+            "frame_id": "oak-boottime-v1/02dc8593966645ef92dd0971202e53f8/613",
+            "issued_boottime_ns": 1007239853530336,
+            "vx": 0.0,
+            "wz": 0.0
+          },
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "identity_or_replay",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.0425322,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210400572636120,
+            "monotonic_ns": 1007240151838396,
+            "goals": [
+              {
+                "id": "0c3b7e200a1742b5a83c93bdc19b9584",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.21579219,
+          "payload_rejection_observed": true
+        },
+        {
+          "case": "simulator_process_stall",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.1798983498451207,
+            "truth_age_s": 0.01432611,
+            "command_age_s": 0.0061623,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210425829392958,
+              "monotonic_ns": 1007261823683146,
+              "vx": 0.18,
+              "wz": -0.15209259016547974
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.2,
+            "confirmed_after_sim_s": 0.52,
+            "stop_path_m": 0.009654859376137281,
+            "stop_displacement_m": 0.0032977075430126145,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "update_gap",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.04522275,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210425282398698,
+            "monotonic_ns": 1007261276688346,
+            "goals": [
+              {
+                "id": "e319fe96ad1b432189794b5189abdbd9",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 1.18503603
+        },
+        {
+          "case": "stale_command",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.15024695002720695,
+            "truth_age_s": 0.01080558,
+            "command_age_s": 0.00244926,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793210371244771854,
+              "monotonic_ns": 1007214407864626,
+              "vx": 0.18,
+              "wz": -0.19546830589250958
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.2,
+            "confirmed_after_sim_s": 0.52,
+            "stop_path_m": 0.00964580678024901,
+            "stop_displacement_m": 0.0032633894545754092,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {
+            "frame_id": "oak-boottime-v1/8505979401aa4b2f8fc8a82b8f7f76c6/10626",
+            "issued_boottime_ns": 1007212833526116,
+            "vx": 0.0,
+            "wz": 0.0
+          },
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "invalid_command_age",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.04714191,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793210371070099314,
+            "monotonic_ns": 1007214233192806,
+            "goals": [
+              {
+                "id": "7865264ab2d84b15980d4b409ba2067a",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.18875736,
+          "payload_rejection_observed": true
+        },
+        {
+          "case": "watchdog_crash",
+          "environment_failure": "Command '['wsl.exe', '-d', 'Ubuntu-24.04', '--', 'python3', '/mnt/d/Projects/OakGPT/scripts/inject_robotics_fault.py', '--kind', 'mission_watchdog', '--pause-seconds', '0', '--ready', '/mnt/d/Projects/OakGPT/runs/phase32/expiry-formal-s3/watchdog_crash/READY.json', '--spool', '/mnt/d/Projects/OakGPT/runs/phase32/expiry-formal-s3/watchdog_crash/spool', '--motion-trace', '/mnt/d/Projects/OakGPT/runs/phase32/expiry-formal-s3/watchdog_crash/trajectory.jsonl']' returned non-zero exit status 1.",
+          "eligible": false
+        }
+      ],
+      "eligible": 6,
+      "planned": 7,
+      "eligible_stopping_target_passes": 6,
+      "observed_active_goals_at_cutoff": 6
+    }
+  },
+  "legacy_guard_crash": {
+    "trials": [
+      {
+        "case": "guard_crash",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": null,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.17238899251423132,
+          "truth_age_s": 0.03887532,
+          "command_age_s": 0.00225009,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793193877485245536,
+            "monotonic_ns": 992198486858569,
+            "vx": 0.2041867971420288,
+            "wz": 0.15624387562274933
+          }
+        },
+        "response": {
+          "settled": false,
+          "stop_latency_sim_s": null,
+          "hold_s": 0.3
+        },
+        "injected_payload": {},
+        "within_0_5_sim_s": false,
+        "first_latch_reason": null,
+        "all_observed_post_latch_commands_zero": null,
+        "max_post_fault_truth_monotonic_gap_s": 0.34197237,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793193877127343076,
+          "monotonic_ns": 992198128956379,
+          "goals": [
+            {
+              "id": "fa0471b6eee447b9945ef159e9a0120b",
+              "status": 2
+            }
+          ]
+        },
+        "mission_result": null,
+        "settling_onset_monotonic_s": null
+      }
+    ],
+    "eligible": 1,
+    "planned": 1,
+    "eligible_stopping_target_passes": 0,
+    "observed_active_goals_at_cutoff": 1
+  },
+  "active_payload_follow_up": {
+    "trials": [
+      {
+        "case": "replayed_command",
+        "environment_failure": "Injector failed; see injector.log",
+        "eligible": false
+      },
+      {
+        "case": "stale_command",
+        "environment_failure": "Injector failed; see injector.log",
+        "eligible": false
+      }
+    ],
+    "eligible": 0,
+    "planned": 2,
+    "eligible_stopping_target_passes": 0,
+    "observed_active_goals_at_cutoff": 0
+  },
+  "expiry_supplementary_v2": {
+    "trials": [
+      {
+        "case": "replayed_command",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": true,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.16443015822609622,
+          "truth_age_s": 0.01707561,
+          "command_age_s": 0.00706707,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793212288051431426,
+            "monotonic_ns": 1008937699399696,
+            "vx": 0.18,
+            "wz": -0.19205165815529698
+          }
+        },
+        "response": {
+          "settled": true,
+          "stop_latency_sim_s": 0.2,
+          "confirmed_after_sim_s": 0.52,
+          "stop_path_m": 0.011673638415353706,
+          "stop_displacement_m": 0.005070816078962155,
+          "speed_threshold_m_s": 0.01,
+          "yaw_threshold_rad_s": 0.03,
+          "hold_s": 0.3
+        },
+        "injected_payload": {
+          "frame_id": "oak-boottime-v1/bbb180801b8347c29a4179fc954437f7/637",
+          "issued_boottime_ns": 1008937613574616,
+          "vx": 0.125,
+          "wz": -0.16
+        },
+        "within_0_5_sim_s": true,
+        "first_latch_reason": "identity_or_replay",
+        "all_observed_post_latch_commands_zero": true,
+        "max_post_fault_truth_monotonic_gap_s": 0.06421689,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793212287885711096,
+          "monotonic_ns": 1008937533679726,
+          "goals": [
+            {
+              "id": "455bfa85bed34eeeb266e8ac0deaa7c1",
+              "status": 2
+            }
+          ]
+        },
+        "mission_result": null,
+        "settling_onset_monotonic_s": 0.19105497,
+        "payload_rejection_observed": true
+      },
+      {
+        "case": "stale_command",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": true,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.1123588262697834,
+          "truth_age_s": 0.00856458,
+          "command_age_s": 0.00439137,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793212257286233512,
+            "monotonic_ns": 1008910516941166,
+            "vx": 0.125,
+            "wz": -0.16
+          }
+        },
+        "response": {
+          "settled": true,
+          "stop_latency_sim_s": 0.16,
+          "confirmed_after_sim_s": 0.48,
+          "stop_path_m": 0.005264921646890571,
+          "stop_displacement_m": 0.001728774975081619,
+          "speed_threshold_m_s": 0.01,
+          "yaw_threshold_rad_s": 0.03,
+          "hold_s": 0.3
+        },
+        "injected_payload": {
+          "frame_id": "oak-boottime-v1/bd3655baff9c4b84ab582281c1a7c781/10645",
+          "issued_boottime_ns": 1008909448265406,
+          "vx": 0.125,
+          "wz": -0.16
+        },
+        "within_0_5_sim_s": true,
+        "first_latch_reason": "invalid_command_age",
+        "all_observed_post_latch_commands_zero": true,
+        "max_post_fault_truth_monotonic_gap_s": 0.0821322,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793212257158508032,
+          "monotonic_ns": 1008910389214966,
+          "goals": [
+            {
+              "id": "0ac60da4a7eb402c83ff94bd8df79082",
+              "status": 2
+            }
+          ]
+        },
+        "mission_result": null,
+        "settling_onset_monotonic_s": 0.14863671,
+        "payload_rejection_observed": true
+      },
+      {
+        "case": "watchdog_crash",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": null,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.17996740726079918,
+          "truth_age_s": 0.01784358,
+          "command_age_s": 0.00144531,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793212226666797562,
+            "monotonic_ns": 1008883481569546,
+            "vx": 0.18,
+            "wz": -0.034394795660822076
+          }
+        },
+        "response": {
+          "settled": true,
+          "stop_latency_sim_s": 0.32,
+          "confirmed_after_sim_s": 0.64,
+          "stop_path_m": 0.03351212386869526,
+          "stop_displacement_m": 0.0262152761787445,
+          "speed_threshold_m_s": 0.01,
+          "yaw_threshold_rad_s": 0.03,
+          "hold_s": 0.3
+        },
+        "injected_payload": {},
+        "within_0_5_sim_s": true,
+        "first_latch_reason": null,
+        "all_observed_post_latch_commands_zero": null,
+        "max_post_fault_truth_monotonic_gap_s": 0.36730251,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793212228071308042,
+          "monotonic_ns": 1008884886081646,
+          "goals": [
+            {
+              "id": "704849bae9a142bfa8523d7eca6ccf34",
+              "status": 5
+            }
+          ]
+        },
+        "mission_result": {
+          "status": "failed",
+          "reason": "watchdog_not_ready_or_faulted",
+          "mission_id": "m-4f9e02e19e944d1e",
+          "execution_seconds": 3.036136859911494,
+          "events": [
+            {
+              "event": "accepted",
+              "mission_id": "m-4f9e02e19e944d1e",
+              "wall_time_ns": 1793212224746496902,
+              "sim_time_ns": 6320000000
+            },
+            {
+              "event": "watchdog_armed",
+              "mission_id": "m-4f9e02e19e944d1e",
+              "wall_time_ns": 1793212224769470662,
+              "sim_time_ns": 6510000000
+            },
+            {
+              "event": "step_started",
+              "mission_id": "m-4f9e02e19e944d1e",
+              "wall_time_ns": 1793212224794671112,
+              "sim_time_ns": 6510000000,
+              "index": 0,
+              "action": "navigate"
+            },
+            {
+              "event": "navigation_feedback",
+              "mission_id": "m-4f9e02e19e944d1e",
+              "wall_time_ns": 1793212224901860122,
+              "sim_time_ns": 6550000000,
+              "distance_remaining": 0.0
+            },
+            {
+              "event": "navigation_feedback",
+              "mission_id": "m-4f9e02e19e944d1e",
+              "wall_time_ns": 1793212225914928292,
+              "sim_time_ns": 7550000000,
+              "distance_remaining": 0.8207106590270996
+            },
+            {
+              "event": "navigation_feedback",
+              "mission_id": "m-4f9e02e19e944d1e",
+              "wall_time_ns": 1793212226918290682,
+              "sim_time_ns": 8590000000,
+              "distance_remaining": 0.6457107067108154
+            },
+            {
+              "event": "failed",
+              "mission_id": "m-4f9e02e19e944d1e",
+              "wall_time_ns": 1793212227622170782,
+              "sim_time_ns": 9290000000,
+              "reason": "watchdog_not_ready_or_faulted"
+            }
+          ]
+        },
+        "settling_onset_monotonic_s": 0.3459825
+      }
+    ],
+    "eligible": 3,
+    "planned": 3,
+    "eligible_stopping_target_passes": 3,
+    "observed_active_goals_at_cutoff": 2
+  },
+  "heldout_stopping_followup": {
+    "block": {
+      "trials": [
+        {
+          "case": "guard_crash",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.17990104932966008,
+            "truth_age_s": 0.00197289,
+            "command_age_s": 0.00619344,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793212326206370262,
+              "monotonic_ns": 1008972271470226,
+              "vx": 0.18,
+              "wz": 0.17919796013753306
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.36,
+            "confirmed_after_sim_s": 0.68,
+            "stop_path_m": 0.037791595422444896,
+            "stop_displacement_m": 0.028561987222333798,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "command_expired",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.08510121,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793212323464117872,
+            "monotonic_ns": 1008969529216666,
+            "goals": [
+              {
+                "id": "dd5a16736e774fdd95b1deb9c6d3f98a",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.35796996
+        }
+      ],
+      "eligible": 1,
+      "planned": 1,
+      "eligible_stopping_target_passes": 1,
+      "observed_active_goals_at_cutoff": 1
+    },
+    "wall": {
+      "trials": [
+        {
+          "case": "guard_crash",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.1798696219475211,
+            "truth_age_s": 0.01770624,
+            "command_age_s": 0.00895455,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793212356981299238,
+              "monotonic_ns": 1008999463490716,
+              "vx": 0.18,
+              "wz": 0.1400024467452971
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.36,
+            "confirmed_after_sim_s": 0.68,
+            "stop_path_m": 0.037899316256962044,
+            "stop_displacement_m": 0.02844849682540642,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "command_expired",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.05253381,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793212355019305718,
+            "monotonic_ns": 1008997501497016,
+            "goals": [
+              {
+                "id": "92195e33f1c64a09853e5439cfc2808f",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.34419249
+        }
+      ],
+      "eligible": 1,
+      "planned": 1,
+      "eligible_stopping_target_passes": 1,
+      "observed_active_goals_at_cutoff": 1
+    }
+  },
+  "heldout_stopping": {
+    "empty": {
+      "trials": [
+        {
+          "case": "guard_crash",
+          "environment_failure": null,
+          "eligible": true,
+          "nonzero_payload_required_and_captured": null,
+          "precondition_at_injection": {
+            "eligible": true,
+            "speed_m_s": 0.1799288533869814,
+            "truth_age_s": 0.00348759,
+            "command_age_s": 0.00646371,
+            "truth_sample_gap_sim_s": 0.04,
+            "last_command": {
+              "kind": "command",
+              "wall_ns": 1793212004856500794,
+              "monotonic_ns": 1008683172624136,
+              "vx": 0.18,
+              "wz": -0.208609396583707
+            }
+          },
+          "response": {
+            "settled": true,
+            "stop_latency_sim_s": 0.32,
+            "confirmed_after_sim_s": 0.64,
+            "stop_path_m": 0.029139053028954906,
+            "stop_displacement_m": 0.023089133946497007,
+            "speed_threshold_m_s": 0.01,
+            "yaw_threshold_rad_s": 0.03,
+            "hold_s": 0.3
+          },
+          "injected_payload": {},
+          "within_0_5_sim_s": true,
+          "first_latch_reason": "command_expired",
+          "all_observed_post_latch_commands_zero": true,
+          "max_post_fault_truth_monotonic_gap_s": 0.05285619,
+          "last_action_status": {
+            "kind": "action_status",
+            "wall_ns": 1793212004199923614,
+            "monotonic_ns": 1008682516046056,
+            "goals": [
+              {
+                "id": "418c61d827824d7c9b65a2b3c434ec41",
+                "status": 2
+              }
+            ]
+          },
+          "mission_result": null,
+          "settling_onset_monotonic_s": 0.31560381
+        }
+      ],
+      "eligible": 1,
+      "planned": 1,
+      "eligible_stopping_target_passes": 1,
+      "observed_active_goals_at_cutoff": 1
+    },
+    "block": {
+      "trials": [
+        {
+          "case": "guard_crash",
+          "environment_failure": "Command '['wsl.exe', '-d', 'Ubuntu-24.04', '--', 'python3', '/mnt/d/Projects/OakGPT/scripts/inject_robotics_fault.py', '--kind', 'velocity_guard', '--pause-seconds', '0', '--ready', '/mnt/d/Projects/OakGPT/runs/phase32/heldout-stop-block-v1/guard_crash/READY.json', '--spool', '/mnt/d/Projects/OakGPT/runs/phase32/heldout-stop-block-v1/guard_crash/spool', '--motion-trace', '/mnt/d/Projects/OakGPT/runs/phase32/heldout-stop-block-v1/guard_crash/trajectory.jsonl']' returned non-zero exit status 1.",
+          "eligible": false
+        }
+      ],
+      "eligible": 0,
+      "planned": 1,
+      "eligible_stopping_target_passes": 0,
+      "observed_active_goals_at_cutoff": 0
+    },
+    "wall": {
+      "trials": [
+        {
+          "case": "guard_crash",
+          "environment_failure": "No simultaneously observed motion and nonzero command",
+          "eligible": false
+        }
+      ],
+      "eligible": 0,
+      "planned": 1,
+      "eligible_stopping_target_passes": 0,
+      "observed_active_goals_at_cutoff": 0
+    }
+  },
+  "limits": [
+    "Simulation only; no physical stopping distances or real-world safety claims.",
+    "Gazebo truth shares physics and clock; hardware independence is untested.",
+    "Phase3.1 worlds used for diagnosis, never configuration selection."
+  ]
+}

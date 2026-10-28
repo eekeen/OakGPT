@@ -237,12 +237,16 @@ def fault_cohort(root):
         "stale_command": "invalid_command_age",
         "replayed_command": "identity_or_replay",
     }
+
     for path in sorted(root.glob("*/result.json")):
         result = json.loads(path.read_text())
         row = {
             "case": path.parent.name,
             "environment_failure": result.get("environment_failure"),
-            "eligible": "injection" in result,
+            "eligible": all(
+                k in result
+                for k in ["injection", "response", "anchor", "observation_end_monotonic_ns"]
+            ),
         }
         if row["eligible"]:
             records = [
@@ -255,7 +259,8 @@ def fault_cohort(root):
                 raise ValueError("Stopping metric differs from recorded response")
             before = result["injection"]["before_monotonic_ns"]
             precondition = motion_precondition(records, before)
-            row["eligible"] = precondition["eligible"]
+            row["eligible"] = precondition["eligible"] and result.get("nonzero_payload", True)
+            row["nonzero_payload_required_and_captured"] = result.get("nonzero_payload")
             row["precondition_at_injection"] = precondition
             truth = [r for r in records if r["kind"] == "truth" and r["monotonic_ns"] >= before]
             gaps = [
@@ -278,6 +283,11 @@ def fault_cohort(root):
             ]
             row.update(
                 response=response,
+                injected_payload={
+                    key: result["injection"][key]
+                    for key in ["frame_id", "issued_boottime_ns", "vx", "wz"]
+                    if key in result["injection"]
+                },
                 within_0_5_sim_s=response["settled"] and response["stop_latency_sim_s"] <= 0.5,
                 first_latch_reason=latched[0]["data"]["reason"] if latched else None,
                 all_observed_post_latch_commands_zero=all(
@@ -308,7 +318,89 @@ def fault_cohort(root):
         "trials": trials,
         "eligible": sum(t["eligible"] for t in trials),
         "planned": len(trials),
+        "eligible_stopping_target_passes": sum(
+            t["eligible"] and t.get("within_0_5_sim_s", False) for t in trials
+        ),
+        "observed_active_goals_at_cutoff": sum(
+            any(
+                g["status"] in [1, 2, 3]
+                for g in (t.get("last_action_status") or {}).get("goals", [])
+            )
+            for t in trials
+        ),
     }
+
+
+def navigation_failures(root):
+    """Post hoc descriptive evidence; do not infer a unique cause from correlation."""
+    policy = json.loads(Path("configs/robotics/policy_v1.json").read_text())
+    diagnoses = []
+    for variant in ["original_nav2", "corrected_nav2"]:
+        for path in sorted((root / variant).glob("*/result.json")):
+            trial = json.loads(path.read_text())
+            for item in trial["missions"]:
+                result = item["result"]
+                if result["status"] == "completed" or not result["events"]:
+                    continue
+                trajectory_path = path.parent / "trajectory.jsonl"
+                rows = read_rows(trajectory_path) if trajectory_path.exists() else []
+                first = min(e["wall_time_ns"] for e in result["events"])
+                last = max(e["wall_time_ns"] for e in result["events"])
+                observed = [r for r in rows if first <= r["wall_ns"] <= last]
+                truth = [r for r in observed if r["kind"] == "truth"]
+                target = policy["locations"][item["mission"]["steps"][-1]["destination"]]
+                latched = [
+                    r for r in observed if r["kind"] == "expiry_events" and r["data"]["latched"]
+                ]
+                trace_path = path.parent / "navigation.jsonl"
+                trace = (
+                    [r for r in read_rows(trace_path) if first <= r["wall_ns"] <= last]
+                    if trace_path.exists()
+                    else []
+                )
+                tf = [r for r in trace if r["kind"] == "tf_pose"]
+                paths = [r for r in trace if r["kind"] == "path" and r["topic"] == "/plan"]
+                leases = [r for r in observed if r["kind"] == "leased_command"]
+                gaps = [
+                    {
+                        "seconds": (b["monotonic_ns"] - a["monotonic_ns"]) / 1e9,
+                        "before": a,
+                        "after": b,
+                    }
+                    for a, b in zip(leases, leases[1:], strict=False)
+                ]
+                diagnoses.append(
+                    {
+                        "variant": variant,
+                        "world": path.parent.name,
+                        "instruction": item["mission"]["instruction"],
+                        "reason": result["reason"],
+                        "target": target,
+                        "last_truth": truth[-1] if truth else None,
+                        "last_tf": tf[-1] if tf else None,
+                        "last_global_path_endpoint": paths[-1]["points"][-1]
+                        if paths and paths[-1]["points"]
+                        else None,
+                        "first_latch": latched[0] if latched else None,
+                        "largest_observed_lease_gap": max(gaps, key=lambda g: g["seconds"])
+                        if gaps
+                        else None,
+                        "last_nav_command": next(
+                            (r for r in reversed(observed) if r["kind"] == "nav_command"), None
+                        ),
+                        "last_applied_command": next(
+                            (r for r in reversed(observed) if r["kind"] == "command"), None
+                        ),
+                        "last_progress": next(
+                            (r for r in reversed(trace) if r["kind"] == "progress_state"), None
+                        ),
+                        "window_wall_ns": [first, last],
+                        "missing_trajectory": not trajectory_path.exists(),
+                        "missing_navigation_trace": not trace_path.exists(),
+                        "interpretation_limit": "Post hoc descriptive trace, not a causal ablation",
+                    }
+                )
+    return diagnoses
 
 
 def main():
@@ -329,8 +421,18 @@ def main():
         "original_nav2": original,
         "corrected_nav2": corrected,
         "paired_comparison": paired_comparison(original, corrected),
+        "navigation_failure_analysis": navigation_failures(root / "held-out-v1"),
         "faults": {name: fault_cohort(root / name) for name in required[1:]},
         "legacy_guard_crash": fault_cohort(root / "legacy-guard-crash-v1"),
+        "active_payload_follow_up": fault_cohort(root / "active-payload-v1"),
+        "expiry_supplementary_v2": fault_cohort(root / "expiry-supplementary-v2"),
+        "heldout_stopping_followup": {
+            family: fault_cohort(root / f"heldout-stop-{family}-v2") for family in ["block", "wall"]
+        },
+        "heldout_stopping": {
+            family: fault_cohort(root / f"heldout-stop-{family}-v1")
+            for family in ["empty", "block", "wall"]
+        },
         "limits": [
             "Simulation only; no physical stopping distances or real-world safety claims.",
             "Gazebo truth shares physics and clock; hardware independence is untested.",
@@ -339,6 +441,14 @@ def main():
     }
     if any(v["planned"] != 7 for v in result["faults"].values()):
         raise ValueError("Incomplete formal fault matrix")
+    if result["active_payload_follow_up"]["planned"] != 2:
+        raise ValueError("Supplementary payload trials missing")
+    if any(v["planned"] != 1 for v in result["heldout_stopping"].values()):
+        raise ValueError("Supplementary held-out stopping trials missing")
+    if result["expiry_supplementary_v2"]["planned"] != 3 or any(
+        v["planned"] != 1 for v in result["heldout_stopping_followup"].values()
+    ):
+        raise ValueError("Measurement-remediation follow-up incomplete")
     write_new_json(args.output, result)
 
 

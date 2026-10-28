@@ -1,0 +1,51 @@
+{
+  "python": {
+    "passed": 55,
+    "tests": 57,
+    "skipped": 2,
+    "errors": 0,
+    "failures": 0
+  },
+  "cpp": {
+    "release_checks": 10031,
+    "sanitizer_checks": 10031,
+    "oracle_cases": 60
+  },
+  "expiry": {
+    "core_checks": 15036,
+    "gazebo_message_checks": 9,
+    "release_passed": true,
+    "asan_ubsan_passed": true
+  },
+  "ros": {
+    "tests": 9,
+    "errors": 0,
+    "failures": 0
+  },
+  "protocol": {
+    "cases": 21,
+    "failures": [],
+    "require_safe": true,
+    "complete": true
+  },
+  "lint_format_mypy_pip_check": "passed; see archived qa-final-v2 logs",
+  "packaging": "sdist/wheel and eight required native/ROS source checks passed",
+  "archives": {
+    "count": 59,
+    "members": 6389,
+    "compressed_bytes": 40787481
+  },
+  "process_audit": {
+    "sessions_audited": 154,
+    "alive_after_stopped": [],
+    "incomplete_cleanup_records": []
+  },
+  "historical_integrity": "Verified 2186 raw and 8 final-QA hashes and cohort counts",
+  "pdf_review": "Separate pdf-review.json receipt records rendering and visual inspection",
+  "hosted_ci": "Checked separately on final PR head; see PR #5 check results",
+  "limits": [
+    "CPU verification is not new GPU training/inference verification.",
+    "ASan/UBSan cover native test executables, not the whole vendor simulator.",
+    "No physical host-suspension or robot stopping test was performed."
+  ]
+}

@@ -21,6 +21,7 @@ def main():
     parser.add_argument("--kind", choices=["stale_command", "replayed_command"], required=True)
     parser.add_argument("--motion-trace", type=Path, required=True)
     parser.add_argument("--armed", type=Path, required=True)
+    parser.add_argument("--active-capture", action="store_true")
     args = parser.parse_args()
     ready = json.loads(args.ready.read_text())
     owned = descendant_identities(ready["pids"])
@@ -69,18 +70,30 @@ def main():
             rclpy.spin_once(node, timeout_sec=0.01)
         # Construct and warm serialization before stopping the live producer.
         # First-use Python/ROS type initialization must not consume the lease.
-        message = copy.deepcopy(received[-1])
-        if args.kind == "stale_command":
-            prefix, sequence = message.header.frame_id.rsplit("/", 1)
-            message.header.frame_id = f"{prefix}/{int(sequence) + 10000}"
-            issued = time.clock_gettime_ns(time.CLOCK_BOOTTIME) - 1000000000
-            message.header.stamp.sec, message.header.stamp.nanosec = divmod(issued, 1000000000)
         from rclpy.serialization import serialize_message
 
-        serialized = serialize_message(message)
+        def prepare(captured):
+            message = copy.deepcopy(captured)
+            if args.kind == "stale_command":
+                prefix, sequence = message.header.frame_id.rsplit("/", 1)
+                message.header.frame_id = f"{prefix}/{int(sequence) + 10000}"
+                issued = time.clock_gettime_ns(time.CLOCK_BOOTTIME) - 1000000000
+                message.header.stamp.sec, message.header.stamp.nanosec = divmod(issued, 1000000000)
+            return message, serialize_message(message)
+
+        # Prepare transport/types before dispatch; publish nothing during preparation.
+        serialize_message(TwistStamped())
+        message, serialized = prepare(received[-1])
         args.armed.write_text(
             json.dumps({"bridge_matched": True, "ready_monotonic_ns": time.monotonic_ns()})
         )
+        if args.active_capture:
+            end = time.monotonic() + 20
+            while abs(received[-1].twist.linear.x) <= 0.01 and time.monotonic() < end:
+                rclpy.spin_once(node, timeout_sec=0.01)
+            if abs(received[-1].twist.linear.x) <= 0.01:
+                raise TimeoutError("No nonzero guard payload captured")
+            message, serialized = prepare(received[-1])
         precondition = wait_motion(args.motion_trace, timeout=20)
         before = time.monotonic_ns()
         os.kill(pid, signal.SIGSTOP)
@@ -105,6 +118,7 @@ def main():
                     "wz": message.twist.angular.z,
                     "bridge_subscription_matched": True,
                     "receiver_precondition": precondition,
+                    "active_capture_required": args.active_capture,
                 }
             )
         )

@@ -119,3 +119,45 @@ expiry tests and ROS package/node tests. Sanitizers exercise native test
 executables; they do not establish sanitized whole-simulator execution.
 `archive_phase32.py` compresses exact evidence bytes; its member hashes are
 checked by `verify_phase32_archive.py`. No historical archive is regenerated.
+
+## Published freezes and offline analysis
+
+The actual held-out study uses `phase32_freeze.json` (v1, implementation commit
+`d38267a`). After all frozen studies finished, three measurement scripts gained
+bounded trace-read recovery and prepared active-payload capture. Their v2 hashes
+are in `phase32_freeze_v2.json`; installed control artifacts, ROS source and
+selected Nav2 parameters are identical. Earlier failures are not replaced.
+The v2 payload runner supports `--active-capture`. It warms transport/types before
+dispatch, then captures a real nonzero lease and verifies motion before injection.
+
+Freeze checking intentionally rejects changed historical sources. For a byte-exact
+v1 source inspection use an isolated worktree at `d38267a`, and retrieve its freeze
+and evidence from the published archive. Rebuilt binaries on another machine may
+have different hashes: record a **new** runtime/source freeze for a replication,
+retain the same protocol/parameters, and use fresh output directories. AMCL and
+controller internal randomness is not fully pinned; trajectories are not promised
+to be bit-identical.
+
+To recompute the published statistics without running ROS, first verify the archives,
+then extract into a new directory. From the repository root in PowerShell:
+
+```powershell
+python scripts/verify_phase32_archive.py
+$phase32Evidence = Join-Path $PWD 'tmp/phase32-evidence-new'
+if (Test-Path -LiteralPath $phase32Evidence) { throw 'Choose a new extraction directory' }
+New-Item -ItemType Directory -Path $phase32Evidence
+Get-ChildItem reports/phase32/raw/*.tar.gz | ForEach-Object {
+    tar -xzf $_.FullName -C $phase32Evidence
+}
+python scripts/analyze_phase32.py --source $phase32Evidence --output tmp/recomputed-analysis.json
+python scripts/plot_phase32.py --source $phase32Evidence `
+    --summary tmp/recomputed-analysis.json --output tmp/recomputed-figures
+python scripts/build_phase32_report.py --output tmp/rebuilt-report.pdf `
+    --markdown-output tmp/rebuilt-report.md
+```
+
+The report builder uses the published `analysis-final.json`, verification receipt
+and figures. The initial `analysis.json` is retained as an earlier derived summary;
+`analysis-final.json` adds descriptive timing/failure details without modifying raw
+measurements. Compressed evidence is distributed through Git separately from the
+source package. Bags remain local, with byte/hash inventory in the raw archive.

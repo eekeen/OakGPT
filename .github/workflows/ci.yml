@@ -50,8 +50,10 @@ jobs:
       - run: ruff format --check .
       - run: mypy
       - run: python scripts/verify_phase31_archive.py
+      - run: python scripts/verify_phase32_archive.py
       - run: python -m pytest -m "not hardware" --junitxml=test-results.xml
       - run: python -m build
+      - run: python scripts/verify_source_package.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:

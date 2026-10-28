@@ -1,6 +1,7 @@
 """Generate an IEEE-style report from measured summaries; no hand-entered results."""
 # ruff: noqa: E501
 
+import argparse
 import json
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -25,6 +26,30 @@ def content(data):
         if not t["within_0_5_sim_s"]
     ]
     unavailable = [s + "/" + t["case"] for s, t in faults if not t["eligible"]]
+    follow = data["active_payload_follow_up"]
+    held_stops = data["heldout_stopping"]
+    supplement = data["expiry_supplementary_v2"]
+    corrected_failures = [
+        f for f in data["navigation_failure_analysis"] if f["variant"] == "corrected_nav2"
+    ]
+    failure_text = []
+    for failure in corrected_failures:
+        latch = failure["first_latch"]
+        gap = failure["largest_observed_lease_gap"]
+        failure_text.append(
+            f"Corrected failure {failure['world']}: {failure['reason']}. "
+            + (
+                f"Native {latch['data']['reason']} latch at {latch['data']['sim_ns'] / 1e9:.3f} simulation seconds; "
+                if latch
+                else "No native latch observed; "
+            )
+            + (
+                f"largest leased-command observer gap {gap['seconds']:.6f} wall seconds. "
+                if gap
+                else "Lease-gap measurement unavailable. "
+            )
+            + "The trace retains requested and applied commands separately. This post hoc association does not identify callback scheduling, publisher blocking or transport delay as a unique cause."
+        )
     fault_lines = []
     for case in sorted({t["case"] for _, t in faults}):
         selected = [t for _, t in faults if t["case"] == case]
@@ -65,7 +90,7 @@ def content(data):
             [
                 "Source, parameters, middleware profile and actual installed Linux artifacts were hashed before held-out generation. Four fresh random start seeds were crossed with empty, center-block and offset-wall families, giving twelve worlds. Each variant receives station navigation, storage inspection and return-to-dock in a fresh simulator. World order is randomized and variant-first assignments are balanced 6/6. Failure aborts subsequent dispatch; all 36 planned requests per variant remain in denominators. No failed worlds are replaced and no held-out tuning is performed.",
                 "Acceptance requires at least 33/36 completed missions, at least 95% independently measured arrivals within 0.35 m, nonnegative sampled robot-circle clearance and bounded observed commands. Translation paths sum independent Gazebo pose increments; AMCL errors use bracketed ground-truth interpolation with a 0.15 s gap limit. Circle/axis-aligned-box clearance is a conservative geometric proxy, not a measured contact-sensor collision rate. Simulator contacts and physical collision rates were not instrumented.",
-                "Three formal sessions cover guard SIGKILL/SIGSTOP, command-bridge SIGKILL, watchdog SIGKILL, stale command, exact replay and simulator SIGSTOP/resume. Immediately before injection, independent translation must exceed 0.05 m/s and a fresh applied |vx| must exceed 0.01 m/s. The target is settling onset within 0.5 simulation seconds, sustained for 0.3 s below 0.01 m/s translation and 0.03 rad/s rotation. Missing preconditions are ineligible, never passes. Four-second observations end before cleanup; cleanup-induced stopping is excluded. Payload delivery requires a matched bridge and native rejection telemetry.",
+                "Three formal sessions cover guard SIGKILL/SIGSTOP, command-bridge SIGKILL, watchdog SIGKILL, stale command, exact replay and simulator SIGSTOP/resume. Immediately before injection, independent translation must exceed 0.05 m/s and a fresh applied |vx| must exceed 0.01 m/s. The target is settling onset within 0.5 simulation seconds, sustained for 0.3 s below 0.01 m/s translation and 0.03 rad/s rotation. Missing preconditions are ineligible, never passes. At least four seconds are observed after injection; exact cutoffs precede cleanup, whose induced stopping is excluded. Payload delivery requires a matched bridge and native rejection telemetry. The formal matrix captures startup-neutral payloads and injects their stale/replayed headers into an independently moving robot; nonzero captured payloads are assessed separately.",
                 "Linux CLOCK_BOOTTIME expires leases across wall-time suspension and simulation pauses. SIGSTOP of the simulator stops physics and tests expiry on resumption. It is not a physical host-sleep test. Motion onset is computed in simulation time; monotonic telemetry gaps are also retained. A 10,000-replicate paired cluster bootstrap (seed 32) resamples the four start seeds shared across layout families; its small-sample interval is descriptive and unstable. Repeated pose samples are not independent mission replications.",
             ],
         ),
@@ -76,8 +101,23 @@ def content(data):
                 f"Completion difference: {number(pair['completion_delta_percentage_points'], 1)} percentage points, bootstrap interval [{number(lo, 1)}, {number(hi, 1)}]. The corrected acceptance decisions are {json.dumps(b['acceptance'], sort_keys=True)}. Independent arrivals within 0.35 m: original {a['completed_arrival_within_0_35m']}/{a['completed']}, corrected {b['completed_arrival_within_0_35m']}/{b['completed']}. Minimum observed circle clearance: original {number(a['minimum_observed_circle_clearance_m'])} m, corrected {number(b['minimum_observed_circle_clearance_m'])} m.",
                 f"Median completed navigation simulation time: original {number(a['completed_navigation_sim_s']['median'])} s, corrected {number(b['completed_navigation_sim_s']['median'])} s. Median completed path: {number(a['completed_path_m']['median'])} versus {number(b['completed_path_m']['median'])} m. On {len(pair['common_completed'])} commonly completed requests, mean corrected-minus-original execution difference is {number(pair['common_completed_execution_delta_s']['mean'])} wall seconds and path difference {number(pair['common_completed_path_delta_m']['mean'])} m. These conditional comparisons have survivorship bias.",
                 f"Pooled sampled AMCL position RMSE: original {number(a['localization_position_rmse_m'])} m ({a['localization_matched']} matches), corrected {number(b['localization_position_rmse_m'])} m ({b['localization_matched']} matches). Sample count and mission duration differ, so pooled errors are not equally weighted per-world performance estimates. Per-world distributions and raw matches are retained.",
+                *failure_text,
+                "All original held-out deadline failures occur in block worlds, without a native expiry latch; final robot poses remain roughly 0.4 m from the target despite small commands and global paths ending at the requested destination. The corrected wall failure instead retains nonzero Nav2 requests while the native latch holds applied commands at zero. Its fail-closed response protects the command boundary at the cost of mission availability. The 200 ms lease remains unchanged; the observed transient timing gap is an unresolved reliability limitation, not a reason to relax the frozen criterion.",
                 f"Formal faults: {passed}/{len(eligible)} eligible trials meet the 0.5 s target; {len(unavailable)} are ineligible. Failures: {'; '.join(failed) or 'none among eligible trials'}. Ineligible: {'; '.join(unavailable) or 'none'}. The historical measured guard-crash pilot had nonzero motion and no settling in its four-second observation; it uses a different exploratory world and is an illustrative failure trace, not a matched efficacy estimate.",
                 *fault_lines,
+                f"Supplementary active-payload study: {follow['eligible']}/{follow['planned']} attempts capture nonzero payloads with valid moving-robot preconditions, and {follow['eligible_stopping_target_passes']} meet the settling target. This separately retained study dispatches during injector discovery; it is not a replacement for missing formal trials. Exact payload values, native rejection reasons and any failed captures remain in analysis.json.",
+                "Supplementary held-out guard-crash trials use the smallest held-out seed in every layout family, selected before those stopping runs. "
+                + "; ".join(
+                    f"{family}: {cohort['eligible']}/{cohort['planned']} eligible, {cohort['eligible_stopping_target_passes']} within target"
+                    for family, cohort in held_stops.items()
+                )
+                + ". They share one start seed and inject early in translation; they are not independent evidence about all navigation states or pure rotation.",
+                f"After the frozen studies, only measurement preparation changed: bounded trace-read recovery records transient DrvFS errors and still requires fresh motion, while active-payload preparation completes discovery/serialization before dispatch. The original freeze and failed attempts are unchanged. A second freeze verifies identical control binaries, ROS source and selected Nav2 parameters. Its supplementary cohort has {supplement['eligible']}/{supplement['planned']} valid injections, with {supplement['eligible_stopping_target_passes']} within the unchanged target. Active nonzero stale/replay payloads and native rejection telemetry are retained separately. Follow-ups for the two held-out strata lacking v1 injections are "
+                + "; ".join(
+                    f"{family}: {cohort['eligible']}/{cohort['planned']} eligible, {cohort['eligible_stopping_target_passes']} within target"
+                    for family, cohort in data["heldout_stopping_followup"].items()
+                )
+                + ". These are additional observations, not replacements for unavailable formal or v1 trials.",
                 "A zero command or native latch does not imply a canceled Nav2 goal. Raw action status is retained independently; an executing goal may remain while the downstream mechanism holds zero. Earlier watchdog settling at 0.72 s and a later 0.80 s observation, missing-motion guard tests, unconfirmed payload delivery and interrupted startups remain in the development archive and are not relabeled as successful formal trials.",
             ],
         ),
@@ -85,7 +125,7 @@ def content(data):
             "V. Verification and threats to validity",
             [
                 "verification.json and the accompanying verification document link actual Python, C++ release, ASan/UBSan, ROS, lint/type and packaging logs. Native sanitizers cover unit executables, not the complete vendor simulator. CPU CI covers Windows/Linux portability without downloading weights. Archive/member hashes preserve raw evidence, including failed pilots. Large bags remain outside Git with local inventories; previous reports and archives are unchanged.",
-                "The world set is small, static and generated from three authored geometry families. Starts are randomized but simulator physics, AMCL and controller scheduling are not fully deterministic. Controller and AMCL internal random streams are not pinned by the harness. Both variants share runtime fixes, so historical comparisons are descriptive. Exploratory development was extensive and some earlier trials experienced process contention. No general navigation improvement follows from development completion alone.",
+                "The world set is small, static and generated from three authored geometry families. Starts are randomized but simulator physics, AMCL and controller scheduling are not fully deterministic. Controller and AMCL internal random streams are not pinned by the harness. Both variants share runtime fixes, so historical comparisons are descriptive. The selected overlay changes controller, inflation, progress and action-acknowledgment parameters together; the held-out comparison does not identify an individual causal component. Exploratory development was extensive and some earlier trials experienced process contention. No general navigation improvement follows from development completion alone.",
                 "Ground truth is independent of ROS localization but shares the same Gazebo physics and clock. Sampled motion can miss between-sample excursions. Circle clearance is not contact detection. Simulation-clock settling during a suspended process cannot measure physical coast-down. Full Windows host suspension, WSL VM suspension, compound failures, malicious trusted publishers, dynamic crowds, real motors and physical stopping distances remain unverified. The native plugin shares the simulator process and provides no independent hardware interlock. No real-world safety claim is made.",
             ],
         ),
@@ -112,19 +152,44 @@ def main():
     from reportlab.lib import colors
     from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY
     from reportlab.lib.styles import ParagraphStyle
-    from reportlab.platypus import BaseDocTemplate, Frame, Image, PageTemplate, Paragraph, Spacer
+    from reportlab.platypus import (
+        BaseDocTemplate,
+        Frame,
+        Image,
+        KeepTogether,
+        NextPageTemplate,
+        PageBreak,
+        PageTemplate,
+        Paragraph,
+        Spacer,
+    )
 
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--output", type=Path, default=Path("output/pdf/phase32-navigation-expiry-report.pdf")
+    )
+    parser.add_argument("--markdown-output", type=Path, default=Path("reports/phase32/report.md"))
+    args = parser.parse_args()
     root = Path("reports/phase32")
-    data = json.loads((root / "analysis.json").read_text())
+    data = json.loads((root / "analysis-final.json").read_text())
     sections = content(data)
+    verification = json.loads((root / "verification.json").read_text())
+    for heading, paragraphs in sections:
+        if heading.startswith("V. Verification"):
+            paragraphs.insert(
+                1,
+                f"The isolated CPU suite passes {verification['python']['passed']} tests with {verification['python']['skipped']} opt-in hardware skips. C++ authorization release and ASan/UBSan builds each pass {verification['cpp']['release_checks']} checks, with {verification['cpp']['oracle_cases']} frozen-oracle cases. Native expiry release and sanitizer builds each pass {verification['expiry']['core_checks']} core checks and {verification['expiry']['gazebo_message_checks']} Gazebo-message checks. ROS package tests pass {verification['ros']['tests']}/{verification['ros']['tests']}; the synthetic protocol fixture passes all {verification['protocol']['cases']} assertions/cases. Ruff, formatting, strict mypy, dependency consistency and sdist/wheel checks pass. Hardware opt-in skips are not GPU test successes.",
+            )
     title = "OakGPT Phase 3.2: Navigation Reliability and Independent Command Expiry"
     markdown = ["# " + title, "", "Measured simulation study; IEEE-style technical report.", ""]
     for heading, paragraphs in sections:
         markdown += ["## " + heading, "", *[p + "\n" for p in paragraphs]]
-    (root / "report.md").write_text("\n".join(markdown), encoding="utf-8", newline="\n")
-    output = Path("output/pdf/phase32-navigation-expiry-report.pdf")
-    if output.exists():
-        raise FileExistsError(output)
+    output = args.output
+    for path in [output, args.markdown_output]:
+        if path.exists():
+            raise FileExistsError(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+    args.markdown_output.write_text("\n".join(markdown), encoding="utf-8", newline="\n")
     normal = ParagraphStyle(
         "body32",
         fontName="Times-Roman",
@@ -147,8 +212,8 @@ def main():
         "title32",
         parent=normal,
         fontName="Times-Bold",
-        fontSize=13,
-        leading=15,
+        fontSize=15,
+        leading=17,
         alignment=TA_CENTER,
         spaceAfter=12,
     )
@@ -186,48 +251,119 @@ def main():
         )
         for index in range(2)
     ]
-    doc.addPageTemplates(PageTemplate(id="two-columns", frames=frames, onPage=footer))
-    story = [
-        Paragraph(escape(title), title_style),
-        Paragraph("Reproducible local robotics study - October 2026", caption),
-        Spacer(1, 8),
+    first_frames = [
+        Frame(
+            margin + index * (column + gap),
+            margin,
+            column,
+            height - 2 * margin - 70,
+            leftPadding=0,
+            rightPadding=0,
+            topPadding=0,
+            bottomPadding=0,
+        )
+        for index in range(2)
     ]
+
+    def first_page(canvas, document):
+        footer(canvas, document)
+        paragraph = Paragraph(escape(title), title_style)
+        _, title_height = paragraph.wrap(width - 2 * margin, 60)
+        paragraph.drawOn(canvas, margin, height - margin - title_height)
+        canvas.setFont("Times-Roman", 9)
+        canvas.drawCentredString(
+            width / 2, 701, "OakGPT Research | measured simulation study | October 2026"
+        )
+
+    wide = Frame(
+        margin,
+        margin,
+        width - 2 * margin,
+        height - 2 * margin,
+        leftPadding=0,
+        rightPadding=0,
+        topPadding=0,
+        bottomPadding=0,
+    )
+    doc.addPageTemplates(
+        [
+            PageTemplate(
+                id="first",
+                frames=first_frames,
+                onPage=first_page,
+                autoNextPageTemplate="two-columns",
+            ),
+            PageTemplate(id="two-columns", frames=frames, onPage=footer),
+            PageTemplate(id="figures", frames=[wide], onPage=footer),
+        ]
+    )
+    story = []
     for heading, paragraphs in sections:
         story.append(Paragraph(escape(heading), heading_style))
         for paragraph in paragraphs:
             story.append(Paragraph(escape(paragraph), normal))
-        figures = {
-            "II. Diagnosis and implementation": [
-                (
-                    "original-failure",
-                    "Historical center-block failure: recorded costmap, path and independent trajectory.",
-                )
-            ],
-            "IV. Measured results": [
-                (
-                    "heldout-comparison",
-                    "Matched held-out completion and conditional travel metrics.",
-                ),
-                (
-                    "heldout-trajectories",
-                    "Prespecified smallest held-out seed, across three world families.",
-                ),
-                ("localization-error", "Per-world AMCL errors against independent sampled truth."),
-                (
-                    "fault-settling",
-                    "Formal motion-settling observations and unchanged 0.5 s criterion.",
-                ),
-                (
-                    "guard-crash-speed",
-                    "Illustrative actual-motion traces; legacy and new worlds differ.",
-                ),
-            ],
-        }
-        for name, text in figures.get(heading, []):
+    # Wide IEEE-style figure appendix preserves the original 8 pt plot labels.
+    story += [
+        NextPageTemplate("figures"),
+        PageBreak(),
+        Paragraph("Appendix: recorded measurements", heading_style),
+    ]
+    figures = {
+        "II. Diagnosis and implementation": [
+            (
+                "architecture",
+                "Implemented separation of authorization, navigation and downstream expiry.",
+            ),
+            (
+                "original-failure",
+                "Historical center-block failure: recorded costmap, path and independent trajectory.",
+            ),
+        ],
+        "IV. Measured results": [
+            (
+                "heldout-comparison",
+                "Matched held-out completion and conditional travel metrics.",
+            ),
+            (
+                "heldout-trajectories",
+                "Prespecified smallest held-out seed, across three world families.",
+            ),
+            (
+                "corrected-failure",
+                "Post hoc first canonical corrected failure; requested and applied commands are separate observations.",
+            ),
+            ("localization-error", "Per-world AMCL errors against independent sampled truth."),
+            (
+                "localization-error-distribution",
+                "Pooled sampled position errors; temporal correlation precludes treating matches as independent trials.",
+            ),
+            (
+                "fault-settling",
+                "Formal motion settling and unchanged 0.5 s criterion; unavailable markers above the axis have no assigned latency.",
+            ),
+            (
+                "guard-crash-speed",
+                "Illustrative actual-motion traces; legacy and new worlds differ.",
+            ),
+        ],
+    }
+    figure_number = 0
+    for values in figures.values():
+        for name, text in values:
+            figure_number += 1
             image = Image(str(root / "figures" / (name + ".png")))
-            image.drawHeight *= column / image.drawWidth
-            image.drawWidth = column
-            story.extend([Spacer(1, 6), image, Paragraph(escape(text), caption), Spacer(1, 8)])
+            image.drawHeight *= (width - 2 * margin) / image.drawWidth
+            image.drawWidth = width - 2 * margin
+            story.append(
+                KeepTogether(
+                    [
+                        Spacer(1, 6),
+                        image,
+                        Paragraph(escape(f"Fig. {figure_number}. {text}"), caption),
+                        Spacer(1, 8),
+                    ]
+                )
+            )
     doc.build(story)
     print(output)
 

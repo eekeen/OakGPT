@@ -46,3 +46,24 @@ def test_unattempted_missions_remain_in_completion_denominator(tmp_path):
     assert result["all_completed_worlds"] == 0
     assert result["completed_arrival_within_0_35m"] == 1
     assert not result["acceptance"]["33_of_36_completed"]
+
+
+def test_partial_fault_result_is_retained_without_claiming_a_motion_measurement(tmp_path):
+    spec = importlib.util.spec_from_file_location("phase32_analysis", "scripts/analyze_phase32.py")
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    case = tmp_path / "watchdog_crash"
+    case.mkdir()
+    (case / "result.json").write_text(
+        json.dumps(
+            {
+                "injection": {"before_monotonic_ns": 10},
+                "environment_failure": "Recorder unavailable after injection",
+            }
+        )
+    )
+    result = module.fault_cohort(tmp_path)
+    assert result["planned"] == 1 and result["eligible"] == 0
+    assert result["eligible_stopping_target_passes"] == 0
+    assert result["trials"][0]["environment_failure"] == "Recorder unavailable after injection"

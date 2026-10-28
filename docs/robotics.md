@@ -5,6 +5,11 @@ ROS topic name, executable path, or motor setpoint. The planner proposes JSON; a
 independent C++ executable decides authorization; a separate ROS node executes only
 resolved Nav2 actions. This is an engineering demonstrator, not a certified safety system.
 
+This page retains the Phase 3 manual interface. For the Phase 3.1 velocity guard,
+publisher audit and ground-truth recorder, use the supervised instrumented launch in
+the [Phase 3.1 guide](phase31-reproduction.md). The original manual simulation launch
+does not insert the separate velocity guard.
+
 ## Installation
 
 Keep Windows inference in the existing Python environment. ROS and Gazebo run in a

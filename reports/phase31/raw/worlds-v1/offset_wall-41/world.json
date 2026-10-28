@@ -1,0 +1,26 @@
+{
+  "layout": "offset_wall",
+  "seed": 41,
+  "start": {
+    "x": -0.1737958620008457,
+    "y": -0.10771232547580994,
+    "yaw": -0.20037796541151887
+  },
+  "amcl_initial_error": {
+    "x": 0.03,
+    "y": -0.02,
+    "yaw": 0.02
+  },
+  "obstacles": [
+    {
+      "x": 0.4,
+      "y": -0.4,
+      "sx": 0.12,
+      "sy": 1.0
+    }
+  ],
+  "truth": "Gazebo model world pose, distinct from wheel odometry and AMCL",
+  "map_world_alignment": "identity by construction",
+  "physics_step_s": 0.01,
+  "truth_frequency_hz": 30
+}

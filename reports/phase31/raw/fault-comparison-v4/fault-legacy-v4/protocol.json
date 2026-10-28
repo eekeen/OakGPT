@@ -1,0 +1,35 @@
+{
+  "runtime": "legacy",
+  "cases": [
+    "control",
+    "lost_lidar",
+    "stale_lidar",
+    "delayed_lidar",
+    "future_lidar",
+    "lost_tf",
+    "future_tf",
+    "action_abort",
+    "executor_crash",
+    "watchdog_crash",
+    "heartbeat_interruption",
+    "late_goal",
+    "mission_expiration",
+    "replay",
+    "corrupt_json",
+    "duplicate_key",
+    "unsafe_omission",
+    "oversized_payload",
+    "delayed_delivery",
+    "spool_loss",
+    "drvfs_detach"
+  ],
+  "ros_domain": "84",
+  "fixture_sha256": "e59c0cc3060beed27240905da49cffb03a69f32e341b8012f385bcef0e166714",
+  "validator_sha256": "b66f081c68cd4275229fc87a030d9b209498a1e84ccb9605483af730c1009ae2",
+  "policy_sha256": "86829578c1dc3d9a66696317fb077ec9ffe5f27b5e4317e8b9d7459fe32f6b05",
+  "runtime_source_sha256": {
+    "executor.py": "b01a1a8f946bca9d75c4d388ef1641f870b5c8b00c1eb34d0d512532f9d767ce",
+    "watchdog.py": "efb2af5311a6380d91cc169f7bc7c961d1632e80adec1cf756b6a1c463413e86",
+    "__init__.py": "44101ff48ade12c5716387a5681666b8bd91226b3e9d86162933bf9329fd4e40"
+  }
+}

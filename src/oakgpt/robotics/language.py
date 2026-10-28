@@ -99,6 +99,7 @@ def language_summary(records: list[dict[str, Any]]) -> dict[str, Any]:
         "missions_completed": sum(
             r.get("execution", {}).get("status") == "completed" for r in records
         ),
+        "execution_unavailable": sum("execution_unavailable" in r for r in records),
     }
 
 
@@ -125,6 +126,7 @@ def run_language(config: Path) -> dict[str, Any]:
     )
 
     def evaluate(name: str, propose: Any) -> None:
+        execution_available = True
         for row in rows:
             print(f"{name}: {row['id']}", flush=True)
             record = {**row, "planner": name, "authorized": False, "interpretation_correct": False}
@@ -154,22 +156,37 @@ def run_language(config: Path) -> dict[str, Any]:
                         authorized=decision["accepted"],
                     )
                     if decision["accepted"] and spec.get("execute", False):
-                        spool = resolve(spec["spool"])
-                        reset = envelope(
-                            "Go to dock",
-                            baseline("Go to dock"),
-                            receiver_now_ms=receiver_clock(spec["clock_command"]),
-                        )
-                        reset_result = wait_mission(reset, spool)
-                        record["reset"] = reset_result
-                        if reset_result["status"] != "completed":
-                            raise RuntimeError("Language-study environment reset failed")
-                        mission = envelope(
-                            row["instruction"],
-                            proposal,
-                            receiver_now_ms=receiver_clock(spec["clock_command"]),
-                        )
-                        record["execution"] = wait_mission(mission, spool)
+                        if not execution_available:
+                            record["execution_unavailable"] = (
+                                "Earlier navigation failure; no automatic recovery"
+                            )
+                        else:
+                            spool = resolve(spec["spool"])
+                            reset = envelope(
+                                "Go to dock",
+                                baseline("Go to dock"),
+                                receiver_now_ms=receiver_clock(spec["clock_command"]),
+                            )
+                            reset_result = wait_mission(reset, spool)
+                            record["reset"] = reset_result
+                            if reset_result["status"] != "completed":
+                                if not spec.get(
+                                    "continue_interpretation_on_execution_failure", False
+                                ):
+                                    raise RuntimeError("Language-study environment reset failed")
+                                record["execution_unavailable"] = (
+                                    "Excluded environment reset failed"
+                                )
+                                execution_available = False
+                            else:
+                                mission = envelope(
+                                    row["instruction"],
+                                    proposal,
+                                    receiver_now_ms=receiver_clock(spec["clock_command"]),
+                                )
+                                record["execution"] = wait_mission(mission, spool)
+                                if record["execution"]["status"] != "completed":
+                                    execution_available = False
                 record["disposition"] = (
                     "authorized"
                     if record["authorized"]

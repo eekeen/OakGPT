@@ -1,0 +1,42 @@
+{
+  "id": "v2-multistep-08",
+  "category": "multistep",
+  "instruction": "Carry out the usual lidar inspection at both the dock and station, in that order.",
+  "expected_steps": [
+    {
+      "action": "navigate",
+      "destination": "dock",
+      "duration_s": 0
+    },
+    {
+      "action": "inspect",
+      "destination": "dock",
+      "duration_s": 2
+    },
+    {
+      "action": "navigate",
+      "destination": "station",
+      "duration_s": 0
+    },
+    {
+      "action": "inspect",
+      "destination": "station",
+      "duration_s": 2
+    }
+  ],
+  "expected_interpretation": "accept",
+  "authorization": "operator_confirmation",
+  "rationale": "Interpretable intent; original instruction is outside executable grammar",
+  "planner": "baseline",
+  "authorized": false,
+  "interpretation_correct": false,
+  "raw_output": "{\"schema_version\": 1, \"decision\": \"reject\", \"reason\": \"unsupported\", \"steps\": []}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "reject",
+    "reason": "unsupported",
+    "steps": []
+  },
+  "inference_latency_s": 3.4899916499853134e-05,
+  "disposition": "rejected"
+}

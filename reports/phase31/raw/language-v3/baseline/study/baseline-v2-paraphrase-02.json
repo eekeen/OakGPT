@@ -1,0 +1,27 @@
+{
+  "id": "v2-paraphrase-02",
+  "category": "paraphrase",
+  "instruction": "The storage bay is where I need you to go.",
+  "expected_steps": [
+    {
+      "action": "navigate",
+      "destination": "storage",
+      "duration_s": 0
+    }
+  ],
+  "expected_interpretation": "accept",
+  "authorization": "operator_confirmation",
+  "rationale": "Interpretable intent; original instruction is outside executable grammar",
+  "planner": "baseline",
+  "authorized": false,
+  "interpretation_correct": false,
+  "raw_output": "{\"schema_version\": 1, \"decision\": \"reject\", \"reason\": \"unsupported\", \"steps\": []}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "reject",
+    "reason": "unsupported",
+    "steps": []
+  },
+  "inference_latency_s": 2.7399975806474686e-05,
+  "disposition": "rejected"
+}

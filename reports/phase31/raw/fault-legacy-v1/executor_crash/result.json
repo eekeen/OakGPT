@@ -1,0 +1,162 @@
+{
+  "runtime": "phase3-final",
+  "case": "executor_crash",
+  "fixture": "synthetic ROS sensors and Nav2 action fixture; no velocity publisher",
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-a16c14f2b16f4d06",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793133107556,
+    "expires_at_ms": 1793133167556,
+    "instruction": "Go to station",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "station",
+        "duration_s": 0
+      }
+    ]
+  },
+  "raw_payload": "{\"schema_version\": 1, \"mission_id\": \"m-a16c14f2b16f4d06\", \"policy_id\": \"oak-room-v1\", \"issued_at_ms\": 1793133107556, \"expires_at_ms\": 1793133167556, \"instruction\": \"Go to station\", \"steps\": [{\"action\": \"navigate\", \"destination\": \"station\", \"duration_s\": 0}]}",
+  "result": null,
+  "first_result": null,
+  "server_events": [
+    {
+      "event": "requested",
+      "monotonic": 937507.471836289
+    },
+    {
+      "event": "executing",
+      "monotonic": 937507.473123739
+    },
+    {
+      "event": "canceled",
+      "monotonic": 937509.493038019
+    }
+  ],
+  "mission_events": [
+    {
+      "event": "accepted",
+      "mission_id": "m-a16c14f2b16f4d06",
+      "wall_time_ns": 1793133109088540080,
+      "sim_time_ns": 1003700792890
+    },
+    {
+      "event": "watchdog_armed",
+      "mission_id": "m-a16c14f2b16f4d06",
+      "wall_time_ns": 1793133109090177810,
+      "sim_time_ns": 1004000675769
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-a16c14f2b16f4d06",
+      "wall_time_ns": 1793133109096878400,
+      "sim_time_ns": 1004000675769,
+      "index": 0,
+      "action": "navigate"
+    }
+  ],
+  "watchdog_events": [
+    {
+      "event": "startup_cancel",
+      "wall_time_ns": 1793133106109080630,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133111208709680,
+      "canceling": 1
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133111408733510,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133111608746000,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133111808690990,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133112008702040,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133112208723800,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133112408747630,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133112608742390,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133112808685940,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133113008743970,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133113208686530,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133113408669410,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133113608647700,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133113808666220,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793133114008713450,
+      "canceling": 0
+    }
+  ],
+  "heartbeats": [
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-a16c14f2b16f4d06",
+      "expires_at_ms": 1793133167556
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-a16c14f2b16f4d06",
+      "expires_at_ms": 1793133167556
+    }
+  ],
+  "active_goal_after_observation": false,
+  "goal_requests": 1,
+  "fault_at_monotonic": 937507.475727889,
+  "cancel_after_fault_s": 2.0173101300606504,
+  "detected_or_rejected": true,
+  "restart_faulted": false,
+  "observation_window_after_fault_s": 5
+}

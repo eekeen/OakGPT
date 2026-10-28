@@ -1,0 +1,81 @@
+{
+  "id": "valid-22",
+  "category": "valid",
+  "instruction": "Visit storage and then inspect dock",
+  "expected_accept": true,
+  "expected_steps": [
+    {
+      "action": "navigate",
+      "destination": "storage",
+      "duration_s": 0
+    },
+    {
+      "action": "navigate",
+      "destination": "dock",
+      "duration_s": 0
+    },
+    {
+      "action": "inspect",
+      "destination": "dock",
+      "duration_s": 2
+    }
+  ],
+  "planner": "Q4_K_M",
+  "accepted": false,
+  "execution": null,
+  "validation_latency_s": 0.13898869999684393,
+  "raw_output": "{\n  \"schema_version\": 1,\n  \"decision\": \"accept\",\n  \"reason\": \"ok\",\n  \"steps\": [\n    {\n      \"action\": \"navigate\",\n      \"destination\": \"storage\",\n      \"duration_s\": 0\n    },\n    {\n      \"action\": \"inspect\",\n      \"destination\": \"storage\",\n      \"duration_s\": 2\n    },\n    {\n      \"action\": \"navigate\",\n      \"destination\": \"dock\",\n      \"duration_s\": 0\n    }\n  ]\n}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "accept",
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "storage",
+        "duration_s": 0
+      },
+      {
+        "action": "inspect",
+        "destination": "storage",
+        "duration_s": 2
+      },
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  },
+  "schema_valid": true,
+  "inference_latency_s": 1.0027658001054078,
+  "validation": {
+    "accepted": false,
+    "reason": "intent_mismatch"
+  },
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-8b3ddecff944445c",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793131834386,
+    "expires_at_ms": 1793132014386,
+    "instruction": "Visit storage and then inspect dock",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "storage",
+        "duration_s": 0
+      },
+      {
+        "action": "inspect",
+        "destination": "storage",
+        "duration_s": 2
+      },
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  }
+}

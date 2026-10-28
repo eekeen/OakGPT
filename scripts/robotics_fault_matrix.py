@@ -8,6 +8,7 @@ import argparse
 import hashlib
 import json
 import os
+import shutil
 import signal
 import subprocess
 import sys
@@ -56,6 +57,11 @@ def case(args, name):
     directory = args.output / name
     directory.mkdir(parents=True)
     spool = directory / "spool"
+    if name == "spool_loss":
+        # NTFS/DrvFS can deny renaming a directory containing an open SQLite ledger.
+        # Isolate namespace-loss behavior on native Linux; DrvFS detach is a separate case.
+        spool = Path("/tmp") / ("oak-phase31-spool-" + uuid.uuid4().hex)
+    offline_spool = spool.with_name(spool.name + "-offline")
     (spool / "pending").mkdir(parents=True)
     receiver_spool = spool
     drive_alias = None
@@ -222,7 +228,12 @@ def case(args, name):
     try:
         watchdog = launch("watchdog")
         receiver = launch("executor")
-        time.sleep(2.5)
+        startup_deadline = time.monotonic() + 8
+        while not heartbeats and time.monotonic() < startup_deadline:
+            time.sleep(0.05)
+        if not heartbeats:
+            raise TimeoutError("Receiver did not publish its initial heartbeat")
+        time.sleep(0.5)  # Permit TF/scan callbacks after the first clock-driven heartbeat.
         now = time.time_ns() // 1000000
         identity = "m-" + uuid.uuid4().hex[:16]
         mission = {
@@ -231,7 +242,13 @@ def case(args, name):
             "policy_id": "oak-room-v1",
             "issued_at_ms": now,
             "expires_at_ms": now
-            + (1000 if name in ["mission_expiration", "delayed_delivery"] else 60000),
+            + (
+                2000
+                if name == "mission_expiration"
+                else 1000
+                if name == "delayed_delivery"
+                else 60000
+            ),
             "instruction": "Go to station",
             "steps": [{"action": "navigate", "destination": "station", "duration_s": 0}],
         }
@@ -251,6 +268,7 @@ def case(args, name):
         deadline = time.monotonic() + (14 if name == "late_goal" else 12)
         after_fault = None
         restarted = False
+        restart_deadline = None
         while time.monotonic() < deadline:
             path = spool / "results" / (identity + ".json")
             if path.exists():
@@ -278,7 +296,7 @@ def case(args, name):
                     os.kill(receiver.pid, signal.SIGSTOP)
                     suspended = True
                 elif name == "spool_loss":
-                    spool.rename(directory / "spool-offline")
+                    spool.rename(offline_spool)
                     renamed = True
                 elif name == "drvfs_detach":
                     subprocess.run(["umount", "-l", str(drive_alias)], check=True)
@@ -298,6 +316,7 @@ def case(args, name):
             if name == "executor_crash" and state["canceled"] and not restarted:
                 launch("executor")
                 restarted = True
+                restart_deadline = time.monotonic() + 5
                 time.sleep(0.5)
             if result and name not in ["late_goal", "replay"]:
                 break
@@ -323,7 +342,16 @@ def case(args, name):
             ):
                 time.sleep(0.3)
                 break
-            if after_fault and time.monotonic() > after_fault and name != "late_goal":
+            if (
+                after_fault
+                and time.monotonic() > after_fault
+                and name != "late_goal"
+                and not (
+                    name == "executor_crash"
+                    and restart_deadline
+                    and time.monotonic() < restart_deadline
+                )
+            ):
                 break
             time.sleep(0.05)
         active = state["active"]
@@ -334,6 +362,7 @@ def case(args, name):
             "fixture": "synthetic ROS sensors and Nav2 action fixture; no velocity publisher",
             "mission": mission,
             "raw_payload": raw,
+            "spool_path": str(spool),
             "result": result,
             "first_result": first_result,
             "server_events": server_events.copy(),
@@ -358,7 +387,7 @@ def case(args, name):
     finally:
         state["cleanup"] = True
         if renamed:
-            (directory / "spool-offline").rename(spool)
+            offline_spool.rename(spool)
         if suspended and receiver.poll() is None:
             os.kill(receiver.pid, signal.SIGCONT)
         time.sleep(0.2)
@@ -373,6 +402,8 @@ def case(args, name):
                 p.wait(timeout=3)
         for log in logs:
             log.close()
+        if name == "spool_loss":
+            shutil.copytree(spool, directory / "native-spool-archive")
         executor.shutdown(timeout_sec=2)
         worker.join(timeout=2)
         server.destroy()
@@ -423,7 +454,14 @@ def main():
     try:
         for name in args.cases:
             print(f"{args.runtime}: {name}", flush=True)
-            records.append(case(args, name))
+            try:
+                records.append(case(args, name))
+            except (OSError, RuntimeError, TimeoutError) as error:
+                failed = {"case": name, "runtime": args.runtime, "injection_error": str(error)}
+                (args.output / name / "injection_failure.json").write_text(
+                    json.dumps(failed, indent=2)
+                )
+                records.append(failed)
             time.sleep(0.3)
     finally:
         (args.output / "matrix.json").write_text(
@@ -434,6 +472,9 @@ def main():
     failures = []
     for record in records:
         name = record["case"]
+        if record.get("injection_error"):
+            failures.append(name + ": injection unavailable")
+            continue
         expected = (
             (record["result"] and record["result"]["status"] == "completed")
             if name == "control"

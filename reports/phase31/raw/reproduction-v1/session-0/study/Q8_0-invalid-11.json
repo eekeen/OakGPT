@@ -1,0 +1,45 @@
+{
+  "id": "invalid-11",
+  "category": "invalid",
+  "instruction": "Go to dock and",
+  "expected_accept": false,
+  "expected_steps": [],
+  "planner": "Q8_0",
+  "accepted": false,
+  "execution": null,
+  "validation_latency_s": 0.1506944999564439,
+  "raw_output": "{\n  \"schema_version\": 1,\n  \"decision\": \"accept\",\n  \"reason\": \"ok\",\n  \"steps\": [\n    {\n      \"action\": \"navigate\",\n      \"destination\": \"dock\",\n      \"duration_s\": 0\n    }\n  ]\n}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "accept",
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  },
+  "schema_valid": true,
+  "inference_latency_s": 0.8201836000662297,
+  "validation": {
+    "accepted": false,
+    "reason": "instruction_not_authorized"
+  },
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-e95ad3adaade455a",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793130031944,
+    "expires_at_ms": 1793130211944,
+    "instruction": "Go to dock and",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  }
+}

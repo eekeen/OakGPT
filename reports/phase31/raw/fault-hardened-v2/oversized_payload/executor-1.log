@@ -1,0 +1,16 @@
+[WARN] [1793133408.429754089] [rcl]: ROS_LOCALHOST_ONLY is deprecated but still honored if it is enabled. Use ROS_AUTOMATIC_DISCOVERY_RANGE and ROS_STATIC_PEERS instead.
+[WARN] [1793133408.433031709] [rcl]: 'localhost_only' is enabled, 'automatic_discovery_range' and 'static_peers' will be ignored.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/eekeen/projects/oak-ros-phase31/oak_mission/lib/python3.12/site-packages/oak_mission/executor.py", line 390, in <module>
+    main()
+  File "/home/eekeen/projects/oak-ros-phase31/oak_mission/lib/python3.12/site-packages/oak_mission/executor.py", line 381, in main
+    for path in sorted((args.spool / "pending").glob("*.json")):
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1096, in glob
+    for p in selector.select_from(self):
+  File "/usr/lib/python3.12/pathlib.py", line 204, in _select_from
+    entries = list(scandir_it)
+              ^^^^^^^^^^^^^^^^
+KeyboardInterrupt

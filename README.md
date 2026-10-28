@@ -139,6 +139,13 @@ Nav2 and a fully local Gazebo Harmonic room. It includes 60 frozen scenarios and
 actual simulation evidence. Start with [robotics setup and safety contract](docs/robotics.md)
 and [Phase 3 verification](docs/phase3-verification.md). ROS is optional for CPU development.
 
+Phase 3.1 adds health-aware execution, a separate velocity guard, systematic fault
+comparison, independent Gazebo ground truth and a human-reviewed linguistic fixture.
+See the [reproduction guide](docs/phase31-reproduction.md) and
+[verification summary](docs/phase31-verification.md), with the
+[measured reliability report](reports/phase31/report.md). The original reports and
+experiments remain intact; missing or failed executions are retained explicitly.
+
 | Area | Documentation |
 | --- | --- |
 | Implementation and interfaces | [Architecture](docs/architecture.md) |

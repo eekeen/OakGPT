@@ -1,0 +1,64 @@
+﻿[
+    {
+        "log_sha256":  "21d79a9c23d89a2cc34d3c4a0299a8e5b2c5b26de78a14ae3d194f157c4ab49f",
+        "command":  [
+                        ".venv\\Scripts\\python.exe",
+                        "-m",
+                        "pytest",
+                        "--junitxml",
+                        "runs/phase31/verification-v1/python/pytest.xml"
+                    ],
+        "name":  "pytest",
+        "exit_code":  0
+    },
+    {
+        "log_sha256":  "af352a86840ad0af3d37ea0d9197f868363a6dac6b1c2ef5d2722f6b41d2d9af",
+        "command":  [
+                        ".venv\\Scripts\\ruff.exe",
+                        "check",
+                        "."
+                    ],
+        "name":  "ruff",
+        "exit_code":  0
+    },
+    {
+        "log_sha256":  "2f6f54f54923021706d4f125d717943504623ba5ee25fc91b153094f9f3fb3a2",
+        "command":  [
+                        ".venv\\Scripts\\ruff.exe",
+                        "format",
+                        "--check",
+                        "."
+                    ],
+        "name":  "format",
+        "exit_code":  0
+    },
+    {
+        "log_sha256":  "74896560feb6e493a22244d7effa88dee6e77a1e829e6a8506355d42a2c34efa",
+        "command":  [
+                        ".venv\\Scripts\\mypy.exe"
+                    ],
+        "name":  "mypy",
+        "exit_code":  0
+    },
+    {
+        "log_sha256":  "5d20b3b6503afd91ac078dab5f31882e969131cd0496048897a78ff04bb41960",
+        "command":  [
+                        ".venv\\Scripts\\python.exe",
+                        "-m",
+                        "build"
+                    ],
+        "name":  "packaging",
+        "exit_code":  0
+    },
+    {
+        "log_sha256":  "b6b55b24aa859657c3a8dce440f99fad4bebe16c80f5c827faafa70f5f1a77cf",
+        "command":  [
+                        ".venv\\Scripts\\python.exe",
+                        "-m",
+                        "pip",
+                        "check"
+                    ],
+        "name":  "pip-check",
+        "exit_code":  1
+    }
+]

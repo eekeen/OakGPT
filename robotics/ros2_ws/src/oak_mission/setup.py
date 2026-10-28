@@ -6,6 +6,7 @@ setup(
     name="oak_mission",
     version="0.1.0",
     packages=["oak_mission"],
+    tests_require=["pytest"],
     data_files=[
         ("share/ament_index/resource_index/packages", ["resource/oak_mission"]),
         ("share/oak_mission", ["package.xml"]),

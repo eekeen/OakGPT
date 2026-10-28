@@ -1,0 +1,150 @@
+{
+  "runtime": "legacy",
+  "case": "executor_crash",
+  "fixture": "synthetic ROS sensors and Nav2 action fixture; no velocity publisher",
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-71ee91f0dad443c6",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793188724484,
+    "expires_at_ms": 1793188784484,
+    "instruction": "Go to station",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "station",
+        "duration_s": 0
+      }
+    ]
+  },
+  "raw_payload": "{\"schema_version\": 1, \"mission_id\": \"m-71ee91f0dad443c6\", \"policy_id\": \"oak-room-v1\", \"issued_at_ms\": 1793188724484, \"expires_at_ms\": 1793188784484, \"instruction\": \"Go to station\", \"steps\": [{\"action\": \"navigate\", \"destination\": \"station\", \"duration_s\": 0}]}",
+  "spool_path": "/mnt/d/Projects/OakGPT/runs/phase31/fault-comparison-v4/fault-legacy-v4/executor_crash/spool",
+  "result": null,
+  "first_result": null,
+  "server_events": [
+    {
+      "event": "requested",
+      "monotonic": 987561.588595939
+    },
+    {
+      "event": "executing",
+      "monotonic": 987561.589313779
+    },
+    {
+      "event": "canceled",
+      "monotonic": 987563.606837209
+    }
+  ],
+  "mission_events": [
+    {
+      "event": "accepted",
+      "mission_id": "m-71ee91f0dad443c6",
+      "wall_time_ns": 1793188724554290513,
+      "sim_time_ns": 1000950570459
+    },
+    {
+      "event": "watchdog_armed",
+      "mission_id": "m-71ee91f0dad443c6",
+      "wall_time_ns": 1793188724556504063,
+      "sim_time_ns": 1000950570459
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-71ee91f0dad443c6",
+      "wall_time_ns": 1793188724561841153,
+      "sim_time_ns": 1000950570459,
+      "index": 0,
+      "action": "navigate"
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-71ee91f0dad443c6",
+      "wall_time_ns": 1793188724564563113,
+      "sim_time_ns": 1000950570459,
+      "distance_remaining": 0.800000011920929
+    }
+  ],
+  "watchdog_events": [
+    {
+      "event": "startup_cancel",
+      "wall_time_ns": 1793188724056522473,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793188726656429063,
+      "canceling": 1
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793188726856563773,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793188727056464213,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793188727256433053,
+      "canceling": 0
+    },
+    {
+      "event": "watchdog_stop",
+      "wall_time_ns": 1793188727456522043,
+      "canceling": 0
+    }
+  ],
+  "heartbeats": [
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-71ee91f0dad443c6",
+      "expires_at_ms": 1793188784484
+    },
+    {
+      "active": false,
+      "faulted": true,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": false,
+      "faulted": true,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": false,
+      "faulted": true,
+      "mission_id": null,
+      "expires_at_ms": 0
+    }
+  ],
+  "active_goal_after_observation": false,
+  "goal_requests": 1,
+  "fault_at_monotonic": 987561.641170969,
+  "cancel_after_fault_s": 1.9656662399647757,
+  "detected_or_rejected": true,
+  "restart_faulted": true,
+  "observation_window_after_fault_s": 5
+}

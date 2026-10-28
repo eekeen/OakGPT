@@ -1,0 +1,32 @@
+{
+  "id": "v2-paraphrase-08",
+  "category": "paraphrase",
+  "instruction": "Please perform our standard lidar inspection at the storage bay.",
+  "expected_steps": [
+    {
+      "action": "navigate",
+      "destination": "storage",
+      "duration_s": 0
+    },
+    {
+      "action": "inspect",
+      "destination": "storage",
+      "duration_s": 2
+    }
+  ],
+  "expected_interpretation": "accept",
+  "authorization": "operator_confirmation",
+  "rationale": "Interpretable intent; original instruction is outside executable grammar",
+  "planner": "baseline",
+  "authorized": false,
+  "interpretation_correct": false,
+  "raw_output": "{\"schema_version\": 1, \"decision\": \"reject\", \"reason\": \"unsupported\", \"steps\": []}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "reject",
+    "reason": "unsupported",
+    "steps": []
+  },
+  "inference_latency_s": 3.709993325173855e-05,
+  "disposition": "rejected"
+}

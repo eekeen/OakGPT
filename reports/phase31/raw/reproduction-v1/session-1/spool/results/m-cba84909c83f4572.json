@@ -1,0 +1,74 @@
+{
+  "status": "completed",
+  "reason": "ok",
+  "mission_id": "m-cba84909c83f4572",
+  "execution_seconds": 2.125224900082685,
+  "events": [
+    {
+      "event": "accepted",
+      "mission_id": "m-cba84909c83f4572",
+      "wall_time_ns": 1793130835032500719,
+      "sim_time_ns": 282050000000
+    },
+    {
+      "event": "watchdog_armed",
+      "mission_id": "m-cba84909c83f4572",
+      "wall_time_ns": 1793130835034703469,
+      "sim_time_ns": 282100000000
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-cba84909c83f4572",
+      "wall_time_ns": 1793130835041744169,
+      "sim_time_ns": 282100000000,
+      "index": 0,
+      "action": "navigate"
+    },
+    {
+      "event": "arrived",
+      "mission_id": "m-cba84909c83f4572",
+      "wall_time_ns": 1793130835094110399,
+      "sim_time_ns": 282160000000,
+      "destination": "dock",
+      "residual_m": 0.014481981239511681
+    },
+    {
+      "event": "step_completed",
+      "mission_id": "m-cba84909c83f4572",
+      "wall_time_ns": 1793130835094267089,
+      "sim_time_ns": 282160000000,
+      "index": 0
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-cba84909c83f4572",
+      "wall_time_ns": 1793130835102746439,
+      "sim_time_ns": 282160000000,
+      "index": 1,
+      "action": "inspect"
+    },
+    {
+      "event": "inspection_snapshot",
+      "mission_id": "m-cba84909c83f4572",
+      "wall_time_ns": 1793130837110450059,
+      "sim_time_ns": 284180000000,
+      "destination": "dock",
+      "valid_ranges": 360,
+      "minimum_range_m": 3.8364415168762207
+    },
+    {
+      "event": "step_completed",
+      "mission_id": "m-cba84909c83f4572",
+      "wall_time_ns": 1793130837110591449,
+      "sim_time_ns": 284180000000,
+      "index": 1
+    },
+    {
+      "event": "completed",
+      "mission_id": "m-cba84909c83f4572",
+      "wall_time_ns": 1793130837110702869,
+      "sim_time_ns": 284180000000,
+      "reason": "ok"
+    }
+  ]
+}

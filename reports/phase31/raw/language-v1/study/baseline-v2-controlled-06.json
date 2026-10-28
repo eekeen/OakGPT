@@ -1,0 +1,218 @@
+{
+  "id": "v2-controlled-06",
+  "category": "controlled",
+  "instruction": "Please check inspection station.",
+  "expected_steps": [
+    {
+      "action": "navigate",
+      "destination": "station",
+      "duration_s": 0
+    },
+    {
+      "action": "inspect",
+      "destination": "station",
+      "duration_s": 2
+    }
+  ],
+  "expected_interpretation": "accept",
+  "authorization": "automatic",
+  "rationale": "Exact bounded contract",
+  "planner": "baseline",
+  "authorized": true,
+  "interpretation_correct": true,
+  "raw_output": "{\"schema_version\": 1, \"decision\": \"accept\", \"reason\": \"ok\", \"steps\": [{\"action\": \"navigate\", \"destination\": \"station\", \"duration_s\": 0}, {\"action\": \"inspect\", \"destination\": \"station\", \"duration_s\": 2}]}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "accept",
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "station",
+        "duration_s": 0
+      },
+      {
+        "action": "inspect",
+        "destination": "station",
+        "duration_s": 2
+      }
+    ]
+  },
+  "inference_latency_s": 3.850017674267292e-05,
+  "validation": {
+    "accepted": true,
+    "frame_id": "map",
+    "mission_id": "m-8502f40007c34c0a",
+    "navigation_timeout_s": 30,
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "station",
+        "duration_s": 0,
+        "pose": {
+          "x": 0.8,
+          "y": 0.0,
+          "yaw": 0.0
+        }
+      },
+      {
+        "action": "inspect",
+        "destination": "station",
+        "duration_s": 2,
+        "pose": {
+          "x": 0.8,
+          "y": 0.0,
+          "yaw": 0.0
+        }
+      }
+    ]
+  },
+  "validation_latency_s": 0.1255898999515921,
+  "reset": {
+    "status": "completed",
+    "reason": "ok",
+    "mission_id": "m-78c3687809084148",
+    "execution_seconds": 0.38489165995270014,
+    "events": [
+      {
+        "event": "accepted",
+        "mission_id": "m-78c3687809084148",
+        "wall_time_ns": 1793188598194776406,
+        "sim_time_ns": 59410000000
+      },
+      {
+        "event": "watchdog_armed",
+        "mission_id": "m-78c3687809084148",
+        "wall_time_ns": 1793188598196725446,
+        "sim_time_ns": 59450000000
+      },
+      {
+        "event": "step_started",
+        "mission_id": "m-78c3687809084148",
+        "wall_time_ns": 1793188598203495606,
+        "sim_time_ns": 59450000000,
+        "index": 0,
+        "action": "navigate"
+      },
+      {
+        "event": "navigation_feedback",
+        "mission_id": "m-78c3687809084148",
+        "wall_time_ns": 1793188598208476926,
+        "sim_time_ns": 59460000000,
+        "distance_remaining": 0.0
+      },
+      {
+        "event": "arrived",
+        "mission_id": "m-78c3687809084148",
+        "wall_time_ns": 1793188598545735816,
+        "sim_time_ns": 59800000000,
+        "destination": "dock",
+        "residual_m": 0.24755222294879686
+      },
+      {
+        "event": "step_completed",
+        "mission_id": "m-78c3687809084148",
+        "wall_time_ns": 1793188598545927066,
+        "sim_time_ns": 59800000000,
+        "index": 0
+      },
+      {
+        "event": "completed",
+        "mission_id": "m-78c3687809084148",
+        "wall_time_ns": 1793188598546094646,
+        "sim_time_ns": 59800000000,
+        "reason": "ok"
+      }
+    ]
+  },
+  "execution": {
+    "status": "completed",
+    "reason": "ok",
+    "mission_id": "m-4c53fa89d4034695",
+    "execution_seconds": 4.097964150016196,
+    "events": [
+      {
+        "event": "accepted",
+        "mission_id": "m-4c53fa89d4034695",
+        "wall_time_ns": 1793188598718590626,
+        "sim_time_ns": 59940000000
+      },
+      {
+        "event": "watchdog_armed",
+        "mission_id": "m-4c53fa89d4034695",
+        "wall_time_ns": 1793188598721052306,
+        "sim_time_ns": 59980000000
+      },
+      {
+        "event": "step_started",
+        "mission_id": "m-4c53fa89d4034695",
+        "wall_time_ns": 1793188598726924176,
+        "sim_time_ns": 59980000000,
+        "index": 0,
+        "action": "navigate"
+      },
+      {
+        "event": "navigation_feedback",
+        "mission_id": "m-4c53fa89d4034695",
+        "wall_time_ns": 1793188599209673016,
+        "sim_time_ns": 60460000000,
+        "distance_remaining": 0.591421365737915
+      },
+      {
+        "event": "navigation_feedback",
+        "mission_id": "m-4c53fa89d4034695",
+        "wall_time_ns": 1793188600219562656,
+        "sim_time_ns": 61470000000,
+        "distance_remaining": 0.39142122864723206
+      },
+      {
+        "event": "arrived",
+        "mission_id": "m-4c53fa89d4034695",
+        "wall_time_ns": 1793188600769259346,
+        "sim_time_ns": 62020000000,
+        "destination": "station",
+        "residual_m": 0.25544370876815226
+      },
+      {
+        "event": "step_completed",
+        "mission_id": "m-4c53fa89d4034695",
+        "wall_time_ns": 1793188600769434576,
+        "sim_time_ns": 62020000000,
+        "index": 0
+      },
+      {
+        "event": "step_started",
+        "mission_id": "m-4c53fa89d4034695",
+        "wall_time_ns": 1793188600775513086,
+        "sim_time_ns": 62020000000,
+        "index": 1,
+        "action": "inspect"
+      },
+      {
+        "event": "inspection_snapshot",
+        "mission_id": "m-4c53fa89d4034695",
+        "wall_time_ns": 1793188602780137536,
+        "sim_time_ns": 64040000000,
+        "destination": "station",
+        "valid_ranges": 360,
+        "minimum_range_m": 3.2919960021972656
+      },
+      {
+        "event": "step_completed",
+        "mission_id": "m-4c53fa89d4034695",
+        "wall_time_ns": 1793188602780348946,
+        "sim_time_ns": 64040000000,
+        "index": 1
+      },
+      {
+        "event": "completed",
+        "mission_id": "m-4c53fa89d4034695",
+        "wall_time_ns": 1793188602780468556,
+        "sim_time_ns": 64040000000,
+        "reason": "ok"
+      }
+    ]
+  },
+  "disposition": "authorized"
+}

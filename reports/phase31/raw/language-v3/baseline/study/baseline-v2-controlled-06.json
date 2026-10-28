@@ -1,0 +1,218 @@
+{
+  "id": "v2-controlled-06",
+  "category": "controlled",
+  "instruction": "Please check inspection station.",
+  "expected_steps": [
+    {
+      "action": "navigate",
+      "destination": "station",
+      "duration_s": 0
+    },
+    {
+      "action": "inspect",
+      "destination": "station",
+      "duration_s": 2
+    }
+  ],
+  "expected_interpretation": "accept",
+  "authorization": "automatic",
+  "rationale": "Exact bounded contract",
+  "planner": "baseline",
+  "authorized": true,
+  "interpretation_correct": true,
+  "raw_output": "{\"schema_version\": 1, \"decision\": \"accept\", \"reason\": \"ok\", \"steps\": [{\"action\": \"navigate\", \"destination\": \"station\", \"duration_s\": 0}, {\"action\": \"inspect\", \"destination\": \"station\", \"duration_s\": 2}]}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "accept",
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "station",
+        "duration_s": 0
+      },
+      {
+        "action": "inspect",
+        "destination": "station",
+        "duration_s": 2
+      }
+    ]
+  },
+  "inference_latency_s": 3.83998267352581e-05,
+  "validation": {
+    "accepted": true,
+    "frame_id": "map",
+    "mission_id": "m-4b7c024890c44a9d",
+    "navigation_timeout_s": 30,
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "station",
+        "duration_s": 0,
+        "pose": {
+          "x": 0.8,
+          "y": 0.0,
+          "yaw": 0.0
+        }
+      },
+      {
+        "action": "inspect",
+        "destination": "station",
+        "duration_s": 2,
+        "pose": {
+          "x": 0.8,
+          "y": 0.0,
+          "yaw": 0.0
+        }
+      }
+    ]
+  },
+  "validation_latency_s": 0.12227280018851161,
+  "reset": {
+    "status": "completed",
+    "reason": "ok",
+    "mission_id": "m-9aeeb92080e2451c",
+    "execution_seconds": 0.08644833008293062,
+    "events": [
+      {
+        "event": "accepted",
+        "mission_id": "m-9aeeb92080e2451c",
+        "wall_time_ns": 1793189125893834011,
+        "sim_time_ns": 59550000000
+      },
+      {
+        "event": "watchdog_armed",
+        "mission_id": "m-9aeeb92080e2451c",
+        "wall_time_ns": 1793189125896194171,
+        "sim_time_ns": 59590000000
+      },
+      {
+        "event": "step_started",
+        "mission_id": "m-9aeeb92080e2451c",
+        "wall_time_ns": 1793189125901846261,
+        "sim_time_ns": 59590000000,
+        "index": 0,
+        "action": "navigate"
+      },
+      {
+        "event": "navigation_feedback",
+        "mission_id": "m-9aeeb92080e2451c",
+        "wall_time_ns": 1793189125907242661,
+        "sim_time_ns": 59590000000,
+        "distance_remaining": 0.0
+      },
+      {
+        "event": "arrived",
+        "mission_id": "m-9aeeb92080e2451c",
+        "wall_time_ns": 1793189125944318251,
+        "sim_time_ns": 59630000000,
+        "destination": "dock",
+        "residual_m": 0.24483341670110528
+      },
+      {
+        "event": "step_completed",
+        "mission_id": "m-9aeeb92080e2451c",
+        "wall_time_ns": 1793189125944516521,
+        "sim_time_ns": 59630000000,
+        "index": 0
+      },
+      {
+        "event": "completed",
+        "mission_id": "m-9aeeb92080e2451c",
+        "wall_time_ns": 1793189125944582761,
+        "sim_time_ns": 59630000000,
+        "reason": "ok"
+      }
+    ]
+  },
+  "execution": {
+    "status": "completed",
+    "reason": "ok",
+    "mission_id": "m-358cff8b6382493e",
+    "execution_seconds": 4.297100940020755,
+    "events": [
+      {
+        "event": "accepted",
+        "mission_id": "m-358cff8b6382493e",
+        "wall_time_ns": 1793189126137790801,
+        "sim_time_ns": 59790000000
+      },
+      {
+        "event": "watchdog_armed",
+        "mission_id": "m-358cff8b6382493e",
+        "wall_time_ns": 1793189126140420331,
+        "sim_time_ns": 59830000000
+      },
+      {
+        "event": "step_started",
+        "mission_id": "m-358cff8b6382493e",
+        "wall_time_ns": 1793189126146807811,
+        "sim_time_ns": 59830000000,
+        "index": 0,
+        "action": "navigate"
+      },
+      {
+        "event": "navigation_feedback",
+        "mission_id": "m-358cff8b6382493e",
+        "wall_time_ns": 1793189126909507141,
+        "sim_time_ns": 60600000000,
+        "distance_remaining": 0.5664212107658386
+      },
+      {
+        "event": "navigation_feedback",
+        "mission_id": "m-358cff8b6382493e",
+        "wall_time_ns": 1793189127919304351,
+        "sim_time_ns": 61610000000,
+        "distance_remaining": 0.34142133593559265
+      },
+      {
+        "event": "arrived",
+        "mission_id": "m-358cff8b6382493e",
+        "wall_time_ns": 1793189128388660831,
+        "sim_time_ns": 62080000000,
+        "destination": "station",
+        "residual_m": 0.21853989115309305
+      },
+      {
+        "event": "step_completed",
+        "mission_id": "m-358cff8b6382493e",
+        "wall_time_ns": 1793189128388831021,
+        "sim_time_ns": 62080000000,
+        "index": 0
+      },
+      {
+        "event": "step_started",
+        "mission_id": "m-358cff8b6382493e",
+        "wall_time_ns": 1793189128395349721,
+        "sim_time_ns": 62080000000,
+        "index": 1,
+        "action": "inspect"
+      },
+      {
+        "event": "inspection_snapshot",
+        "mission_id": "m-358cff8b6382493e",
+        "wall_time_ns": 1793189130395832461,
+        "sim_time_ns": 64090000000,
+        "destination": "station",
+        "valid_ranges": 360,
+        "minimum_range_m": 3.2862205505371094
+      },
+      {
+        "event": "step_completed",
+        "mission_id": "m-358cff8b6382493e",
+        "wall_time_ns": 1793189130396037031,
+        "sim_time_ns": 64090000000,
+        "index": 1
+      },
+      {
+        "event": "completed",
+        "mission_id": "m-358cff8b6382493e",
+        "wall_time_ns": 1793189130396173921,
+        "sim_time_ns": 64090000000,
+        "reason": "ok"
+      }
+    ]
+  },
+  "disposition": "authorized"
+}

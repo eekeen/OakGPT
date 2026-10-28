@@ -1,0 +1,64 @@
+﻿[
+    {
+        "log_sha256":  "7ab7b3f6a815ef8403aa511d606f1643600fdf54548afb630023996a8368f38d",
+        "command":  [
+                        ".venv-phase31-verify\\Scripts\\python.exe",
+                        "-m",
+                        "pytest",
+                        "--junitxml",
+                        "runs/phase31/verification-clean/python/pytest.xml"
+                    ],
+        "name":  "pytest",
+        "exit_code":  0
+    },
+    {
+        "log_sha256":  "af352a86840ad0af3d37ea0d9197f868363a6dac6b1c2ef5d2722f6b41d2d9af",
+        "command":  [
+                        ".venv-phase31-verify\\Scripts\\ruff.exe",
+                        "check",
+                        "."
+                    ],
+        "name":  "ruff",
+        "exit_code":  0
+    },
+    {
+        "log_sha256":  "16846b510d4797875d4ce38e85b8cc2d8eb4cce1dbf269f4a8f8645276378617",
+        "command":  [
+                        ".venv-phase31-verify\\Scripts\\ruff.exe",
+                        "format",
+                        "--check",
+                        "."
+                    ],
+        "name":  "format",
+        "exit_code":  0
+    },
+    {
+        "log_sha256":  "74896560feb6e493a22244d7effa88dee6e77a1e829e6a8506355d42a2c34efa",
+        "command":  [
+                        ".venv-phase31-verify\\Scripts\\mypy.exe"
+                    ],
+        "name":  "mypy",
+        "exit_code":  0
+    },
+    {
+        "log_sha256":  "df08fad5e8e9714a6ce53eee663fbd703397f23bc600002bb66c403aec6b1e41",
+        "command":  [
+                        ".venv-phase31-verify\\Scripts\\python.exe",
+                        "-m",
+                        "build"
+                    ],
+        "name":  "packaging",
+        "exit_code":  0
+    },
+    {
+        "log_sha256":  "6326999b2d47daff6338070efad9139a62dd802f33019eab621859ade33fc907",
+        "command":  [
+                        ".venv-phase31-verify\\Scripts\\python.exe",
+                        "-m",
+                        "pip",
+                        "check"
+                    ],
+        "name":  "pip-check",
+        "exit_code":  0
+    }
+]

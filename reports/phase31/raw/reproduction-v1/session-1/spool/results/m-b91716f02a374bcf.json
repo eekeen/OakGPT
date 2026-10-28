@@ -1,0 +1,88 @@
+{
+  "status": "completed",
+  "reason": "ok",
+  "mission_id": "m-b91716f02a374bcf",
+  "execution_seconds": 4.71692862000782,
+  "events": [
+    {
+      "event": "accepted",
+      "mission_id": "m-b91716f02a374bcf",
+      "wall_time_ns": 1793130837864763279,
+      "sim_time_ns": 284880000000
+    },
+    {
+      "event": "watchdog_armed",
+      "mission_id": "m-b91716f02a374bcf",
+      "wall_time_ns": 1793130837866560669,
+      "sim_time_ns": 284930000000
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-b91716f02a374bcf",
+      "wall_time_ns": 1793130837873604249,
+      "sim_time_ns": 284930000000,
+      "index": 0,
+      "action": "navigate"
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-b91716f02a374bcf",
+      "wall_time_ns": 1793130838606241599,
+      "sim_time_ns": 285670000000,
+      "distance_remaining": 0.6499999165534973
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-b91716f02a374bcf",
+      "wall_time_ns": 1793130839616271279,
+      "sim_time_ns": 286680000000,
+      "distance_remaining": 0.44999992847442627
+    },
+    {
+      "event": "arrived",
+      "mission_id": "m-b91716f02a374bcf",
+      "wall_time_ns": 1793130840516025039,
+      "sim_time_ns": 287580000000,
+      "destination": "station",
+      "residual_m": 0.23049615572692436
+    },
+    {
+      "event": "step_completed",
+      "mission_id": "m-b91716f02a374bcf",
+      "wall_time_ns": 1793130840516219439,
+      "sim_time_ns": 287580000000,
+      "index": 0
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-b91716f02a374bcf",
+      "wall_time_ns": 1793130840524969509,
+      "sim_time_ns": 287580000000,
+      "index": 1,
+      "action": "inspect"
+    },
+    {
+      "event": "inspection_snapshot",
+      "mission_id": "m-b91716f02a374bcf",
+      "wall_time_ns": 1793130842529894019,
+      "sim_time_ns": 289600000000,
+      "destination": "station",
+      "valid_ranges": 360,
+      "minimum_range_m": 3.3005006313323975
+    },
+    {
+      "event": "step_completed",
+      "mission_id": "m-b91716f02a374bcf",
+      "wall_time_ns": 1793130842530098229,
+      "sim_time_ns": 289600000000,
+      "index": 1
+    },
+    {
+      "event": "completed",
+      "mission_id": "m-b91716f02a374bcf",
+      "wall_time_ns": 1793130842530219729,
+      "sim_time_ns": 289600000000,
+      "reason": "ok"
+    }
+  ]
+}

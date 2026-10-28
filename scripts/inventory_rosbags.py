@@ -10,9 +10,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("directory", type=Path)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--prefix", help="Include only top-level bag names with this prefix")
     args = parser.parse_args()
     files = []
     for path in sorted(args.directory.rglob("*")):
+        if args.prefix and not path.relative_to(args.directory).parts[0].startswith(args.prefix):
+            continue
         if path.is_file():
             digest = hashlib.sha256()
             with path.open("rb") as stream:

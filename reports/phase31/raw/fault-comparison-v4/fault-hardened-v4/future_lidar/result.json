@@ -1,0 +1,173 @@
+{
+  "runtime": "hardened",
+  "case": "future_lidar",
+  "fixture": "synthetic ROS sensors and Nav2 action fixture; no velocity publisher",
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-97d577b2041049bb",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793188796618,
+    "expires_at_ms": 1793188856618,
+    "instruction": "Go to station",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "station",
+        "duration_s": 0
+      }
+    ]
+  },
+  "raw_payload": "{\"schema_version\": 1, \"mission_id\": \"m-97d577b2041049bb\", \"policy_id\": \"oak-room-v1\", \"issued_at_ms\": 1793188796618, \"expires_at_ms\": 1793188856618, \"instruction\": \"Go to station\", \"steps\": [{\"action\": \"navigate\", \"destination\": \"station\", \"duration_s\": 0}]}",
+  "spool_path": "/mnt/d/Projects/OakGPT/runs/phase31/fault-comparison-v4/fault-hardened-v4/future_lidar/spool",
+  "result": {
+    "status": "failed",
+    "reason": "scan_timestamp_watchdog",
+    "mission_id": "m-97d577b2041049bb",
+    "execution_seconds": 0.1388173500308767,
+    "events": [
+      {
+        "event": "accepted",
+        "mission_id": "m-97d577b2041049bb",
+        "wall_time_ns": 1793188796679791969,
+        "sim_time_ns": 1001050724709
+      },
+      {
+        "event": "watchdog_armed",
+        "mission_id": "m-97d577b2041049bb",
+        "wall_time_ns": 1793188796681870339,
+        "sim_time_ns": 1001100654099
+      },
+      {
+        "event": "step_started",
+        "mission_id": "m-97d577b2041049bb",
+        "wall_time_ns": 1793188796688457079,
+        "sim_time_ns": 1001100654099,
+        "index": 0,
+        "action": "navigate"
+      },
+      {
+        "event": "navigation_feedback",
+        "mission_id": "m-97d577b2041049bb",
+        "wall_time_ns": 1793188796692909109,
+        "sim_time_ns": 1001100654099,
+        "distance_remaining": 0.800000011920929
+      },
+      {
+        "event": "failed",
+        "mission_id": "m-97d577b2041049bb",
+        "wall_time_ns": 1793188796793310049,
+        "sim_time_ns": 1001200616379,
+        "reason": "scan_timestamp_watchdog"
+      }
+    ]
+  },
+  "first_result": null,
+  "server_events": [
+    {
+      "event": "requested",
+      "monotonic": 987626.550316849
+    },
+    {
+      "event": "executing",
+      "monotonic": 987626.551235839
+    },
+    {
+      "event": "canceled",
+      "monotonic": 987626.652296299
+    }
+  ],
+  "mission_events": [
+    {
+      "event": "accepted",
+      "mission_id": "m-97d577b2041049bb",
+      "wall_time_ns": 1793188796679791969,
+      "sim_time_ns": 1001050724709
+    },
+    {
+      "event": "watchdog_armed",
+      "mission_id": "m-97d577b2041049bb",
+      "wall_time_ns": 1793188796681870339,
+      "sim_time_ns": 1001100654099
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-97d577b2041049bb",
+      "wall_time_ns": 1793188796688457079,
+      "sim_time_ns": 1001100654099,
+      "index": 0,
+      "action": "navigate"
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-97d577b2041049bb",
+      "wall_time_ns": 1793188796692909109,
+      "sim_time_ns": 1001100654099,
+      "distance_remaining": 0.800000011920929
+    },
+    {
+      "event": "failed",
+      "mission_id": "m-97d577b2041049bb",
+      "wall_time_ns": 1793188796793310049,
+      "sim_time_ns": 1001200616379,
+      "reason": "scan_timestamp_watchdog"
+    }
+  ],
+  "watchdog_events": [
+    {
+      "event": "startup_cancel",
+      "wall_time_ns": 1793188796051636609,
+      "canceling": 0
+    }
+  ],
+  "heartbeats": [
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-97d577b2041049bb",
+      "expires_at_ms": 1793188856618
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-97d577b2041049bb",
+      "expires_at_ms": 1793188856618
+    },
+    {
+      "active": false,
+      "faulted": true,
+      "mission_id": null,
+      "expires_at_ms": 0
+    }
+  ],
+  "active_goal_after_observation": false,
+  "goal_requests": 1,
+  "fault_at_monotonic": 987626.584586149,
+  "cancel_after_fault_s": 0.06771015003323555,
+  "detected_or_rejected": true,
+  "restart_faulted": null,
+  "observation_window_after_fault_s": 5
+}

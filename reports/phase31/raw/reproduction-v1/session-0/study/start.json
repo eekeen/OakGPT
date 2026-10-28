@@ -1,0 +1,67 @@
+{
+  "environment": {
+    "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "logical_cpu_count": 16,
+    "torch": "2.9.1",
+    "cuda_runtime": null,
+    "cudnn": null,
+    "cuda_available": false,
+    "gpu": null,
+    "git_revision": "108e83b6781e90a763f42b8fa2273465d338d60c",
+    "git_dirty": false
+  },
+  "spec": {
+    "dataset": "D:\\Projects\\OakGPT\\data\\robotics\\instructions_v1.jsonl",
+    "policy": "D:\\Projects\\OakGPT\\configs\\robotics\\policy_v1.json",
+    "output_dir": "D:\\Projects\\OakGPT\\runs\\phase31\\reproduction-v1\\session-0\\study",
+    "spool": "D:\\Projects\\OakGPT\\runs\\phase31\\reproduction-v1\\session-0\\spool",
+    "execute": true,
+    "server_binary": "D:\\Projects\\OakGPT\\vendor\\llama.cpp\\llama-server.exe",
+    "port": 18082,
+    "models": {
+      "Q4_K_M": "D:\\Projects\\OakGPT\\models\\phase2-Qwen3-1.7B-Q4_K_M.gguf",
+      "Q8_0": "D:\\Projects\\OakGPT\\models\\phase2-Qwen3-1.7B-Q8_0.gguf"
+    },
+    "validator_command": [
+      "wsl.exe",
+      "-d",
+      "Ubuntu-24.04",
+      "--",
+      "/home/eekeen/projects/oak-build/oak-validate",
+      "--policy",
+      "/mnt/d/Projects/OakGPT/configs/robotics/policy_v1.json"
+    ],
+    "clock_command": [
+      "wsl.exe",
+      "-d",
+      "Ubuntu-24.04",
+      "--",
+      "/home/eekeen/projects/oak-build/oak-validate",
+      "--clock"
+    ],
+    "planner_order": [
+      "Q8_0",
+      "Q4_K_M",
+      "baseline"
+    ],
+    "runtime_sources": [
+      "D:\\Projects\\OakGPT\\src\\oakgpt\\robotics\\evaluate.py",
+      "D:\\Projects\\OakGPT\\src\\oakgpt\\robotics\\planner.py",
+      "D:\\Projects\\OakGPT\\cpp\\src\\validator.cpp",
+      "D:\\Projects\\OakGPT\\robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\executor.py",
+      "D:\\Projects\\OakGPT\\robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\watchdog.py"
+    ]
+  },
+  "spec_sha256": "433b4fa1ae8654169b70d1298733e2e3891ef60f8f10fef2d1e3c1dea7e7edf6",
+  "dataset_sha256": "f56ee17a91c4e926f56b8fb6767648159aad6c3cbe4801a6c08549f180928085",
+  "started_at_ns": 1793129624530979100,
+  "runtime_source_hashes": {
+    "D:\\Projects\\OakGPT\\src\\oakgpt\\robotics\\evaluate.py": "2cd5057a94141c89d952de040d7e70c45f395f308948e6a334fa3a5d7096b664",
+    "D:\\Projects\\OakGPT\\src\\oakgpt\\robotics\\planner.py": "abaddf1204909cb6ee9090fc2d47d3f0b50eb494e06319e84ad1ed429ad9e29e",
+    "D:\\Projects\\OakGPT\\cpp\\src\\validator.cpp": "74abfe0b23069c2008c89dffc439fd14f68172983535cae8c323b41d5a2203a8",
+    "D:\\Projects\\OakGPT\\robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\executor.py": "b01a1a8f946bca9d75c4d388ef1641f870b5c8b00c1eb34d0d512532f9d767ce",
+    "D:\\Projects\\OakGPT\\robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\watchdog.py": "efb2af5311a6380d91cc169f7bc7c961d1632e80adec1cf756b6a1c463413e86"
+  }
+}

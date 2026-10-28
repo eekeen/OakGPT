@@ -1,0 +1,39 @@
+{
+  "trials": [
+    {
+      "world": {
+        "layout": "empty",
+        "seed": 41,
+        "start": {
+          "x": -0.1737958620008457,
+          "y": -0.10771232547580994,
+          "yaw": -0.20037796541151887
+        },
+        "amcl_initial_error": {
+          "x": 0.03,
+          "y": -0.02,
+          "yaw": 0.02
+        },
+        "obstacles": [],
+        "truth": "Gazebo model world pose, distinct from wheel odometry and AMCL",
+        "map_world_alignment": "identity by construction",
+        "physics_step_s": 0.01,
+        "truth_frequency_hz": 30
+      },
+      "controls": [],
+      "stop": {
+        "kind": "operator_stop",
+        "environment_error": "Ground-truth simulation startup failed"
+      },
+      "localization": {
+        "matched": 0,
+        "excluded": 0,
+        "max_bracket_gap_s": 0.15,
+        "position_rmse_m": null,
+        "position_p95_m": null,
+        "matches": []
+      },
+      "trajectory_sha256": "e03667df9442c2bd6732c4d9a83aaa0dc946e84a3507a4d957d45a63cab429ec"
+    }
+  ]
+}

@@ -14,7 +14,7 @@ LAYOUTS = {
 }
 
 
-def create_world(output, layout, seed):
+def create_world(output, layout, seed, obstacles_override=None):
     output.mkdir(parents=True, exist_ok=False)
     root = Path("robotics/ros2_ws/src/oak_mission/config")
     tree = ET.parse(root / "room.sdf")
@@ -36,7 +36,7 @@ def create_world(output, layout, seed):
         "update_frequency": "30",
     }.items():
         ET.SubElement(plugin, name).text = value
-    obstacles = LAYOUTS[layout]
+    obstacles = LAYOUTS[layout] if obstacles_override is None else obstacles_override
     for index, obstacle in enumerate(obstacles):
         model = ET.SubElement(world, "model", name=f"obstacle_{index}")
         ET.SubElement(model, "static").text = "true"

@@ -89,3 +89,46 @@ def test_malformed_heartbeat_defaults_to_latched_zero(guard):
     node.receive_heartbeat(String(data='{"active": 1}'))
     node.tick()
     assert node.latched and commands[-1].linear.x == 0
+
+
+def test_leased_forwarding_preserves_original_receipt_and_increments_sequence(guard):
+    node, commands = guard
+    node.leased_output = True
+    healthy(node)
+    issued = node.command_boottime_ns
+    node.tick()
+    node.tick()
+    a, b = commands[-2:]
+    assert a.header.stamp == b.header.stamp
+    assert b.header.stamp.sec * 1000000000 + b.header.stamp.nanosec == issued
+    assert a.header.frame_id == f"oak-boottime-v1/{node.epoch}/1"
+    assert b.header.frame_id == f"oak-boottime-v1/{node.epoch}/2"
+    assert b.twist.linear.x == 0.1
+    node.latched = True
+    node.tick()
+    assert commands[-1].twist.linear.x == commands[-1].twist.angular.z == 0
+
+
+def test_leased_guard_neutralizes_before_downstream_expiry(guard):
+    node, commands = guard
+    node.leased_output = True
+    healthy(node)
+    node.command_at = time.monotonic() - 0.18
+    node.tick()
+    assert node.reason == "command_timeout"
+    assert commands[-1].twist.linear.x == 0
+    issued = commands[-1].header.stamp.sec * 1000000000 + commands[-1].header.stamp.nanosec
+    assert time.clock_gettime_ns(time.CLOCK_BOOTTIME) - issued < 100000000
+
+
+def test_leased_guard_stops_forwarding_on_two_missed_watchdog_periods(guard):
+    node, commands = guard
+    node.leased_output = True
+    healthy(node)
+    node.watchdog_at = time.monotonic() - 0.21
+    node.tick()
+    assert node.reason == "watchdog_unavailable"
+    assert commands[-1].twist.linear.x == commands[-1].twist.angular.z == 0
+    node.leased_output = False
+    node.tick()
+    assert node.reason == "forwarding" and commands[-1].linear.x == 0.1

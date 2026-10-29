@@ -15,7 +15,7 @@ from lifecycle_msgs.srv import GetState
 from rclpy.node import Node
 from rclpy.qos import DurabilityPolicy, QoSProfile, qos_profile_sensor_data
 from sensor_msgs.msg import LaserScan
-from std_msgs.msg import Bool
+from std_msgs.msg import Bool, String
 from tf2_msgs.msg import TFMessage
 
 
@@ -46,6 +46,28 @@ def signal_owned(owned, kind):
             continue
 
 
+def live_owned(owned):
+    remaining = {}
+    for pid, start in owned.items():
+        try:
+            fields = Path(f"/proc/{pid}/stat").read_text().rsplit(")", 1)[1].split()
+            if fields[19] == start and fields[0] not in {"Z", "X"}:
+                remaining[pid] = start
+        except (OSError, IndexError):
+            continue
+    return remaining
+
+
+def kill_remaining_owned(owned, timeout=5):
+    # A launcher can exit while its SIGTERM-resistant children remain alive.
+    # Recheck PID/start identity for every signal, including orphaned descendants.
+    signal_owned(live_owned(owned), signal.SIGKILL)
+    deadline = time.monotonic() + timeout
+    while live_owned(owned) and time.monotonic() < deadline:
+        time.sleep(0.02)
+    return live_owned(owned)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--directory", type=Path, required=True)
@@ -53,6 +75,8 @@ def main():
     parser.add_argument("--bag", type=Path, required=True)
     parser.add_argument("--world-directory", type=Path)
     parser.add_argument("--allow-executor-exit", action="store_true")
+    parser.add_argument("--navigation-trace", action="store_true")
+    parser.add_argument("--launch-name", default="reliability.launch.py")
     args = parser.parse_args()
     args.directory.mkdir(parents=True, exist_ok=True)
     if (args.directory / "READY.json").exists():
@@ -61,6 +85,25 @@ def main():
     rclpy.init(args=[])
     node = Node("oak_session_readiness")
     state = {"scan": False, "watchdog": False}
+    expiry_received = 0.0
+    if args.launch_name == "expiry.launch.py":
+        state["expiry"] = False
+
+        def expiry_status(message):
+            nonlocal expiry_received
+            try:
+                value = json.loads(message.data)
+                age = (time.clock_gettime_ns(time.CLOCK_BOOTTIME) - value["boottime_ns"]) / 1e9
+                state["expiry"] = (
+                    value["latched"] is False
+                    and value["lifetime_ns"] == 200000000
+                    and -0.02 <= age <= 2
+                )
+                expiry_received = time.monotonic()
+            except (ValueError, TypeError, KeyError):
+                state["expiry"] = False
+
+        node.create_subscription(String, "/oak/expiry_events", expiry_status, 10)
     if args.world_directory:
         state["truth"] = False
         state["routing"] = False
@@ -102,7 +145,7 @@ def main():
                 "ros2",
                 "launch",
                 "oak_mission",
-                "reliability.launch.py",
+                args.launch_name,
                 "world:=" + str(world / "world.sdf"),
                 "map:=" + str(world / "map.yaml"),
                 "params:=" + str(world / "nav2.yaml"),
@@ -121,6 +164,19 @@ def main():
                     "use_sim_time:=true",
                 ],
             )
+            if args.navigation_trace:
+                start(
+                    "navigation-recorder",
+                    [
+                        "python3",
+                        str(args.project / "scripts/record_navigation.py"),
+                        "--directory",
+                        str(args.directory),
+                        "--ros-args",
+                        "-p",
+                        "use_sim_time:=true",
+                    ],
+                )
         start("simulation", launch)
         start(
             "executor",
@@ -146,15 +202,27 @@ def main():
             if any(p.poll() is not None for p in processes):
                 raise RuntimeError("A session process exited during startup")
             rclpy.spin_once(node, timeout_sec=0.1)
+            if args.launch_name == "expiry.launch.py" and time.monotonic() - expiry_received > 2:
+                state["expiry"] = False
             if args.world_directory:
                 publishers = node.get_publishers_info_by_topic("/cmd_vel")
                 upstream = node.get_publishers_info_by_topic("/oak/nav_cmd_vel")
                 state["routing"] = (
                     len(publishers) == 1
-                    and publishers[0].node_name == "oak_velocity_guard"
+                    and publishers[0].node_name
+                    == (
+                        "oak_command_bridge"
+                        if args.launch_name == "expiry.launch.py"
+                        else "oak_velocity_guard"
+                    )
                     and len(upstream) == 1
                     and upstream[0].node_name == "collision_monitor"
                 )
+                if args.launch_name == "expiry.launch.py":
+                    leased = node.get_publishers_info_by_topic("/oak/leased_cmd_vel")
+                    state["routing"] &= (
+                        len(leased) == 1 and leased[0].node_name == "oak_velocity_guard"
+                    )
             if not all(state.values()) or not all(c.service_is_ready() for c in clients):
                 continue
             futures = [c.call_async(GetState.Request()) for c in clients]
@@ -190,7 +258,14 @@ def main():
                 "/oak/ground_truth",
                 "/oak/guard_events",
                 "/oak/nav_cmd_vel",
+                "/oak/leased_cmd_vel",
+                "/oak/expiry_events",
                 "/navigate_to_pose/_action/status",
+                "/local_costmap/costmap_raw",
+                "/global_costmap/costmap_raw",
+                "/plan",
+                "/local_plan",
+                "/oak/progress_state",
             ],
         )
         time.sleep(2)  # Excluded recorder discovery, not a measurement.
@@ -203,6 +278,14 @@ def main():
                     "ros_domain": os.getenv("ROS_DOMAIN_ID"),
                     "gazebo_partition": os.getenv("GZ_PARTITION"),
                     "command_route_checked": bool(args.world_directory),
+                    "middleware_environment": {
+                        name: os.getenv(name)
+                        for name in [
+                            "RMW_IMPLEMENTATION",
+                            "RMW_FASTRTPS_USE_QOS_FROM_XML",
+                            "FASTRTPS_DEFAULT_PROFILES_FILE",
+                        ]
+                    },
                     "command_publisher_nodes": [
                         p.node_name for p in node.get_publishers_info_by_topic("/cmd_vel")
                     ],
@@ -235,13 +318,23 @@ def main():
             except subprocess.TimeoutExpired:
                 signal_owned(owned, signal.SIGKILL)
                 p.wait(timeout=5)
+        remaining = kill_remaining_owned(owned)
         for log in logs:
             log.close()
         (args.directory / "STOPPED.json").write_text(
-            json.dumps({"owned_processes": owned, "stopped_at_ns": time.time_ns()})
+            json.dumps(
+                {
+                    "owned_processes": owned,
+                    "stopped_at_ns": time.time_ns(),
+                    "remaining_live_processes": remaining,
+                    "cleanup_complete": not remaining,
+                }
+            )
         )
         node.destroy_node()
         rclpy.try_shutdown()
+        if remaining:
+            raise RuntimeError("Session cleanup left live owned descendants")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,116 @@
+{
+  "version": "phase32-v2-before-held-out",
+  "scope": "Simulation-only navigation and downstream command expiry; C++ mission authorization unchanged",
+  "historical_worlds": "Phase3.1 worlds-v3 seeds 41,42,43: diagnosis/reproduction only; never configuration selection",
+  "development": {
+    "seeds": [
+      210,
+      211,
+      212
+    ],
+    "families": [
+      "empty",
+      "block",
+      "wall"
+    ],
+    "selection": "Development completion, independent arrival and clearance; select the smallest successful correction. Navigation deadline remains 30 s."
+  },
+  "held_out": {
+    "world_count": 12,
+    "families": [
+      "empty",
+      "block",
+      "wall"
+    ],
+    "starts_per_family": 4,
+    "generation": "After corrected configuration/source freeze, use a fresh SystemRandom seed; persist seed, input generator hash and all generated assets before execution",
+    "geometry": {
+      "start_x": [
+        -0.25,
+        -0.05
+      ],
+      "start_y": [
+        -0.2,
+        0.2
+      ],
+      "start_yaw": [
+        -0.3,
+        0.3
+      ],
+      "block_x": [
+        0.32,
+        0.48
+      ],
+      "block_y": [
+        0.32,
+        0.5
+      ],
+      "block_size": [
+        0.22,
+        0.32
+      ],
+      "wall_x": [
+        0.34,
+        0.5
+      ],
+      "wall_y": [
+        -0.42,
+        -0.28
+      ],
+      "wall_length": [
+        0.8,
+        1.02
+      ],
+      "wall_width": 0.12
+    },
+    "variants": [
+      "original_nav2",
+      "corrected_nav2"
+    ],
+    "authority_and_actuator": "Identical unchanged mission validator and identical downstream expiry in both paired variants",
+    "ordering": "Randomized paired world order, balanced variant-first assignment; fresh simulator per world/variant",
+    "instructions": [
+      "Go to station",
+      "Inspect storage",
+      "Go to dock"
+    ],
+    "failure_policy": "Abort subsequent mission dispatch after a fault; retain failed and unattempted requests; no automatic retry or replacement",
+    "acceptance": {
+      "completed_of_36_planned_min": 33,
+      "independent_truth_arrival_within_0.35m_fraction_min": 0.95,
+      "observed_robot_circle_obstacle_clearance_m_min": 0.0,
+      "navigation_step_deadline_s": 30,
+      "command_absolute_linear_m_s_max": 0.220001,
+      "command_absolute_angular_rad_s_max": 0.800001,
+      "comparison": "Report all planned completion denominators, paired world outcomes, travel time/path length on observed missions, localization error and missingness; no tuning after held-out execution"
+    }
+  },
+  "expiry": {
+    "candidate_command_lifetime_ms": 200,
+    "faults": [
+      "guard_crash",
+      "guard_suspend",
+      "command_bridge_crash",
+      "watchdog_crash",
+      "stale_command",
+      "replayed_command",
+      "simulator_process_stall"
+    ],
+    "precondition": "Independent ground-truth translation >0.05 m/s and a nonzero applied command before injection",
+    "observation_s_min": 4,
+    "acceptance": {
+      "settling_onset_sim_s_max": 0.5,
+      "translation_threshold_m_s": 0.01,
+      "rotation_threshold_rad_s": 0.03,
+      "settling_hold_sim_s": 0.3,
+      "max_truth_gap_sim_s": 0.15,
+      "process_stall": "On resumption, expiry latches zero before sustained movement resumes; physical Windows/WSL host suspension is not inferred from this proxy"
+    },
+    "residuals": "Trusted local ROS/Gazebo transports; no certified safety hardware or physical stopping verification"
+  },
+  "preparation": {
+    "clock_handshake": "At most three read-only preparations per mission; every accepted reply must satisfy unchanged receiver_clock one-second RTT bound. Record every attempt. No rejected/failed mission is retried or replaced.",
+    "idle_callbacks": "Shared executor drains ROS callbacks while polling Windows spool at 10 Hz; all TF/scan freshness checks and mission deadlines unchanged.",
+    "updated_utc": "2026-10-28T13:48:59.348621+00:00"
+  }
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>oak_nav_trace</name><version>0.1.0</version>
+  <description>Read-only trace wrapper around the installed Nav2 progress checker.</description>
+  <maintainer email="eekeen@users.noreply.github.com">eekeen</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>nav2_controller</depend><depend>nav2_core</depend>
+  <depend>pluginlib</depend><depend>std_msgs</depend>
+  <test_depend>rclcpp</test_depend><test_depend>std_srvs</test_depend>
+  <test_depend>rmw_fastrtps_shared_cpp</test_depend><test_depend>fastrtps</test_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

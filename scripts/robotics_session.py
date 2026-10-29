@@ -82,6 +82,7 @@ def main():
     if (args.directory / "READY.json").exists():
         raise FileExistsError("Session already started")
     processes, logs, roles = [], [], {}
+    resource_stop = resource_worker = None
     rclpy.init(args=[])
     node = Node("oak_session_readiness")
     state = {"scan": False, "watchdog": False}
@@ -130,6 +131,33 @@ def main():
     ]
 
     def start(name, command):
+        timing_prefix = os.getenv("OAK_TIMING_PREFIX")
+        if name == "simulation" and timing_prefix:
+            timing_directory = (
+                Path("/dev/shm/oak-phase33") / args.directory.name / str(time.time_ns())
+            )
+            timing_directory.mkdir(parents=True, exist_ok=False)
+            (args.directory / "TIMING_DIRECTORY.json").write_text(
+                json.dumps(
+                    {
+                        "path": str(timing_directory),
+                        "clock": "Linux CLOCK_BOOTTIME and CLOCK_MONOTONIC, same WSL kernel; "
+                        "DDS realtime separate",
+                    }
+                )
+            )
+            command = [
+                "env",
+                "OAK_TIMING_DIR=" + str(timing_directory),
+                "LD_PRELOAD=" + timing_prefix + "/lib/liboak_transport_trace.so",
+                *command,
+            ]
+            from timing_resources import start_resources
+
+            nonlocal resource_stop, resource_worker
+            resource_stop, resource_worker = start_resources(
+                timing_directory, lambda: descendant_identities([p.pid for p in processes])
+            )
         log = (args.directory / f"{name}.log").open("x")
         logs.append(log)
         process = subprocess.Popen(command, stdout=log, stderr=log)
@@ -319,6 +347,14 @@ def main():
                 signal_owned(owned, signal.SIGKILL)
                 p.wait(timeout=5)
         remaining = kill_remaining_owned(owned)
+        if resource_stop is not None:
+            resource_stop.set()
+            resource_worker.join(timeout=2)
+        timing_path = args.directory / "TIMING_DIRECTORY.json"
+        if timing_path.exists():
+            import shutil
+
+            shutil.copytree(json.loads(timing_path.read_text())["path"], args.directory / "timing")
         for log in logs:
             log.close()
         (args.directory / "STOPPED.json").write_text(

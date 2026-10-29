@@ -13,11 +13,14 @@ from rclpy.qos import DurabilityPolicy, QoSProfile
 from std_msgs.msg import Bool, String
 
 from oak_mission.guard_rules import command_allowed
+from oak_mission.timing import Timing
 
 
 class VelocityGuard(Node):
     def __init__(self):
         super().__init__("oak_velocity_guard")
+        self.timing = Timing()
+        self.previous_tick_ns = 0
         self.leased_output = self.declare_parameter("leased_output", False).value
         self.publisher = self.create_publisher(
             TwistStamped if self.leased_output else Twist,
@@ -61,6 +64,7 @@ class VelocityGuard(Node):
             self.controller_pending = self.controller.call_async(GetState.Request())
 
     def receive_command(self, message):
+        self.timing.record("guard_receipt", vx=message.linear.x, wz=message.angular.z)
         values = [
             message.linear.x,
             message.linear.y,
@@ -86,6 +90,7 @@ class VelocityGuard(Node):
         self.command, self.command_at = message, time.monotonic()
         if self.leased_output:
             self.command_boottime_ns = time.clock_gettime_ns(time.CLOCK_BOOTTIME)
+        self.timing.record("guard_processed", issued_ns=self.command_boottime_ns)
 
     def receive_heartbeat(self, message):
         try:
@@ -121,6 +126,12 @@ class VelocityGuard(Node):
         self.ready, self.watchdog_at = message.data, time.monotonic()
 
     def tick(self):
+        started = time.monotonic_ns()
+        self.timing.record(
+            "guard_tick_begin",
+            interval_ns=started - self.previous_tick_ns if self.previous_tick_ns else None,
+        )
+        self.previous_tick_ns = started
         now = time.monotonic()
         reason = (
             "latched_fault"
@@ -143,6 +154,9 @@ class VelocityGuard(Node):
                 String(data=json.dumps({"event": reason, "wall_time_ns": time.time_ns()}))
             )
             self.reason = reason
+        self.timing.record(
+            "guard_tick_end", duration_ns=time.monotonic_ns() - started, reason=reason
+        )
 
     def publish_command(self, forwarding):
         command = self.command if forwarding else Twist()
@@ -158,7 +172,15 @@ class VelocityGuard(Node):
             )
             message.header.stamp.sec, message.header.stamp.nanosec = divmod(issued, 1000000000)
             message.twist = command
+            self.timing.record(
+                "guard_publish_begin",
+                sequence=self.sequence,
+                issued_ns=issued,
+                vx=command.linear.x,
+                wz=command.angular.z,
+            )
             self.publisher.publish(message)
+            self.timing.record("guard_publish_end", sequence=self.sequence)
         else:
             self.publisher.publish(command)
 

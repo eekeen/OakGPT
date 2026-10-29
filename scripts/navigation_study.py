@@ -28,6 +28,10 @@ def run_trial(args, world):
     shutil.copytree(world, copied)
     if args.launch == "expiry.launch.py":
         enable_expiry(copied)
+    if getattr(args, "timing", False):
+        from phase33_world import instrument_world
+
+        instrument_world(copied)
     if args.overlay or args.progress_trace:
         import yaml
 
@@ -37,6 +41,10 @@ def run_trial(args, world):
         if args.progress_trace:
             parameters["controller_server"]["ros__parameters"]["progress_checker"]["plugin"] = (
                 "oak_nav_trace::ProgressTrace"
+            )
+        if getattr(args, "timing", False):
+            parameters["controller_server"]["ros__parameters"]["FollowPath"]["plugin"] = (
+                "oak_nav_trace::ControllerTrace"
             )
         (copied / "nav2.yaml").write_text(yaml.safe_dump(parameters, sort_keys=False))
     source_hashes = {p.name: sha256(p) for p in world.iterdir() if p.is_file()}
@@ -48,6 +56,7 @@ def run_trial(args, world):
         "--",
         "env",
         f"OAK_ROS_INSTALL={args.install}",
+        "OAK_TIMING_PREFIX=" + (args.install if getattr(args, "timing", False) else ""),
         f"OAK_EXPIRY_PLUGIN_DIR={args.expiry_plugin_dir}",
         "OAK_FASTDDS_PROFILE=" + (wsl_path(args.fastdds_profile) if args.fastdds_profile else ""),
         "GZ_PARTITION=oak-phase32-" + args.output.name + "-" + world.name,
@@ -135,6 +144,7 @@ def main():
     parser.add_argument("--fastdds-profile", type=Path)
     parser.add_argument("--overlay", type=Path)
     parser.add_argument("--progress-trace", action="store_true")
+    parser.add_argument("--timing", action="store_true")
     parser.add_argument(
         "--instructions", nargs="+", default=["Go to station", "Inspect storage", "Go to dock"]
     )

@@ -1,0 +1,88 @@
+{
+  "status": "completed",
+  "reason": "ok",
+  "mission_id": "m-4c53fa89d4034695",
+  "execution_seconds": 4.097964150016196,
+  "events": [
+    {
+      "event": "accepted",
+      "mission_id": "m-4c53fa89d4034695",
+      "wall_time_ns": 1793188598718590626,
+      "sim_time_ns": 59940000000
+    },
+    {
+      "event": "watchdog_armed",
+      "mission_id": "m-4c53fa89d4034695",
+      "wall_time_ns": 1793188598721052306,
+      "sim_time_ns": 59980000000
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-4c53fa89d4034695",
+      "wall_time_ns": 1793188598726924176,
+      "sim_time_ns": 59980000000,
+      "index": 0,
+      "action": "navigate"
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-4c53fa89d4034695",
+      "wall_time_ns": 1793188599209673016,
+      "sim_time_ns": 60460000000,
+      "distance_remaining": 0.591421365737915
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-4c53fa89d4034695",
+      "wall_time_ns": 1793188600219562656,
+      "sim_time_ns": 61470000000,
+      "distance_remaining": 0.39142122864723206
+    },
+    {
+      "event": "arrived",
+      "mission_id": "m-4c53fa89d4034695",
+      "wall_time_ns": 1793188600769259346,
+      "sim_time_ns": 62020000000,
+      "destination": "station",
+      "residual_m": 0.25544370876815226
+    },
+    {
+      "event": "step_completed",
+      "mission_id": "m-4c53fa89d4034695",
+      "wall_time_ns": 1793188600769434576,
+      "sim_time_ns": 62020000000,
+      "index": 0
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-4c53fa89d4034695",
+      "wall_time_ns": 1793188600775513086,
+      "sim_time_ns": 62020000000,
+      "index": 1,
+      "action": "inspect"
+    },
+    {
+      "event": "inspection_snapshot",
+      "mission_id": "m-4c53fa89d4034695",
+      "wall_time_ns": 1793188602780137536,
+      "sim_time_ns": 64040000000,
+      "destination": "station",
+      "valid_ranges": 360,
+      "minimum_range_m": 3.2919960021972656
+    },
+    {
+      "event": "step_completed",
+      "mission_id": "m-4c53fa89d4034695",
+      "wall_time_ns": 1793188602780348946,
+      "sim_time_ns": 64040000000,
+      "index": 1
+    },
+    {
+      "event": "completed",
+      "mission_id": "m-4c53fa89d4034695",
+      "wall_time_ns": 1793188602780468556,
+      "sim_time_ns": 64040000000,
+      "reason": "ok"
+    }
+  ]
+}

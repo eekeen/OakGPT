@@ -1,0 +1,40 @@
+{
+  "environment": {
+    "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "logical_cpu_count": 16,
+    "torch": "2.9.1",
+    "cuda_runtime": null,
+    "cudnn": null,
+    "cuda_available": false,
+    "gpu": null,
+    "git_revision": "88cc41d4a20905b3d1363ca3a60f19b1061edbc2",
+    "git_dirty": true
+  },
+  "worlds": [
+    "empty-42",
+    "center_block-43",
+    "empty-43",
+    "offset_wall-41",
+    "center_block-42",
+    "empty-41",
+    "offset_wall-43",
+    "offset_wall-42",
+    "center_block-41"
+  ],
+  "seeds": [
+    41,
+    42,
+    43
+  ],
+  "stop_assignment": "Latin rotation over layout and seed",
+  "trial_order_seed": 31,
+  "stop_kind_override": null,
+  "stopping_anchor": "last pre-injection received Gazebo world-pose sample",
+  "thresholds": {
+    "translation_m_s": 0.01,
+    "yaw_rad_s": 0.03,
+    "hold_s": 0.3
+  }
+}

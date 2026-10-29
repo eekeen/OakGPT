@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from oakgpt.robotics.evaluate import summarize, wilson
+from oakgpt.robotics.evaluate import run_study, summarize, wilson
 from oakgpt.robotics.planner import plan_prompt
 from oakgpt.robotics.plans import (
     PROPOSAL_SCHEMA,
@@ -124,3 +124,20 @@ def test_metrics_keep_rejected_valid_requests_in_completion_denominator():
     assert wilson(0, 0) is None
     interval = wilson(36, 36)
     assert interval and 0.90 < interval[0] < 1 and interval[1] == 1
+
+
+def test_study_rejects_duplicate_planner_order_before_execution(tmp_path):
+    config = tmp_path / "config.json"
+    config.write_text(
+        json.dumps(
+            {
+                "output_dir": "study",
+                "dataset": str(Path("data/robotics/instructions_v1.jsonl").resolve()),
+                "spool": "spool",
+                "models": {"Q4_K_M": "unused"},
+                "planner_order": ["baseline", "baseline"],
+            }
+        )
+    )
+    with pytest.raises(ValueError, match="exact permutation"):
+        run_study(config)

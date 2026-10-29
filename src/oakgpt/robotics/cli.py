@@ -13,12 +13,19 @@ def main() -> None:
     sub = parser.add_subparsers(dest="command", required=True)
     study = sub.add_parser("evaluate")
     study.add_argument("--config", type=Path, required=True)
+    language = sub.add_parser("language")
+    language.add_argument("--config", type=Path, required=True)
     plan = sub.add_parser("plan")
     plan.add_argument("--instruction", required=True)
     plan.add_argument("--config", type=Path, required=True)
     plan.add_argument("--planner", choices=["baseline", "qwen"], default="baseline")
     plan.add_argument("--submit", action="store_true")
     args = parser.parse_args()
+    if args.command == "language":
+        from oakgpt.robotics.language import run_language
+
+        print(json.dumps(run_language(args.config)["summaries"], indent=2))
+        return
     if args.command == "evaluate":
         print(json.dumps(run_study(args.config)["summaries"], indent=2))
         return

@@ -1,0 +1,42 @@
+{
+  "status": "failed",
+  "reason": "Nav2 status 6",
+  "mission_id": "m-dbfa64aa4a014ace",
+  "execution_seconds": 0.1009696499677375,
+  "events": [
+    {
+      "event": "accepted",
+      "mission_id": "m-dbfa64aa4a014ace",
+      "wall_time_ns": 1793133104288425000,
+      "sim_time_ns": 1003716930069
+    },
+    {
+      "event": "watchdog_armed",
+      "mission_id": "m-dbfa64aa4a014ace",
+      "wall_time_ns": 1793133104293023370,
+      "sim_time_ns": 1003716930069
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-dbfa64aa4a014ace",
+      "wall_time_ns": 1793133104299062910,
+      "sim_time_ns": 1003716930069,
+      "index": 0,
+      "action": "navigate"
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-dbfa64aa4a014ace",
+      "wall_time_ns": 1793133104302868200,
+      "sim_time_ns": 1003716930069,
+      "distance_remaining": 0.800000011920929
+    },
+    {
+      "event": "failed",
+      "mission_id": "m-dbfa64aa4a014ace",
+      "wall_time_ns": 1793133104357369230,
+      "sim_time_ns": 1003817517579,
+      "reason": "Nav2 status 6"
+    }
+  ]
+}

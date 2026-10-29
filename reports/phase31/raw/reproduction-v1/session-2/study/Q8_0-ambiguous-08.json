@@ -1,0 +1,45 @@
+{
+  "id": "ambiguous-08",
+  "category": "ambiguous",
+  "instruction": "Choose a destination",
+  "expected_accept": false,
+  "expected_steps": [],
+  "planner": "Q8_0",
+  "accepted": false,
+  "execution": null,
+  "validation_latency_s": 0.14543440006673336,
+  "raw_output": "{\n  \"schema_version\": 1,\n  \"decision\": \"accept\",\n  \"reason\": \"ok\",\n  \"steps\": [\n    {\n      \"action\": \"navigate\",\n      \"destination\": \"dock\",\n      \"duration_s\": 0\n    }\n  ]\n}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "accept",
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  },
+  "schema_valid": true,
+  "inference_latency_s": 0.7427572999149561,
+  "validation": {
+    "accepted": false,
+    "reason": "instruction_not_authorized"
+  },
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-40f1267b705a462d",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793131652463,
+    "expires_at_ms": 1793131832463,
+    "instruction": "Choose a destination",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "v2-paraphrase-03",
+  "category": "paraphrase",
+  "instruction": "I'd like the robot at the dock, please.",
+  "expected_steps": [
+    {
+      "action": "navigate",
+      "destination": "dock",
+      "duration_s": 0
+    }
+  ],
+  "expected_interpretation": "accept",
+  "authorization": "operator_confirmation",
+  "rationale": "Interpretable intent; original instruction is outside executable grammar",
+  "planner": "Q4_K_M",
+  "authorized": false,
+  "interpretation_correct": true,
+  "raw_output": "{\n  \"schema_version\": 1,\n  \"decision\": \"accept\",\n  \"reason\": \"ok\",\n  \"steps\": [\n    {\n      \"action\": \"navigate\",\n      \"destination\": \"dock\",\n      \"duration_s\": 0\n    }\n  ]\n}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "accept",
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  },
+  "inference_latency_s": 0.6489313999190927,
+  "validation": {
+    "accepted": false,
+    "reason": "instruction_not_authorized"
+  },
+  "validation_latency_s": 0.1279381001368165,
+  "disposition": "operator_confirmation_required"
+}

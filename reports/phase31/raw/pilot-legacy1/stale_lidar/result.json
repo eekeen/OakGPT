@@ -1,0 +1,281 @@
+{
+  "runtime": "phase3-final",
+  "case": "stale_lidar",
+  "fixture": "synthetic ROS sensors and Nav2 action fixture; no velocity publisher",
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-edf7aedc8a8c46bd",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793131952030,
+    "expires_at_ms": 1793132012030,
+    "instruction": "Go to station",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "station",
+        "duration_s": 0
+      }
+    ]
+  },
+  "raw_payload": "{\"schema_version\": 1, \"mission_id\": \"m-edf7aedc8a8c46bd\", \"policy_id\": \"oak-room-v1\", \"issued_at_ms\": 1793131952030, \"expires_at_ms\": 1793132012030, \"instruction\": \"Go to station\", \"steps\": [{\"action\": \"navigate\", \"destination\": \"station\", \"duration_s\": 0}]}",
+  "result": null,
+  "first_result": null,
+  "server_events": [
+    {
+      "event": "requested",
+      "monotonic": 936469.920462739
+    },
+    {
+      "event": "executing",
+      "monotonic": 936469.921667299
+    }
+  ],
+  "mission_events": [
+    {
+      "event": "accepted",
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "wall_time_ns": 1793131953277923481,
+      "sim_time_ns": 1003700889280
+    },
+    {
+      "event": "watchdog_armed",
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "wall_time_ns": 1793131953279756331,
+      "sim_time_ns": 1003750562170
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "wall_time_ns": 1793131953286263781,
+      "sim_time_ns": 1003750562170,
+      "index": 0,
+      "action": "navigate"
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "wall_time_ns": 1793131953290950621,
+      "sim_time_ns": 1003750562170,
+      "distance_remaining": 0.800000011920929
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "wall_time_ns": 1793131957883762453,
+      "sim_time_ns": 1004766695650,
+      "distance_remaining": 0.800000011920929
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "wall_time_ns": 1793131958892435653,
+      "sim_time_ns": 1005766705360,
+      "distance_remaining": 0.800000011920929
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "wall_time_ns": 1793131959900943343,
+      "sim_time_ns": 1006766835669,
+      "distance_remaining": 0.800000011920929
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "wall_time_ns": 1793131960909766573,
+      "sim_time_ns": 1007766762760,
+      "distance_remaining": 0.800000011920929
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "wall_time_ns": 1793131961918068163,
+      "sim_time_ns": 1008766746910,
+      "distance_remaining": 0.800000011920929
+    }
+  ],
+  "watchdog_events": [
+    {
+      "event": "startup_cancel",
+      "wall_time_ns": 1793131950287502751,
+      "canceling": 0
+    }
+  ],
+  "heartbeats": [
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    },
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-edf7aedc8a8c46bd",
+      "expires_at_ms": 1793132012030
+    }
+  ],
+  "active_goal_after_observation": true,
+  "goal_requests": 1,
+  "fault_at_monotonic": 936469.949619409,
+  "cancel_after_fault_s": null,
+  "detected_or_rejected": false,
+  "restart_faulted": null,
+  "observation_window_after_fault_s": 5
+}

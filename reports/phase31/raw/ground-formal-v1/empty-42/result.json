@@ -1,0 +1,4841 @@
+{
+  "world": {
+    "layout": "empty",
+    "seed": 42,
+    "start": {
+      "x": -0.12211464030842326,
+      "y": -0.18999569791093324,
+      "yaw": -0.13498240897852845
+    },
+    "amcl_initial_error": {
+      "x": 0.03,
+      "y": -0.02,
+      "yaw": 0.02
+    },
+    "obstacles": [],
+    "truth": "Gazebo model world pose, distinct from wheel odometry and AMCL",
+    "map_world_alignment": "identity by construction",
+    "physics_step_s": 0.01,
+    "truth_frequency_hz": 30
+  },
+  "controls": [
+    {
+      "mission": {
+        "schema_version": 1,
+        "mission_id": "m-083fe155a9d9426a",
+        "policy_id": "oak-room-v1",
+        "issued_at_ms": 1793133790178,
+        "expires_at_ms": 1793133970178,
+        "instruction": "Go to station",
+        "steps": [
+          {
+            "action": "navigate",
+            "destination": "station",
+            "duration_s": 0
+          }
+        ]
+      },
+      "result": {
+        "status": "completed",
+        "reason": "ok",
+        "mission_id": "m-083fe155a9d9426a",
+        "execution_seconds": 3.5197532100137323,
+        "events": [
+          {
+            "event": "accepted",
+            "mission_id": "m-083fe155a9d9426a",
+            "wall_time_ns": 1793133790302441124,
+            "sim_time_ns": 5700000000
+          },
+          {
+            "event": "watchdog_armed",
+            "mission_id": "m-083fe155a9d9426a",
+            "wall_time_ns": 1793133790307120314,
+            "sim_time_ns": 5750000000
+          },
+          {
+            "event": "step_started",
+            "mission_id": "m-083fe155a9d9426a",
+            "wall_time_ns": 1793133790314322294,
+            "sim_time_ns": 5750000000,
+            "index": 0,
+            "action": "navigate"
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-083fe155a9d9426a",
+            "wall_time_ns": 1793133790322441374,
+            "sim_time_ns": 5760000000,
+            "distance_remaining": 0.0
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-083fe155a9d9426a",
+            "wall_time_ns": 1793133791328152674,
+            "sim_time_ns": 6770000000,
+            "distance_remaining": 0.7707104682922363
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-083fe155a9d9426a",
+            "wall_time_ns": 1793133792338105044,
+            "sim_time_ns": 7780000000,
+            "distance_remaining": 0.5707108378410339
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-083fe155a9d9426a",
+            "wall_time_ns": 1793133793348371604,
+            "sim_time_ns": 8790000000,
+            "distance_remaining": 0.3207107186317444
+          },
+          {
+            "event": "arrived",
+            "mission_id": "m-083fe155a9d9426a",
+            "wall_time_ns": 1793133793770016204,
+            "sim_time_ns": 9210000000,
+            "destination": "station",
+            "residual_m": 0.2253090501565213
+          },
+          {
+            "event": "step_completed",
+            "mission_id": "m-083fe155a9d9426a",
+            "wall_time_ns": 1793133793771397164,
+            "sim_time_ns": 9210000000,
+            "index": 0
+          },
+          {
+            "event": "completed",
+            "mission_id": "m-083fe155a9d9426a",
+            "wall_time_ns": 1793133793771659064,
+            "sim_time_ns": 9210000000,
+            "reason": "ok"
+          }
+        ]
+      }
+    },
+    {
+      "mission": {
+        "schema_version": 1,
+        "mission_id": "m-177cb91e971b4e91",
+        "policy_id": "oak-room-v1",
+        "issued_at_ms": 1793133793900,
+        "expires_at_ms": 1793133973900,
+        "instruction": "Inspect storage",
+        "steps": [
+          {
+            "action": "navigate",
+            "destination": "storage",
+            "duration_s": 0
+          },
+          {
+            "action": "inspect",
+            "destination": "storage",
+            "duration_s": 2
+          }
+        ]
+      },
+      "result": {
+        "status": "completed",
+        "reason": "ok",
+        "mission_id": "m-177cb91e971b4e91",
+        "execution_seconds": 8.616963780019432,
+        "events": [
+          {
+            "event": "accepted",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133794014696144,
+            "sim_time_ns": 9420000000
+          },
+          {
+            "event": "watchdog_armed",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133794018263294,
+            "sim_time_ns": 9460000000
+          },
+          {
+            "event": "step_started",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133794025271504,
+            "sim_time_ns": 9460000000,
+            "index": 0,
+            "action": "navigate"
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133794358313174,
+            "sim_time_ns": 9800000000,
+            "distance_remaining": 1.0861390829086304
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133795368103094,
+            "sim_time_ns": 10810000000,
+            "distance_remaining": 1.0824906826019287
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133796378006774,
+            "sim_time_ns": 11820000000,
+            "distance_remaining": 1.045710563659668
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133797388040054,
+            "sim_time_ns": 12830000000,
+            "distance_remaining": 0.9207106828689575
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133798388315174,
+            "sim_time_ns": 13830000000,
+            "distance_remaining": 0.7207107543945312
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133799400183734,
+            "sim_time_ns": 14840000000,
+            "distance_remaining": 0.49571073055267334
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133800408111914,
+            "sim_time_ns": 15850000000,
+            "distance_remaining": 0.24571073055267334
+          },
+          {
+            "event": "arrived",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133800577652654,
+            "sim_time_ns": 16020000000,
+            "destination": "storage",
+            "residual_m": 0.23698841985432392
+          },
+          {
+            "event": "step_completed",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133800577822214,
+            "sim_time_ns": 16020000000,
+            "index": 0
+          },
+          {
+            "event": "step_started",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133800584735564,
+            "sim_time_ns": 16020000000,
+            "index": 1,
+            "action": "inspect"
+          },
+          {
+            "event": "inspection_snapshot",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133802589730274,
+            "sim_time_ns": 18040000000,
+            "destination": "storage",
+            "valid_ranges": 360,
+            "minimum_range_m": 3.231748104095459
+          },
+          {
+            "event": "step_completed",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133802589953384,
+            "sim_time_ns": 18040000000,
+            "index": 1
+          },
+          {
+            "event": "completed",
+            "mission_id": "m-177cb91e971b4e91",
+            "wall_time_ns": 1793133802590058144,
+            "sim_time_ns": 18040000000,
+            "reason": "ok"
+          }
+        ]
+      }
+    },
+    {
+      "mission": {
+        "schema_version": 1,
+        "mission_id": "m-3771dc3d76a84248",
+        "policy_id": "oak-room-v1",
+        "issued_at_ms": 1793133802686,
+        "expires_at_ms": 1793133982686,
+        "instruction": "Go to dock",
+        "steps": [
+          {
+            "action": "navigate",
+            "destination": "dock",
+            "duration_s": 0
+          }
+        ]
+      },
+      "result": {
+        "status": "completed",
+        "reason": "ok",
+        "mission_id": "m-3771dc3d76a84248",
+        "execution_seconds": 6.300862830015831,
+        "events": [
+          {
+            "event": "accepted",
+            "mission_id": "m-3771dc3d76a84248",
+            "wall_time_ns": 1793133802808606134,
+            "sim_time_ns": 18200000000
+          },
+          {
+            "event": "watchdog_armed",
+            "mission_id": "m-3771dc3d76a84248",
+            "wall_time_ns": 1793133802812826594,
+            "sim_time_ns": 18260000000
+          },
+          {
+            "event": "step_started",
+            "mission_id": "m-3771dc3d76a84248",
+            "wall_time_ns": 1793133802819907884,
+            "sim_time_ns": 18260000000,
+            "index": 0,
+            "action": "navigate"
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-3771dc3d76a84248",
+            "wall_time_ns": 1793133802828064944,
+            "sim_time_ns": 18270000000,
+            "distance_remaining": 0.6327563524246216
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-3771dc3d76a84248",
+            "wall_time_ns": 1793133803833513804,
+            "sim_time_ns": 19280000000,
+            "distance_remaining": 0.5457108616828918
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-3771dc3d76a84248",
+            "wall_time_ns": 1793133804842875144,
+            "sim_time_ns": 20290000000,
+            "distance_remaining": 0.5492706894874573
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-3771dc3d76a84248",
+            "wall_time_ns": 1793133805853075194,
+            "sim_time_ns": 21300000000,
+            "distance_remaining": 0.5492706894874573
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-3771dc3d76a84248",
+            "wall_time_ns": 1793133806862587374,
+            "sim_time_ns": 22310000000,
+            "distance_remaining": 0.39571067690849304
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-3771dc3d76a84248",
+            "wall_time_ns": 1793133807873487084,
+            "sim_time_ns": 23320000000,
+            "distance_remaining": 0.19571076333522797
+          },
+          {
+            "event": "navigation_feedback",
+            "mission_id": "m-3771dc3d76a84248",
+            "wall_time_ns": 1793133808874379604,
+            "sim_time_ns": 24310000000,
+            "distance_remaining": 0.14571088552474976
+          },
+          {
+            "event": "arrived",
+            "mission_id": "m-3771dc3d76a84248",
+            "wall_time_ns": 1793133809062486444,
+            "sim_time_ns": 24510000000,
+            "destination": "dock",
+            "residual_m": 0.1968105965683874
+          },
+          {
+            "event": "step_completed",
+            "mission_id": "m-3771dc3d76a84248",
+            "wall_time_ns": 1793133809062675084,
+            "sim_time_ns": 24510000000,
+            "index": 0
+          },
+          {
+            "event": "completed",
+            "mission_id": "m-3771dc3d76a84248",
+            "wall_time_ns": 1793133809062864804,
+            "sim_time_ns": 24510000000,
+            "reason": "ok"
+          }
+        ]
+      }
+    }
+  ],
+  "stop": {
+    "kind": "watchdog_crash",
+    "mission": {
+      "schema_version": 1,
+      "mission_id": "m-ad14a19764bd4e68",
+      "policy_id": "oak-room-v1",
+      "issued_at_ms": 1793133809153,
+      "expires_at_ms": 1793133989153,
+      "instruction": "Go to storage",
+      "steps": [
+        {
+          "action": "navigate",
+          "destination": "storage",
+          "duration_s": 0
+        }
+      ]
+    },
+    "pre_injection_speed_m_s": 0.06064384981086003,
+    "trigger_speed_anchor": {
+      "kind": "truth",
+      "wall_ns": 1793133809430582034,
+      "monotonic_ns": 938139714603529,
+      "sim_ns": 24880000000,
+      "frame": "oak_room",
+      "child": "oak_robot",
+      "x": 0.22297975281381527,
+      "y": 0.1448281234773162,
+      "yaw": -0.04329604507254521
+    },
+    "injection": {
+      "kind": "mission_watchdog",
+      "pid": 190804,
+      "before_wall_ns": 1793133809697890044,
+      "before_monotonic_ns": 938139981912169,
+      "after_wall_ns": 1793133809698102804,
+      "after_monotonic_ns": 938139982123579,
+      "clock_domain": "WSL receiver wall clock"
+    },
+    "post_injection_tail": [
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133808800542254,
+        "monotonic_ns": 938139084563479,
+        "vx": -0.027252603322267532,
+        "vy": 0.0,
+        "wz": 0.492434561252594
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133808806768814,
+        "monotonic_ns": 938139090789949,
+        "vx": -0.027252603322267532,
+        "wz": 0.492434561252594
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133808826977594,
+        "monotonic_ns": 938139110998639,
+        "vx": -0.027252603322267532,
+        "wz": 0.492434561252594
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133808830463204,
+        "monotonic_ns": 938139114484519,
+        "sim_ns": 24280000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.23750835988246455,
+        "y": 0.14358183590237675,
+        "yaw": -0.15424056218437687
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133808840520434,
+        "monotonic_ns": 938139124542109,
+        "vx": -0.04544064402580261,
+        "vy": 0.0,
+        "wz": 0.44316574931144714
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133808846919794,
+        "monotonic_ns": 938139130941289,
+        "vx": -0.04544064402580261,
+        "wz": 0.44316574931144714
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133808866865954,
+        "monotonic_ns": 938139150887179,
+        "vx": -0.04544064402580261,
+        "wz": 0.44316574931144714
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133808872752314,
+        "monotonic_ns": 938139156773719,
+        "sim_ns": 24320000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.23614986365515503,
+        "y": 0.14378380546701847,
+        "yaw": -0.1340499089098812
+      },
+      {
+        "kind": "amcl",
+        "wall_ns": 1793133808874025454,
+        "monotonic_ns": 938139158046409,
+        "sim_ns": 24300000000,
+        "frame": "map",
+        "x": 0.1829036726843545,
+        "y": 0.1155443875276633,
+        "yaw": -0.18476956809967482,
+        "covariance": [
+          0.004610483548059596,
+          -0.00239905391014774,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.00239905391014774,
+          0.005747044957438991,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0040409407191532125
+        ]
+      },
+      {
+        "kind": "mission_events",
+        "wall_ns": 1793133808875664174,
+        "monotonic_ns": 938139159685129,
+        "data": {
+          "event": "navigation_feedback",
+          "mission_id": "m-3771dc3d76a84248",
+          "wall_time_ns": 1793133808874379604,
+          "sim_time_ns": 24310000000,
+          "distance_remaining": 0.14571088552474976
+        }
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133808887063124,
+        "monotonic_ns": 938139171084259,
+        "vx": -0.04544064402580261,
+        "wz": 0.44316574931144714
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133808907031424,
+        "monotonic_ns": 938139191053099,
+        "vx": -0.04544064402580261,
+        "wz": 0.44316574931144714
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133808910708554,
+        "monotonic_ns": 938139194729779,
+        "sim_ns": 24360000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.23439294136372008,
+        "y": 0.14401986699541086,
+        "yaw": -0.11469931177058182
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133808921031464,
+        "monotonic_ns": 938139205052869,
+        "vx": -0.04544064402580261,
+        "vy": 0.0,
+        "wz": 0.44316574931144714
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133808926731074,
+        "monotonic_ns": 938139210752389,
+        "vx": -0.04544064402580261,
+        "wz": 0.44316574931144714
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133808946955154,
+        "monotonic_ns": 938139230976469,
+        "vx": -0.04544064402580261,
+        "wz": 0.44316574931144714
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133808950466774,
+        "monotonic_ns": 938139234487909,
+        "sim_ns": 24400000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.2325858128069498,
+        "y": 0.14421454660411034,
+        "yaw": -0.09500462425436448
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133808951419334,
+        "monotonic_ns": 938139235440019,
+        "vx": -0.06663832813501358,
+        "vy": 0.0,
+        "wz": 0.39223262667655945
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133808966859554,
+        "monotonic_ns": 938139250880869,
+        "vx": -0.06663832813501358,
+        "wz": 0.39223262667655945
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133808987343914,
+        "monotonic_ns": 938139271365319,
+        "vx": -0.06663832813501358,
+        "wz": 0.39223262667655945
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133808991251534,
+        "monotonic_ns": 938139275272669,
+        "sim_ns": 24440000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.23045989223417557,
+        "y": 0.14440469820602136,
+        "yaw": -0.0772378540128901
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809001323704,
+        "monotonic_ns": 938139285344659,
+        "vx": -0.06663832813501358,
+        "vy": 0.0,
+        "wz": 0.39223262667655945
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809006943664,
+        "monotonic_ns": 938139290964889,
+        "vx": -0.06663832813501358,
+        "wz": 0.39223262667655945
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809026950394,
+        "monotonic_ns": 938139310972159,
+        "vx": -0.06663832813501358,
+        "wz": 0.39223262667655945
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809031258154,
+        "monotonic_ns": 938139315279649,
+        "sim_ns": 24480000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.22790350786811656,
+        "y": 0.14460144479088036,
+        "yaw": -0.06056724670272442
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809041480174,
+        "monotonic_ns": 938139325501489,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.23223262667655944
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809046741394,
+        "monotonic_ns": 938139330762439,
+        "vx": 0.0,
+        "wz": 0.23223262667655944
+      },
+      {
+        "kind": "action_status",
+        "wall_ns": 1793133809062885864,
+        "monotonic_ns": 938139346907269,
+        "goals": [
+          {
+            "id": "c80a39919ea24e2088db90ff46585158",
+            "status": 4
+          },
+          {
+            "id": "af718bd6a9f3458f90223d8d20581d8d",
+            "status": 4
+          },
+          {
+            "id": "ba366b9331784b7a8c66b6feec793f1d",
+            "status": 4
+          }
+        ]
+      },
+      {
+        "kind": "mission_events",
+        "wall_ns": 1793133809064304714,
+        "monotonic_ns": 938139348325579,
+        "data": {
+          "event": "arrived",
+          "mission_id": "m-3771dc3d76a84248",
+          "wall_time_ns": 1793133809062486444,
+          "sim_time_ns": 24510000000,
+          "destination": "dock",
+          "residual_m": 0.1968105965683874
+        }
+      },
+      {
+        "kind": "mission_events",
+        "wall_ns": 1793133809065635904,
+        "monotonic_ns": 938139349657039,
+        "data": {
+          "event": "step_completed",
+          "mission_id": "m-3771dc3d76a84248",
+          "wall_time_ns": 1793133809062675084,
+          "sim_time_ns": 24510000000,
+          "index": 0
+        }
+      },
+      {
+        "kind": "mission_events",
+        "wall_ns": 1793133809066834524,
+        "monotonic_ns": 938139350855479,
+        "data": {
+          "event": "completed",
+          "mission_id": "m-3771dc3d76a84248",
+          "wall_time_ns": 1793133809062864804,
+          "sim_time_ns": 24510000000,
+          "reason": "ok"
+        }
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809067918664,
+        "monotonic_ns": 938139351939799,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "guard_events",
+        "wall_ns": 1793133809070486724,
+        "monotonic_ns": 938139354508219,
+        "data": {
+          "event": "no_active_lease",
+          "wall_time_ns": 1793133809066708074
+        }
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809073088354,
+        "monotonic_ns": 938139357109759,
+        "sim_ns": 24520000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.22638267196819634,
+        "y": 0.1446742743659363,
+        "yaw": -0.04647838468992138
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809087150674,
+        "monotonic_ns": 938139371172169,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809106989374,
+        "monotonic_ns": 938139391010419,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809110931014,
+        "monotonic_ns": 938139394952239,
+        "sim_ns": 24560000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.22638267196819634,
+        "y": 0.1446742743659363,
+        "yaw": -0.04647838468992138
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809120886094,
+        "monotonic_ns": 938139404907229,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.07223262667655944
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809127091504,
+        "monotonic_ns": 938139411112549,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809146888624,
+        "monotonic_ns": 938139430909939,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809151381964,
+        "monotonic_ns": 938139435403819,
+        "sim_ns": 24600000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.22638267196819634,
+        "y": 0.1446742743659363,
+        "yaw": -0.04647838468992138
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809161459534,
+        "monotonic_ns": 938139445481479,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809167205764,
+        "monotonic_ns": 938139451227709,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809187200524,
+        "monotonic_ns": 938139471221929,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809190604864,
+        "monotonic_ns": 938139474626539,
+        "sim_ns": 24640000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.22638267196819634,
+        "y": 0.1446742743659363,
+        "yaw": -0.04647838468992138
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809200955944,
+        "monotonic_ns": 938139484977529,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809207021494,
+        "monotonic_ns": 938139491042539,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809227025704,
+        "monotonic_ns": 938139511047109,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809230833604,
+        "monotonic_ns": 938139514855459,
+        "sim_ns": 24680000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.22638267196819634,
+        "y": 0.1446742743659363,
+        "yaw": -0.04647838468992138
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809240694814,
+        "monotonic_ns": 938139524715859,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809246972494,
+        "monotonic_ns": 938139530993809,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809266907764,
+        "monotonic_ns": 938139550929169,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809270428474,
+        "monotonic_ns": 938139554449879,
+        "sim_ns": 24720000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.22638267196819634,
+        "y": 0.1446742743659363,
+        "yaw": -0.04647838468992138
+      },
+      {
+        "kind": "mission_events",
+        "wall_ns": 1793133809281894294,
+        "monotonic_ns": 938139565915429,
+        "data": {
+          "event": "accepted",
+          "mission_id": "m-ad14a19764bd4e68",
+          "wall_time_ns": 1793133809281431514,
+          "sim_time_ns": 24680000000
+        }
+      },
+      {
+        "kind": "mission_events",
+        "wall_ns": 1793133809284449304,
+        "monotonic_ns": 938139568470799,
+        "data": {
+          "event": "watchdog_armed",
+          "mission_id": "m-ad14a19764bd4e68",
+          "wall_time_ns": 1793133809283917134,
+          "sim_time_ns": 24730000000
+        }
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809286882994,
+        "monotonic_ns": 938139570904219,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "guard_events",
+        "wall_ns": 1793133809288227414,
+        "monotonic_ns": 938139572248369,
+        "data": {
+          "event": "forwarding",
+          "wall_time_ns": 1793133809286564304
+        }
+      },
+      {
+        "kind": "mission_events",
+        "wall_ns": 1793133809291841814,
+        "monotonic_ns": 938139575862859,
+        "data": {
+          "event": "step_started",
+          "mission_id": "m-ad14a19764bd4e68",
+          "wall_time_ns": 1793133809291286874,
+          "sim_time_ns": 24730000000,
+          "index": 0,
+          "action": "navigate"
+        }
+      },
+      {
+        "kind": "action_status",
+        "wall_ns": 1793133809293417624,
+        "monotonic_ns": 938139577438759,
+        "goals": [
+          {
+            "id": "c80a39919ea24e2088db90ff46585158",
+            "status": 4
+          },
+          {
+            "id": "af718bd6a9f3458f90223d8d20581d8d",
+            "status": 4
+          },
+          {
+            "id": "ba366b9331784b7a8c66b6feec793f1d",
+            "status": 4
+          },
+          {
+            "id": "e51178da9583426eaf857b5ada72d2ee",
+            "status": 2
+          }
+        ]
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809306864074,
+        "monotonic_ns": 938139590885119,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809310144214,
+        "monotonic_ns": 938139594165529,
+        "sim_ns": 24760000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.22638267196819634,
+        "y": 0.1446742743659363,
+        "yaw": -0.04647838468992138
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809311888954,
+        "monotonic_ns": 938139595910359,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809327056384,
+        "monotonic_ns": 938139611077429,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809346946114,
+        "monotonic_ns": 938139630967429,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809350164154,
+        "monotonic_ns": 938139634185649,
+        "sim_ns": 24800000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.22638267196819634,
+        "y": 0.1446742743659363,
+        "yaw": -0.04647838468992138
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809361258904,
+        "monotonic_ns": 938139645280759,
+        "vx": -0.05546041578054428,
+        "vy": 0.0,
+        "wz": 0.05115891247987747
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809367258034,
+        "monotonic_ns": 938139651279169,
+        "vx": -0.05546041578054428,
+        "wz": 0.05115891247987747
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809386996474,
+        "monotonic_ns": 938139671017789,
+        "vx": -0.05546041578054428,
+        "wz": 0.05115891247987747
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809390674684,
+        "monotonic_ns": 938139674695909,
+        "sim_ns": 24840000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.22540308094035139,
+        "y": 0.14471966508460088,
+        "yaw": -0.04545512955642815
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809400626074,
+        "monotonic_ns": 938139684647119,
+        "vx": -0.05546041578054428,
+        "vy": 0.0,
+        "wz": 0.05115891247987747
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809406906274,
+        "monotonic_ns": 938139690927499,
+        "vx": -0.05546041578054428,
+        "wz": 0.05115891247987747
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809426817964,
+        "monotonic_ns": 938139710839549,
+        "vx": -0.05546041578054428,
+        "wz": 0.05115891247987747
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809430582034,
+        "monotonic_ns": 938139714603529,
+        "sim_ns": 24880000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.22297975281381527,
+        "y": 0.1448281234773162,
+        "yaw": -0.04329604507254521
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809440772824,
+        "monotonic_ns": 938139724794319,
+        "vx": -0.0899510383605957,
+        "vy": 0.0,
+        "wz": 0.115738146007061
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809446799944,
+        "monotonic_ns": 938139730821079,
+        "vx": -0.0899510383605957,
+        "wz": 0.115738146007061
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809467033384,
+        "monotonic_ns": 938139751054699,
+        "vx": -0.0899510383605957,
+        "wz": 0.115738146007061
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809471752714,
+        "monotonic_ns": 938139755773939,
+        "sim_ns": 24920000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.22012680107642194,
+        "y": 0.1449510570721072,
+        "yaw": -0.03983488657859502
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809487218494,
+        "monotonic_ns": 938139771239629,
+        "vx": -0.0899510383605957,
+        "wz": 0.115738146007061
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809506821124,
+        "monotonic_ns": 938139790842169,
+        "vx": -0.0899510383605957,
+        "wz": 0.115738146007061
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809510118814,
+        "monotonic_ns": 938139794140039,
+        "sim_ns": 24960000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.21654124275609277,
+        "y": 0.14508758906923763,
+        "yaw": -0.03474405458538275
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809511733594,
+        "monotonic_ns": 938139795754729,
+        "vx": -0.0899510383605957,
+        "vy": 0.0,
+        "wz": 0.115738146007061
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809526943684,
+        "monotonic_ns": 938139810964999,
+        "vx": -0.0899510383605957,
+        "wz": 0.115738146007061
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809547101434,
+        "monotonic_ns": 938139831123289,
+        "vx": -0.0899510383605957,
+        "wz": 0.115738146007061
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809552692774,
+        "monotonic_ns": 938139836714359,
+        "sim_ns": 25000000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.21294797096108764,
+        "y": 0.14520542550551746,
+        "yaw": -0.02960174571749001
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809554313854,
+        "monotonic_ns": 938139838335169,
+        "vx": -0.1,
+        "vy": 0.0,
+        "wz": 0.133825421333313
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809567037154,
+        "monotonic_ns": 938139851058469,
+        "vx": -0.1,
+        "wz": 0.133825421333313
+      },
+      {
+        "kind": "amcl",
+        "wall_ns": 1793133809580408094,
+        "monotonic_ns": 938139864429679,
+        "sim_ns": 25000000000,
+        "frame": "map",
+        "x": 0.15986190543622097,
+        "y": 0.12013556389977845,
+        "yaw": -0.0662979387618076,
+        "covariance": [
+          0.0057571086944479336,
+          -0.002060623863287314,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.002060623863287314,
+          0.004580538257090006,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.004552798423993415
+        ]
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809587109854,
+        "monotonic_ns": 938139871131079,
+        "vx": -0.1,
+        "wz": 0.133825421333313
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809591241304,
+        "monotonic_ns": 938139875262529,
+        "sim_ns": 25040000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.20918425572075708,
+        "y": 0.14531071991334013,
+        "yaw": -0.024288101773032655
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809600910544,
+        "monotonic_ns": 938139884931589,
+        "vx": -0.1,
+        "vy": 0.0,
+        "wz": 0.133825421333313
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809606986534,
+        "monotonic_ns": 938139891007759,
+        "vx": -0.1,
+        "wz": 0.133825421333313
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809626954474,
+        "monotonic_ns": 938139910975609,
+        "vx": -0.1,
+        "wz": 0.133825421333313
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809630430544,
+        "monotonic_ns": 938139914451589,
+        "sim_ns": 25080000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.2051900675206394,
+        "y": 0.14539885948383344,
+        "yaw": -0.01835835298912897
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809640725104,
+        "monotonic_ns": 938139924746329,
+        "vx": -0.1,
+        "vy": 0.0,
+        "wz": 0.19075942039489746
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809646851674,
+        "monotonic_ns": 938139930872719,
+        "vx": -0.1,
+        "wz": 0.19075942039489746
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809667433144,
+        "monotonic_ns": 938139951454369,
+        "vx": -0.1,
+        "wz": 0.19075942039489746
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809671338784,
+        "monotonic_ns": 938139955360099,
+        "sim_ns": 25120000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.2011930861896068,
+        "y": 0.1454632479944597,
+        "yaw": -0.011780923053156176
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809680360834,
+        "monotonic_ns": 938139964382509,
+        "vx": -0.1,
+        "vy": 0.0,
+        "wz": 0.19075942039489746
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809686872424,
+        "monotonic_ns": 938139970893559,
+        "vx": -0.1,
+        "wz": 0.19075942039489746
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809707050424,
+        "monotonic_ns": 938139991071829,
+        "vx": -0.1,
+        "wz": 0.19075942039489746
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809710278994,
+        "monotonic_ns": 938139994300129,
+        "sim_ns": 25160000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.19719549216862448,
+        "y": 0.14549800161644907,
+        "yaw": -0.003421841453991314
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809726885164,
+        "monotonic_ns": 938140010906659,
+        "vx": -0.1,
+        "wz": 0.19075942039489746
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809746836634,
+        "monotonic_ns": 938140030857769,
+        "vx": -0.1,
+        "wz": 0.19075942039489746
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809751147634,
+        "monotonic_ns": 938140035169219,
+        "sim_ns": 25200000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.19319782164183852,
+        "y": 0.14549881013727012,
+        "yaw": 0.005054769278537059
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809760885004,
+        "monotonic_ns": 938140044906319,
+        "vx": -0.1,
+        "vy": 0.0,
+        "wz": 0.22045409679412842
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809767191934,
+        "monotonic_ns": 938140051213339,
+        "vx": -0.1,
+        "wz": 0.22045409679412842
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809787106324,
+        "monotonic_ns": 938140071127819,
+        "vx": -0.1,
+        "wz": 0.22045409679412842
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809790480604,
+        "monotonic_ns": 938140074501919,
+        "sim_ns": 25240000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1891994786573061,
+        "y": 0.1454659414374626,
+        "yaw": 0.013928304817100303
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809800541794,
+        "monotonic_ns": 938140084562929,
+        "vx": -0.1,
+        "vy": 0.0,
+        "wz": 0.22045409679412842
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809806890664,
+        "monotonic_ns": 938140090912069,
+        "vx": -0.1,
+        "wz": 0.22045409679412842
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809827043104,
+        "monotonic_ns": 938140111064509,
+        "vx": -0.1,
+        "wz": 0.22045409679412842
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809830487314,
+        "monotonic_ns": 938140114508539,
+        "sim_ns": 25280000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.18520225503601145,
+        "y": 0.14539540124025224,
+        "yaw": 0.02372465130586162
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809840364994,
+        "monotonic_ns": 938140124386219,
+        "vx": -0.09709842503070831,
+        "vy": 0.0,
+        "wz": 0.23262186348438263
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809847064774,
+        "monotonic_ns": 938140131085999,
+        "vx": -0.09709842503070831,
+        "wz": 0.23262186348438263
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809866947214,
+        "monotonic_ns": 938140150968259,
+        "vx": -0.09709842503070831,
+        "wz": 0.23262186348438263
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809870325454,
+        "monotonic_ns": 938140154346589,
+        "sim_ns": 25320000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.18124261575217135,
+        "y": 0.14528803553589698,
+        "yaw": 0.03363417276025503
+      },
+      {
+        "kind": "mission_events",
+        "wall_ns": 1793133809876150524,
+        "monotonic_ns": 938140160171929,
+        "data": {
+          "event": "navigation_feedback",
+          "mission_id": "m-ad14a19764bd4e68",
+          "wall_time_ns": 1793133809875534924,
+          "sim_time_ns": 25320000000,
+          "distance_remaining": 0.6818085312843323
+        }
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809887157884,
+        "monotonic_ns": 938140171179289,
+        "vx": -0.09709842503070831,
+        "wz": 0.23262186348438263
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809906935204,
+        "monotonic_ns": 938140190956519,
+        "vx": -0.09709842503070831,
+        "wz": 0.23262186348438263
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809910222184,
+        "monotonic_ns": 938140194243319,
+        "sim_ns": 25360000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.17736338483423095,
+        "y": 0.14514228670853793,
+        "yaw": 0.04397115900400696
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809912349334,
+        "monotonic_ns": 938140196370649,
+        "vx": -0.09709842503070831,
+        "vy": 0.0,
+        "wz": 0.23262186348438263
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809926833574,
+        "monotonic_ns": 938140210854709,
+        "vx": -0.09709842503070831,
+        "wz": 0.23262186348438263
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809946821044,
+        "monotonic_ns": 938140230842269,
+        "vx": -0.09709842503070831,
+        "wz": 0.23262186348438263
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809949928924,
+        "monotonic_ns": 938140233949969,
+        "sim_ns": 25400000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.17348581090939963,
+        "y": 0.1449564495706805,
+        "yaw": 0.0543083008582349
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133809961549814,
+        "monotonic_ns": 938140245570949,
+        "vx": -0.0883086770772934,
+        "vy": 0.0,
+        "wz": 0.267935186624527
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809967257614,
+        "monotonic_ns": 938140251278749,
+        "vx": -0.0883086770772934,
+        "wz": 0.267935186624527
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133809987024134,
+        "monotonic_ns": 938140271045179,
+        "vx": -0.0883086770772934,
+        "wz": 0.267935186624527
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133809990131114,
+        "monotonic_ns": 938140274152519,
+        "sim_ns": 25440000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.16971450729685972,
+        "y": 0.14474386191881927,
+        "yaw": 0.06490144792216934
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810001511794,
+        "monotonic_ns": 938140285533289,
+        "vx": -0.0883086770772934,
+        "vy": 0.0,
+        "wz": 0.267935186624527
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810006940504,
+        "monotonic_ns": 938140290961549,
+        "vx": -0.0883086770772934,
+        "wz": 0.267935186624527
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810027150904,
+        "monotonic_ns": 938140311172129,
+        "vx": -0.0883086770772934,
+        "wz": 0.267935186624527
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810031713184,
+        "monotonic_ns": 938140315734679,
+        "sim_ns": 25480000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.16615041346241752,
+        "y": 0.14450244370898255,
+        "yaw": 0.07649651804417655
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810041641804,
+        "monotonic_ns": 938140325663299,
+        "vx": -0.08226778358221054,
+        "vy": 0.0,
+        "wz": 0.2924913763999939
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810047033974,
+        "monotonic_ns": 938140331055199,
+        "vx": -0.08226778358221054,
+        "wz": 0.2924913763999939
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810068419324,
+        "monotonic_ns": 938140352440729,
+        "vx": -0.08226778358221054,
+        "wz": 0.2924913763999939
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810071444764,
+        "monotonic_ns": 938140355466259,
+        "sim_ns": 25520000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1626821950477228,
+        "y": 0.14422557704580816,
+        "yaw": 0.08843197229627346
+      },
+      {
+        "kind": "amcl",
+        "wall_ns": 1793133810078729814,
+        "monotonic_ns": 938140362751129,
+        "sim_ns": 25500000000,
+        "frame": "map",
+        "x": 0.10066543612563977,
+        "y": 0.12100430435792826,
+        "yaw": 0.0611756252655113,
+        "covariance": [
+          0.006700284084393904,
+          -0.0006298462993036269,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.0006298462993036269,
+          0.0036639504737224615,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0047327767681635356
+        ]
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810087220144,
+        "monotonic_ns": 938140371241549,
+        "vx": -0.08226778358221054,
+        "wz": 0.2924913763999939
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810107080174,
+        "monotonic_ns": 938140391101489,
+        "vx": -0.08226778358221054,
+        "wz": 0.2924913763999939
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810111014164,
+        "monotonic_ns": 938140395035389,
+        "sim_ns": 25560000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15936923246709378,
+        "y": 0.14392298085652824,
+        "yaw": 0.10114623140648688
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810112554514,
+        "monotonic_ns": 938140396575559,
+        "vx": -0.08226778358221054,
+        "vy": 0.0,
+        "wz": 0.2924913763999939
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810127350784,
+        "monotonic_ns": 938140411372279,
+        "vx": -0.08226778358221054,
+        "wz": 0.2924913763999939
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810147111544,
+        "monotonic_ns": 938140431133039,
+        "vx": -0.08226778358221054,
+        "wz": 0.2924913763999939
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810151922224,
+        "monotonic_ns": 938140435944169,
+        "sim_ns": 25600000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15609857997145835,
+        "y": 0.14357475525087704,
+        "yaw": 0.11414427949823966
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810161156674,
+        "monotonic_ns": 938140445178439,
+        "vx": -0.06283224374055862,
+        "vy": 0.0,
+        "wz": 0.3411218225955963
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810167033584,
+        "monotonic_ns": 938140451054719,
+        "vx": -0.06283224374055862,
+        "wz": 0.3411218225955963
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810187142644,
+        "monotonic_ns": 938140471164139,
+        "vx": -0.06283224374055862,
+        "wz": 0.3411218225955963
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810190289764,
+        "monotonic_ns": 938140474310809,
+        "sim_ns": 25640000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15312668371863822,
+        "y": 0.14322378227420757,
+        "yaw": 0.12753804842523755
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810200666764,
+        "monotonic_ns": 938140484688079,
+        "vx": -0.06283224374055862,
+        "vy": 0.0,
+        "wz": 0.3411218225955963
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810207144334,
+        "monotonic_ns": 938140491165829,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "guard_events",
+        "wall_ns": 1793133810208676314,
+        "monotonic_ns": 938140492697179,
+        "data": {
+          "event": "watchdog_unavailable",
+          "wall_time_ns": 1793133810206656444
+        }
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810226868464,
+        "monotonic_ns": 938140510889599,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810230726674,
+        "monotonic_ns": 938140514748079,
+        "sim_ns": 25680000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15161882827342307,
+        "y": 0.14304497140649577,
+        "yaw": 0.13599477887248454
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810240548284,
+        "monotonic_ns": 938140524569689,
+        "vx": -0.04625089839100838,
+        "vy": 0.0,
+        "wz": 0.364348828792572
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810246864934,
+        "monotonic_ns": 938140530886339,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810267051214,
+        "monotonic_ns": 938140551072709,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810270269344,
+        "monotonic_ns": 938140554294979,
+        "sim_ns": 25720000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15162019096216897,
+        "y": 0.14304515905203985,
+        "yaw": 0.13599477888103587
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810280902934,
+        "monotonic_ns": 938140564925239,
+        "vx": -0.04625089839100838,
+        "vy": 0.0,
+        "wz": 0.364348828792572
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810287173414,
+        "monotonic_ns": 938140571194639,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810307093204,
+        "monotonic_ns": 938140591115059,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810314049034,
+        "monotonic_ns": 938140598070889,
+        "sim_ns": 25760000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15162149995118288,
+        "y": 0.14304533930282645,
+        "yaw": 0.1359947788861489
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810327095074,
+        "monotonic_ns": 938140611116839,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810346884094,
+        "monotonic_ns": 938140630905319,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810350148844,
+        "monotonic_ns": 938140634170519,
+        "sim_ns": 25800000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15162275735482467,
+        "y": 0.14304551245019412,
+        "yaw": 0.13599477889086667
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810355110274,
+        "monotonic_ns": 938140639131769,
+        "vx": -0.028495408594608307,
+        "vy": 0.0,
+        "wz": 0.34153154492378235
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810368779384,
+        "monotonic_ns": 938140652800969,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810387106444,
+        "monotonic_ns": 938140671127939,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810390848374,
+        "monotonic_ns": 938140674869509,
+        "sim_ns": 25840000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15162396520623678,
+        "y": 0.14304567877411095,
+        "yaw": 0.1359947788952195
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810395166304,
+        "monotonic_ns": 938140679187529,
+        "vx": -0.028495408594608307,
+        "vy": 0.0,
+        "wz": 0.34153154492378235
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810407040904,
+        "monotonic_ns": 938140691062309,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810426911734,
+        "monotonic_ns": 938140710932959,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810430410574,
+        "monotonic_ns": 938140714431979,
+        "sim_ns": 25880000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15162512545840523,
+        "y": 0.14304583854350672,
+        "yaw": 0.1359947788992355
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810432057034,
+        "monotonic_ns": 938140716078709,
+        "vx": -0.032933250069618225,
+        "vy": 0.0,
+        "wz": 0.32897841930389404
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810446891374,
+        "monotonic_ns": 938140730912419,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810467237854,
+        "monotonic_ns": 938140751259619,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810471118654,
+        "monotonic_ns": 938140755139969,
+        "sim_ns": 25920000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15162623998733474,
+        "y": 0.14304599201671145,
+        "yaw": 0.1359947789029409
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810487214344,
+        "monotonic_ns": 938140771235659,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810507203884,
+        "monotonic_ns": 938140791225289,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810510811624,
+        "monotonic_ns": 938140794833299,
+        "sim_ns": 25960000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15162731059507312,
+        "y": 0.1430461394418698,
+        "yaw": 0.1359947789063597
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810512825914,
+        "monotonic_ns": 938140796847049,
+        "vx": -0.032933250069618225,
+        "vy": 0.0,
+        "wz": 0.32897841930389404
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810526985794,
+        "monotonic_ns": 938140811006749,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810546982624,
+        "monotonic_ns": 938140831003849,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810550999414,
+        "monotonic_ns": 938140835020639,
+        "sim_ns": 26000000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15162833901263043,
+        "y": 0.1430462810573465,
+        "yaw": 0.13599477890951386
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810561532834,
+        "monotonic_ns": 938140845554689,
+        "vx": -0.01083443034440279,
+        "vy": 0.0,
+        "wz": 0.31472301483154297
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810567315784,
+        "monotonic_ns": 938140851336919,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810587237734,
+        "monotonic_ns": 938140871258869,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810590125744,
+        "monotonic_ns": 938140874147059,
+        "sim_ns": 26040000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15162932690278233,
+        "y": 0.143046417092109,
+        "yaw": 0.13599477891242395
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810600563944,
+        "monotonic_ns": 938140884585439,
+        "vx": -0.01083443034440279,
+        "vy": 0.0,
+        "wz": 0.31472301483154297
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810606996694,
+        "monotonic_ns": 938140891018009,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810626965984,
+        "monotonic_ns": 938140910987119,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810630211564,
+        "monotonic_ns": 938140914232789,
+        "sim_ns": 26080000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15163027586276348,
+        "y": 0.14304654776609965,
+        "yaw": 0.13599477891510892
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810640342144,
+        "monotonic_ns": 938140924363189,
+        "vx": -0.010288186371326447,
+        "vy": 0.0,
+        "wz": 0.32931244373321533
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810646922854,
+        "monotonic_ns": 938140930943899,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810666903754,
+        "monotonic_ns": 938140950924979,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810670656934,
+        "monotonic_ns": 938140954677979,
+        "sim_ns": 26120000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15163118742684067,
+        "y": 0.14304667329059065,
+        "yaw": 0.13599477891758616
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810687053314,
+        "monotonic_ns": 938140971075079,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "action_status",
+        "wall_ns": 1793133810695509714,
+        "monotonic_ns": 938140979530759,
+        "goals": [
+          {
+            "id": "c80a39919ea24e2088db90ff46585158",
+            "status": 4
+          },
+          {
+            "id": "af718bd6a9f3458f90223d8d20581d8d",
+            "status": 4
+          },
+          {
+            "id": "ba366b9331784b7a8c66b6feec793f1d",
+            "status": 4
+          },
+          {
+            "id": "e51178da9583426eaf857b5ada72d2ee",
+            "status": 3
+          }
+        ]
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810707490244,
+        "monotonic_ns": 938140991514979,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810710374654,
+        "monotonic_ns": 938140994395789,
+        "sim_ns": 26160000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516320630688063,
+        "y": 0.14304679386852523,
+        "yaw": 0.1359947789198717
+      },
+      {
+        "kind": "action_status",
+        "wall_ns": 1793133810716185684,
+        "monotonic_ns": 938141000207179,
+        "goals": [
+          {
+            "id": "c80a39919ea24e2088db90ff46585158",
+            "status": 4
+          },
+          {
+            "id": "af718bd6a9f3458f90223d8d20581d8d",
+            "status": 4
+          },
+          {
+            "id": "ba366b9331784b7a8c66b6feec793f1d",
+            "status": 4
+          },
+          {
+            "id": "e51178da9583426eaf857b5ada72d2ee",
+            "status": 5
+          }
+        ]
+      },
+      {
+        "kind": "mission_events",
+        "wall_ns": 1793133810717718474,
+        "monotonic_ns": 938141001739249,
+        "data": {
+          "event": "failed",
+          "mission_id": "m-ad14a19764bd4e68",
+          "wall_time_ns": 1793133810716227804,
+          "sim_time_ns": 26160000000,
+          "reason": "watchdog_not_ready_or_faulted"
+        }
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810721622314,
+        "monotonic_ns": 938141005643719,
+        "vx": -0.010288186371326447,
+        "vy": 0.0,
+        "wz": 0.32931244373321533
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810726858334,
+        "monotonic_ns": 938141010879829,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "guard_events",
+        "wall_ns": 1793133810727948054,
+        "monotonic_ns": 938141011969279,
+        "data": {
+          "event": "latched_fault",
+          "wall_time_ns": 1793133810726441004
+        }
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810747279334,
+        "monotonic_ns": 938141031301009,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810751041694,
+        "monotonic_ns": 938141035062919,
+        "sim_ns": 26200000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516329042043647,
+        "y": 0.14304690969484968,
+        "yaw": 0.13599477892198042
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810762257494,
+        "monotonic_ns": 938141046279259,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.16931244373321533
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810767037214,
+        "monotonic_ns": 938141051059069,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810787039804,
+        "monotonic_ns": 938141071061029,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810790287814,
+        "monotonic_ns": 938141074309219,
+        "sim_ns": 26240000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15163371219341187,
+        "y": 0.14304702095682398,
+        "yaw": 0.13599477892392597
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810792065584,
+        "monotonic_ns": 938141076086809,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.009312443733215325
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810806950684,
+        "monotonic_ns": 938141090972179,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810826883074,
+        "monotonic_ns": 938141110904299,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810830624374,
+        "monotonic_ns": 938141114645509,
+        "sim_ns": 26280000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516344883422475,
+        "y": 0.14304712783433085,
+        "yaw": 0.13599477892572087
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810840310534,
+        "monotonic_ns": 938141124332209,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810846855604,
+        "monotonic_ns": 938141130877009,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810866943514,
+        "monotonic_ns": 938141150965369,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810870517144,
+        "monotonic_ns": 938141154538819,
+        "sim_ns": 26320000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15163523390567948,
+        "y": 0.14304723050015689,
+        "yaw": 0.13599477892737682
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810887345704,
+        "monotonic_ns": 938141171367109,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810907007734,
+        "monotonic_ns": 938141191028779,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810913246084,
+        "monotonic_ns": 938141197267849,
+        "sim_ns": 26360000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15163595008906094,
+        "y": 0.14304732912028323,
+        "yaw": 0.13599477892890455
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810920810494,
+        "monotonic_ns": 938141204831539,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810926911144,
+        "monotonic_ns": 938141210932999,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810946755874,
+        "monotonic_ns": 938141230777009,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810950112694,
+        "monotonic_ns": 938141234133829,
+        "sim_ns": 26400000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15163663805023433,
+        "y": 0.14304742385414612,
+        "yaw": 0.13599477893031406
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810960953914,
+        "monotonic_ns": 938141244975409,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810967045564,
+        "monotonic_ns": 938141251066969,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133810987031774,
+        "monotonic_ns": 938141271053269,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133810990733654,
+        "monotonic_ns": 938141274754789,
+        "sim_ns": 26440000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15163729890140168,
+        "y": 0.14304751485489964,
+        "yaw": 0.13599477893161446
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133810991487134,
+        "monotonic_ns": 938141275508359,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811006790464,
+        "monotonic_ns": 938141290811959,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811027018414,
+        "monotonic_ns": 938141311040179,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811030995334,
+        "monotonic_ns": 938141315016739,
+        "sim_ns": 26480000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.151637933710934,
+        "y": 0.14304760226966012,
+        "yaw": 0.13599477893281411
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811040592844,
+        "monotonic_ns": 938141324614429,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811046807884,
+        "monotonic_ns": 938141330829199,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811066931974,
+        "monotonic_ns": 938141350953379,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811070667244,
+        "monotonic_ns": 938141354688919,
+        "sim_ns": 26520000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516385435050937,
+        "y": 0.14304768623974645,
+        "yaw": 0.13599477893392092
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811087154974,
+        "monotonic_ns": 938141371176469,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811106877754,
+        "monotonic_ns": 938141390899429,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811110231514,
+        "monotonic_ns": 938141394252739,
+        "sim_ns": 26560000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15163912926969708,
+        "y": 0.14304776690090804,
+        "yaw": 0.135994778934942
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811120779154,
+        "monotonic_ns": 938141404800739,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811126851454,
+        "monotonic_ns": 938141410872859,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811146871774,
+        "monotonic_ns": 938141430892999,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811150041664,
+        "monotonic_ns": 938141434063249,
+        "sim_ns": 26600000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.151639691951703,
+        "y": 0.14304784438354307,
+        "yaw": 0.13599477893588402
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811161144514,
+        "monotonic_ns": 938141445166009,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811166980024,
+        "monotonic_ns": 938141451001699,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811187153794,
+        "monotonic_ns": 938141471174929,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811190414404,
+        "monotonic_ns": 938141474435809,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811191251584,
+        "monotonic_ns": 938141475272269,
+        "sim_ns": 26640000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516402324607483,
+        "y": 0.1430479188129101,
+        "yaw": 0.13599477893675302
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811206842374,
+        "monotonic_ns": 938141490863599,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811226849374,
+        "monotonic_ns": 938141510870419,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811230219874,
+        "monotonic_ns": 938141514241279,
+        "sim_ns": 26680000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164075167062216,
+        "y": 0.14304799030933096,
+        "yaw": 0.13599477893755468
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811240428214,
+        "monotonic_ns": 938141524449349,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811246800754,
+        "monotonic_ns": 938141530821889,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811267007824,
+        "monotonic_ns": 938141551029769,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811270470754,
+        "monotonic_ns": 938141554492159,
+        "sim_ns": 26720000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164125042067444,
+        "y": 0.14304805898838743,
+        "yaw": 0.13599477893829418
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811287124804,
+        "monotonic_ns": 938141571146119,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811306808704,
+        "monotonic_ns": 938141590829839,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811310117464,
+        "monotonic_ns": 938141594138689,
+        "sim_ns": 26760000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164149237648175,
+        "y": 0.14304809230627194,
+        "yaw": 0.1359947789386422
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811311093514,
+        "monotonic_ns": 938141595114199,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811326739384,
+        "monotonic_ns": 938141610760429,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811346890024,
+        "monotonic_ns": 938141630911069,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811350097444,
+        "monotonic_ns": 938141634119029,
+        "sim_ns": 26800000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164218973461935,
+        "y": 0.14304818833413077,
+        "yaw": 0.13599477893960576
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811361068264,
+        "monotonic_ns": 938141645089849,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811366971544,
+        "monotonic_ns": 938141650992769,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811387110034,
+        "monotonic_ns": 938141671131439,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811390433284,
+        "monotonic_ns": 938141674454509,
+        "sim_ns": 26840000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516425229569807,
+        "y": 0.14304823421963578,
+        "yaw": 0.13599477894004555
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811400624884,
+        "monotonic_ns": 938141684646289,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811406841994,
+        "monotonic_ns": 938141690863219,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811426791304,
+        "monotonic_ns": 938141710824589,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811430824294,
+        "monotonic_ns": 938141714845969,
+        "sim_ns": 26880000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516428462819438,
+        "y": 0.1430482787422467,
+        "yaw": 0.13599477894045955
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811440668224,
+        "monotonic_ns": 938141724689359,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811446748804,
+        "monotonic_ns": 938141730769939,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811466861914,
+        "monotonic_ns": 938141750883319,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811470736954,
+        "monotonic_ns": 938141754758179,
+        "sim_ns": 26920000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164346440688262,
+        "y": 0.14304836385951133,
+        "yaw": 0.13599477894121603
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811486966474,
+        "monotonic_ns": 938141770987699,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811506849184,
+        "monotonic_ns": 938141790870229,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811510121674,
+        "monotonic_ns": 938141794142809,
+        "sim_ns": 26960000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164375976888975,
+        "y": 0.14304840453155723,
+        "yaw": 0.13599477894156128
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811521077194,
+        "monotonic_ns": 938141805098239,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811526948164,
+        "monotonic_ns": 938141810969389,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811546983244,
+        "monotonic_ns": 938141831004379,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811550204794,
+        "monotonic_ns": 938141834225839,
+        "sim_ns": 27000000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164404635806827,
+        "y": 0.14304844399556427,
+        "yaw": 0.1359947789418863
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811551223504,
+        "monotonic_ns": 938141835244279,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811566965494,
+        "monotonic_ns": 938141850986989,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811587240964,
+        "monotonic_ns": 938141871261919,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811590408694,
+        "monotonic_ns": 938141874430279,
+        "sim_ns": 27040000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164459425252647,
+        "y": 0.14304851944192698,
+        "yaw": 0.13599477894248013
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811600698574,
+        "monotonic_ns": 938141884719889,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811606783024,
+        "monotonic_ns": 938141890804159,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811626872464,
+        "monotonic_ns": 938141910894229,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811630409554,
+        "monotonic_ns": 938141914430779,
+        "sim_ns": 27080000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164485605597444,
+        "y": 0.14304855549288084,
+        "yaw": 0.1359947789427512
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811640532214,
+        "monotonic_ns": 938141924553709,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811646938684,
+        "monotonic_ns": 938141930959729,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811667131264,
+        "monotonic_ns": 938141951152669,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811673251174,
+        "monotonic_ns": 938141957272579,
+        "sim_ns": 27120000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164511008338247,
+        "y": 0.14304859047305585,
+        "yaw": 0.13599477894300624
+      },
+      {
+        "kind": "nav_command",
+        "wall_ns": 1793133811680891544,
+        "monotonic_ns": 938141964913039,
+        "vx": 0.0,
+        "vy": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811687371544,
+        "monotonic_ns": 938141971392859,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811707155164,
+        "monotonic_ns": 938141991176299,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811710743734,
+        "monotonic_ns": 938141994765139,
+        "sim_ns": 27160000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164559572710093,
+        "y": 0.14304865734734615,
+        "yaw": 0.13599477894347242
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811727070454,
+        "monotonic_ns": 938142011091859,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811746866584,
+        "monotonic_ns": 938142030888079,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811750995874,
+        "monotonic_ns": 938142035017009,
+        "sim_ns": 27200000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516459035956855,
+        "y": 0.1430486997415804,
+        "yaw": 0.13599477894375325
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811766963494,
+        "monotonic_ns": 938142050984629,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811786966714,
+        "monotonic_ns": 938142070988029,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811790079094,
+        "monotonic_ns": 938142074100319,
+        "sim_ns": 27240000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164619933273615,
+        "y": 0.14304874046527244,
+        "yaw": 0.1359947789440122
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811806811174,
+        "monotonic_ns": 938142090832759,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811827009244,
+        "monotonic_ns": 938142111030739,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811830154384,
+        "monotonic_ns": 938142114175789,
+        "sim_ns": 27280000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516464834163032,
+        "y": 0.14304877958425238,
+        "yaw": 0.13599477894425116
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811846848844,
+        "monotonic_ns": 938142130869889,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811867120174,
+        "monotonic_ns": 938142151141759,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811871621254,
+        "monotonic_ns": 938142155642389,
+        "sim_ns": 27320000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516467563056067,
+        "y": 0.14304881716175705,
+        "yaw": 0.13599477894447154
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811887173254,
+        "monotonic_ns": 938142171194569,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811906832314,
+        "monotonic_ns": 938142190853359,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811910686744,
+        "monotonic_ns": 938142194708239,
+        "sim_ns": 27360000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164701844176415,
+        "y": 0.1430488532585278,
+        "yaw": 0.13599477894467468
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811926911584,
+        "monotonic_ns": 938142210932629,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811946847484,
+        "monotonic_ns": 938142230868529,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811950349564,
+        "monotonic_ns": 938142234370789,
+        "sim_ns": 27400000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516472702485154,
+        "y": 0.1430488879329147,
+        "yaw": 0.13599477894486203
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811966948084,
+        "monotonic_ns": 938142250969669,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133811987064164,
+        "monotonic_ns": 938142271085479,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133811990539154,
+        "monotonic_ns": 938142274560109,
+        "sim_ns": 27440000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164751213288938,
+        "y": 0.14304892124096735,
+        "yaw": 0.13599477894503484
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812006954794,
+        "monotonic_ns": 938142290976289,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812026950904,
+        "monotonic_ns": 938142310971859,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812030189104,
+        "monotonic_ns": 938142314210419,
+        "sim_ns": 27480000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164751213288938,
+        "y": 0.14304892124096735,
+        "yaw": 0.13599477894503484
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812046912724,
+        "monotonic_ns": 938142330933949,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812066958784,
+        "monotonic_ns": 938142350980189,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812070790174,
+        "monotonic_ns": 938142354811849,
+        "sim_ns": 27520000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516478011292058,
+        "y": 0.1430489610364461,
+        "yaw": 0.13599477894523207
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812087013934,
+        "monotonic_ns": 938142371035159,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812107039384,
+        "monotonic_ns": 938142391060519,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812110251574,
+        "monotonic_ns": 938142394272889,
+        "sim_ns": 27560000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516480759615978,
+        "y": 0.1430489988815188,
+        "yaw": 0.13599477894541034
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812126978254,
+        "monotonic_ns": 938142410999659,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812146738204,
+        "monotonic_ns": 938142430759249,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812150163334,
+        "monotonic_ns": 938142434184649,
+        "sim_ns": 27600000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516483373242641,
+        "y": 0.1430490348717786,
+        "yaw": 0.13599477894557147
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812167058944,
+        "monotonic_ns": 938142451081069,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812187254314,
+        "monotonic_ns": 938142471275359,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812191084174,
+        "monotonic_ns": 938142475105759,
+        "sim_ns": 27640000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164858587737406,
+        "y": 0.14304906909813325,
+        "yaw": 0.13599477894571707
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812206821574,
+        "monotonic_ns": 938142490842619,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812226801754,
+        "monotonic_ns": 938142510823069,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812230133554,
+        "monotonic_ns": 938142514154959,
+        "sim_ns": 27680000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164858587737406,
+        "y": 0.14304906909813325,
+        "yaw": 0.13599477894571707
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812246891104,
+        "monotonic_ns": 938142530912149,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812266928884,
+        "monotonic_ns": 938142550950379,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812270832364,
+        "monotonic_ns": 938142554853679,
+        "sim_ns": 27720000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164886811427836,
+        "y": 0.14304910796282627,
+        "yaw": 0.13599477894587342
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812287264204,
+        "monotonic_ns": 938142571285609,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812307009214,
+        "monotonic_ns": 938142591030529,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812310134104,
+        "monotonic_ns": 938142594155509,
+        "sim_ns": 27760000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164913383451628,
+        "y": 0.14304914455313508,
+        "yaw": 0.13599477894601178
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812326781674,
+        "monotonic_ns": 938142610803259,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812346863914,
+        "monotonic_ns": 938142630885499,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812350214344,
+        "monotonic_ns": 938142634235749,
+        "sim_ns": 27800000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164913383451628,
+        "y": 0.14304914455313508,
+        "yaw": 0.13599477894601178
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812367472834,
+        "monotonic_ns": 938142651494239,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812386979164,
+        "monotonic_ns": 938142671000659,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812390374414,
+        "monotonic_ns": 938142674395819,
+        "sim_ns": 27840000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164938400467487,
+        "y": 0.1430491790021608,
+        "yaw": 0.1359947789461344
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812406784474,
+        "monotonic_ns": 938142690805789,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812426800024,
+        "monotonic_ns": 938142710821249,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812430446104,
+        "monotonic_ns": 938142714467419,
+        "sim_ns": 27880000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164938400467487,
+        "y": 0.1430491790021608,
+        "yaw": 0.1359947789461344
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812446745104,
+        "monotonic_ns": 938142730766599,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812466941914,
+        "monotonic_ns": 938142750963409,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812470132774,
+        "monotonic_ns": 938142754154449,
+        "sim_ns": 27920000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516496574273464,
+        "y": 0.1430492166531125,
+        "yaw": 0.1359947789462597
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812487037924,
+        "monotonic_ns": 938142771059239,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812506815604,
+        "monotonic_ns": 938142790836829,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812510911234,
+        "monotonic_ns": 938142794933269,
+        "sim_ns": 27960000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164991227497013,
+        "y": 0.1430492517462357,
+        "yaw": 0.13599477894636838
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812526792364,
+        "monotonic_ns": 938142810813589,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812546903134,
+        "monotonic_ns": 938142830924179,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812549990224,
+        "monotonic_ns": 938142834011179,
+        "sim_ns": 28000000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15164991227497013,
+        "y": 0.1430492517462357,
+        "yaw": 0.13599477894636838
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812567012014,
+        "monotonic_ns": 938142851033509,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812586949264,
+        "monotonic_ns": 938142870970399,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812590448914,
+        "monotonic_ns": 938142874470049,
+        "sim_ns": 28040000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15165018239925893,
+        "y": 0.14304928894299226,
+        "yaw": 0.1359947789464751
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812606810014,
+        "monotonic_ns": 938142890831059,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812626840054,
+        "monotonic_ns": 938142910861819,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812630530954,
+        "monotonic_ns": 938142914552179,
+        "sim_ns": 28080000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15165018239925893,
+        "y": 0.14304928894299226,
+        "yaw": 0.1359947789464751
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812646848404,
+        "monotonic_ns": 938142930869719,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812666899144,
+        "monotonic_ns": 938142950920189,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812670971644,
+        "monotonic_ns": 938142954993049,
+        "sim_ns": 28120000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516504316548634,
+        "y": 0.14304932326608158,
+        "yaw": 0.13599477894656603
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812687652874,
+        "monotonic_ns": 938142971674189,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812706814144,
+        "monotonic_ns": 938142990835369,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812709978724,
+        "monotonic_ns": 938142993999859,
+        "sim_ns": 28160000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516504316548634,
+        "y": 0.14304932326608158,
+        "yaw": 0.13599477894656603
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812726817454,
+        "monotonic_ns": 938143010838589,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812746822474,
+        "monotonic_ns": 938143030843519,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812750044294,
+        "monotonic_ns": 938143034065699,
+        "sim_ns": 28200000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516504316548634,
+        "y": 0.14304932326608158,
+        "yaw": 0.13599477894656603
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812766951604,
+        "monotonic_ns": 938143050973099,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812787501394,
+        "monotonic_ns": 938143071522979,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812790497134,
+        "monotonic_ns": 938143074518449,
+        "sim_ns": 28240000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15165068912533594,
+        "y": 0.1430493587203792,
+        "yaw": 0.13599477894665188
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812806909894,
+        "monotonic_ns": 938143090931119,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812826883414,
+        "monotonic_ns": 938143110904729,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812830619854,
+        "monotonic_ns": 938143114641709,
+        "sim_ns": 28280000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.15165068912533594,
+        "y": 0.1430493587203792,
+        "yaw": 0.13599477894665188
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812846961424,
+        "monotonic_ns": 938143130982649,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812867219434,
+        "monotonic_ns": 938143151240659,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812870948224,
+        "monotonic_ns": 938143154969629,
+        "sim_ns": 28320000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516509491734896,
+        "y": 0.14304939452962923,
+        "yaw": 0.13599477894673032
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812887042474,
+        "monotonic_ns": 938143171063969,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812907078724,
+        "monotonic_ns": 938143191100039,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812909979604,
+        "monotonic_ns": 938143194001189,
+        "sim_ns": 28360000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516509491734896,
+        "y": 0.14304939452962923,
+        "yaw": 0.13599477894673032
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812926836514,
+        "monotonic_ns": 938143210858099,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812947196674,
+        "monotonic_ns": 938143231218169,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812950259734,
+        "monotonic_ns": 938143234281229,
+        "sim_ns": 28400000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516509491734896,
+        "y": 0.14304939452962923,
+        "yaw": 0.13599477894673032
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812967099724,
+        "monotonic_ns": 938143251120949,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133812987261434,
+        "monotonic_ns": 938143271282929,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133812990246824,
+        "monotonic_ns": 938143274268139,
+        "sim_ns": 28440000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516512066005321,
+        "y": 0.14304942997794678,
+        "yaw": 0.13599477894680012
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813006911134,
+        "monotonic_ns": 938143290933079,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813026715814,
+        "monotonic_ns": 938143310737219,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133813031193854,
+        "monotonic_ns": 938143315215529,
+        "sim_ns": 28480000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516512066005321,
+        "y": 0.14304942997794678,
+        "yaw": 0.13599477894680012
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813047087404,
+        "monotonic_ns": 938143331108719,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813066924574,
+        "monotonic_ns": 938143350945709,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133813070737604,
+        "monotonic_ns": 938143354759009,
+        "sim_ns": 28520000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516512066005321,
+        "y": 0.14304942997794678,
+        "yaw": 0.13599477894680012
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813087186094,
+        "monotonic_ns": 938143371207679,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813106804384,
+        "monotonic_ns": 938143390825429,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133813110259304,
+        "monotonic_ns": 938143394280799,
+        "sim_ns": 28560000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516514568016982,
+        "y": 0.1430494644312431,
+        "yaw": 0.13599477894686027
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813126831904,
+        "monotonic_ns": 938143410852949,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813146805064,
+        "monotonic_ns": 938143430826379,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133813150686674,
+        "monotonic_ns": 938143434707719,
+        "sim_ns": 28600000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516514568016982,
+        "y": 0.1430494644312431,
+        "yaw": 0.13599477894686027
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813166908004,
+        "monotonic_ns": 938143450929319,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813186993214,
+        "monotonic_ns": 938143471014349,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133813190038274,
+        "monotonic_ns": 938143474059229,
+        "sim_ns": 28640000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516514568016982,
+        "y": 0.1430494644312431,
+        "yaw": 0.13599477894686027
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813206801494,
+        "monotonic_ns": 938143490822629,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813226851604,
+        "monotonic_ns": 938143510872649,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133813230250994,
+        "monotonic_ns": 938143514272399,
+        "sim_ns": 28680000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516516958782098,
+        "y": 0.14304949735264774,
+        "yaw": 0.13599477894691078
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813246873994,
+        "monotonic_ns": 938143530895219,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813267155584,
+        "monotonic_ns": 938143551177079,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133813272171914,
+        "monotonic_ns": 938143556193049,
+        "sim_ns": 28720000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516516958782098,
+        "y": 0.14304949735264774,
+        "yaw": 0.13599477894691078
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813287175004,
+        "monotonic_ns": 938143571196319,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "command",
+        "wall_ns": 1793133813306803464,
+        "monotonic_ns": 938143590824509,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      {
+        "kind": "truth",
+        "wall_ns": 1793133813310555114,
+        "monotonic_ns": 938143594576879,
+        "sim_ns": 28760000000,
+        "frame": "oak_room",
+        "child": "oak_robot",
+        "x": 0.1516516958782098,
+        "y": 0.14304949735264774,
+        "yaw": 0.13599477894691078
+      }
+    ],
+    "anchor": {
+      "kind": "truth",
+      "wall_ns": 1793133809671338784,
+      "monotonic_ns": 938139955360099,
+      "sim_ns": 25120000000,
+      "frame": "oak_room",
+      "child": "oak_robot",
+      "x": 0.2011930861896068,
+      "y": 0.1454632479944597,
+      "yaw": -0.011780923053156176
+    },
+    "anchor_receipt_age_at_injection_s": 0.02655207,
+    "mission_result": {
+      "status": "failed",
+      "reason": "watchdog_not_ready_or_faulted",
+      "mission_id": "m-ad14a19764bd4e68",
+      "execution_seconds": 1.4834480399731547,
+      "events": [
+        {
+          "event": "accepted",
+          "mission_id": "m-ad14a19764bd4e68",
+          "wall_time_ns": 1793133809281431514,
+          "sim_time_ns": 24680000000
+        },
+        {
+          "event": "watchdog_armed",
+          "mission_id": "m-ad14a19764bd4e68",
+          "wall_time_ns": 1793133809283917134,
+          "sim_time_ns": 24730000000
+        },
+        {
+          "event": "step_started",
+          "mission_id": "m-ad14a19764bd4e68",
+          "wall_time_ns": 1793133809291286874,
+          "sim_time_ns": 24730000000,
+          "index": 0,
+          "action": "navigate"
+        },
+        {
+          "event": "navigation_feedback",
+          "mission_id": "m-ad14a19764bd4e68",
+          "wall_time_ns": 1793133809875534924,
+          "sim_time_ns": 25320000000,
+          "distance_remaining": 0.6818085312843323
+        },
+        {
+          "event": "failed",
+          "mission_id": "m-ad14a19764bd4e68",
+          "wall_time_ns": 1793133810716227804,
+          "sim_time_ns": 26160000000,
+          "reason": "watchdog_not_ready_or_faulted"
+        }
+      ]
+    },
+    "last_action_status": {
+      "kind": "action_status",
+      "wall_ns": 1793133810716185684,
+      "monotonic_ns": 938141000207179,
+      "goals": [
+        {
+          "id": "c80a39919ea24e2088db90ff46585158",
+          "status": 4
+        },
+        {
+          "id": "af718bd6a9f3458f90223d8d20581d8d",
+          "status": 4
+        },
+        {
+          "id": "ba366b9331784b7a8c66b6feec793f1d",
+          "status": 4
+        },
+        {
+          "id": "e51178da9583426eaf857b5ada72d2ee",
+          "status": 5
+        }
+      ]
+    },
+    "status_observed_wall_ns": 1793133626064054200,
+    "motion_response": {
+      "settled": true,
+      "stop_latency_sim_s": 0.6,
+      "confirmed_after_sim_s": 0.92,
+      "stop_path_m": 0.04967386659251929,
+      "stop_displacement_m": 0.04963183550266886,
+      "speed_threshold_m_s": 0.01,
+      "yaw_threshold_rad_s": 0.03,
+      "hold_s": 0.3
+    }
+  },
+  "localization": {
+    "matched": 65,
+    "excluded": 0,
+    "max_bracket_gap_s": 0.15,
+    "position_rmse_m": 0.0472444215162416,
+    "position_p95_m": 0.0790519229613617,
+    "matches": [
+      {
+        "sim_ns": 6300000000,
+        "truth_x": -0.05534220914828107,
+        "truth_y": -0.1967660884340786,
+        "estimate_x": -0.02149720999573398,
+        "estimate_y": -0.21568204082215245,
+        "position_error_m": 0.038772377053564684,
+        "yaw_error_rad": 0.010701378007826959,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 6600000000,
+        "truth_x": 0.010544965144390041,
+        "truth_y": -0.19765717355248888,
+        "estimate_x": 0.03810997827316681,
+        "estimate_y": -0.215783226188131,
+        "position_error_m": 0.03299066129891465,
+        "yaw_error_rad": 0.0018446420589717238,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 6900000000,
+        "truth_x": 0.07625406567143667,
+        "truth_y": -0.19324175806949348,
+        "estimate_x": 0.10574531035552251,
+        "estimate_y": -0.21041776203626936,
+        "position_error_m": 0.034128413752814855,
+        "yaw_error_rad": 0.005687878215547365,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 7200000000,
+        "truth_x": 0.14173006106952368,
+        "truth_y": -0.18531729974484754,
+        "estimate_x": 0.17966311038263602,
+        "estimate_y": -0.20044080431109187,
+        "position_error_m": 0.040836706779026954,
+        "yaw_error_rad": 0.003854521358714863,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 7500000000,
+        "truth_x": 0.2069004372632605,
+        "truth_y": -0.17509872074175586,
+        "estimate_x": 0.23683023494134128,
+        "estimate_y": -0.18920740584030524,
+        "position_error_m": 0.03308848416384286,
+        "yaw_error_rad": 0.0014509516341944806,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 7800000000,
+        "truth_x": 0.2717394809600246,
+        "truth_y": -0.16290928451289224,
+        "estimate_x": 0.3069397681243557,
+        "estimate_y": -0.17559002994635398,
+        "position_error_m": 0.03741472332116908,
+        "yaw_error_rad": 0.007103619948280154,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 8100000000,
+        "truth_x": 0.33620699086146455,
+        "truth_y": -0.1489673729448907,
+        "estimate_x": 0.37204634085666144,
+        "estimate_y": -0.16000499307286403,
+        "position_error_m": 0.03750050754546745,
+        "yaw_error_rad": 0.004774274483334645,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 8400000000,
+        "truth_x": 0.40069664790128573,
+        "truth_y": -0.13499543944253947,
+        "estimate_x": 0.4299025199824419,
+        "estimate_y": -0.14630009095542987,
+        "position_error_m": 0.0313173771227533,
+        "yaw_error_rad": 0.0026617794311949716,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 8700000000,
+        "truth_x": 0.46563970792865117,
+        "truth_y": -0.12330842364995842,
+        "estimate_x": 0.48290237878162656,
+        "estimate_y": -0.1330262906177625,
+        "position_error_m": 0.019810016238814742,
+        "yaw_error_rad": 0.016424397517060124,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 9000000000,
+        "truth_x": 0.5306661287659636,
+        "truth_y": -0.11418546239139292,
+        "estimate_x": 0.5482723979543632,
+        "estimate_y": -0.12050919658344948,
+        "position_error_m": 0.018707493922655,
+        "yaw_error_rad": 0.021506327950078744,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 9300000000,
+        "truth_x": 0.5860650246723991,
+        "truth_y": -0.10829956194406484,
+        "estimate_x": 0.5996203047429296,
+        "estimate_y": -0.11403767405006308,
+        "position_error_m": 0.01471976726485598,
+        "yaw_error_rad": 0.018825073746996993,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 10100000000,
+        "truth_x": 0.5327779137325754,
+        "truth_y": -0.1156009952549031,
+        "estimate_x": 0.5465636462810889,
+        "estimate_y": -0.11986299556159709,
+        "position_error_m": 0.014429520730551062,
+        "yaw_error_rad": 0.010492461878345072,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 10500000000,
+        "truth_x": 0.4992883475599384,
+        "truth_y": -0.12465109766259844,
+        "estimate_x": 0.5119986933221838,
+        "estimate_y": -0.1254200914611608,
+        "position_error_m": 0.012733587116679185,
+        "yaw_error_rad": 0.013880023235587237,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 10800000000,
+        "truth_x": 0.48602341818085826,
+        "truth_y": -0.13027477910156723,
+        "estimate_x": 0.49068624777907016,
+        "estimate_y": -0.13617395289688283,
+        "position_error_m": 0.007519456850684046,
+        "yaw_error_rad": 0.006167341813180127,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 11000000000,
+        "truth_x": 0.4875291872873853,
+        "truth_y": -0.12927968702355763,
+        "estimate_x": 0.4853973742300006,
+        "estimate_y": -0.13904704269456578,
+        "position_error_m": 0.009997292819339183,
+        "yaw_error_rad": 0.000294631650627486,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 11200000000,
+        "truth_x": 0.49088946565647,
+        "truth_y": -0.12682643837713603,
+        "estimate_x": 0.4810160201168316,
+        "estimate_y": -0.14153789152213703,
+        "position_error_m": 0.01771755571352227,
+        "yaw_error_rad": 0.019533588870955576,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 11400000000,
+        "truth_x": 0.4904951654348367,
+        "truth_y": -0.12720901615305177,
+        "estimate_x": 0.47692105700233134,
+        "estimate_y": -0.14349439279028522,
+        "position_error_m": 0.02120070545887475,
+        "yaw_error_rad": 0.010861624351889199,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 11600000000,
+        "truth_x": 0.4916529445050058,
+        "truth_y": -0.12562908204756823,
+        "estimate_x": 0.4864236643343707,
+        "estimate_y": -0.14436387065124417,
+        "position_error_m": 0.019450904223902388,
+        "yaw_error_rad": 0.014002212259787705,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 11800000000,
+        "truth_x": 0.49518144550540205,
+        "truth_y": -0.11942938547810406,
+        "estimate_x": 0.4901962392444826,
+        "estimate_y": -0.1400710908360888,
+        "position_error_m": 0.02123516615310006,
+        "yaw_error_rad": 0.006853898644576528,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 12000000000,
+        "truth_x": 0.4985734310732773,
+        "truth_y": -0.11022521816869968,
+        "estimate_x": 0.4897061144506962,
+        "estimate_y": -0.12643965327544154,
+        "position_error_m": 0.018480725362275324,
+        "yaw_error_rad": 0.01634036196167532,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 12200000000,
+        "truth_x": 0.5024534497751009,
+        "truth_y": -0.09009119147943612,
+        "estimate_x": 0.48852050560048815,
+        "estimate_y": -0.10454904714010065,
+        "position_error_m": 0.02007875802128916,
+        "yaw_error_rad": 0.01726485515478826,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 12400000000,
+        "truth_x": 0.5034991642857515,
+        "truth_y": -0.05497730778310897,
+        "estimate_x": 0.48681832093958727,
+        "estimate_y": -0.07989290852961378,
+        "position_error_m": 0.029983957298837356,
+        "yaw_error_rad": 0.0172588028343188,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 12600000000,
+        "truth_x": 0.4984107459257275,
+        "truth_y": -0.011702846707947044,
+        "estimate_x": 0.4786605179027315,
+        "estimate_y": -0.04086267585226642,
+        "position_error_m": 0.03521884641333718,
+        "yaw_error_rad": 0.006462483947617725,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 12800000000,
+        "truth_x": 0.4876179720882001,
+        "truth_y": 0.03092918994764965,
+        "estimate_x": 0.4734780548329992,
+        "estimate_y": -0.0034547595998688134,
+        "position_error_m": 0.037177859627340354,
+        "yaw_error_rad": 0.011731238244098163,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 13100000000,
+        "truth_x": 0.463089338896867,
+        "truth_y": 0.09210973169503278,
+        "estimate_x": 0.4550595291966481,
+        "estimate_y": 0.04949719512894684,
+        "position_error_m": 0.043362496658030894,
+        "yaw_error_rad": 0.013771566946009006,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 13400000000,
+        "truth_x": 0.4314071825327647,
+        "truth_y": 0.14997672755504984,
+        "estimate_x": 0.4217040749935664,
+        "estimate_y": 0.11329923012084434,
+        "position_error_m": 0.03793928193776734,
+        "yaw_error_rad": 0.010689298312595241,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 13700000000,
+        "truth_x": 0.3953451380956219,
+        "truth_y": 0.20524711312727328,
+        "estimate_x": 0.38157964922874993,
+        "estimate_y": 0.1756274420542093,
+        "position_error_m": 0.0326621125804881,
+        "yaw_error_rad": 0.02033208657641961,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 14000000000,
+        "truth_x": 0.35790714863134104,
+        "truth_y": 0.2596053424510833,
+        "estimate_x": 0.349944343876211,
+        "estimate_y": 0.22116722302941835,
+        "position_error_m": 0.039254239060800784,
+        "yaw_error_rad": 0.012804536080044839,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 14300000000,
+        "truth_x": 0.321315913762248,
+        "truth_y": 0.31453410122241443,
+        "estimate_x": 0.31687074938548315,
+        "estimate_y": 0.26853880466796914,
+        "position_error_m": 0.04620959631362111,
+        "yaw_error_rad": 0.016730816934405368,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 14600000000,
+        "truth_x": 0.28630367987099403,
+        "truth_y": 0.37048052381592284,
+        "estimate_x": 0.2710701914386344,
+        "estimate_y": 0.33805084527182083,
+        "position_error_m": 0.03582936254376603,
+        "yaw_error_rad": 0.004878283938495098,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 14900000000,
+        "truth_x": 0.25283499149143196,
+        "truth_y": 0.4273632457999177,
+        "estimate_x": 0.23726951118596723,
+        "estimate_y": 0.3913695272959198,
+        "position_error_m": 0.03921520048252784,
+        "yaw_error_rad": 0.0063003749715844215,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 15200000000,
+        "truth_x": 0.22219653226557184,
+        "truth_y": 0.4858052057218344,
+        "estimate_x": 0.20076024229230024,
+        "estimate_y": 0.44105909881435723,
+        "position_error_m": 0.04961581009308988,
+        "yaw_error_rad": 0.003058376951552866,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 15500000000,
+        "truth_x": 0.19703870023829484,
+        "truth_y": 0.5467893461435367,
+        "estimate_x": 0.1752706842119646,
+        "estimate_y": 0.5065916380408402,
+        "position_error_m": 0.0457132612972665,
+        "yaw_error_rad": 0.003201908204821357,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 15800000000,
+        "truth_x": 0.17786530059819125,
+        "truth_y": 0.6099019735953604,
+        "estimate_x": 0.16494989949338426,
+        "estimate_y": 0.5474029603429896,
+        "position_error_m": 0.06381954436705155,
+        "yaw_error_rad": 0.006013238845780755,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 16100000000,
+        "truth_x": 0.1654486331421968,
+        "truth_y": 0.6691726971946884,
+        "estimate_x": 0.15993777654375813,
+        "estimate_y": 0.6017299183146612,
+        "position_error_m": 0.06766755473274326,
+        "yaw_error_rad": 0.0066933776242477094,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 18800000000,
+        "truth_x": 0.1756361580245591,
+        "truth_y": 0.6240674978245642,
+        "estimate_x": 0.16437520339049216,
+        "estimate_y": 0.5712163918670662,
+        "position_error_m": 0.05403747311080702,
+        "yaw_error_rad": 0.008095029081648608,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 19100000000,
+        "truth_x": 0.1869710261108946,
+        "truth_y": 0.5963761282588504,
+        "estimate_x": 0.1796754673633387,
+        "estimate_y": 0.548139941921667,
+        "position_error_m": 0.048784780923916415,
+        "yaw_error_rad": 0.003559855044744875,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 19300000000,
+        "truth_x": 0.19648426769073518,
+        "truth_y": 0.580013992012482,
+        "estimate_x": 0.18972170935919874,
+        "estimate_y": 0.5349264658464877,
+        "position_error_m": 0.045591854655811656,
+        "yaw_error_rad": 0.004649390887311977,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 19500000000,
+        "truth_x": 0.20698885150455065,
+        "truth_y": 0.5661960351571955,
+        "estimate_x": 0.19914046786141412,
+        "estimate_y": 0.5190664730101909,
+        "position_error_m": 0.04777858049354565,
+        "yaw_error_rad": 0.001694096386539723,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 19700000000,
+        "truth_x": 0.21773553934102402,
+        "truth_y": 0.5554967785134834,
+        "estimate_x": 0.21548457573204344,
+        "estimate_y": 0.509394785372086,
+        "position_error_m": 0.046156912903468836,
+        "yaw_error_rad": 0.0016959353214702766,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 19900000000,
+        "truth_x": 0.223258542333446,
+        "truth_y": 0.5512491412973719,
+        "estimate_x": 0.21424327202419952,
+        "estimate_y": 0.5048622238631292,
+        "position_error_m": 0.0472548538014883,
+        "yaw_error_rad": 0.004993181231990995,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 20100000000,
+        "truth_x": 0.2266996903913296,
+        "truth_y": 0.5493566767114204,
+        "estimate_x": 0.217144850694975,
+        "estimate_y": 0.508605144110216,
+        "position_error_m": 0.041856688485474615,
+        "yaw_error_rad": 0.014461824887320063,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 20300000000,
+        "truth_x": 0.22872998399369637,
+        "truth_y": 0.5485902032363676,
+        "estimate_x": 0.22023228145455565,
+        "estimate_y": 0.5097972589822698,
+        "position_error_m": 0.03971276208406137,
+        "yaw_error_rad": 0.01552421704176865,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 20500000000,
+        "truth_x": 0.22804743577170328,
+        "truth_y": 0.5486719299799726,
+        "estimate_x": 0.2150964102406342,
+        "estimate_y": 0.517494765673415,
+        "position_error_m": 0.03376010421347203,
+        "yaw_error_rad": 0.018637466425630134,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 20700000000,
+        "truth_x": 0.22416912426361735,
+        "truth_y": 0.548788722190982,
+        "estimate_x": 0.21002790002009297,
+        "estimate_y": 0.5090414396621078,
+        "position_error_m": 0.04218792115684046,
+        "yaw_error_rad": 0.02936880607687664,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 20900000000,
+        "truth_x": 0.21880171147750005,
+        "truth_y": 0.5481102595171231,
+        "estimate_x": 0.18874472249123314,
+        "estimate_y": 0.5125694839660903,
+        "position_error_m": 0.04654642106209096,
+        "yaw_error_rad": 0.027774073264216437,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 21100000000,
+        "truth_x": 0.21235864462739754,
+        "truth_y": 0.5460560887542801,
+        "estimate_x": 0.16366435160870385,
+        "estimate_y": 0.5239843160854133,
+        "position_error_m": 0.053463046315530297,
+        "yaw_error_rad": 0.030491417256463205,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 21300000000,
+        "truth_x": 0.2029787820705775,
+        "truth_y": 0.5411370785410881,
+        "estimate_x": 0.15337832442932545,
+        "estimate_y": 0.5199786584829685,
+        "position_error_m": 0.05392480076530163,
+        "yaw_error_rad": 0.026495657276435658,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 21500000000,
+        "truth_x": 0.18939083561707143,
+        "truth_y": 0.5307122994771475,
+        "estimate_x": 0.1489103316206586,
+        "estimate_y": 0.513085572014705,
+        "position_error_m": 0.04415170126777475,
+        "yaw_error_rad": 0.027896976335413548,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 21700000000,
+        "truth_x": 0.1715274018582429,
+        "truth_y": 0.5114622935564137,
+        "estimate_x": 0.13480375631906308,
+        "estimate_y": 0.5009858230668695,
+        "position_error_m": 0.038188775518542266,
+        "yaw_error_rad": 0.02897272327125533,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 21900000000,
+        "truth_x": 0.14915569140747392,
+        "truth_y": 0.47859630381853424,
+        "estimate_x": 0.09318685529292642,
+        "estimate_y": 0.4598783692438585,
+        "position_error_m": 0.05901585965449388,
+        "yaw_error_rad": 0.018896038847596053,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 22100000000,
+        "truth_x": 0.13040472083519927,
+        "truth_y": 0.43896243175290783,
+        "estimate_x": 0.06799213910489257,
+        "estimate_y": 0.4280270215470277,
+        "position_error_m": 0.06336334551310466,
+        "yaw_error_rad": 0.024790945622610527,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 22300000000,
+        "truth_x": 0.11898616292205064,
+        "truth_y": 0.3965479610401458,
+        "estimate_x": 0.050562314726895576,
+        "estimate_y": 0.3925216965876855,
+        "position_error_m": 0.06854220456970123,
+        "yaw_error_rad": 0.03713413496507024,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 22500000000,
+        "truth_x": 0.1152514524871831,
+        "truth_y": 0.35280873005983726,
+        "estimate_x": 0.0363634950797303,
+        "estimate_y": 0.35558332560237943,
+        "position_error_m": 0.07893673545533018,
+        "yaw_error_rad": 0.02280156377841558,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 22700000000,
+        "truth_x": 0.11931175815801602,
+        "truth_y": 0.3090621413563067,
+        "estimate_x": 0.0402842555175359,
+        "estimate_y": 0.31102691877320987,
+        "position_error_m": 0.0790519229613617,
+        "yaw_error_rad": 0.034107005700701576,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 22900000000,
+        "truth_x": 0.13103179708445103,
+        "truth_y": 0.2667181357138472,
+        "estimate_x": 0.0504156670582183,
+        "estimate_y": 0.26240133909842317,
+        "position_error_m": 0.0807316242461738,
+        "yaw_error_rad": 0.03809770077141739,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 23100000000,
+        "truth_x": 0.14998015741179507,
+        "truth_y": 0.22711806387313496,
+        "estimate_x": 0.06787039876483174,
+        "estimate_y": 0.19931427081455916,
+        "position_error_m": 0.08668946518180094,
+        "yaw_error_rad": 0.033519908622166694,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 23300000000,
+        "truth_x": 0.17449061966966328,
+        "truth_y": 0.19270148245746999,
+        "estimate_x": 0.10804209001779198,
+        "estimate_y": 0.14897785290042914,
+        "position_error_m": 0.0795434653163725,
+        "yaw_error_rad": 0.024779637109558883,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 23500000000,
+        "truth_x": 0.1993340382359015,
+        "truth_y": 0.16775905423556622,
+        "estimate_x": 0.14510143947432835,
+        "estimate_y": 0.1260749074432166,
+        "position_error_m": 0.0684013366992191,
+        "yaw_error_rad": 0.03411715219081779,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 23700000000,
+        "truth_x": 0.22005744465945187,
+        "truth_y": 0.15273652913256236,
+        "estimate_x": 0.16326950782166902,
+        "estimate_y": 0.1352139321900807,
+        "position_error_m": 0.05942988451865511,
+        "yaw_error_rad": 0.03528018578448777,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 23900000000,
+        "truth_x": 0.23524629813875148,
+        "truth_y": 0.14485594979286817,
+        "estimate_x": 0.18157429399783795,
+        "estimate_y": 0.1272318853422854,
+        "position_error_m": 0.05649151862236077,
+        "yaw_error_rad": 0.02920858275704702,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 24100000000,
+        "truth_x": 0.24022324625082556,
+        "truth_y": 0.14303767552450114,
+        "estimate_x": 0.18283305113878112,
+        "estimate_y": 0.12747063249727278,
+        "position_error_m": 0.05946400023215818,
+        "yaw_error_rad": 0.044189129858212994,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 24300000000,
+        "truth_x": 0.23682911176880977,
+        "truth_y": 0.14368282068469762,
+        "estimate_x": 0.1829036726843545,
+        "estimate_y": 0.1155443875276633,
+        "position_error_m": 0.06082535985084005,
+        "yaw_error_rad": 0.04062433255254577,
+        "truth_bracket_gap_s": 0.04
+      },
+      {
+        "sim_ns": 25000000000,
+        "truth_x": 0.21294797096108764,
+        "truth_y": 0.14520542550551746,
+        "estimate_x": 0.15986190543622097,
+        "estimate_y": 0.12013556389977845,
+        "position_error_m": 0.0587079919077577,
+        "yaw_error_rad": 0.03669619304431759,
+        "truth_bracket_gap_s": 0.0
+      },
+      {
+        "sim_ns": 25500000000,
+        "truth_x": 0.16441630425507014,
+        "truth_y": 0.14436401037739535,
+        "estimate_x": 0.10066543612563977,
+        "estimate_y": 0.12100430435792826,
+        "position_error_m": 0.0678958691863647,
+        "yaw_error_rad": 0.02128861990471371,
+        "truth_bracket_gap_s": 0.04
+      }
+    ]
+  },
+  "trajectory_sha256": "f4ca8ae5a0b1c6cb9fb5f7d7fa874b64fc2fda75d9a3fbe83aecbefdc2a97d96"
+}

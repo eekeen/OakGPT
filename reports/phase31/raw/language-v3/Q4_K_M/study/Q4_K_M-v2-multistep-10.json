@@ -1,0 +1,53 @@
+{
+  "id": "v2-multistep-10",
+  "category": "multistep",
+  "instruction": "Go check the dock with lidar after visiting storage.",
+  "expected_steps": [
+    {
+      "action": "navigate",
+      "destination": "storage",
+      "duration_s": 0
+    },
+    {
+      "action": "navigate",
+      "destination": "dock",
+      "duration_s": 0
+    },
+    {
+      "action": "inspect",
+      "destination": "dock",
+      "duration_s": 2
+    }
+  ],
+  "expected_interpretation": "accept",
+  "authorization": "operator_confirmation",
+  "rationale": "Interpretable intent; original instruction is outside executable grammar",
+  "planner": "Q4_K_M",
+  "authorized": false,
+  "interpretation_correct": false,
+  "raw_output": "{\n  \"schema_version\": 1,\n  \"decision\": \"accept\",\n  \"reason\": \"ok\",\n  \"steps\": [\n    {\n      \"action\": \"navigate\",\n      \"destination\": \"storage\",\n      \"duration_s\": 0\n    },\n    {\n      \"action\": \"inspect\",\n      \"destination\": \"dock\",\n      \"duration_s\": 2\n    }\n  ]\n}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "accept",
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "storage",
+        "duration_s": 0
+      },
+      {
+        "action": "inspect",
+        "destination": "dock",
+        "duration_s": 2
+      }
+    ]
+  },
+  "inference_latency_s": 0.8499853999819607,
+  "validation": {
+    "accepted": false,
+    "reason": "inspection_requires_navigation"
+  },
+  "validation_latency_s": 0.13412680011242628,
+  "disposition": "operator_confirmation_required"
+}

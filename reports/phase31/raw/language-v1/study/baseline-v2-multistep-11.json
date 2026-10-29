@@ -1,0 +1,37 @@
+{
+  "id": "v2-multistep-11",
+  "category": "multistep",
+  "instruction": "Before your standard lidar inspection at storage, make a stop at the station.",
+  "expected_steps": [
+    {
+      "action": "navigate",
+      "destination": "station",
+      "duration_s": 0
+    },
+    {
+      "action": "navigate",
+      "destination": "storage",
+      "duration_s": 0
+    },
+    {
+      "action": "inspect",
+      "destination": "storage",
+      "duration_s": 2
+    }
+  ],
+  "expected_interpretation": "accept",
+  "authorization": "operator_confirmation",
+  "rationale": "Interpretable intent; original instruction is outside executable grammar",
+  "planner": "baseline",
+  "authorized": false,
+  "interpretation_correct": false,
+  "raw_output": "{\"schema_version\": 1, \"decision\": \"reject\", \"reason\": \"unsupported\", \"steps\": []}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "reject",
+    "reason": "unsupported",
+    "steps": []
+  },
+  "inference_latency_s": 0.00024290010333061218,
+  "disposition": "rejected"
+}

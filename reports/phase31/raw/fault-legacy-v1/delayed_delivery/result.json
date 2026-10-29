@@ -1,0 +1,81 @@
+{
+  "runtime": "phase3-final",
+  "case": "delayed_delivery",
+  "fixture": "synthetic ROS sensors and Nav2 action fixture; no velocity publisher",
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-713c9de4cabe402a",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793133180073,
+    "expires_at_ms": 1793133181073,
+    "instruction": "Go to station",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "station",
+        "duration_s": 0
+      }
+    ]
+  },
+  "raw_payload": "{\"schema_version\": 1, \"mission_id\": \"m-713c9de4cabe402a\", \"policy_id\": \"oak-room-v1\", \"issued_at_ms\": 1793133180073, \"expires_at_ms\": 1793133181073, \"instruction\": \"Go to station\", \"steps\": [{\"action\": \"navigate\", \"destination\": \"station\", \"duration_s\": 0}]}",
+  "result": {
+    "status": "rejected",
+    "reason": "mission_expired_or_future",
+    "mission_id": null,
+    "execution_seconds": 0.010811250074766576,
+    "events": [
+      {
+        "event": "rejected",
+        "mission_id": null,
+        "wall_time_ns": 1793133181427059933,
+        "sim_time_ns": 1003850944660,
+        "reason": "mission_expired_or_future"
+      }
+    ]
+  },
+  "first_result": null,
+  "server_events": [],
+  "mission_events": [
+    {
+      "event": "rejected",
+      "mission_id": null,
+      "wall_time_ns": 1793133181427059933,
+      "sim_time_ns": 1003850944660,
+      "reason": "mission_expired_or_future"
+    }
+  ],
+  "watchdog_events": [
+    {
+      "event": "startup_cancel",
+      "wall_time_ns": 1793133178409227273,
+      "canceling": 0
+    }
+  ],
+  "heartbeats": [
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    }
+  ],
+  "active_goal_after_observation": false,
+  "goal_requests": 0,
+  "fault_at_monotonic": null,
+  "cancel_after_fault_s": null,
+  "detected_or_rejected": true,
+  "restart_faulted": null,
+  "observation_window_after_fault_s": 5
+}

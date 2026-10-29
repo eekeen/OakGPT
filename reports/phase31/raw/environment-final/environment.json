@@ -1,0 +1,46 @@
+{
+  "captured_utc": "2026-10-28T12:14:29.124746+00:00",
+  "environment": {
+    "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "logical_cpu_count": 16,
+    "torch": "2.9.1+cpu",
+    "cuda_runtime": null,
+    "cudnn": null,
+    "cuda_available": false,
+    "gpu": null,
+    "git_revision": "88cc41d4a20905b3d1363ca3a60f19b1061edbc2",
+    "git_dirty": true
+  },
+  "source_sha256": {
+    "src/oakgpt/robotics/cli.py": "47d7c84842c4db835f4d7f4e72f6c49a4bba1ca91fd38d335fd86508e9ccd7e7",
+    "src/oakgpt/robotics/evaluate.py": "2cd5057a94141c89d952de040d7e70c45f395f308948e6a334fa3a5d7096b664",
+    "src/oakgpt/robotics/ground_truth.py": "0d21961792f1647b8b5ff401d181a110ca98b6ac1dbdaa11347048968bae1d76",
+    "src/oakgpt/robotics/language.py": "310dd5d8337ee809ea51620b85bee233c9bd366e884e48ee4f5a787ce4550798",
+    "src/oakgpt/robotics/planner.py": "abaddf1204909cb6ee9090fc2d47d3f0b50eb494e06319e84ad1ed429ad9e29e",
+    "src/oakgpt/robotics/plans.py": "8db395cdeb92955cb6ae95d5786090fffd87fececa4e894900b2cedad8be300d",
+    "src/oakgpt/robotics/safety.py": "29ac59d46797b15a1cbd78b2d66f26dfcd23abef8cc6cd667778288a304284f1",
+    "src/oakgpt/robotics/__init__.py": "9eae3c6336c67a663955647ade18b57f031f1921a98844e06a2b39bbf5d37890",
+    "robotics/ros2_ws/src/oak_mission/oak_mission/executor.py": "a9d046e55672a24c580f75864b1b2f93dbccf01f287637a7f08490c07800ea6d",
+    "robotics/ros2_ws/src/oak_mission/oak_mission/guard_rules.py": "47d29194ea9e53d540407558b933f811dec02e618bcf6f0dff8a301fcfb21da5",
+    "robotics/ros2_ws/src/oak_mission/oak_mission/observer.py": "7439fc955cf0a2a36857424225ed29179d63ef56fae109c5064ebca8c083656d",
+    "robotics/ros2_ws/src/oak_mission/oak_mission/velocity_guard.py": "33a0f07094db2d679ab8bff8f9f28799281f2f2371aab2a8b7ac3e0c2d579406",
+    "robotics/ros2_ws/src/oak_mission/oak_mission/watchdog.py": "9ce83d401fef7d649619cc3d46d1f38bd3781f32e002bc44bf1e31e1fd6029cf",
+    "robotics/ros2_ws/src/oak_mission/oak_mission/__init__.py": "44101ff48ade12c5716387a5681666b8bd91226b3e9d86162933bf9329fd4e40",
+    "robotics/ros2_ws/src/oak_mission/launch/reliability.launch.py": "dd5133c6d82e1b1bb026e8e4fa4cdcdf15ac59ba377914da3ace858e2464145c",
+    "robotics/ros2_ws/src/oak_mission/launch/simulation.launch.py": "5a0bf838f9e84f2e20448128ec8dc41edb9c77bd73f77f683a238f9990fd7a07",
+    "configs/robotics/policy_v1.json": "86829578c1dc3d9a66696317fb077ec9ffe5f27b5e4317e8b9d7459fe32f6b05"
+  },
+  "gpu_snapshot": {
+    "exit_code": 0,
+    "stdout": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB\n",
+    "stderr": ""
+  },
+  "ros_packages": {
+    "exit_code": 0,
+    "stdout": "ros-jazzy-gz-sim-vendor\t0.0.13-1noble.20260905.073557\nros-jazzy-nav2-bringup\t1.3.13-1noble.20261006.042503\nros-jazzy-rclpy\t7.1.12-1noble.20260902.053513\nros-jazzy-ros-gz\t1.0.24-1noble.20260905.090616\n",
+    "stderr": ""
+  },
+  "note": "Post-study inventory, not peak VRAM; native llama.cpp uses CUDA separately from CPU PyTorch"
+}

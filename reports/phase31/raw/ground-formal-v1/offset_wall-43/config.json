@@ -1,0 +1,30 @@
+{
+  "dataset": "../../data/robotics/instructions_v1.jsonl",
+  "policy": "policy_v1.json",
+  "output_dir": "../../runs/phase3/study-clean",
+  "spool": "D:\\Projects\\OakGPT\\runs\\phase31\\ground-formal-v1\\offset_wall-43\\spool",
+  "execute": true,
+  "server_binary": "../../vendor/llama.cpp/llama-server.exe",
+  "port": 18082,
+  "models": {
+    "Q4_K_M": "../../models/phase2-Qwen3-1.7B-Q4_K_M.gguf",
+    "Q8_0": "../../models/phase2-Qwen3-1.7B-Q8_0.gguf"
+  },
+  "validator_command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--",
+    "/home/eekeen/projects/oak-build/oak-validate",
+    "--policy",
+    "/mnt/d/Projects/OakGPT/configs/robotics/policy_v1.json"
+  ],
+  "clock_command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--",
+    "/home/eekeen/projects/oak-build/oak-validate",
+    "--clock"
+  ]
+}

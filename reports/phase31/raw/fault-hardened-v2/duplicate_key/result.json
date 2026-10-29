@@ -1,0 +1,82 @@
+{
+  "runtime": "phase31-r3",
+  "case": "duplicate_key",
+  "fixture": "synthetic ROS sensors and Nav2 action fixture; no velocity publisher",
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-002b0dfd6b104706",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793133400894,
+    "expires_at_ms": 1793133460894,
+    "instruction": "Go to station",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "station",
+        "duration_s": 0
+      }
+    ]
+  },
+  "raw_payload": "{\"schema_version\": 1, \"mission_id\": \"m-002b0dfd6b104706\", \"policy_id\": \"oak-room-v1\", \"issued_at_ms\": 1793133400894, \"expires_at_ms\": 1793133460894, \"instruction\": \"Go to station\", \"steps\": [{\"action\": \"navigate\", \"destination\": \"station\", \"duration_s\": 0}],\"schema_version\":1}",
+  "spool_path": "/mnt/d/Projects/OakGPT/runs/phase31/fault-hardened-v2/duplicate_key/spool",
+  "result": {
+    "status": "rejected",
+    "reason": "duplicate_key",
+    "mission_id": null,
+    "execution_seconds": 0.013093019952066243,
+    "events": [
+      {
+        "event": "rejected",
+        "mission_id": null,
+        "wall_time_ns": 1793133402424268199,
+        "sim_time_ns": 1004000837500,
+        "reason": "duplicate_key"
+      }
+    ]
+  },
+  "first_result": null,
+  "server_events": [],
+  "mission_events": [
+    {
+      "event": "rejected",
+      "mission_id": null,
+      "wall_time_ns": 1793133402424268199,
+      "sim_time_ns": 1004000837500,
+      "reason": "duplicate_key"
+    }
+  ],
+  "watchdog_events": [
+    {
+      "event": "startup_cancel",
+      "wall_time_ns": 1793133399441047379,
+      "canceling": 0
+    }
+  ],
+  "heartbeats": [
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    },
+    {
+      "active": false,
+      "faulted": false,
+      "mission_id": null,
+      "expires_at_ms": 0
+    }
+  ],
+  "active_goal_after_observation": false,
+  "goal_requests": 0,
+  "fault_at_monotonic": null,
+  "cancel_after_fault_s": null,
+  "detected_or_rejected": true,
+  "restart_faulted": null,
+  "observation_window_after_fault_s": 5
+}

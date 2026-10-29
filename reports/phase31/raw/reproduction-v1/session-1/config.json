@@ -1,0 +1,42 @@
+{
+  "dataset": "D:\\Projects\\OakGPT\\data\\robotics\\instructions_v1.jsonl",
+  "policy": "D:\\Projects\\OakGPT\\configs\\robotics\\policy_v1.json",
+  "output_dir": "D:\\Projects\\OakGPT\\runs\\phase31\\reproduction-v1\\session-1\\study",
+  "spool": "D:\\Projects\\OakGPT\\runs\\phase31\\reproduction-v1\\session-1\\spool",
+  "execute": true,
+  "server_binary": "D:\\Projects\\OakGPT\\vendor\\llama.cpp\\llama-server.exe",
+  "port": 18082,
+  "models": {
+    "Q4_K_M": "D:\\Projects\\OakGPT\\models\\phase2-Qwen3-1.7B-Q4_K_M.gguf",
+    "Q8_0": "D:\\Projects\\OakGPT\\models\\phase2-Qwen3-1.7B-Q8_0.gguf"
+  },
+  "validator_command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--",
+    "/home/eekeen/projects/oak-build/oak-validate",
+    "--policy",
+    "/mnt/d/Projects/OakGPT/configs/robotics/policy_v1.json"
+  ],
+  "clock_command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--",
+    "/home/eekeen/projects/oak-build/oak-validate",
+    "--clock"
+  ],
+  "planner_order": [
+    "Q4_K_M",
+    "baseline",
+    "Q8_0"
+  ],
+  "runtime_sources": [
+    "D:\\Projects\\OakGPT\\src\\oakgpt\\robotics\\evaluate.py",
+    "D:\\Projects\\OakGPT\\src\\oakgpt\\robotics\\planner.py",
+    "D:\\Projects\\OakGPT\\cpp\\src\\validator.cpp",
+    "D:\\Projects\\OakGPT\\robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\executor.py",
+    "D:\\Projects\\OakGPT\\robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\watchdog.py"
+  ]
+}

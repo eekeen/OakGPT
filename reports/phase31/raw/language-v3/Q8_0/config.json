@@ -1,0 +1,34 @@
+{
+  "dataset_directory": "D:\\Projects\\OakGPT\\data\\robotics\\linguistic_v2",
+  "policy": "D:\\Projects\\OakGPT\\configs\\robotics\\policy_v1.json",
+  "planner_order": [
+    "Q8_0"
+  ],
+  "execute": true,
+  "continue_interpretation_on_execution_failure": true,
+  "server_binary": "D:\\Projects\\OakGPT\\vendor\\llama.cpp\\llama-server.exe",
+  "port": 18082,
+  "models": {
+    "Q4_K_M": "D:\\Projects\\OakGPT\\models\\phase2-Qwen3-1.7B-Q4_K_M.gguf",
+    "Q8_0": "D:\\Projects\\OakGPT\\models\\phase2-Qwen3-1.7B-Q8_0.gguf"
+  },
+  "validator_command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--",
+    "/home/eekeen/projects/oak-build/oak-validate",
+    "--policy",
+    "/mnt/d/Projects/OakGPT/configs/robotics/policy_v1.json"
+  ],
+  "clock_command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--",
+    "/home/eekeen/projects/oak-build/oak-validate",
+    "--clock"
+  ],
+  "output_dir": "D:\\Projects\\OakGPT\\runs\\phase31\\language-v3\\Q8_0\\study",
+  "spool": "D:\\Projects\\OakGPT\\runs\\phase31\\language-v3\\Q8_0\\spool"
+}

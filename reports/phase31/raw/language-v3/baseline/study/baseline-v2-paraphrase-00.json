@@ -1,0 +1,27 @@
+{
+  "id": "v2-paraphrase-00",
+  "category": "paraphrase",
+  "instruction": "Take the robot over to the charging dock.",
+  "expected_steps": [
+    {
+      "action": "navigate",
+      "destination": "dock",
+      "duration_s": 0
+    }
+  ],
+  "expected_interpretation": "accept",
+  "authorization": "operator_confirmation",
+  "rationale": "Interpretable intent; original instruction is outside executable grammar",
+  "planner": "baseline",
+  "authorized": false,
+  "interpretation_correct": false,
+  "raw_output": "{\"schema_version\": 1, \"decision\": \"reject\", \"reason\": \"unsupported\", \"steps\": []}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "reject",
+    "reason": "unsupported",
+    "steps": []
+  },
+  "inference_latency_s": 0.0007156000938266516,
+  "disposition": "rejected"
+}

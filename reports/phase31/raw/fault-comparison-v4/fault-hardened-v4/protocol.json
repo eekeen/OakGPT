@@ -1,0 +1,38 @@
+{
+  "runtime": "hardened",
+  "cases": [
+    "control",
+    "lost_lidar",
+    "stale_lidar",
+    "delayed_lidar",
+    "future_lidar",
+    "lost_tf",
+    "future_tf",
+    "action_abort",
+    "executor_crash",
+    "watchdog_crash",
+    "heartbeat_interruption",
+    "late_goal",
+    "mission_expiration",
+    "replay",
+    "corrupt_json",
+    "duplicate_key",
+    "unsafe_omission",
+    "oversized_payload",
+    "delayed_delivery",
+    "spool_loss",
+    "drvfs_detach"
+  ],
+  "ros_domain": "84",
+  "fixture_sha256": "e59c0cc3060beed27240905da49cffb03a69f32e341b8012f385bcef0e166714",
+  "validator_sha256": "b66f081c68cd4275229fc87a030d9b209498a1e84ccb9605483af730c1009ae2",
+  "policy_sha256": "86829578c1dc3d9a66696317fb077ec9ffe5f27b5e4317e8b9d7459fe32f6b05",
+  "runtime_source_sha256": {
+    "executor.py": "a9d046e55672a24c580f75864b1b2f93dbccf01f287637a7f08490c07800ea6d",
+    "observer.py": "7439fc955cf0a2a36857424225ed29179d63ef56fae109c5064ebca8c083656d",
+    "watchdog.py": "9ce83d401fef7d649619cc3d46d1f38bd3781f32e002bc44bf1e31e1fd6029cf",
+    "velocity_guard.py": "33a0f07094db2d679ab8bff8f9f28799281f2f2371aab2a8b7ac3e0c2d579406",
+    "__init__.py": "44101ff48ade12c5716387a5681666b8bd91226b3e9d86162933bf9329fd4e40",
+    "guard_rules.py": "47d29194ea9e53d540407558b933f811dec02e618bcf6f0dff8a301fcfb21da5"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "id": "valid-21",
+  "category": "valid",
+  "instruction": "Inspect dock then inspect station",
+  "expected_accept": true,
+  "expected_steps": [
+    {
+      "action": "navigate",
+      "destination": "dock",
+      "duration_s": 0
+    },
+    {
+      "action": "inspect",
+      "destination": "dock",
+      "duration_s": 2
+    },
+    {
+      "action": "navigate",
+      "destination": "station",
+      "duration_s": 0
+    },
+    {
+      "action": "inspect",
+      "destination": "station",
+      "duration_s": 2
+    }
+  ],
+  "planner": "Q4_K_M",
+  "accepted": false,
+  "execution": null,
+  "validation_latency_s": 0.1675393998157233,
+  "raw_output": "{\n  \"schema_version\": 1,\n  \"decision\": \"accept\",\n  \"reason\": \"ok\",\n  \"steps\": [\n    {\n      \"action\": \"navigate\",\n      \"destination\": \"dock\",\n      \"duration_s\": 0\n    },\n    {\n      \"action\": \"inspect\",\n      \"destination\": \"dock\",\n      \"duration_s\": 0\n    },\n    {\n      \"action\": \"navigate\",\n      \"destination\": \"station\",\n      \"duration_s\": 2\n    },\n    {\n      \"action\": \"inspect\",\n      \"destination\": \"station\",\n      \"duration_s\": 2\n    }\n  ]\n}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "accept",
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      },
+      {
+        "action": "inspect",
+        "destination": "dock",
+        "duration_s": 0
+      },
+      {
+        "action": "navigate",
+        "destination": "station",
+        "duration_s": 2
+      },
+      {
+        "action": "inspect",
+        "destination": "station",
+        "duration_s": 2
+      }
+    ]
+  },
+  "schema_valid": true,
+  "inference_latency_s": 1.2276188998948783,
+  "validation": {
+    "accepted": false,
+    "reason": "integer_out_of_bounds"
+  },
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-34b36106b6584835",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793130696159,
+    "expires_at_ms": 1793130876159,
+    "instruction": "Inspect dock then inspect station",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      },
+      {
+        "action": "inspect",
+        "destination": "dock",
+        "duration_s": 0
+      },
+      {
+        "action": "navigate",
+        "destination": "station",
+        "duration_s": 2
+      },
+      {
+        "action": "inspect",
+        "destination": "station",
+        "duration_s": 2
+      }
+    ]
+  }
+}

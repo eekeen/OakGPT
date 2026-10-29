@@ -1,0 +1,17 @@
+{
+  "dataset_directory": "../../data/robotics/linguistic_v2",
+  "policy": "policy_v1.json",
+  "output_dir": "../../runs/phase31/manual-language-study",
+  "spool": "../../runs/phase31/manual-language-spool",
+  "planner_order": ["baseline", "Q4_K_M", "Q8_0"],
+  "execute": true,
+  "continue_interpretation_on_execution_failure": true,
+  "server_binary": "../../vendor/llama.cpp/llama-server.exe",
+  "port": 18082,
+  "models": {
+    "Q4_K_M": "../../models/phase2-Qwen3-1.7B-Q4_K_M.gguf",
+    "Q8_0": "../../models/phase2-Qwen3-1.7B-Q8_0.gguf"
+  },
+  "validator_command": ["wsl.exe", "-d", "Ubuntu-24.04", "--", "/home/eekeen/projects/oak-build/oak-validate", "--policy", "/mnt/d/Projects/OakGPT/configs/robotics/policy_v1.json"],
+  "clock_command": ["wsl.exe", "-d", "Ubuntu-24.04", "--", "/home/eekeen/projects/oak-build/oak-validate", "--clock"]
+}

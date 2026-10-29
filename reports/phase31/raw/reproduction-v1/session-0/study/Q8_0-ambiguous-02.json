@@ -1,0 +1,45 @@
+{
+  "id": "ambiguous-02",
+  "category": "ambiguous",
+  "instruction": "Go to dock or station",
+  "expected_accept": false,
+  "expected_steps": [],
+  "planner": "Q8_0",
+  "accepted": false,
+  "execution": null,
+  "validation_latency_s": 0.14984059985727072,
+  "raw_output": "{\n  \"schema_version\": 1,\n  \"decision\": \"accept\",\n  \"reason\": \"ok\",\n  \"steps\": [\n    {\n      \"action\": \"navigate\",\n      \"destination\": \"dock\",\n      \"duration_s\": 0\n    }\n  ]\n}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "accept",
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  },
+  "schema_valid": true,
+  "inference_latency_s": 0.8133451999165118,
+  "validation": {
+    "accepted": false,
+    "reason": "instruction_not_authorized"
+  },
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-e7cb688bf08d4a03",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793130035278,
+    "expires_at_ms": 1793130215278,
+    "instruction": "Go to dock or station",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "dock",
+        "duration_s": 0
+      }
+    ]
+  }
+}

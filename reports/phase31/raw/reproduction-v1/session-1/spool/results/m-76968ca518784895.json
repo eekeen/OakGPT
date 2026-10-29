@@ -1,0 +1,102 @@
+{
+  "status": "completed",
+  "reason": "ok",
+  "mission_id": "m-76968ca518784895",
+  "execution_seconds": 6.4046231099637225,
+  "events": [
+    {
+      "event": "accepted",
+      "mission_id": "m-76968ca518784895",
+      "wall_time_ns": 1793131101888211078,
+      "sim_time_ns": 520000000000
+    },
+    {
+      "event": "watchdog_armed",
+      "mission_id": "m-76968ca518784895",
+      "wall_time_ns": 1793131101890172538,
+      "sim_time_ns": 520050000000
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-76968ca518784895",
+      "wall_time_ns": 1793131101897283078,
+      "sim_time_ns": 520050000000,
+      "index": 0,
+      "action": "navigate"
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-76968ca518784895",
+      "wall_time_ns": 1793131102629892978,
+      "sim_time_ns": 520790000000,
+      "distance_remaining": 0.7457107305526733
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-76968ca518784895",
+      "wall_time_ns": 1793131103640099868,
+      "sim_time_ns": 521800000000,
+      "distance_remaining": 0.7207106947898865
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-76968ca518784895",
+      "wall_time_ns": 1793131104650420248,
+      "sim_time_ns": 522810000000,
+      "distance_remaining": 0.5957106351852417
+    },
+    {
+      "event": "navigation_feedback",
+      "mission_id": "m-76968ca518784895",
+      "wall_time_ns": 1793131105660246798,
+      "sim_time_ns": 523820000000,
+      "distance_remaining": 0.3707106113433838
+    },
+    {
+      "event": "arrived",
+      "mission_id": "m-76968ca518784895",
+      "wall_time_ns": 1793131106233871338,
+      "sim_time_ns": 524390000000,
+      "destination": "storage",
+      "residual_m": 0.23468903763767168
+    },
+    {
+      "event": "step_completed",
+      "mission_id": "m-76968ca518784895",
+      "wall_time_ns": 1793131106234408728,
+      "sim_time_ns": 524390000000,
+      "index": 0
+    },
+    {
+      "event": "step_started",
+      "mission_id": "m-76968ca518784895",
+      "wall_time_ns": 1793131106243428438,
+      "sim_time_ns": 524390000000,
+      "index": 1,
+      "action": "inspect"
+    },
+    {
+      "event": "inspection_snapshot",
+      "mission_id": "m-76968ca518784895",
+      "wall_time_ns": 1793131108250604298,
+      "sim_time_ns": 526410000000,
+      "destination": "storage",
+      "valid_ranges": 360,
+      "minimum_range_m": 3.2918317317962646
+    },
+    {
+      "event": "step_completed",
+      "mission_id": "m-76968ca518784895",
+      "wall_time_ns": 1793131108250855128,
+      "sim_time_ns": 526410000000,
+      "index": 1
+    },
+    {
+      "event": "completed",
+      "mission_id": "m-76968ca518784895",
+      "wall_time_ns": 1793131108251025048,
+      "sim_time_ns": 526410000000,
+      "reason": "ok"
+    }
+  ]
+}

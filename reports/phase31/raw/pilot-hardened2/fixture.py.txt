@@ -1,0 +1,463 @@
+"""Systematic ROS protocol fault fixture: real C++/executor/watchdog, synthetic sensors/action.
+
+No velocity publisher or Gazebo motion is present. Observed goals are protocol states,
+not claims of physical stopping. Use a separate ROS domain from performance studies.
+"""
+
+import argparse
+import hashlib
+import json
+import os
+import signal
+import subprocess
+import sys
+import threading
+import time
+import uuid
+from pathlib import Path
+
+import rclpy
+from geometry_msgs.msg import TransformStamped
+from nav2_msgs.action import NavigateToPose
+from rclpy.action import ActionServer, CancelResponse, GoalResponse
+from rclpy.callback_groups import ReentrantCallbackGroup
+from rclpy.executors import MultiThreadedExecutor
+from rclpy.node import Node
+from rosgraph_msgs.msg import Clock
+from sensor_msgs.msg import LaserScan
+from std_msgs.msg import String
+from tf2_msgs.msg import TFMessage
+
+CASES = [
+    "control",
+    "lost_lidar",
+    "stale_lidar",
+    "delayed_lidar",
+    "future_lidar",
+    "lost_tf",
+    "future_tf",
+    "action_abort",
+    "executor_crash",
+    "watchdog_crash",
+    "heartbeat_interruption",
+    "late_goal",
+    "mission_expiration",
+    "replay",
+    "corrupt_json",
+    "duplicate_key",
+    "unsafe_omission",
+    "oversized_payload",
+    "delayed_delivery",
+    "spool_loss",
+]
+
+
+def case(args, name):
+    directory = args.output / name
+    directory.mkdir(parents=True)
+    spool = directory / "spool"
+    (spool / "pending").mkdir(parents=True)
+    receiver_spool = spool
+    drive_alias = None
+    if name == "drvfs_detach":
+        if os.geteuid() != 0:
+            raise PermissionError("Private DrvFS detach case requires WSL root")
+        drive_alias = Path("/mnt/oak-phase31-private-drive")
+        if drive_alias.exists():
+            raise FileExistsError("Private mount path must not exist before the test")
+        drive_alias.mkdir()
+        subprocess.run(
+            ["mount", "-t", "drvfs", "D:", str(drive_alias), "-o", "uid=1000,gid=1000"], check=True
+        )
+        receiver_spool = drive_alias / spool.relative_to("/mnt/d")
+    node = Node("fixture", namespace="oak_fault_" + name)
+    state = {
+        "active": False,
+        "started": False,
+        "fault": False,
+        "cleanup": False,
+        "requests": 0,
+        "canceled": False,
+        "success": False,
+    }
+    server_events, watchdog_events, mission_events, heartbeats = [], [], [], []
+    clock_pub = node.create_publisher(Clock, "/clock", 10)
+    scan_pub = node.create_publisher(LaserScan, "scan", 10)
+    tf_pub = node.create_publisher(TFMessage, "/tf", 10)
+    origin = time.monotonic()
+    stale_at = None
+
+    def stamp(seconds):
+        from builtin_interfaces.msg import Time
+
+        return Time(sec=int(seconds), nanosec=int((seconds % 1) * 1e9))
+
+    def inputs():
+        nonlocal stale_at
+        now = time.monotonic() - origin + 1000
+        clock_pub.publish(Clock(clock=stamp(now)))
+        if state["fault"] and stale_at is None:
+            stale_at = now
+        if not (state["fault"] and name == "lost_lidar"):
+            scan_time = now
+            if state["fault"]:
+                if name == "stale_lidar":
+                    scan_time = stale_at
+                elif name == "delayed_lidar":
+                    scan_time -= 3
+                elif name == "future_lidar":
+                    scan_time += 5
+            scan = LaserScan()
+            scan.header.stamp = stamp(scan_time)
+            scan.header.frame_id = "base_scan"
+            scan.angle_min, scan.angle_max, scan.angle_increment = -3.14, 3.14, 0.0175
+            scan.range_min, scan.range_max = 0.1, 10.0
+            scan.ranges = [4.0] * 360
+            scan_pub.publish(scan)
+        if not (state["fault"] and name == "lost_tf"):
+            transform = TransformStamped()
+            transform.header.frame_id, transform.child_frame_id = "map", "base_link"
+            transform.header.stamp = stamp(
+                now + (5 if state["fault"] and name == "future_tf" else 0)
+            )
+            transform.transform.translation.x = 0.8
+            transform.transform.rotation.w = 1.0
+            tf_pub.publish(TFMessage(transforms=[transform]))
+
+    node.create_timer(0.05, inputs)
+    node.create_subscription(
+        String, "oak/watchdog_events", lambda m: watchdog_events.append(json.loads(m.data)), 50
+    )
+    node.create_subscription(
+        String, "oak/mission_events", lambda m: mission_events.append(json.loads(m.data)), 50
+    )
+    node.create_subscription(
+        String, "oak/heartbeat", lambda m: heartbeats.append(json.loads(m.data)), 50
+    )
+
+    def accept(request):
+        state["requests"] += 1
+        server_events.append({"event": "requested", "monotonic": time.monotonic()})
+        if name == "late_goal":
+            time.sleep(7)
+        return GoalResponse.ACCEPT
+
+    def execute(handle):
+        state.update(active=True, started=True)
+        server_events.append({"event": "executing", "monotonic": time.monotonic()})
+        started = time.monotonic()
+        while time.monotonic() - started < 25:
+            feedback = NavigateToPose.Feedback()
+            feedback.distance_remaining = 0.8
+            handle.publish_feedback(feedback)
+            if handle.is_cancel_requested:
+                handle.canceled()
+                state.update(active=False, canceled=True)
+                server_events.append({"event": "canceled", "monotonic": time.monotonic()})
+                return NavigateToPose.Result()
+            if state["cleanup"] or (state["fault"] and name == "action_abort"):
+                handle.abort()
+                state["active"] = False
+                server_events.append({"event": "aborted", "monotonic": time.monotonic()})
+                return NavigateToPose.Result()
+            if name in ["control", "replay"] and time.monotonic() - started > 0.8:
+                handle.succeed()
+                state.update(active=False, success=True)
+                return NavigateToPose.Result()
+            time.sleep(0.05)
+        handle.abort()
+        state["active"] = False
+        return NavigateToPose.Result()
+
+    server = ActionServer(
+        node,
+        NavigateToPose,
+        "navigate_to_pose",
+        execute,
+        goal_callback=accept,
+        cancel_callback=lambda _: CancelResponse.ACCEPT,
+        callback_group=ReentrantCallbackGroup(),
+    )
+    executor = MultiThreadedExecutor(num_threads=4)
+    executor.add_node(node)
+    worker = threading.Thread(target=executor.spin, daemon=True)
+    worker.start()
+    processes, logs = [], []
+    suspended = False
+    renamed = False
+    result = None
+    first_result = None
+    fault_at = None
+    namespace = "/oak_fault_" + name
+    env = {
+        **os.environ,
+        "PYTHONPATH": str(args.package_path) + ":" + os.environ.get("PYTHONPATH", ""),
+    }
+
+    def launch(kind):
+        command = [sys.executable, "-m", "oak_mission." + kind]
+        if kind == "executor":
+            command += [
+                "--spool",
+                str(receiver_spool),
+                "--validator",
+                str(args.validator),
+                "--policy",
+                str(args.policy),
+            ]
+        command += ["--ros-args", "-r", "__ns:=" + namespace]
+        if kind == "executor":
+            command += ["-p", "use_sim_time:=true"]
+        log = (directory / f"{kind}-{len(processes)}.log").open("x")
+        logs.append(log)
+        p = subprocess.Popen(command, env=env, stdout=log, stderr=log, start_new_session=True)
+        processes.append(p)
+        return p
+
+    def put(raw, identity):
+        temporary = spool / "pending" / (identity + ".tmp")
+        temporary.write_text(raw)
+        temporary.rename(temporary.with_suffix(".json"))
+
+    try:
+        watchdog = launch("watchdog")
+        receiver = launch("executor")
+        time.sleep(2.5)
+        now = time.time_ns() // 1000000
+        identity = "m-" + uuid.uuid4().hex[:16]
+        mission = {
+            "schema_version": 1,
+            "mission_id": identity,
+            "policy_id": "oak-room-v1",
+            "issued_at_ms": now,
+            "expires_at_ms": now
+            + (1000 if name in ["mission_expiration", "delayed_delivery"] else 60000),
+            "instruction": "Go to station",
+            "steps": [{"action": "navigate", "destination": "station", "duration_s": 0}],
+        }
+        raw = json.dumps(mission)
+        if name == "corrupt_json":
+            raw = '{"schema_version":'
+        elif name == "duplicate_key":
+            raw = raw[:-1] + ',"schema_version":1}'
+        elif name == "unsafe_omission":
+            mission["instruction"] += " and disable collision avoidance"
+            raw = json.dumps(mission)
+        elif name == "oversized_payload":
+            raw = " " * 17000
+        elif name == "delayed_delivery":
+            time.sleep(1.3)
+        put(raw, identity)
+        deadline = time.monotonic() + (14 if name == "late_goal" else 12)
+        after_fault = None
+        restarted = False
+        while time.monotonic() < deadline:
+            path = spool / "results" / (identity + ".json")
+            if path.exists():
+                try:
+                    result = json.loads(path.read_text())
+                except json.JSONDecodeError:
+                    pass
+            if name == "replay" and result and first_result is None:
+                first_result, result = result, None
+                path.rename(path.with_suffix(".original.json"))
+                put(raw, identity)
+            if name == "late_goal" and result and fault_at is None:
+                fault_at = time.monotonic()
+            if state["started"] and fault_at is None:
+                state["fault"] = True
+                fault_at = time.monotonic()
+                after_fault = fault_at + 5
+                if name == "executor_crash":
+                    receiver.kill()
+                    receiver.wait(timeout=3)
+                elif name == "watchdog_crash":
+                    watchdog.kill()
+                    watchdog.wait(timeout=3)
+                elif name == "heartbeat_interruption":
+                    os.kill(receiver.pid, signal.SIGSTOP)
+                    suspended = True
+                elif name == "spool_loss":
+                    spool.rename(directory / "spool-offline")
+                    renamed = True
+                elif name == "drvfs_detach":
+                    subprocess.run(["umount", "-l", str(drive_alias)], check=True)
+                    (directory / "interface_injection.json").write_text(
+                        json.dumps(
+                            {
+                                "method": "detach private DrvFS D: alias; leave /mnt/d mounted",
+                                "detached_at_ns": time.time_ns(),
+                                "alias": str(drive_alias),
+                                "receiver_spool": str(receiver_spool),
+                                "receiver_path_reachable": receiver_spool.exists(),
+                                "original_windows_spool_reachable": spool.exists(),
+                            },
+                            indent=2,
+                        )
+                    )
+            if name == "executor_crash" and state["canceled"] and not restarted:
+                launch("executor")
+                restarted = True
+                time.sleep(0.5)
+            if result and name not in ["late_goal", "replay"]:
+                break
+            if name == "replay" and first_result and result:
+                break
+            if name == "late_goal" and state["canceled"]:
+                time.sleep(0.3)
+                break
+            if (
+                name
+                in [
+                    "executor_crash",
+                    "heartbeat_interruption",
+                    "spool_loss",
+                    "watchdog_crash",
+                    "drvfs_detach",
+                ]
+                and state["canceled"]
+                and (
+                    name != "executor_crash"
+                    or any(h.get("faulted") and not h.get("active") for h in heartbeats)
+                )
+            ):
+                time.sleep(0.3)
+                break
+            if after_fault and time.monotonic() > after_fault and name != "late_goal":
+                break
+            time.sleep(0.05)
+        active = state["active"]
+        event_cancel = next((e for e in server_events if e["event"] == "canceled"), None)
+        observed = {
+            "runtime": args.runtime,
+            "case": name,
+            "fixture": "synthetic ROS sensors and Nav2 action fixture; no velocity publisher",
+            "mission": mission,
+            "raw_payload": raw,
+            "result": result,
+            "first_result": first_result,
+            "server_events": server_events.copy(),
+            "mission_events": mission_events.copy(),
+            "watchdog_events": watchdog_events.copy(),
+            "heartbeats": heartbeats.copy(),
+            "active_goal_after_observation": active,
+            "goal_requests": state["requests"],
+            "fault_at_monotonic": fault_at,
+            "cancel_after_fault_s": event_cancel["monotonic"] - fault_at
+            if event_cancel and fault_at
+            else None,
+            "detected_or_rejected": bool(result and result["status"] in ["failed", "rejected"])
+            or bool(state["canceled"]),
+            "restart_faulted": any(h.get("faulted") and not h.get("active") for h in heartbeats)
+            if name == "executor_crash"
+            else None,
+            "observation_window_after_fault_s": 5 if name != "late_goal" else 14,
+        }
+        (directory / "result.json").write_text(json.dumps(observed, indent=2))
+        return observed
+    finally:
+        state["cleanup"] = True
+        if renamed:
+            (directory / "spool-offline").rename(spool)
+        if suspended and receiver.poll() is None:
+            os.kill(receiver.pid, signal.SIGCONT)
+        time.sleep(0.2)
+        for p in processes:
+            if p.poll() is None:
+                p.send_signal(signal.SIGINT)
+        for p in processes:
+            try:
+                p.wait(timeout=3)
+            except subprocess.TimeoutExpired:
+                p.kill()
+                p.wait(timeout=3)
+        for log in logs:
+            log.close()
+        executor.shutdown(timeout_sec=2)
+        worker.join(timeout=2)
+        server.destroy()
+        node.destroy_node()
+        if drive_alias is not None:
+            if drive_alias.is_mount():
+                subprocess.run(["umount", "-l", str(drive_alias)], check=True)
+            if not drive_alias.is_mount() and not any(drive_alias.iterdir()):
+                drive_alias.rmdir()
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--runtime", required=True)
+    parser.add_argument("--package-path", type=Path, required=True)
+    parser.add_argument("--validator", type=Path, required=True)
+    parser.add_argument("--policy", type=Path, required=True)
+    parser.add_argument("--cases", nargs="+", choices=CASES + ["drvfs_detach"], default=CASES)
+    parser.add_argument("--require-safe", action="store_true")
+    args = parser.parse_args()
+    args.output = args.output.resolve()
+    args.output.mkdir(parents=True, exist_ok=False)
+    (args.output / "fixture.py.txt").write_bytes(Path(__file__).read_bytes())
+    snapshot = args.output / "runtime_source"
+    snapshot.mkdir()
+    for path in (args.package_path / "oak_mission").glob("*.py"):
+        (snapshot / (path.name + ".txt")).write_bytes(path.read_bytes())
+    (args.output / "protocol.json").write_text(
+        json.dumps(
+            {
+                "runtime": args.runtime,
+                "cases": args.cases,
+                "ros_domain": os.getenv("ROS_DOMAIN_ID"),
+                "fixture_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                "validator_sha256": hashlib.sha256(args.validator.read_bytes()).hexdigest(),
+                "policy_sha256": hashlib.sha256(args.policy.read_bytes()).hexdigest(),
+                "runtime_source_sha256": {
+                    p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                    for p in (args.package_path / "oak_mission").glob("*.py")
+                },
+            },
+            indent=2,
+        )
+    )
+    rclpy.init(args=[])
+    records = []
+    try:
+        for name in args.cases:
+            print(f"{args.runtime}: {name}", flush=True)
+            records.append(case(args, name))
+            time.sleep(0.3)
+    finally:
+        (args.output / "matrix.json").write_text(
+            json.dumps({"runtime": args.runtime, "records": records}, indent=2)
+        )
+        rclpy.try_shutdown()
+
+    failures = []
+    for record in records:
+        name = record["case"]
+        expected = (
+            (record["result"] and record["result"]["status"] == "completed")
+            if name == "control"
+            else record["detected_or_rejected"]
+        )
+        if not expected or record["active_goal_after_observation"]:
+            failures.append(name)
+        if name == "replay" and record["goal_requests"] != 1:
+            failures.append("replay issued another goal")
+        if name == "executor_crash" and not record["restart_faulted"]:
+            failures.append("restart lost inflight latch")
+    (args.output / "assertions.json").write_text(
+        json.dumps(
+            {
+                "failures": failures,
+                "require_safe": args.require_safe,
+                "complete": len(records) == len(args.cases),
+            },
+            indent=2,
+        )
+    )
+    if args.require_safe and failures:
+        raise AssertionError(f"Fault regression failures: {failures}")
+
+
+if __name__ == "__main__":
+    main()

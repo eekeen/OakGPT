@@ -1,0 +1,87 @@
+{
+  "runtime": "phase31-r1",
+  "case": "stale_lidar",
+  "fixture": "synthetic ROS sensors and Nav2 action fixture; no velocity publisher",
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-6da11b68e6ac4e34",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793132038629,
+    "expires_at_ms": 1793132098629,
+    "instruction": "Go to station",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "station",
+        "duration_s": 0
+      }
+    ]
+  },
+  "raw_payload": "{\"schema_version\": 1, \"mission_id\": \"m-6da11b68e6ac4e34\", \"policy_id\": \"oak-room-v1\", \"issued_at_ms\": 1793132038629, \"expires_at_ms\": 1793132098629, \"instruction\": \"Go to station\", \"steps\": [{\"action\": \"navigate\", \"destination\": \"station\", \"duration_s\": 0}]}",
+  "result": {
+    "status": "failed",
+    "reason": "tf_watchdog",
+    "mission_id": "m-6da11b68e6ac4e34",
+    "execution_seconds": 0.03159657004289329,
+    "events": [
+      {
+        "event": "accepted",
+        "mission_id": "m-6da11b68e6ac4e34",
+        "wall_time_ns": 1793132040166681973,
+        "sim_time_ns": 1004000596300
+      },
+      {
+        "event": "failed",
+        "mission_id": "m-6da11b68e6ac4e34",
+        "wall_time_ns": 1793132040167900033,
+        "sim_time_ns": 1004000596300,
+        "reason": "tf_watchdog"
+      }
+    ]
+  },
+  "first_result": null,
+  "server_events": [],
+  "mission_events": [
+    {
+      "event": "accepted",
+      "mission_id": "m-6da11b68e6ac4e34",
+      "wall_time_ns": 1793132040166681973,
+      "sim_time_ns": 1004000596300
+    },
+    {
+      "event": "failed",
+      "mission_id": "m-6da11b68e6ac4e34",
+      "wall_time_ns": 1793132040167900033,
+      "sim_time_ns": 1004000596300,
+      "reason": "tf_watchdog"
+    }
+  ],
+  "watchdog_events": [
+    {
+      "event": "startup_cancel",
+      "wall_time_ns": 1793132036867707583,
+      "canceling": 0
+    }
+  ],
+  "heartbeats": [
+    {
+      "active": true,
+      "faulted": false,
+      "mission_id": "m-6da11b68e6ac4e34",
+      "expires_at_ms": 1793132098629
+    },
+    {
+      "active": false,
+      "faulted": true,
+      "mission_id": null,
+      "expires_at_ms": 0
+    }
+  ],
+  "active_goal_after_observation": false,
+  "goal_requests": 0,
+  "fault_at_monotonic": null,
+  "cancel_after_fault_s": null,
+  "detected_or_rejected": true,
+  "restart_faulted": null,
+  "observation_window_after_fault_s": 5
+}

@@ -1,0 +1,56 @@
+{
+  "id": "valid-17",
+  "category": "valid",
+  "instruction": "Check storage bay",
+  "expected_accept": true,
+  "expected_steps": [
+    {
+      "action": "navigate",
+      "destination": "storage",
+      "duration_s": 0
+    },
+    {
+      "action": "inspect",
+      "destination": "storage",
+      "duration_s": 2
+    }
+  ],
+  "planner": "Q8_0",
+  "accepted": false,
+  "execution": null,
+  "validation_latency_s": 0.12699849996715784,
+  "raw_output": "{\n  \"schema_version\": 1,\n  \"decision\": \"accept\",\n  \"reason\": \"ok\",\n  \"steps\": [\n    {\n      \"action\": \"navigate\",\n      \"destination\": \"storage\",\n      \"duration_s\": 0\n    }\n  ]\n}",
+  "proposal": {
+    "schema_version": 1,
+    "decision": "accept",
+    "reason": "ok",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "storage",
+        "duration_s": 0
+      }
+    ]
+  },
+  "schema_valid": true,
+  "inference_latency_s": 0.8547928999178112,
+  "validation": {
+    "accepted": false,
+    "reason": "intent_mismatch"
+  },
+  "mission": {
+    "schema_version": 1,
+    "mission_id": "m-d591c16cf47f40d8",
+    "policy_id": "oak-room-v1",
+    "issued_at_ms": 1793131129197,
+    "expires_at_ms": 1793131309197,
+    "instruction": "Check storage bay",
+    "steps": [
+      {
+        "action": "navigate",
+        "destination": "storage",
+        "duration_s": 0
+      }
+    ]
+  }
+}

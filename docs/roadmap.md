@@ -1,11 +1,40 @@
 # Roadmap
 
+## Priorities after Phase 3.1
+
+1. **Navigation reliability before broader autonomy.** Preserve the nine-world results,
+   including four pre-injection navigation failures. Record planned paths, costmaps,
+   controller state and near-goal behavior on a separate development world set. Tune
+   progress/controller settings there, then preregister a new held-out study. Keep
+   mission expiration and the independent C++ contract fixed.
+2. **Remove remaining software stop failure points.** Evaluate guard-process loss,
+   compound faults and host suspension. Add independently enforced actuator-side command
+   expiry and process supervision before a physical robot is considered. A canceled ROS
+   action or a zero message does not prove motion stopped.
+3. **Broader language with independent review.** Obtain additional annotators and an
+   untouched instruction test set. Compare exact interpretation, abstention, unsafe
+   proposals and controlled authorization separately. Implement an audited operator
+   review flow only if needed; confirmation must never bypass C++ validation.
+4. **Fine-tuning as a measured hypothesis.** Use disjoint training data, excluding both
+   frozen instruction fixtures. Evaluate adapter training and inference within 6 GB;
+   compare against the deterministic recognizer and unchanged base models. Do not trade
+   increased unsafe proposals for a higher positive interpretation score.
+5. **Demonstration and publication.** Provide a deterministic offline demonstration with
+   replayable success and failure traces, pinned environments, raw manifests and clear
+   simulator-only limits. Publish negative results and missing outcomes alongside gains.
+
+The sections below retain the original extension plan for context. Phase 2 GPU studies
+and Phase 3/3.1 C++/ROS2/Gazebo components are now implemented; LoRA remains future work.
+
 Phase 1 implements scratch training and local inference. Phase 2 adds physical GPU
 verification, licensed data and controlled experiments. Phase 3 now implements bounded
 planning, C++ validation and actual ROS2 Jazzy/Nav2/Gazebo execution. LoRA remains deferred.
 Historical phase reports retain their original evidence.
 
-## Recommended next phase: reliability and broader evaluation
+## Prior recommendation (before Phase 3.1)
+
+This recommendation motivated the now-completed Phase 3.1 study; the priorities above
+supersede it.
 
 Prioritize simulator ground-truth trajectory and stopping-distance checks, randomized
 cluttered worlds, independent simulator seeds, action-server outages, sensor/TF loss,

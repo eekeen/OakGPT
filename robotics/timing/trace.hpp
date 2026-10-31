@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdio>
+#include <atomic>
 #include <cstdlib>
 #include <cstring>
 #include <fcntl.h>
@@ -18,6 +19,7 @@ inline unsigned long long clock_ns(clockid_t id = CLOCK_BOOTTIME) {
   return static_cast<unsigned long long>(t.tv_sec)*1000000000ULL+t.tv_nsec;
 }
 inline void record(const char *stage, const char *detail = "") {
+  static std::atomic<unsigned long long> dropped{0};
   static int fd = [] {
     const char *root = std::getenv("OAK_TIMING_DIR");
     if (!root || !*root) return -1;
@@ -27,12 +29,12 @@ inline void record(const char *stage, const char *detail = "") {
   if (fd < 0) return;
   char buffer[2048];
   int n = std::snprintf(buffer, sizeof(buffer),
-      "{\"stage\":\"%s\",\"boot_ns\":%llu,\"mono_ns\":%llu,\"thread_cpu_ns\":%llu,\"pid\":%d,\"tid\":%ld%s}\n",
+      "{\"stage\":\"%s\",\"boot_ns\":%llu,\"mono_ns\":%llu,\"thread_cpu_ns\":%llu,\"native_dropped\":%llu,\"pid\":%d,\"tid\":%ld%s}\n",
       stage, clock_ns(), clock_ns(CLOCK_MONOTONIC), clock_ns(CLOCK_THREAD_CPUTIME_ID),
-      getpid(), syscall(SYS_gettid), detail);
+      dropped.load(std::memory_order_relaxed), getpid(), syscall(SYS_gettid), detail);
   if (n > 0 && n < static_cast<int>(sizeof(buffer))) {
-    auto ignored = write(fd, buffer, static_cast<size_t>(n));
-    (void)ignored;
-  }
+    auto written = write(fd, buffer, static_cast<size_t>(n));
+    if (written != n) dropped.fetch_add(1, std::memory_order_relaxed);
+  } else dropped.fetch_add(1, std::memory_order_relaxed);
 }
 }  // namespace oak_timing

@@ -5,8 +5,37 @@
 #include <gz/transport/Node.hh>
 #include <gz/msgs/twist.pb.h>
 #include <geometry_msgs/msg/twist_stamped.hpp>
+#include <execinfo.h>
+#include <pthread.h>
+#include <semaphore.h>
+#include <rmw_fastrtps_shared_cpp/custom_publisher_info.hpp>
+#include <unordered_set>
+#include <atomic>
 
 namespace {
+thread_local bool publishing = false;
+thread_local bool unwinding_wait = false;
+std::atomic<pthread_mutex_t *> send_mutex{nullptr};
+std::atomic<long> send_owner{0};
+thread_local unsigned long long send_held_since = 0;
+thread_local bool resolving_site = false;
+void waiting_stack(unsigned long long elapsed, const char *stage = "publish_wait_stack", bool unknown = false) {
+  const char *enabled = std::getenv("OAK_TIMING_STACKS");
+  if ((!unknown && elapsed < 50000000ULL) || !enabled || !*enabled || unwinding_wait) return;
+  unwinding_wait = true;
+  void *addresses[32];
+  int count = backtrace(addresses, 32);
+  for (int i=0; i<count; ++i) {
+    Dl_info info{};
+    if (!dladdr(addresses[i], &info) || !info.dli_fname) continue;
+    auto fields = ",\"wait_ns\":"+std::to_string(elapsed)+",\"duration_known\":"+(unknown ? "false" : "true")+",\"frame\":"+std::to_string(i)+
+      ",\"module\":\""+info.dli_fname+"\",\"offset\":"+
+      std::to_string(reinterpret_cast<uintptr_t>(addresses[i])-reinterpret_cast<uintptr_t>(info.dli_fbase))+
+      ",\"symbol\":\""+(info.dli_sname ? std::string(info.dli_sname) : "unknown")+"\"";
+    oak_timing::record(stage, fields.c_str());
+  }
+  unwinding_wait = false;
+}
 bool relevant(const char *topic) {
   return topic && (std::strstr(topic, "cmd_vel") || std::strstr(topic, "actuator_cmd"));
 }
@@ -41,9 +70,121 @@ extern "C" rcl_ret_t rcl_publish(const rcl_publisher_t *publisher, const void *m
   using Function = rcl_ret_t (*)(const rcl_publisher_t *, const void *, rmw_publisher_allocation_t *);
   static auto original = reinterpret_cast<Function>(dlsym(RTLD_NEXT, "rcl_publish"));
   const char *topic = rcl_publisher_get_topic_name(publisher);
+  if (relevant(topic)) {
+    static std::mutex qos_mutex;
+    static std::unordered_set<const rcl_publisher_t *> observed;
+    std::lock_guard<std::mutex> lock(qos_mutex);
+    if (observed.insert(publisher).second) {
+      auto rmw = rcl_publisher_get_rmw_handle(publisher);
+      if (rmw) {
+        auto qos = rcl_publisher_get_actual_qos(publisher);
+        if (qos) {
+          auto fields = ",\"topic\":\""+std::string(topic)+"\",\"implementation\":\""+rmw->implementation_identifier+
+            "\",\"reliability\":"+std::to_string(qos->reliability)+",\"depth\":"+std::to_string(qos->depth);
+          oak_timing::record("actual_ros_writer_qos", fields.c_str());
+        }
+      }
+      if (rmw && std::strcmp(rmw->implementation_identifier, "rmw_fastrtps_cpp") == 0) {
+        auto info = static_cast<CustomPublisherInfo *>(rmw->data);
+        auto qos = info->data_writer_->get_qos();
+        auto fields = ",\"topic\":\""+std::string(topic)+"\",\"publication_mode\":"+
+          std::to_string(qos.publish_mode().kind)+",\"data_sharing\":"+
+          std::to_string(qos.data_sharing().kind())+",\"max_blocking_ns\":"+
+          std::to_string(static_cast<long long>(qos.reliability().max_blocking_time.seconds)*1000000000LL+qos.reliability().max_blocking_time.nanosec);
+        oak_timing::record("actual_writer_qos", fields.c_str());
+      }
+    }
+  }
   if (relevant(topic)) ros_record("dds_publish_begin", topic, msg);
+  bool was_publishing = publishing;
+  publishing = relevant(topic);
   auto result = original(publisher, msg, allocation);
+  publishing = was_publishing;
   if (relevant(topic)) ros_record("dds_publish_end", topic);
+  return result;
+}
+extern "C" int pthread_cond_timedwait(pthread_cond_t *condition, pthread_mutex_t *mutex,
+                                       const timespec *timeout) {
+  using Function = int (*)(pthread_cond_t *, pthread_mutex_t *, const timespec *);
+  static auto original = reinterpret_cast<Function>(dlsym(RTLD_NEXT, "pthread_cond_timedwait"));
+  auto before = publishing ? oak_timing::clock_ns() : 0;
+  int result = original(condition, mutex, timeout);
+  if (publishing) waiting_stack(oak_timing::clock_ns()-before);
+  return result;
+}
+extern "C" int pthread_cond_wait(pthread_cond_t *condition, pthread_mutex_t *mutex) {
+  using Function = int (*)(pthread_cond_t *, pthread_mutex_t *);
+  static auto original = reinterpret_cast<Function>(dlsym(RTLD_NEXT, "pthread_cond_wait"));
+  auto before = publishing && !unwinding_wait ? oak_timing::clock_ns() : 0;
+  int result = original(condition, mutex);
+  if (before) waiting_stack(oak_timing::clock_ns()-before);
+  return result;
+}
+extern "C" int pthread_mutex_lock(pthread_mutex_t *mutex) {
+  using Function = int (*)(pthread_mutex_t *);
+  static auto original = reinterpret_cast<Function>(dlsym(RTLD_NEXT, "pthread_mutex_lock"));
+  if (!send_mutex.load() && publishing && !resolving_site && !unwinding_wait) {
+    resolving_site = true;
+    Dl_info info{};
+    if (dladdr(__builtin_return_address(0), &info) && info.dli_sname &&
+        std::strstr(info.dli_sname, "RTPSWriter8send_nts")) {
+      send_mutex.store(mutex);
+      oak_timing::record("send_resource_mutex_identified");
+    }
+    resolving_site = false;
+  }
+  bool watched = send_mutex.load() == mutex;
+  auto before = (watched || publishing) && !unwinding_wait ? oak_timing::clock_ns() : 0;
+  if (watched) {
+    auto fields = ",\"recorded_owner_tid\":"+std::to_string(send_owner.load());
+    oak_timing::record("send_resource_wait_begin", fields.c_str());
+  }
+  int result = original(mutex);
+  if (watched && result == 0) {
+    send_held_since = oak_timing::clock_ns();
+    send_owner.store(syscall(SYS_gettid));
+    auto fields = ",\"wait_ns\":"+std::to_string(send_held_since-before);
+    oak_timing::record("send_resource_acquired", fields.c_str());
+  }
+  if (before) waiting_stack(oak_timing::clock_ns()-before);
+  return result;
+}
+extern "C" int pthread_mutex_unlock(pthread_mutex_t *mutex) {
+  using Function = int (*)(pthread_mutex_t *);
+  static auto original = reinterpret_cast<Function>(dlsym(RTLD_NEXT, "pthread_mutex_unlock"));
+  if (send_mutex.load() == mutex) {
+    auto held = send_held_since ? oak_timing::clock_ns()-send_held_since : 0;
+    auto fields = ",\"held_ns\":"+std::to_string(held)+",\"duration_known\":"+(send_held_since ? "true" : "false");
+    oak_timing::record("send_resource_releasing", fields.c_str());
+    waiting_stack(held, "send_resource_owner_stack", send_held_since == 0);
+    send_held_since = 0;
+    send_owner.store(0);
+  }
+  return original(mutex);
+}
+extern "C" int pthread_cond_clockwait(pthread_cond_t *condition, pthread_mutex_t *mutex,
+                                       clockid_t clock, const timespec *timeout) {
+  using Function = int (*)(pthread_cond_t *, pthread_mutex_t *, clockid_t, const timespec *);
+  static auto original = reinterpret_cast<Function>(dlsym(RTLD_NEXT, "pthread_cond_clockwait"));
+  auto before = publishing ? oak_timing::clock_ns() : 0;
+  int result = original(condition, mutex, clock, timeout);
+  if (publishing) waiting_stack(oak_timing::clock_ns()-before);
+  return result;
+}
+extern "C" int nanosleep(const timespec *duration, timespec *remaining) {
+  using Function = int (*)(const timespec *, timespec *);
+  static auto original = reinterpret_cast<Function>(dlsym(RTLD_NEXT, "nanosleep"));
+  auto before = publishing ? oak_timing::clock_ns() : 0;
+  int result = original(duration, remaining);
+  if (publishing) waiting_stack(oak_timing::clock_ns()-before);
+  return result;
+}
+extern "C" int sem_timedwait(sem_t *semaphore, const timespec *timeout) {
+  using Function = int (*)(sem_t *, const timespec *);
+  static auto original = reinterpret_cast<Function>(dlsym(RTLD_NEXT, "sem_timedwait"));
+  auto before = publishing ? oak_timing::clock_ns() : 0;
+  int result = original(semaphore, timeout);
+  if (publishing) waiting_stack(oak_timing::clock_ns()-before);
   return result;
 }
 extern "C" rcl_ret_t rcl_take(const rcl_subscription_t *sub, void *msg,

@@ -1,0 +1,34 @@
+{
+  "software_summary": "83 Python tests passed, 2 hardware tests skipped; Ruff lint/format and strict mypy passed. Release and ASan/UBSan C++ validator and expiry property tests passed. The 60-case C++ frozen oracle and actual C++ mailbox boundary check passed. ROS package tests: 10 passed, zero failures/errors/skips. Installed Gazebo expiry tests: 2 passed. Wheel/sdist packaging and 14 required native/ROS source checks passed. Phase 3.3 archive hashes verified (27 archives, 1958 members before the verification-log supplement).",
+  "notes": [
+    "Initial colcon invocation omitted --merge-install and failed before tests; retained in verification-v1/ros-test.log. Corrected invocation in verification-ros-followup-v1 passed.",
+    "No final held-out or actual-motion fault regression is represented as passed."
+  ],
+  "input_sha256": {
+    "pytest-checkpoint-v3.log": "f9f75759f7bfbba4fb48fed9c51160e643a0f8a8c0d61cc523cbd653321da57f",
+    "ruff-checkpoint-v4.log": "af352a86840ad0af3d37ea0d9197f868363a6dac6b1c2ef5d2722f6b41d2d9af",
+    "format-checkpoint-v4.log": "4cd03066e50299fbe390fb1261508fe5f92f391e406b0cb2a9ece19f09824298",
+    "mypy-checkpoint-v4.log": "25daa561f2e79ac2f51f900a152eadf72cd290f94bb28f01206e52b54fa2d793",
+    "package-integrity-v1.log": "a5453bf8e25eebb76225a24629c7a7f21dbd79c01ce80dab283acfa54b3d58a9",
+    "archive-integrity-v2.log": "b40f7ff723e88488e7ab4f5473ff9c599b49efe70543d33091a2fd966ca277a9",
+    "v11-native-verification.log": "0af8be1d5b0c993d0666a8d8764bddf49583966832da4cb49cf23d007b9c4f53",
+    "verification-v1/validator-release-ctest.log": "1322c26d8a7966704ad6903cd918673e74762b85822e6e0afee389daa27e25d3",
+    "verification-v1/validator-sanitizer-ctest.log": "4632217ef571731d8087c488848e92476a95536f361eec4db1af4f974fc35e2d",
+    "verification-v1/expiry-release-ctest.log": "5793046437f8512cb4569a79ad29bef19ab266a4b067cd0629c406cbd0a16b94",
+    "verification-v1/expiry-sanitizer-ctest.log": "80ca942ed71a1fd625c32c5a7f4d5a8b109fbc52eaebab1dd2dc5ee655aa20d0",
+    "verification-v1/frozen-cpp-oracle.log": "ebad0b63864e5fb4e4d75132d837e0c4639d78b5ff92ef98ce50b76c7cda5ad9",
+    "verification-v1/clock-mailbox.json": "1b7b44bf89d105add516fffb01aebb52bd444b3bb2eafaf8e32993c7332b7376",
+    "verification-ros-followup-v1/ros-summary.log": "aec258ec0f88517623f82b224d2b3052523ada3b3644cf5d414792eb1ebbf352",
+    "verification-ros-followup-v1/installed-expiry.log": "90986421ea93a22081f8a211c1b61dde574586e4e5a0fbfe8db81c757ac44c1b",
+    "verification-ros-followup-v1/history-unchanged.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "decision": "NO-GO for Phase 4 on current evidence; development/startup gate remains unmet",
+  "pending": [
+    "Measured quiet host baseline",
+    "Clock and ROS/TF startup qualification",
+    "Controlled three-backend smoke",
+    "Justified candidate and source/runtime freeze",
+    "Independent 24-world held-out replication",
+    "Final eligible actual-motion safety regressions"
+  ]
+}

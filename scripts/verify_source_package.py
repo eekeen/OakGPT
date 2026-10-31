@@ -1,10 +1,17 @@
 """Check distributable robotics sources and prevent accidental weight packaging."""
 
+import argparse
 import tarfile
 from pathlib import Path
 
 REQUIRED = [
     "cpp/CMakeLists.txt",
+    "robotics/timing/trace.hpp",
+    "robotics/ros2_ws/src/oak_nav_trace/src/transport_trace.cpp",
+    "robotics/ros2_ws/src/oak_nav_trace/src/controller_trace.cpp",
+    "configs/robotics/phase33_fastdds_udp.xml",
+    "configs/robotics/phase33_cyclonedds.xml",
+    "scripts/receiver_clock_mailbox.py",
     "robotics/command_expiry/CMakeLists.txt",
     "robotics/command_expiry/include/expiry.hpp",
     "robotics/command_expiry/src/gazebo_expiry.cpp",
@@ -16,7 +23,10 @@ REQUIRED = [
 
 
 def main():
-    packages = list(Path("dist").glob("oakgpt-*.tar.gz"))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dist-dir", type=Path, default=Path("dist"))
+    args = parser.parse_args()
+    packages = list(args.dist_dir.glob("oakgpt-*.tar.gz"))
     if len(packages) != 1:
         raise ValueError("Expected exactly one current source distribution")
     with tarfile.open(packages[0]) as archive:

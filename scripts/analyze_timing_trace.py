@@ -37,6 +37,7 @@ def main():
         stage for stage in required if not result["stage_counts"].get(stage)
     ]
     result["trace_errors"] = max((r.get("trace_errors", 0) for r in rows), default=0)
+    result["native_dropped"] = max((r.get("native_dropped", 0) for r in rows), default=0)
     write_new_json(args.output, result)
     print(
         json.dumps(
@@ -47,7 +48,7 @@ def main():
             }
         )
     )
-    if result["missing_stages"] or result["trace_errors"]:
+    if result["missing_stages"] or result["trace_errors"] or result["native_dropped"]:
         raise SystemExit(1)
 
 

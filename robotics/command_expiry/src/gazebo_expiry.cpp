@@ -7,6 +7,7 @@
 #include <gz/plugin/Register.hh>
 #include <gz/sim/System.hh>
 #include <gz/sim/EntityComponentManager.hh>
+#include <gz/sim/Util.hh>
 #include <gz/sim/components/ContactSensorData.hh>
 #include <gz/transport/Node.hh>
 #include <mutex>
@@ -23,8 +24,9 @@ std::uint64_t boottime() {
 class GazeboExpiry : public gz::sim::System, public gz::sim::ISystemConfigure,
                      public gz::sim::ISystemPreUpdate, public gz::sim::ISystemPostUpdate {
  public:
-  void Configure(const gz::sim::Entity &, const std::shared_ptr<const sdf::Element> &,
+  void Configure(const gz::sim::Entity &entity, const std::shared_ptr<const sdf::Element> &,
                  gz::sim::EntityComponentManager &, gz::sim::EventManager &) override {
+    entity_ = entity;
     output_ = node_.Advertise<gz::msgs::Twist>("/oak/actuator_cmd");
     events_ = node_.Advertise<gz::msgs::StringMsg>("/oak/expiry_events");
     node_.Subscribe("/oak/leased_cmd_vel", &GazeboExpiry::receive, this);
@@ -33,8 +35,11 @@ class GazeboExpiry : public gz::sim::System, public gz::sim::ISystemConfigure,
     }
   }
   void contacts(const gz::msgs::Contacts &message) {
+    contacts_at(message, static_cast<long long>(message.header().stamp().sec())*1000000000LL+message.header().stamp().nsec(), "transport");
+  }
+  void contacts_at(const gz::msgs::Contacts &message, long long sim_ns, const char *source) {
     std::string fields = ",\"count\":"+std::to_string(message.contact_size())+
-      ",\"sim_ns\":"+std::to_string(static_cast<long long>(message.header().stamp().sec())*1000000000LL+message.header().stamp().nsec());
+      ",\"sim_ns\":"+std::to_string(sim_ns)+",\"contact_source\":\""+source+"\"";
     oak_timing::record("contact_sample", fields.c_str());
     for (const auto &contact : message.contact()) {
       // Names are generated locally from fixed, alphanumeric world identifiers.
@@ -42,12 +47,21 @@ class GazeboExpiry : public gz::sim::System, public gz::sim::ISystemConfigure,
       oak_timing::record("contact_pair", detail.c_str());
     }
   }
-  void PostUpdate(const gz::sim::UpdateInfo &, const gz::sim::EntityComponentManager &ecm) override {
+  void PostUpdate(const gz::sim::UpdateInfo &info, const gz::sim::EntityComponentManager &ecm) override {
     ecm.Each<gz::sim::components::ContactSensorData>(
-      [this](const gz::sim::Entity &, const gz::sim::components::ContactSensorData *data) {
-        contacts(data->Data());
+      [this, &info](const gz::sim::Entity &, const gz::sim::components::ContactSensorData *data) {
+        // Physics component messages have no container timestamp; use this
+        // PostUpdate's actual simulator time, not a zero/default header.
+        contacts_at(data->Data(), static_cast<long long>(info.simTime.count()), "physics_ecm");
         return true;
       });
+    if (++pose_tick_ % 4 == 0) {
+      auto pose = gz::sim::worldPose(entity_, ecm);
+      char fields[256];
+      std::snprintf(fields, sizeof(fields), ",\"sim_ns\":%lld,\"x\":%.12g,\"y\":%.12g,\"yaw\":%.12g",
+        static_cast<long long>(info.simTime.count()), pose.Pos().X(), pose.Pos().Y(), pose.Rot().Yaw());
+      oak_timing::record("ground_truth_native", fields);
+    }
   }
   void receive(const gz::msgs::Twist &message) {
     oak_timing::record("native_ingress");
@@ -87,6 +101,8 @@ class GazeboExpiry : public gz::sim::System, public gz::sim::ISystemConfigure,
       text << "{\"reason\":\"" << reason << "\",\"latched\":" << (latched ? "true" : "false")
            << ",\"boottime_ns\":" << now << ",\"lifetime_ns\":" << lifetime_ns
            << ",\"sim_ns\":" << info.simTime.count() << "}";
+      auto trace_fields = std::string(",\"state\":")+text.str();
+      oak_timing::record("expiry_state", trace_fields.c_str());
       gz::msgs::StringMsg event; event.set_data(text.str()); events_.Publish(event);
       last_reason_ = reason; last_event_ = now;
     }
@@ -98,6 +114,8 @@ class GazeboExpiry : public gz::sim::System, public gz::sim::ISystemConfigure,
   std::mutex mutex_;
   std::string last_reason_;
   std::uint64_t last_event_{0};
+  gz::sim::Entity entity_{};
+  unsigned pose_tick_{0};
 };
 }  // namespace oak_expiry
 GZ_ADD_PLUGIN(oak_expiry::GazeboExpiry, gz::sim::System,

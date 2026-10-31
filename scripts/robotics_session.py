@@ -82,6 +82,7 @@ def main():
     if (args.directory / "READY.json").exists():
         raise FileExistsError("Session already started")
     processes, logs, roles = [], [], {}
+    executor_command = None
     resource_stop = resource_worker = None
     rclpy.init(args=[])
     node = Node("oak_session_readiness")
@@ -131,6 +132,9 @@ def main():
     ]
 
     def start(name, command):
+        nonlocal executor_command
+        if name == "executor":
+            executor_command = list(command)
         timing_prefix = os.getenv("OAK_TIMING_PREFIX")
         if name == "simulation" and timing_prefix:
             timing_directory = (
@@ -148,7 +152,8 @@ def main():
             )
             command = [
                 "env",
-                "OAK_TIMING_DIR=" + str(timing_directory),
+                "OAK_TIMING_DIR="
+                + (str(timing_directory) if os.getenv("OAK_TRACE_LOGGING", "on") == "on" else ""),
                 "LD_PRELOAD=" + timing_prefix + "/lib/liboak_transport_trace.so",
                 *command,
             ]
@@ -327,7 +332,29 @@ def main():
                 }
             )
         )
+        restarted = False
         while not (args.directory / "STOP_SESSION").exists():
+            from receiver_clock_mailbox import serve_clock
+
+            serve_clock(args.directory, str(Path.home() / "projects/oak-build/oak-validate"))
+            if (
+                args.allow_executor_exit
+                and not restarted
+                and (args.directory / "RESTART_EXECUTOR").exists()
+            ):
+                original = next(p for p in processes if roles[p.pid] == "executor")
+                if original.poll() is not None:
+                    process = start("executor-restarted", executor_command)
+                    (args.directory / "RESTARTED_EXECUTOR.json").write_text(
+                        json.dumps(
+                            {
+                                "pid": process.pid,
+                                "monotonic_ns": time.monotonic_ns(),
+                                "wall_ns": time.time_ns(),
+                            }
+                        )
+                    )
+                    restarted = True
             if any(
                 p.poll() is not None
                 and not (args.allow_executor_exit and roles[p.pid] == "executor")
@@ -354,7 +381,32 @@ def main():
         if timing_path.exists():
             import shutil
 
-            shutil.copytree(json.loads(timing_path.read_text())["path"], args.directory / "timing")
+            source = Path(json.loads(timing_path.read_text())["path"])
+            destination = args.directory / "timing"
+            shutil.copytree(source, destination)
+            source_files = {
+                p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in source.iterdir()
+                if p.is_file()
+            }
+            copied_files = {
+                p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in destination.iterdir()
+                if p.is_file()
+            }
+            if source_files != copied_files:
+                raise RuntimeError("Timing evidence copy differs; native source retained")
+            # Free only this owned ephemeral directory after its byte-identical
+            # durable copy is verified. Historical/durable evidence is retained.
+            if source.resolve().is_relative_to(
+                Path("/dev/shm/oak-phase33").resolve()
+            ) and source.resolve() != Path("/dev/shm/oak-phase33"):
+                shutil.rmtree(source)
+            (args.directory / "TIMING_COPY_VERIFIED.json").write_text(
+                json.dumps(
+                    {"files_sha256": source_files, "native_temporary_released": not source.exists()}
+                )
+            )
         for log in logs:
             log.close()
         (args.directory / "STOPPED.json").write_text(

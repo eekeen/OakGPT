@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eo pipefail
 output="$1"
-prefix=/home/eekeen/projects/oak-phase33-instrumented
+prefix="${2:?Supply the fresh installed runtime prefix}"
 mkdir "$output"
 temporary=$(mktemp -d /dev/shm/oak-timing-overhead.XXXXXX)
 "$prefix/lib/oak_nav_trace/oak_trace_benchmark" > "$output/native-disabled.json"

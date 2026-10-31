@@ -10,15 +10,16 @@ class Timing:
     def __init__(self):
         root = os.environ.get("OAK_TIMING_DIR")
         self.errors = 0
-        self.fd = (
-            os.open(
-                os.path.join(root, f"python-{os.getpid()}.jsonl"),
-                os.O_WRONLY | os.O_CREAT | os.O_APPEND | getattr(os, "O_CLOEXEC", 0),
-                0o600,
-            )
-            if root
-            else None
-        )
+        self.fd = None
+        if root:
+            try:
+                self.fd = os.open(
+                    os.path.join(root, f"python-{os.getpid()}.jsonl"),
+                    os.O_WRONLY | os.O_CREAT | os.O_APPEND | getattr(os, "O_CLOEXEC", 0),
+                    0o600,
+                )
+            except OSError:
+                self.errors += 1
 
     def record(self, stage, **values):
         if self.fd is not None:

@@ -28,6 +28,10 @@ def run_trial(args, world):
     shutil.copytree(world, copied)
     if args.launch == "expiry.launch.py":
         enable_expiry(copied)
+    if getattr(args, "timing", False):
+        from phase33_world import instrument_world
+
+        instrument_world(copied)
     if args.overlay or args.progress_trace:
         import yaml
 
@@ -37,6 +41,10 @@ def run_trial(args, world):
         if args.progress_trace:
             parameters["controller_server"]["ros__parameters"]["progress_checker"]["plugin"] = (
                 "oak_nav_trace::ProgressTrace"
+            )
+        if getattr(args, "timing", False):
+            parameters["controller_server"]["ros__parameters"]["FollowPath"]["plugin"] = (
+                "oak_nav_trace::ControllerTrace"
             )
         (copied / "nav2.yaml").write_text(yaml.safe_dump(parameters, sort_keys=False))
     source_hashes = {p.name: sha256(p) for p in world.iterdir() if p.is_file()}
@@ -48,6 +56,17 @@ def run_trial(args, world):
         "--",
         "env",
         f"OAK_ROS_INSTALL={args.install}",
+        "OAK_TIMING_PREFIX=" + (args.install if getattr(args, "timing", False) else ""),
+        "OAK_TIMING_STACKS=" + ("1" if getattr(args, "timing_stacks", False) else ""),
+        "RMW_FASTRTPS_PUBLICATION_MODE=" + getattr(args, "publication_mode", "SYNCHRONOUS"),
+        "RMW_IMPLEMENTATION=" + getattr(args, "rmw", "rmw_fastrtps_cpp"),
+        "OAK_TRACE_LOGGING=" + getattr(args, "trace_logging", "on"),
+        "CYCLONEDDS_URI="
+        + (
+            "file://" + wsl_path(args.cyclone_config)
+            if getattr(args, "cyclone_config", None)
+            else ""
+        ),
         f"OAK_EXPIRY_PLUGIN_DIR={args.expiry_plugin_dir}",
         "OAK_FASTDDS_PROFILE=" + (wsl_path(args.fastdds_profile) if args.fastdds_profile else ""),
         "GZ_PARTITION=oak-phase32-" + args.output.name + "-" + world.name,
@@ -81,7 +100,9 @@ def run_trial(args, world):
                     instruction,
                     baseline(instruction),
                     receiver_now_ms=trial_clock(
-                        config["clock_command"], root / "clock_handshakes.jsonl"
+                        config["clock_command"],
+                        root / "clock_handshakes.jsonl",
+                        mailbox=root if getattr(args, "clock_mailbox", False) else None,
                     ),
                 )
                 result = wait_mission(mission, root / "spool")
@@ -135,6 +156,17 @@ def main():
     parser.add_argument("--fastdds-profile", type=Path)
     parser.add_argument("--overlay", type=Path)
     parser.add_argument("--progress-trace", action="store_true")
+    parser.add_argument("--timing", action="store_true")
+    parser.add_argument("--timing-stacks", action="store_true")
+    parser.add_argument("--clock-mailbox", action="store_true")
+    parser.add_argument(
+        "--rmw", choices=["rmw_fastrtps_cpp", "rmw_cyclonedds_cpp"], default="rmw_fastrtps_cpp"
+    )
+    parser.add_argument("--cyclone-config", type=Path)
+    parser.add_argument("--trace-logging", choices=["on", "off"], default="on")
+    parser.add_argument(
+        "--publication-mode", choices=["SYNCHRONOUS", "ASYNCHRONOUS"], default="SYNCHRONOUS"
+    )
     parser.add_argument(
         "--instructions", nargs="+", default=["Go to station", "Inspect storage", "Go to dock"]
     )
@@ -166,6 +198,9 @@ def main():
             "navigation_timeout_s": 30,
             "overlay": json.loads(args.overlay.read_text()) if args.overlay else None,
             "progress_trace": args.progress_trace,
+            "publication_mode": args.publication_mode,
+            "rmw": args.rmw,
+            "trace_logging": args.trace_logging,
             "fastdds_profile_sha256": sha256(args.fastdds_profile)
             if args.fastdds_profile
             else None,

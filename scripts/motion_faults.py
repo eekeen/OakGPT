@@ -30,11 +30,19 @@ def trial(args, kind):
     shutil.copytree(args.world, world)
     if args.launch == "expiry.launch.py":
         enable_expiry(world)
+    if getattr(args, "timing", False):
+        from phase33_world import instrument_world
+
+        instrument_world(world)
     if args.overlay:
         import yaml
 
         parameters = yaml.safe_load((world / "nav2.yaml").read_text())
         parameters = parameter_overlay(parameters, json.loads(args.overlay.read_text()))
+        if getattr(args, "timing", False):
+            parameters["controller_server"]["ros__parameters"]["FollowPath"]["plugin"] = (
+                "oak_nav_trace::ControllerTrace"
+            )
         (world / "nav2.yaml").write_text(yaml.safe_dump(parameters, sort_keys=False))
     config = json.loads(Path("configs/robotics/study_wsl.json").read_text())
     stop = {"kind": kind}
@@ -48,6 +56,9 @@ def trial(args, kind):
             navigation_trace=False,
             expiry_plugin_dir=args.expiry_plugin_dir,
             fastdds_profile=args.fastdds_profile,
+            timing=getattr(args, "timing", False),
+            publication_mode=getattr(args, "publication_mode", "SYNCHRONOUS"),
+            allow_executor_exit=kind == "executor_restart",
         ):
             if kind in {"stale_command", "replayed_command"}:
                 payload_process = subprocess.Popen(
@@ -86,6 +97,7 @@ def trial(args, kind):
                 receiver_now_ms=trial_clock(
                     config["clock_command"], root / "clock_handshakes.jsonl"
                 ),
+                ttl_ms=3000 if kind == "mission_expiration" else 180000,
             )
             submit_spool(mission, root / "spool")
             stop["mission"] = mission
@@ -126,21 +138,53 @@ def trial(args, kind):
                         "watchdog_crash": "mission_watchdog",
                         "command_bridge_crash": "command_bridge",
                         "simulator_process_stall": "simulator",
+                        "unexpected_gap": "velocity_guard",
+                        "executor_restart": "mission_executor",
+                        "mission_expiration": "mission_expiration",
                     }[kind],
                     "--pause-seconds",
-                    "1" if kind in {"guard_suspend", "simulator_process_stall"} else "0",
+                    "1"
+                    if kind in {"guard_suspend", "simulator_process_stall"}
+                    else "0.25"
+                    if kind == "unexpected_gap"
+                    else "0",
                     "--ready",
                     wsl_path(root / "READY.json"),
                     "--spool",
                     wsl_path(root / "spool"),
                 ]
                 injection += ["--motion-trace", wsl_path(root / "trajectory.jsonl")]
+                if kind == "mission_expiration":
+                    injection += ["--expires-at-ms", str(mission["expires_at_ms"])]
                 response = subprocess.check_output(injection, text=True, timeout=10)
             stop["injection"] = json.loads(response)
             if args.active_capture and kind in {"stale_command", "replayed_command"}:
                 stop["nonzero_payload"] = abs(stop["injection"]["vx"]) > 0.01
             before = stop["injection"]["before_monotonic_ns"]
+            if kind == "executor_restart":
+                (root / "RESTART_EXECUTOR").touch()
             time.sleep(4)
+            if kind == "executor_restart":
+                stop["restart_receipt"] = (
+                    json.loads((root / "RESTARTED_EXECUTOR.json").read_text())
+                    if (root / "RESTARTED_EXECUTOR.json").exists()
+                    else None
+                )
+                probe = envelope(
+                    "Go to station",
+                    baseline("Go to station"),
+                    receiver_now_ms=trial_clock(
+                        config["clock_command"], root / "clock_handshakes.jsonl"
+                    ),
+                )
+                submit_spool(probe, root / "spool")
+                probe_path = root / "spool/results" / (probe["mission_id"] + ".json")
+                deadline = time.monotonic() + 2
+                while not probe_path.exists() and time.monotonic() < deadline:
+                    time.sleep(0.02)
+                stop["restart_probe_result"] = (
+                    json.loads(probe_path.read_text()) if probe_path.exists() else None
+                )
             rows = [
                 json.loads(line) for line in (root / "trajectory.jsonl").read_text().splitlines()
             ]
@@ -173,6 +217,10 @@ def main():
     parser.add_argument("--freeze", type=Path)
     parser.add_argument("--fastdds-profile", type=Path)
     parser.add_argument("--overlay", type=Path)
+    parser.add_argument("--timing", action="store_true")
+    parser.add_argument(
+        "--publication-mode", choices=["SYNCHRONOUS", "ASYNCHRONOUS"], default="SYNCHRONOUS"
+    )
     parser.add_argument("--active-capture", action="store_true")
     parser.add_argument(
         "--cases",
@@ -185,6 +233,9 @@ def main():
             "simulator_process_stall",
             "stale_command",
             "replayed_command",
+            "unexpected_gap",
+            "executor_restart",
+            "mission_expiration",
         ],
         default=["guard_crash"],
     )
@@ -225,6 +276,8 @@ def main():
         {
             "cases": args.cases,
             "active_capture": args.active_capture,
+            "publication_mode": args.publication_mode,
+            "timing": args.timing,
             "environment": environment(),
             "world_sha256": sha256(args.world / "world.json"),
             "install": args.install,

@@ -17,6 +17,9 @@ def session(
     navigation_trace=True,
     expiry_plugin_dir="/home/eekeen/projects/oak-expiry-build",
     fastdds_profile=None,
+    timing=False,
+    publication_mode="SYNCHRONOUS",
+    allow_executor_exit=False,
 ):
     project = Path.cwd().resolve()
     command = [
@@ -26,6 +29,8 @@ def session(
         "--",
         "env",
         f"OAK_ROS_INSTALL={install}",
+        "OAK_TIMING_PREFIX=" + (install if timing else ""),
+        "RMW_FASTRTPS_PUBLICATION_MODE=" + publication_mode,
         f"OAK_EXPIRY_PLUGIN_DIR={expiry_plugin_dir}",
         "OAK_FASTDDS_PROFILE=" + (wsl_path(fastdds_profile) if fastdds_profile else ""),
         "GZ_PARTITION=oak32-" + root.parent.name + "-" + root.name,
@@ -44,6 +49,8 @@ def session(
     ]
     if navigation_trace:
         command.append("--navigation-trace")
+    if allow_executor_exit:
+        command.append("--allow-executor-exit")
     with (root / "supervisor.log").open("x") as log:
         process = subprocess.Popen(command, stdout=log, stderr=log)
         try:

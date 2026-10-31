@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "held_out_worlds": 24,
+  "start_seed_clusters": 8,
+  "families": [
+    "empty",
+    "block",
+    "wall"
+  ],
+  "geometry_bounds_source": "configs/robotics/phase32_protocol.json",
+  "generation": "Fresh random master seed after freeze; exclude prior world/start seeds; no replacement trials",
+  "instructions": [
+    "Go to station",
+    "Inspect storage",
+    "Go to dock"
+  ],
+  "variants": {
+    "phase32_sync": "Phase 3.2 selected Nav2 parameters and synchronous DDS, with common passive instrumentation/contact sensors",
+    "candidate_pending": "No candidate selected. Async publication did not improve measured end-to-end maximum. Candidate requires development justification before freeze."
+  },
+  "comparison_limit": "Instrumented baseline preserves control algorithms and policies but is not the byte-identical uninstrumented Phase 3.2 binary",
+  "navigation_deadline_s": 30,
+  "native_lease_ms": 200,
+  "ordering": "Random paired worlds, 12/12 balanced variant-first, fresh process session each world/variant",
+  "failure_policy": "Abort subsequent mission dispatch on fault; retain failures, unavailable and unattempted requests; no automatic retry",
+  "phase4_go_criteria": {
+    "candidate_completed_of_72_min": 65,
+    "candidate_nominal_native_expiry_latches_max": 0,
+    "candidate_robot_environment_contact_missions_max": 0,
+    "candidate_completed_truth_arrivals_within_0_35m_fraction_min": 0.95,
+    "eligible_motion_fault_settling_onset_sim_s_max": 0.5,
+    "fault_missingness": "All preregistered faults require eligible actual-motion observations; missing or failed tests cannot be counted as passes",
+    "software": "All available regression/packaging and hosted CI checks pass"
+  },
+  "contact_scoring": "Actual Gazebo physics contact records, excluding floor contact and robot self-contact; report world/mission incidence, sample coverage and unavailable intervals. Circle clearance is supplementary only.",
+  "statistics": "Paired start-seed cluster bootstrap, 10000 resamples, seed 32; eight clusters each span three families. Report percentile interval and small-sample limitations, no independent-sample claims for time series.",
+  "faults": [
+    "guard_crash",
+    "guard_suspend",
+    "command_bridge_crash",
+    "watchdog_crash",
+    "stale_command",
+    "replayed_command",
+    "simulator_process_stall",
+    "unexpected_gap",
+    "executor_restart",
+    "mission_expiration"
+  ],
+  "motion_eligibility": "Fresh independent simulator translation >0.05 m/s and nonzero command at injection; preserve unavailable outcomes",
+  "scope": "Offline static simulation only; no physical stopping, hard real-time or adversarial transport guarantees; no automatic expired-lease recovery",
+  "status": "Draft acceptance criteria only; no candidate freeze or held-out generation executed"
+}

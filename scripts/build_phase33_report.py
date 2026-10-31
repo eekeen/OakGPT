@@ -167,6 +167,25 @@ def main():
             ],
         ),
     ]
+    followup = json.loads((root / "quiet-window-followup-v1.json").read_text())
+    baseline = followup["quiet_baselines"][-1]
+    busy = [v["system_busy_percent"] for v in baseline["samples"]]
+    external = [v["selected_external_core_equivalents"] for v in baseline["samples"]]
+    probe = followup["mailbox_isolation"]
+    for heading, paragraphs in sections:
+        if heading.startswith("III."):
+            paragraphs.append(
+                f"An isolated Windows/WSL mailbox diagnostic accepted {probe['accepted']}/"
+                f"{probe['attempted']} handshakes, round trips "
+                f"{probe['min_roundtrip_ns'] / 1e6:.0f}-{probe['max_roundtrip_ns'] / 1e6:.0f} ms, "
+                "with the original one-second bound and no ROS mission. "
+                f"All {len(followup['quiet_baselines'])} attempts to qualify the approved quiet-host "
+                f"window failed the prespecified baseline check. Latest samples: "
+                f"{min(busy):.1f}-{max(busy):.1f}% system CPU and "
+                f"{min(external):.1f}-{max(external):.1f} external CPU-core equivalents. "
+                "The small middleware smoke was therefore not launched. Isolated mailbox "
+                "success does not establish ROS/TF startup reliability."
+            )
     title = "OakGPT Phase 3.3: Timing Attribution and Development Reliability Audit"
     (root / "report.md").write_text(
         "# "

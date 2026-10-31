@@ -1,5 +1,5 @@
 {
-  "software_summary": "83 Python tests passed, 2 hardware tests skipped; Ruff lint/format and strict mypy passed. Release and ASan/UBSan C++ validator and expiry property tests passed. The 60-case C++ frozen oracle and actual C++ mailbox boundary check passed. ROS package tests: 10 passed, zero failures/errors/skips. Installed Gazebo expiry tests: 2 passed. Wheel/sdist packaging and 14 required native/ROS source checks passed. Phase 3.3 archive hashes verified (27 archives, 1958 members before the verification-log supplement).",
+  "software_summary": "83 Python tests passed, 2 hardware tests skipped; Ruff lint/format and strict mypy passed. Release and ASan/UBSan C++ validator and expiry property tests passed. The 60-case C++ frozen oracle and actual C++ mailbox boundary check passed. ROS package tests: 10 passed, zero failures/errors/skips. Installed Gazebo expiry tests: 2 passed. Wheel/sdist packaging and 14 required native/ROS source checks passed. Phase 3.3 archive hashes verified (27 archives, 1958 members before the verification-log supplement). Six hosted GitHub Actions jobs passed for checkpoint 09ea6c9.",
   "notes": [
     "Initial colcon invocation omitted --merge-install and failed before tests; retained in verification-v1/ros-test.log. Corrected invocation in verification-ros-followup-v1 passed.",
     "No final held-out or actual-motion fault regression is represented as passed."
@@ -30,5 +30,10 @@
     "Justified candidate and source/runtime freeze",
     "Independent 24-world held-out replication",
     "Final eligible actual-motion safety regressions"
-  ]
+  ],
+  "hosted_ci": {
+    "commit": "09ea6c924cfee5df6e991934693148ecdfa31919",
+    "run_id": 41152166372,
+    "successful_jobs": 6
+  }
 }

@@ -32,9 +32,11 @@ The original clock harness expected plain text instead of C++ JSON, and a later 
 
 The mailbox uses fresh nonce binding, strict JSON/types/ranges, pre-existing challenge rejection and a one-second host-monotonic round-trip limit. It is trusted local transport, not an authenticated adversarial channel. Actual C++ integration accepted a fresh mission and rejected expired/future missions. The independent validator continues to read its own clock for mission acceptance.
 
+An isolated Windows/WSL mailbox diagnostic accepted 10/10 handshakes, round trips 125-688 ms, with the original one-second bound and no ROS mission. All 3 attempts to qualify the approved quiet-host window failed the prespecified baseline check. Latest samples: 62.9-65.9% system CPU and 5.1-5.6 external CPU-core equivalents. The small middleware smoke was therefore not launched. Isolated mailbox success does not establish ROS/TF startup reliability.
+
 ## IV. Verification and threats to validity
 
-Executed software verification: 83 Python tests passed, 2 hardware tests skipped; Ruff lint/format and strict mypy passed. Release and ASan/UBSan C++ validator and expiry property tests passed. The 60-case C++ frozen oracle and actual C++ mailbox boundary check passed. ROS package tests: 10 passed, zero failures/errors/skips. Installed Gazebo expiry tests: 2 passed. Wheel/sdist packaging and 14 required native/ROS source checks passed. Phase 3.3 archive hashes verified (27 archives, 1958 members before the verification-log supplement).
+Executed software verification: 83 Python tests passed, 2 hardware tests skipped; Ruff lint/format and strict mypy passed. Release and ASan/UBSan C++ validator and expiry property tests passed. The 60-case C++ frozen oracle and actual C++ mailbox boundary check passed. ROS package tests: 10 passed, zero failures/errors/skips. Installed Gazebo expiry tests: 2 passed. Wheel/sdist packaging and 14 required native/ROS source checks passed. Phase 3.3 archive hashes verified (27 archives, 1958 members before the verification-log supplement). Six hosted GitHub Actions jobs passed for checkpoint 09ea6c9.
 
 Fresh native source snapshots and separate install/build directories prevent the stale-object problem found in earlier DrvFS builds. Source inputs and installed binary hashes are preserved. Actual ECM contacts and native poses were observed. Earlier runs without working contact observation remain unavailable, not collision-free.
 

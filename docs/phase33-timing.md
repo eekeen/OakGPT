@@ -4,7 +4,72 @@ This work starts from integrated main `e806d56380e812848f1b7a4aadabcacee0d6457d`
 PRs #4 and #5 were merged once; their ancestry, branches and all earlier evidence remain.
 PR #6 contains the Phase 3.3 work. No LoRA or physical robot deployment is included.
 
+## Current status (2026-11-04)
+
+The completed quiet-host comparison is archived: 36/36 missions, 12/12 qualified
+sessions across three backends and logging on/off. Cyclone is the development-selected
+candidate, not a demonstrated navigation improvement. Source checkpoint `57c2b60`
+and installed artifacts were frozen in `configs/robotics/phase33_freeze_v1.json`.
+Freeze checkpoint `b7e67ac` is pushed. The new 24 worlds and balanced paired schedule
+exist, but no held-out mission was dispatched: the actual runner's CPU samples were
+21.7-29.5%, above the unchanged 20% ceiling. Its failed preflight is preserved.
+Final motion-fault tests are pending; software tests cannot substitute for them.
+The final post-QA host sample v15 also failed (34.1-36.5% CPU); it is archived separately.
+
+The current report is [the quiet-host follow-up](../reports/phase33/quiet-followup-report-v2/report.md)
+([PDF](../reports/phase33/quiet-followup-report-v2/report.pdf)). Its three pages were
+rendered and visually inspected. Earlier reports and all failed trials remain unchanged.
+The earlier checkpoint descriptions below are historical, not the current status.
+Saved resource observations are summarized separately in
+`reports/phase33/quiet-resource-observations-v1.json`: maximum nominal-100-ms
+sampling gaps reached 0.958-2.264 s. Main-thread sampling does not cover every
+middleware worker or establish the cause of a delay.
+
+Resume only after measuring low host load, with the existing worlds/schedule:
+
+```powershell
+.venv-phase31-verify/Scripts/python.exe scripts/phase33_paired.py `
+  --worlds runs/phase33/held-out-worlds-v1 `
+  --freeze configs/robotics/phase33_freeze_v1.json `
+  --output runs/phase33/held-out-replication-v1 --resume
+```
+
+Every remaining session performs a new host gate and clock/ROS/TF qualification.
+Completed failures and unavailable trials are never retried; incomplete directories
+require inspection. Do not regenerate worlds or edit frozen source/configuration.
+After replication, run the ten preregistered faults on the frozen Cyclone runtime
+using `motion_faults.py --clock-mailbox --rmw rmw_cyclonedds_cpp
+--cyclone-config configs/robotics/phase33_cyclonedds.xml --timing --active-capture`,
+with the matching freeze/install/expiry/overlay paths and new output directories.
+Independently verify fresh nonzero motion and native stale/replay delivery. Preserve
+missing preconditions and failures; do not score action cancellation as motion stopping.
+
+**Phase 4: NO-GO on current evidence.** The 200 ms lease, 30 s navigation deadline,
+C++ authorization and preregistered acceptance criteria remain unchanged. No LoRA work
+or additional robotics scope is authorized by a candidate selection alone.
+
 ## Measurement boundaries
+
+```mermaid
+flowchart LR
+  I[Untrusted structured plan] --> V[Independent C++ authorization]
+  V --> E[Mission executor]
+  E --> N[Nav2 controller]
+  N --> G[ROS velocity guard]
+  G --> D[Stamped DDS command]
+  D --> B[C++ ROS/Gazebo bridge]
+  B --> T[Gazebo transport]
+  T --> X[Native 200 ms lease and expiry latch]
+  X --> A[Simulated actuator]
+  A --> P[Independent Gazebo pose and contact observations]
+  G -. sequence identity .-> R[Same-kernel BOOTTIME trace analysis]
+  B -. publication and take events .-> R
+  X -. ingress and PreUpdate events .-> R
+  P -. simulation ground truth .-> H[Motion and contact analysis]
+```
+
+The two analysis clock domains remain separate. The diagram describes implemented
+data flow, not a certified stopping system. Native expiry shares the simulator process.
 
 Computed cross-process intervals use Linux CLOCK_BOOTTIME within one WSL kernel.
 CLOCK_MONOTONIC and thread CPU time are separate fields. DDS source/receive stamps
@@ -16,6 +81,8 @@ unstamped ROS input are observed but cannot be assigned a unique command identit
 through the entire chain. Publication entry/exit is an API duration, not a wire stamp.
 Native ingress-to-PreUpdate includes simulation scheduling and lock contention.
 Thread CPU subtraction cannot distinguish sleeping, middleware blocking and CPU starvation.
+Timing percentiles use the existing empirical order statistic at zero-based index
+`min(n - 1, int(n * q))`; per-session samples are never independent world trials.
 
 The optional preload wraps actual rcl publish/take and installed Gazebo v13 publish
 calls. Nav2's RPP wrapper delegates its computation unchanged. Independent native
@@ -123,7 +190,7 @@ behavior are preserved; ROS cancellation is not proof of simulated or physical s
 - ROS middleware publication: https://github.com/ros2/rmw_fastrtps/blob/jazzy/rmw_fastrtps_shared_cpp/src/rmw_publish.cpp
 - Actual contact component semantics: https://github.com/gazebosim/gz-sim/blob/gz-sim8/src/systems/contact/Contact.cc
 
-## Quiet-window follow-up and current checkpoint
+## Historical quiet-window follow-up (checkpoint 3489b30 and earlier)
 
 Checkpoint `09ea6c9` is pushed to PR #6; all six hosted CI jobs passed (run
 41152166372). Local verification is described in `reports/phase33/verification-summary.json`.

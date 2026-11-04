@@ -1,0 +1,75 @@
+{
+  "candidate_freeze": "configs/robotics/phase33_freeze_v1.json",
+  "candidate_freeze_sha256": "2d036fab6212951b99d6fbb15232a8856b49f335a398ad707db91de95440e658",
+  "source_and_installed_freeze_rechecked": true,
+  "python_passed": 91,
+  "hardware_skipped": 2,
+  "ruff_lint_format": "passed",
+  "mypy": "passed, 36 source files",
+  "cpp": "Release and ASan/UBSan passed; validator 10031 checks, expiry 15036 checks per mode",
+  "ros": "10 tests; zero failures/errors/skips",
+  "installed_expiry": "2 tests passed",
+  "native_clock_semantics_records": 20000,
+  "mailbox": "Actual C++ fresh accepted, stale/future rejected; unit stale/replay/corruption checks passed; original one-second freshness unchanged",
+  "packaging": "wheel/sdist built; 14 required native/ROS sources, no weights/bags",
+  "archive_integrity_before_final_log_supplement": "89 archives, 3459 original member hashes verified",
+  "historical_evidence": "git diff against e806d56 for cpp, expiry policy and Phase 2/3/3.1/3.2 report trees passed",
+  "hosted_ci": {
+    "commit": "b7e67ac8d140ee3da5b3e169d0da6c38106fff7b",
+    "run_id": 41890033981,
+    "successful_jobs": 6
+  },
+  "pdf_review": {
+    "path": "reports/phase33/quiet-followup-report-v2/report.pdf",
+    "rendered_pages": 3,
+    "visually_reviewed_pages": [
+      1,
+      2,
+      3
+    ]
+  },
+  "inputs_sha256": {
+    "pytest-final-followup-v2.log": "83ac72b059e58579607fb86289dcf6c481faf98571a1a89dacf21171bbf5d51c",
+    "ruff-final-followup-v2.log": "af352a86840ad0af3d37ea0d9197f868363a6dac6b1c2ef5d2722f6b41d2d9af",
+    "format-final-followup-v2.log": "74fc1bf27446000709d06b5d012b0ccdeb40bccf63d91477838783cfd86509af",
+    "mypy-final-followup-v2.log": "25daa561f2e79ac2f51f900a152eadf72cd290f94bb28f01206e52b54fa2d793",
+    "archive-integrity-v6.log": "044edbfbe061ef444f654ab1ca44c2aba09b3b7e93c6099b7b8be1527fafc365",
+    "package-v3-build.log": "c45e132fd2353231dc4190efffe15cce72dfc60d0c1ae120aa549880470bfea2",
+    "package-v3-integrity.log": "a5453bf8e25eebb76225a24629c7a7f21dbd79c01ce80dab283acfa54b3d58a9",
+    "verification-v2/COMPLETE.json": "f42fe1245bbbc07b4e4b22c49ce7f83f254843f749b93ddd61a5ab4eee48dbd7",
+    "verification-v2/validator-release-ctest.log": "b7389cccd8fadda3f27c74c2107e9b8f1ac2bf260c4c76fe1f28a5e907a5f596",
+    "verification-v2/validator-sanitizer-ctest.log": "e884f4dd2a2319b8c2eadb4eab11478446b8673d8f30d533552b6be24f8317ff",
+    "verification-v2/expiry-release-ctest.log": "cb76aeb01fc3bac18ecaba13f45889d65b509b83e1f29c5cf2654d7081844d9c",
+    "verification-v2/expiry-sanitizer-ctest.log": "bd1193d6e51b0b1ea6f0e8a83b883f8830e9e102d58d6ddfd183d7880f71973d",
+    "verification-v2/ros-summary.log": "aec258ec0f88517623f82b224d2b3052523ada3b3644cf5d414792eb1ebbf352",
+    "verification-v2/clock-mailbox.json": "4f60c186a6141b402f82690690c95970696d6c205c2bc5227634d542071ef4c6",
+    "verification-v2/installed-expiry.log": "e51a30034a17d41c5b1297c6d5bf39edaf87b17c6ca0f819dec4f9fca05bdd9c",
+    "verification-v2/overhead/semantics.json": "b5f0c49a5246fd63f019d74280a59f5b0bb563f9743c7989387047ad37e8fb2b"
+  },
+  "completed_development": {
+    "sessions": 12,
+    "missions": 36,
+    "mission_completions": 36,
+    "startup_failures": 0
+  },
+  "held_out": {
+    "worlds_frozen": 24,
+    "independent_start_seed_clusters": 8,
+    "sessions_dispatched": 0,
+    "status": "Blocked before dispatch by measured host-load gate; schedule and preflight preserved, resume only existing schedule"
+  },
+  "final_actual_motion_faults": {
+    "preregistered_cases": 10,
+    "executed": 0,
+    "status": "Not verified; no missing precondition or absent result scored as passed"
+  },
+  "phase4_decision": "NO-GO pending independent held-out and eligible actual-motion regressions",
+  "limitations": [
+    "Historical 337 ms event not causally established by the later mutex capture",
+    "No mission-completion advantage observed in quiet development cohort",
+    "Logging-off native timing and contacts unavailable",
+    "Nominal 100 ms resource observation has actual gaps up to 2.264 s and incomplete middleware-worker coverage",
+    "Native expiry shares the simulator process; no physical or hard-real-time guarantees",
+    "Current host contention includes processes outside the selected-process counter; total utilization gate remains enforced"
+  ]
+}

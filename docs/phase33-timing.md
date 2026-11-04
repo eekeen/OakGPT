@@ -6,6 +6,13 @@ PR #6 contains the Phase 3.3 work. No LoRA or physical robot deployment is inclu
 
 ## Current status (2026-11-04)
 
+The subsequent [held-out resume attempt](../reports/phase33/held-out-resume-20261104-v1/status.md)
+also stopped before dispatch: initial v16 CPU was 47.7-50.7%, and the documented
+`--resume` runner measured 46.9-50.2%. A separate project's training/Gazebo stack
+was active in WSL and left untouched. Its CPU contribution was not quantified.
+The schedule and all 121 saved world assets matched; zero sessions or final faults
+ran. A measured quiet window remains the environmental blocker.
+
 The completed quiet-host comparison is archived: 36/36 missions, 12/12 qualified
 sessions across three backends and logging on/off. Cyclone is the development-selected
 candidate, not a demonstrated navigation improvement. Source checkpoint `57c2b60`

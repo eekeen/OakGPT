@@ -20,6 +20,8 @@ def session(
     timing=False,
     publication_mode="SYNCHRONOUS",
     allow_executor_exit=False,
+    rmw="rmw_fastrtps_cpp",
+    cyclone_config=None,
 ):
     project = Path.cwd().resolve()
     command = [
@@ -29,6 +31,9 @@ def session(
         "--",
         "env",
         f"OAK_ROS_INSTALL={install}",
+        "RMW_IMPLEMENTATION=" + rmw,
+        "CYCLONEDDS_URI=" + ("file://" + wsl_path(cyclone_config) if cyclone_config else ""),
+        "OAK_TIMING_STACKS=",
         "OAK_TIMING_PREFIX=" + (install if timing else ""),
         "RMW_FASTRTPS_PUBLICATION_MODE=" + publication_mode,
         f"OAK_EXPIRY_PLUGIN_DIR={expiry_plugin_dir}",

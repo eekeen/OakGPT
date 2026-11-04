@@ -16,7 +16,7 @@
   ],
   "variants": {
     "phase32_sync": "Phase 3.2 selected Nav2 parameters and synchronous DDS, with common passive instrumentation/contact sensors",
-    "candidate_pending": "No candidate selected. Async publication did not improve measured end-to-end maximum. Candidate requires development justification before freeze."
+    "candidate": "Cyclone DDS 0.10.5 / rmw_cyclonedds_cpp 2.2.4 with loopback configuration; selected for lower observed development startup tails, not a proven mission-success improvement"
   },
   "comparison_limit": "Instrumented baseline preserves control algorithms and policies but is not the byte-identical uninstrumented Phase 3.2 binary",
   "navigation_deadline_s": 30,
@@ -48,5 +48,5 @@
   ],
   "motion_eligibility": "Fresh independent simulator translation >0.05 m/s and nonzero command at injection; preserve unavailable outcomes",
   "scope": "Offline static simulation only; no physical stopping, hard real-time or adversarial transport guarantees; no automatic expired-lease recovery",
-  "status": "Draft acceptance criteria only; no candidate freeze or held-out generation executed"
+  "status": "Candidate selected from completed quiet-host development; criteria unchanged; freeze must precede generation"
 }

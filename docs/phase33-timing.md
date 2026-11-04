@@ -143,3 +143,35 @@ This is not a mission result and does not qualify ROS/TF startup under low host 
 Raw requests, replies and host baselines are preserved in the quiet-window follow-up
 archive. A further low-load baseline is needed before startup qualification and the
 small three-backend smoke. Larger comparisons remain gated on reliable dispatch.
+
+## Completed quiet-host development and candidate selection
+
+The preserved `backend-development-quiet-v1` completed all twelve scheduled sessions
+and all 36 requested missions while execution was interrupted. No session was rerun.
+Saved preflight baselines and ROS/TF qualification passed in each session; owned-process
+cleanup receipts show no remaining processes. Logging-on sessions recorded all required
+stages, with no observed expiry latches or >200 ms gaps following nonzero commands.
+Logging-off stage latency and contact observations remain unavailable, not zero.
+
+Cyclone is selected for independent replication because its two traced guard-to-native
+maxima were 2.369790 and 1.374930 ms. Corresponding Fast DDS maxima were 325.463760
+and 318.981420 ms; UDP maxima were 314.946000 and 316.622610 ms. All configurations
+completed their missions, so no mission-success advantage is demonstrated. These maxima
+include startup neutral commands. In the UDP empty-world worst case, the long interval
+was before DDS take despite a fast guard publication return; Fast DDS also retained
+long synchronous publication calls. Multiple delay locations must remain distinct.
+The historical 337 ms event still lacks causal attribution.
+
+Actual contact samples and floor-pair observations were present in all six traced
+sessions; no robot/environment pair was observed in those two development worlds.
+This is a small development sample, not a collision-free guarantee. Full raw evidence,
+source bytes and negative initial startup-probe attempts are archived separately.
+The initial probe used the wrong ROS domain; its failure was instrumentation error,
+not evidence of a TF failure. The corrected probe checks two continuous seconds of
+scan/TF freshness using the executor's existing [-0.2, 1.0] simulation-second bounds.
+It is preparation only and changes neither authorization nor navigation deadlines.
+
+The prior checkpoint report is preserved under `reports/phase33/checkpoints/`.
+Candidate source, installed binaries and criteria must be frozen before generating
+24 untouched worlds. Until independent held-out and actual-motion fault criteria are
+satisfied, the Phase 4 decision remains NO-GO. No LoRA work has begun.

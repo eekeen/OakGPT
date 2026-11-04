@@ -1,6 +1,7 @@
 """Controlled development matrix: transport/backend and trace-recording effects."""
 
 import argparse
+import hashlib
 import json
 import random
 import subprocess
@@ -18,6 +19,8 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--install", required=True)
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--startup-probe", action="store_true")
+    parser.add_argument("--quiet-host", action="store_true")
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=args.resume)
     conditions = [
@@ -54,6 +57,19 @@ def main():
                 "development_only": True,
                 "publication_mode": "SYNCHRONOUS",
                 "install": args.install,
+                "startup_probe": args.startup_probe,
+                "quiet_host": args.quiet_host,
+                "source_sha256": {
+                    name: hashlib.sha256(Path("scripts", name).read_bytes()).hexdigest()
+                    for name in [
+                        "phase33_backend_development.py",
+                        "navigation_study.py",
+                        "receiver_clock_mailbox.py",
+                        "probe_ros_startup.py",
+                        "probe_ros_startup.sh",
+                        "robotics_session.py",
+                    ]
+                },
                 "controlled": (
                     "Same compiled runtime and observation configuration, trace file output "
                     "on/off; no inference on wire latency when logging off"
@@ -70,6 +86,32 @@ def main():
                 raise RuntimeError("Preserved incomplete trial requires inspection: " + str(prior))
             print("RETAINED", entry, flush=True)
             continue
+        if args.quiet_host:
+            baseline = args.output / (
+                entry["backend"]
+                + "-"
+                + entry["trace_logging"]
+                + "-"
+                + entry["world"]
+                + "-host.json"
+            )
+            subprocess.run(
+                [
+                    "powershell",
+                    "-NoProfile",
+                    "-File",
+                    "scripts/measure_phase33_host.ps1",
+                    "-Output",
+                    str(baseline),
+                ],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            if not json.loads(baseline.read_text(encoding="utf-8-sig"))["quiet_baseline"]:
+                raise RuntimeError(
+                    "Quiet gate failed; remaining sessions not launched: " + str(baseline)
+                )
         cyclone = entry["backend"] == "cyclone"
         profile = (
             None
@@ -89,6 +131,7 @@ def main():
             timing=True,
             timing_stacks=False,
             clock_mailbox=True,
+            startup_probe=args.startup_probe,
             trace_logging=entry["trace_logging"],
             publication_mode="SYNCHRONOUS",
             rmw="rmw_cyclonedds_cpp" if cyclone else "rmw_fastrtps_cpp",

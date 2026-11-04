@@ -59,6 +59,8 @@ def trial(args, kind):
             timing=getattr(args, "timing", False),
             publication_mode=getattr(args, "publication_mode", "SYNCHRONOUS"),
             allow_executor_exit=kind == "executor_restart",
+            rmw=args.rmw,
+            cyclone_config=args.cyclone_config,
         ):
             if kind in {"stale_command", "replayed_command"}:
                 payload_process = subprocess.Popen(
@@ -67,6 +69,20 @@ def trial(args, kind):
                         "-d",
                         "Ubuntu-24.04",
                         "--",
+                        "env",
+                        "RMW_IMPLEMENTATION=" + args.rmw,
+                        "CYCLONEDDS_URI="
+                        + (
+                            "file://" + wsl_path(args.cyclone_config) if args.cyclone_config else ""
+                        ),
+                        *(
+                            [
+                                "FASTRTPS_DEFAULT_PROFILES_FILE=" + wsl_path(args.fastdds_profile),
+                                "RMW_FASTRTPS_USE_QOS_FROM_XML=0",
+                            ]
+                            if args.fastdds_profile
+                            else []
+                        ),
                         "bash",
                         wsl_path(Path("scripts/inject_expiry_payload.sh")),
                         args.install,
@@ -95,7 +111,9 @@ def trial(args, kind):
                 "Go to station",
                 baseline("Go to station"),
                 receiver_now_ms=trial_clock(
-                    config["clock_command"], root / "clock_handshakes.jsonl"
+                    config["clock_command"],
+                    root / "clock_handshakes.jsonl",
+                    mailbox=root if args.clock_mailbox else None,
                 ),
                 ttl_ms=3000 if kind == "mission_expiration" else 180000,
             )
@@ -174,7 +192,9 @@ def trial(args, kind):
                     "Go to station",
                     baseline("Go to station"),
                     receiver_now_ms=trial_clock(
-                        config["clock_command"], root / "clock_handshakes.jsonl"
+                        config["clock_command"],
+                        root / "clock_handshakes.jsonl",
+                        mailbox=root if args.clock_mailbox else None,
                     ),
                 )
                 submit_spool(probe, root / "spool")
@@ -218,6 +238,11 @@ def main():
     parser.add_argument("--fastdds-profile", type=Path)
     parser.add_argument("--overlay", type=Path)
     parser.add_argument("--timing", action="store_true")
+    parser.add_argument("--clock-mailbox", action="store_true")
+    parser.add_argument(
+        "--rmw", default="rmw_fastrtps_cpp", choices=["rmw_fastrtps_cpp", "rmw_cyclonedds_cpp"]
+    )
+    parser.add_argument("--cyclone-config", type=Path)
     parser.add_argument(
         "--publication-mode", choices=["SYNCHRONOUS", "ASYNCHRONOUS"], default="SYNCHRONOUS"
     )
@@ -251,11 +276,15 @@ def main():
             or args.expiry_plugin_dir != freeze["expiry_plugin_dir"]
         ):
             raise ValueError("Fault runtime differs from frozen runtime")
-        if (
-            args.fastdds_profile is None
-            or args.fastdds_profile.as_posix() != freeze["fastdds_profile"]
-        ):
+        actual_profile = args.fastdds_profile.as_posix() if args.fastdds_profile else None
+        actual_cyclone = args.cyclone_config.as_posix() if args.cyclone_config else None
+        if actual_profile != freeze["fastdds_profile"]:
             raise ValueError("Fault middleware profile differs from frozen profile")
+        if args.rmw != freeze.get("rmw", "rmw_fastrtps_cpp") or actual_cyclone != freeze.get(
+            "cyclone_config"
+        ):
+            raise ValueError("Fault RMW differs from frozen configuration")
+
     args.output.mkdir(parents=True, exist_ok=False)
     snapshots = args.output / "source"
     snapshots.mkdir()
@@ -267,6 +296,7 @@ def main():
         "inject_expiry_payload.sh",
         "expiry_world.py",
         "trial_clock.py",
+        "receiver_clock_mailbox.py",
         "robotics_session.py",
         "robotics_session_host.py",
     ]:
@@ -278,6 +308,9 @@ def main():
             "active_capture": args.active_capture,
             "publication_mode": args.publication_mode,
             "timing": args.timing,
+            "rmw": args.rmw,
+            "clock_mailbox": args.clock_mailbox,
+            "cyclone_config_sha256": sha256(args.cyclone_config) if args.cyclone_config else None,
             "environment": environment(),
             "world_sha256": sha256(args.world / "world.json"),
             "install": args.install,

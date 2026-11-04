@@ -102,8 +102,55 @@ def analyze_timing(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 if before in r and after in r and r[after] >= r[before]
             ]
         )
+    matched = {
+        sequence: stamps
+        for sequence, stamps in commands.items()
+        if "guard_publish_begin" in stamps
+        and "native_decoded" in stamps
+        and stamps["native_decoded"] >= stamps["guard_publish_begin"]
+    }
+    worst = max(
+        matched,
+        key=lambda sequence: (
+            matched[sequence]["native_decoded"] - matched[sequence]["guard_publish_begin"]
+        ),
+        default=None,
+    )
+    context = None
+    if worst is not None:
+        stamps = matched[worst]
+        context = {
+            "sequence": worst,
+            "stages_boottime_ns": stamps,
+            "nonzero_command": worst in nonzero,
+        }
+    mutex_waits = [int(r["wait_ns"]) for r in rows if r["stage"] == "send_resource_acquired"]
+    mutex_holds = [
+        int(r["held_ns"])
+        for r in rows
+        if r["stage"] == "send_resource_releasing" and r.get("duration_known") is True
+    ]
+    long_mutex = [
+        r
+        for r in rows
+        if r["stage"] in {"send_resource_acquired", "send_resource_releasing"}
+        and max(int(r.get("wait_ns", 0)), int(r.get("held_ns", 0))) >= 50_000_000
+    ]
     return {
         "stage_counts": dict(counts),
+        "worst_matched_command": context,
+        "send_resource_mutex": {
+            "acquisition_wait": distribution(mutex_waits),
+            "known_hold_duration": distribution(mutex_holds),
+            "unknown_hold_records": sum(
+                r["stage"] == "send_resource_releasing" and not r.get("duration_known", False)
+                for r in rows
+            ),
+            "long_events": long_mutex,
+            "limit": "Observed selected participant mutex only; acquisition duration includes "
+            "small tracing overhead and descheduling. Deep stacks may extend holds. "
+            "A recorded owner is not retrospective proof of the historical event's owner.",
+        },
         "command_stream": {
             "native_interarrival": distribution(native_gaps),
             "native_gaps_over_200ms": sum(g > 200_000_000 for g in native_gaps),

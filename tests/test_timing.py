@@ -136,3 +136,28 @@ def test_native_stream_gaps_cross_worker_threads_and_keep_missingness():
     assert result["gaps_over_200ms_following_nonzero"] == 1
     assert result["nonzero_guard_begin_to_native"]["n"] == 1
     assert result["native_state_reasons"] == {}
+
+
+def test_unknown_mutex_hold_is_not_reported_as_measured_zero():
+    rows = [
+        {
+            "stage": "send_resource_releasing",
+            "boot_ns": 1,
+            "pid": 1,
+            "held_ns": 0,
+            "duration_known": False,
+        },
+        {
+            "stage": "send_resource_releasing",
+            "boot_ns": 2,
+            "pid": 1,
+            "held_ns": 70000000,
+            "duration_known": True,
+        },
+        {"stage": "send_resource_acquired", "boot_ns": 3, "pid": 1, "wait_ns": 100000000},
+    ]
+    result = analyze_timing(rows)["send_resource_mutex"]
+    assert result["unknown_hold_records"] == 1
+    assert result["known_hold_duration"]["n"] == 1
+    assert result["known_hold_duration"]["median_ns"] == 70000000
+    assert result["acquisition_wait"]["max_ns"] == 100000000

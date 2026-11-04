@@ -95,6 +95,26 @@ def run_trial(args, world):
                 if time.monotonic() > deadline:
                     raise TimeoutError("Readiness deadline")
                 time.sleep(0.2)
+            if getattr(args, "startup_probe", False):
+                trial_clock(config["clock_command"], root / "startup-clock.jsonl", mailbox=root)
+                probe = commands[: commands.index("bash")] + [
+                    "timeout",
+                    "--signal=TERM",
+                    "--kill-after=3s",
+                    "30s",
+                    "bash",
+                    wsl_path(project / "scripts/probe_ros_startup.sh"),
+                    args.install,
+                    "--output",
+                    wsl_path(root / "startup-probe.jsonl"),
+                ]
+                with (root / "startup-probe.log").open("x") as stream:
+                    try:
+                        response = subprocess.run(probe, stdout=stream, stderr=stream, timeout=40)
+                    except subprocess.TimeoutExpired as error:
+                        raise RuntimeError("ROS/TF startup probe process unavailable") from error
+                if response.returncode != 0:
+                    raise RuntimeError("ROS/TF startup qualification failed")
             for instruction in args.instructions:
                 mission = envelope(
                     instruction,
@@ -159,6 +179,7 @@ def main():
     parser.add_argument("--timing", action="store_true")
     parser.add_argument("--timing-stacks", action="store_true")
     parser.add_argument("--clock-mailbox", action="store_true")
+    parser.add_argument("--startup-probe", action="store_true")
     parser.add_argument(
         "--rmw", choices=["rmw_fastrtps_cpp", "rmw_cyclonedds_cpp"], default="rmw_fastrtps_cpp"
     )
@@ -179,6 +200,9 @@ def main():
         "record_navigation.py",
         "robotics_session.py",
         "trial_clock.py",
+        "receiver_clock_mailbox.py",
+        "probe_ros_startup.py",
+        "probe_ros_startup.sh",
         "expiry_world.py",
     ]:
         (snapshot / (name + ".txt")).write_bytes((Path("scripts") / name).read_bytes())
@@ -191,6 +215,7 @@ def main():
         args.output / "protocol.json",
         {
             "worlds": [w.name for w in worlds],
+            "startup_probe": args.startup_probe,
             "instructions": args.instructions,
             "install": args.install,
             "launch": args.launch,

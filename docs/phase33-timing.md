@@ -4,7 +4,21 @@ This work starts from integrated main `e806d56380e812848f1b7a4aadabcacee0d6457d`
 PRs #4 and #5 were merged once; their ancestry, branches and all earlier evidence remain.
 PR #6 contains the Phase 3.3 work. No LoRA or physical robot deployment is included.
 
-## Current status (2026-11-04)
+## Final evaluation (2026-11-06)
+
+The frozen 48-session schedule is complete: **72/72 missions per backend**, all truth
+arrivals within 0.35 m, no observed robot/environment contact or nominal expiry latch.
+All ten fault cases had eligible motion. Nine meet the unchanged 0.50 simulation-second
+settling target; executor restart takes **0.60 s in both independent observations**.
+The fresh restart probe produced no result within its observation window.
+
+**Phase 4: NO-GO. PR #6 remains draft; do not merge as an accepted release.**
+The frozen study was not tuned, regenerated or relaxed. See the
+[final evaluation guide](phase33-final-evaluation.md) and
+[four-page report](../reports/phase33/final-report-v2/report.pdf).
+Earlier checkpoint descriptions below are historical and do not supersede these results.
+
+## Historical checkpoint status (2026-11-04)
 
 The subsequent [held-out resume attempt](../reports/phase33/held-out-resume-20261104-v1/status.md)
 also stopped before dispatch: initial v16 CPU was 47.7-50.7%, and the documented

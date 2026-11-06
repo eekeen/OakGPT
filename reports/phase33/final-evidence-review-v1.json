@@ -1,0 +1,24 @@
+{
+  "scope": "All final-* archive groups, including preserved prior final-host-gate-v15; original groups retained unchanged",
+  "archives": 64,
+  "new_archives_excluding_prior_host_gate": 63,
+  "members": 5028,
+  "compressed_bytes": 145676462,
+  "largest_archive_bytes": 4232971,
+  "roots": [
+    "reports/phase33/final-faults-v1/raw",
+    "reports/phase33/final-host-gate-v15/raw",
+    "reports/phase33/final-publish-qa-v1/raw",
+    "reports/phase33/final-session-index-v1/raw",
+    "reports/phase33/final-study-baseline-v1/raw",
+    "reports/phase33/final-study-candidate-v1/raw",
+    "reports/phase33/final-verification-v1/raw"
+  ],
+  "findings": [],
+  "budget_bytes_per_archive": 25000000,
+  "limitations": [
+    "Signature scan cannot prove absence of sensitive information",
+    "No models, weights, large bags or private process-name diagnostics committed",
+    "Raw archive growth is retained for provenance; use separately versioned artifact distribution for future large campaigns without rewriting this archive"
+  ]
+}

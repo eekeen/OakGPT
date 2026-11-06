@@ -154,6 +154,15 @@ failure. Actual-motion faults, unavailable injections and follow-ups are preserv
 See [verification](docs/phase32-verification.md), [reproduction](docs/phase32-reproduction.md)
 and the [measured report](reports/phase32/report.md). These are simulation observations.
 
+Phase 3.3 completes a frozen 24-world middleware replication: Fast DDS and Cyclone
+each complete 72/72 missions, with no observed robot/environment contacts or nominal
+expiry latches. Timing results are mixed: Cyclone lowers whole-session tail maxima
+but has a higher observed nonzero-command maximum. Nine of ten eligible motion-fault
+cases meet the frozen 0.50 s target; executor restart takes 0.60 simulated seconds.
+**Phase 4 remains NO-GO.** No lease, deadline or threshold was relaxed. See the
+[final evaluation and reproduction guide](docs/phase33-final-evaluation.md) and
+[IEEE-style report](reports/phase33/final-report-v2/report.pdf).
+
 | Area | Documentation |
 | --- | --- |
 | Implementation and interfaces | [Architecture](docs/architecture.md) |

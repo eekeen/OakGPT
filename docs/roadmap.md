@@ -1,5 +1,15 @@
 # Roadmap
 
+## Measured Phase 3.3 gate
+
+The frozen 24-world comparison is complete, with 72/72 missions per backend.
+Phase 4 remains **NO-GO**: executor restart settles in 0.60 simulated seconds,
+exceeding the original 0.50 s target; its restart probe response is unavailable.
+Resolve only this narrow detection/recovery question in separate development trials,
+then freeze and independently evaluate a changed candidate. Do not tune the consumed
+held-out worlds, relax thresholds, expand robotics features or start LoRA yet.
+See [the final evaluation](phase33-final-evaluation.md).
+
 ## Priorities after Phase 3.1
 
 1. **Navigation reliability before broader autonomy.** Preserve the nine-world results,

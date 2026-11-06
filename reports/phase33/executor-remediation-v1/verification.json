@@ -1,0 +1,23 @@
+{
+  "baseline": "e163d31",
+  "branch": "remediation/phase33-executor-restart",
+  "protected_files_verified": 285,
+  "protected_changes": [],
+  "runtime_source_changed": false,
+  "timeline_reproduced": true,
+  "pytest": {
+    "passed": 101,
+    "skipped": 2,
+    "failed": 0
+  },
+  "ruff_check": "passed",
+  "ruff_format": "passed",
+  "mypy": "passed",
+  "host_gate": "failed",
+  "live_trials_run": 0,
+  "correction_implemented": false,
+  "new_candidate_frozen": false,
+  "independent_validation_completed": false,
+  "phase4": "NO-GO",
+  "blocker": "Unchanged host qualification exceeds 20% CPU; live development not permitted"
+}

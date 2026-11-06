@@ -1,0 +1,180 @@
+{
+  "archive_sha256": "29691fc1e7c6c31a33ec17676489fb370baaa74c91715d77c4cc1c6954380a03",
+  "clock_domain": "Same WSL kernel MONOTONIC; no BOOTTIME/wall subtraction",
+  "timeline": [
+    {
+      "event": "crash signal requested",
+      "relative_monotonic_s": 0.0,
+      "source": "result.json",
+      "record": {
+        "kind": "mission_executor",
+        "pid": 40672,
+        "pause_seconds": 0.0,
+        "before_wall_ns": 1793924737652923277,
+        "before_monotonic_ns": 97912659667016,
+        "after_wall_ns": 1793924737653092387,
+        "after_monotonic_ns": 97912659836126,
+        "clock_domain": "WSL receiver wall clock",
+        "receiver_precondition": {
+          "eligible": true,
+          "speed_m_s": 0.17988431326126592,
+          "truth_age_s": 0.01693278,
+          "command_age_s": 0.00783477,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793924737644953147,
+            "monotonic_ns": 97912651697156,
+            "vx": 0.18,
+            "wz": -0.177703427383604
+          },
+          "read_errors": {}
+        },
+        "expiry_bracket": null
+      },
+      "limitation": "Signal syscall bracket, not instrumented executor exit."
+    },
+    {
+      "event": "crash signal syscall returned",
+      "relative_monotonic_s": 0.00016911,
+      "source": "result.json",
+      "limitation": "Does not prove exact process exit time."
+    },
+    {
+      "event": "replacement process spawned",
+      "relative_monotonic_s": 0.1047771,
+      "source": "RESTARTED_EXECUTOR.json",
+      "record": {
+        "pid": 41117,
+        "monotonic_ns": 97912764444116,
+        "wall_ns": 1793924737757701907
+      },
+      "limitation": "Spawn receipt is not readiness or recovery authorization."
+    },
+    {
+      "event": "guard zero publication begins",
+      "relative_monotonic_s": 0.41857551,
+      "source": "timing",
+      "record": {
+        "stage": "guard_publish_begin",
+        "boot_ns": 97913078242346,
+        "mono_ns": 97913078242526,
+        "thread_cpu_ns": 1874348100,
+        "pid": 40696,
+        "trace_errors": 0,
+        "sequence": 397,
+        "issued_ns": 97913078234156,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      "limitation": null
+    },
+    {
+      "event": "guard detection tick ends",
+      "relative_monotonic_s": 0.41907483,
+      "source": "timing",
+      "record": {
+        "stage": "guard_tick_end",
+        "boot_ns": 97913078741666,
+        "mono_ns": 97913078741846,
+        "thread_cpu_ns": 1874903100,
+        "pid": 40696,
+        "trace_errors": 0,
+        "duration_ns": 607050,
+        "reason": "no_active_lease"
+      },
+      "limitation": null
+    },
+    {
+      "event": "native receives zero target",
+      "relative_monotonic_s": 0.41934384,
+      "source": "timing",
+      "record": {
+        "stage": "native_decoded",
+        "boot_ns": 97913079010946,
+        "mono_ns": 97913079010856,
+        "thread_cpu_ns": 31342700,
+        "native_dropped": 0,
+        "pid": 40711,
+        "tid": 40948,
+        "sequence": 397,
+        "issued_ns": 97913078234156,
+        "vx": 0
+      },
+      "limitation": "Native decode is not independent wheel/physics application proof."
+    },
+    {
+      "event": "observer guard_events",
+      "relative_monotonic_s": 0.42065964,
+      "source": "trajectory.jsonl",
+      "record": {
+        "kind": "guard_events",
+        "wall_ns": 1793924738073582647,
+        "monotonic_ns": 97913080326656,
+        "data": {
+          "event": "no_active_lease",
+          "wall_time_ns": 1793924738071886057
+        }
+      },
+      "limitation": "Observer receipt time, not publisher/actuator execution time."
+    },
+    {
+      "event": "observer command",
+      "relative_monotonic_s": 0.42214851,
+      "source": "trajectory.jsonl",
+      "record": {
+        "kind": "command",
+        "wall_ns": 1793924738075071607,
+        "monotonic_ns": 97913081815526,
+        "vx": 0.0,
+        "wz": 0.0
+      },
+      "limitation": "Observer receipt time, not publisher/actuator execution time."
+    },
+    {
+      "event": "observer watchdog_events",
+      "relative_monotonic_s": 0.87429501,
+      "source": "trajectory.jsonl",
+      "record": {
+        "kind": "watchdog_events",
+        "wall_ns": 1793924738527218017,
+        "monotonic_ns": 97913533962026,
+        "data": {
+          "event": "watchdog_stop",
+          "wall_time_ns": 1793924738525538527,
+          "canceling": 1
+        }
+      },
+      "limitation": "Observer receipt time, not publisher/actuator execution time."
+    }
+  ],
+  "native_stopping": {
+    "settled": true,
+    "stop_latency_sim_s": 0.6,
+    "confirmed_after_sim_s": 0.92,
+    "stop_path_m": 0.08506489336011334,
+    "stop_displacement_m": 0.07884279516943922,
+    "speed_threshold_m_s": 0.01,
+    "yaw_threshold_rad_s": 0.03,
+    "hold_s": 0.3,
+    "onset_monotonic_s_from_injection": 0.58163625
+  },
+  "observer_stopping": {
+    "settled": true,
+    "stop_latency_sim_s": 0.6,
+    "confirmed_after_sim_s": 0.92,
+    "stop_path_m": 0.08506489336013107,
+    "stop_displacement_m": 0.0788427951694758,
+    "speed_threshold_m_s": 0.01,
+    "yaw_threshold_rad_s": 0.03,
+    "hold_s": 0.3
+  },
+  "restart_probe_result": null,
+  "unavailable": [
+    "heartbeat publication/receipt sequence and source age",
+    "exact executor exit instant",
+    "verified restart authorization",
+    "successful fresh authorized mission after restart"
+  ],
+  "interpretation": "500 ms heartbeat freshness consumes the stopping budget before braking; receipt-only heartbeats do not bound delivery age. Restart remains latched on the unfinished mission and no recovery was demonstrated."
+}

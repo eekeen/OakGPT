@@ -1,0 +1,87 @@
+{
+  "quiet_baselines": [
+    {
+      "recorded_utc": "2026-10-31T00:40:48.4195161Z",
+      "logical_processors": 16,
+      "samples": [
+        {
+          "sample": 0,
+          "system_busy_percent": 52.529325513196476,
+          "selected_external_core_equivalents": 5.192694791056467
+        },
+        {
+          "sample": 1,
+          "system_busy_percent": 80.05698005698005,
+          "selected_external_core_equivalents": 6.42730923001587
+        },
+        {
+          "sample": 2,
+          "system_busy_percent": 51.7910447761194,
+          "selected_external_core_equivalents": 4.680938346828861
+        }
+      ],
+      "quiet_baseline": false,
+      "criterion": "All three five-second samples: system busy <20%, selected unrelated workload <0.5 CPU cores",
+      "limits": "Short baseline, not a scheduling bound. Selected external process names and command lines intentionally omitted. Recheck during trials."
+    },
+    {
+      "recorded_utc": "2026-10-31T00:45:38.4519187Z",
+      "logical_processors": 16,
+      "samples": [
+        {
+          "sample": 0,
+          "system_busy_percent": 70.41547277936962,
+          "selected_external_core_equivalents": 5.498729331621641
+        },
+        {
+          "sample": 1,
+          "system_busy_percent": 69.04673590504451,
+          "selected_external_core_equivalents": 5.624135093823937
+        },
+        {
+          "sample": 2,
+          "system_busy_percent": 65.23668639053255,
+          "selected_external_core_equivalents": 5.257291110090957
+        }
+      ],
+      "quiet_baseline": false,
+      "criterion": "All three five-second samples: system busy <20%, selected unrelated workload <0.5 CPU cores",
+      "limits": "Short baseline, not a scheduling bound. Selected external process names and command lines intentionally omitted. Recheck during trials."
+    },
+    {
+      "recorded_utc": "2026-10-31T00:48:26.9145942Z",
+      "logical_processors": 16,
+      "samples": [
+        {
+          "sample": 0,
+          "system_busy_percent": 64.9223372781065,
+          "selected_external_core_equivalents": 5.6469407647075
+        },
+        {
+          "sample": 1,
+          "system_busy_percent": 62.86656891495601,
+          "selected_external_core_equivalents": 5.063286315207618
+        },
+        {
+          "sample": 2,
+          "system_busy_percent": 65.89233038348083,
+          "selected_external_core_equivalents": 5.435620332022332
+        }
+      ],
+      "quiet_baseline": false,
+      "criterion": "All three five-second samples: system busy <20%, selected unrelated workload <0.5 CPU cores",
+      "limits": "Short baseline, not a scheduling bound. Selected external process names and command lines intentionally omitted. Recheck during trials."
+    }
+  ],
+  "quiet_gate_passed": false,
+  "mailbox_isolation": {
+    "accepted": 10,
+    "attempted": 10,
+    "min_roundtrip_ns": 125000000,
+    "max_roundtrip_ns": 688000000,
+    "conditions": "Preparation-only diagnostic under high measured host load; no ROS/Gazebo mission dispatched"
+  },
+  "controlled_smoke": "Not launched: host quiet gate unmet",
+  "startup_qualification": "Not verified under low load",
+  "phase4_decision": "NO-GO: no justified middleware candidate or independent reliability replication"
+}

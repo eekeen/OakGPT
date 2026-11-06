@@ -1,0 +1,2824 @@
+{
+  "summary_sha256": "8af23553396aac7b10ef2a954819a08ce75a98656d4972fbc68ddc1de43f2445",
+  "trials": [
+    {
+      "condition": "cyclone-off",
+      "world": "block-211",
+      "available": true,
+      "sha256": "4544e20dc61af59c8e1b9835b2825fcfc55292e72da02813647e1a4dc241479a",
+      "samples": 546,
+      "sampling_gap": {
+        "n": 545,
+        "median_ns": 108496980,
+        "p95_ns": 110917620,
+        "p99_ns": 123314850,
+        "max_ns": 1300030110
+      },
+      "observed_main_thread_runnable_wait_delta": {
+        "n": 14197,
+        "median_ns": 48700,
+        "p95_ns": 484200,
+        "p99_ns": 1261000,
+        "max_ns": 83752100
+      },
+      "cpu_some_avg10_max_percent": 2.54,
+      "observations_near_worst_matched_command": []
+    },
+    {
+      "condition": "cyclone-off",
+      "world": "empty-210",
+      "available": true,
+      "sha256": "4e0475d35fc5e46970b9cf55b7365dc7f15a7732c9ca98eaa2234eac772190d9",
+      "samples": 382,
+      "sampling_gap": {
+        "n": 381,
+        "median_ns": 108645120,
+        "p95_ns": 112247280,
+        "p99_ns": 118680660,
+        "max_ns": 1299805920
+      },
+      "observed_main_thread_runnable_wait_delta": {
+        "n": 9598,
+        "median_ns": 41500,
+        "p95_ns": 618700,
+        "p99_ns": 2393300,
+        "max_ns": 89701800
+      },
+      "cpu_some_avg10_max_percent": 2.95,
+      "observations_near_worst_matched_command": []
+    },
+    {
+      "condition": "cyclone-on",
+      "world": "block-211",
+      "available": true,
+      "sha256": "98cdd62c72c804810100e58b23d420b0a8e94c86389a8e2c58673983aea73b1d",
+      "samples": 501,
+      "sampling_gap": {
+        "n": 500,
+        "median_ns": 108313740,
+        "p95_ns": 111074040,
+        "p99_ns": 120457980,
+        "max_ns": 1305079290
+      },
+      "observed_main_thread_runnable_wait_delta": {
+        "n": 12947,
+        "median_ns": 71800,
+        "p95_ns": 592700,
+        "p99_ns": 1330300,
+        "max_ns": 71288900
+      },
+      "cpu_some_avg10_max_percent": 2.98,
+      "observations_near_worst_matched_command": [
+        {
+          "boot_ns": 1188449801516073,
+          "cpu_some_avg10_percent": 1.85,
+          "loadavg": [
+            3.1591796875,
+            2.466796875,
+            1.33984375
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 346503,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 346504,
+              "runnable_wait_delta_ns": 185800
+            },
+            {
+              "pid": 346506,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 346507,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 346516,
+              "runnable_wait_delta_ns": 561400
+            },
+            {
+              "pid": 346517,
+              "runnable_wait_delta_ns": 541600
+            },
+            {
+              "pid": 346549,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 346550,
+              "runnable_wait_delta_ns": 108300
+            },
+            {
+              "pid": 346551,
+              "runnable_wait_delta_ns": 59200
+            },
+            {
+              "pid": 346552,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 346553,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 346554,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 346939,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 346555,
+              "runnable_wait_delta_ns": 594800
+            },
+            {
+              "pid": 346556,
+              "runnable_wait_delta_ns": 13100
+            },
+            {
+              "pid": 346565,
+              "runnable_wait_delta_ns": 178200
+            },
+            {
+              "pid": 346566,
+              "runnable_wait_delta_ns": 174500
+            },
+            {
+              "pid": 346567,
+              "runnable_wait_delta_ns": 568700
+            },
+            {
+              "pid": 346568,
+              "runnable_wait_delta_ns": 513400
+            },
+            {
+              "pid": 346571,
+              "runnable_wait_delta_ns": 1207800
+            },
+            {
+              "pid": 346572,
+              "runnable_wait_delta_ns": 941800
+            },
+            {
+              "pid": 346573,
+              "runnable_wait_delta_ns": 868400
+            },
+            {
+              "pid": 346574,
+              "runnable_wait_delta_ns": 486400
+            },
+            {
+              "pid": 346575,
+              "runnable_wait_delta_ns": 539700
+            },
+            {
+              "pid": 346576,
+              "runnable_wait_delta_ns": 400300
+            },
+            {
+              "pid": 346579,
+              "runnable_wait_delta_ns": 1054400
+            },
+            {
+              "pid": 346582,
+              "runnable_wait_delta_ns": 98200
+            },
+            {
+              "pid": 346583,
+              "runnable_wait_delta_ns": 498600
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition": "cyclone-on",
+      "world": "empty-210",
+      "available": true,
+      "sha256": "6c51402c27976ee310b079ade245158d5b28432a3af52124f1fe6fe222e60307",
+      "samples": 384,
+      "sampling_gap": {
+        "n": 383,
+        "median_ns": 108664380,
+        "p95_ns": 112146930,
+        "p99_ns": 125853030,
+        "max_ns": 1179988920
+      },
+      "observed_main_thread_runnable_wait_delta": {
+        "n": 9649,
+        "median_ns": 36500,
+        "p95_ns": 609800,
+        "p99_ns": 1951300,
+        "max_ns": 81071100
+      },
+      "cpu_some_avg10_max_percent": 3.02,
+      "observations_near_worst_matched_command": [
+        {
+          "boot_ns": 1188089828494473,
+          "cpu_some_avg10_percent": 1.62,
+          "loadavg": [
+            2.0029296875,
+            1.20947265625,
+            0.564453125
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 343424,
+              "runnable_wait_delta_ns": 659400
+            },
+            {
+              "pid": 343425,
+              "runnable_wait_delta_ns": 603500
+            },
+            {
+              "pid": 343426,
+              "runnable_wait_delta_ns": 2320400
+            },
+            {
+              "pid": 343427,
+              "runnable_wait_delta_ns": 700900
+            },
+            {
+              "pid": 343345,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343346,
+              "runnable_wait_delta_ns": 83000
+            },
+            {
+              "pid": 343348,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343349,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343358,
+              "runnable_wait_delta_ns": 126800
+            },
+            {
+              "pid": 343359,
+              "runnable_wait_delta_ns": 153300
+            },
+            {
+              "pid": 343391,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343392,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343393,
+              "runnable_wait_delta_ns": 273000
+            },
+            {
+              "pid": 343394,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343395,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343396,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343781,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343397,
+              "runnable_wait_delta_ns": 1890400
+            },
+            {
+              "pid": 343398,
+              "runnable_wait_delta_ns": 314200
+            },
+            {
+              "pid": 343407,
+              "runnable_wait_delta_ns": 654900
+            },
+            {
+              "pid": 343412,
+              "runnable_wait_delta_ns": 1371700
+            },
+            {
+              "pid": 343415,
+              "runnable_wait_delta_ns": 882200
+            },
+            {
+              "pid": 343416,
+              "runnable_wait_delta_ns": 245700
+            },
+            {
+              "pid": 343417,
+              "runnable_wait_delta_ns": 362900
+            },
+            {
+              "pid": 343418,
+              "runnable_wait_delta_ns": 53500
+            },
+            {
+              "pid": 343419,
+              "runnable_wait_delta_ns": 1156900
+            },
+            {
+              "pid": 343420,
+              "runnable_wait_delta_ns": 342100
+            },
+            {
+              "pid": 343421,
+              "runnable_wait_delta_ns": 874900
+            }
+          ]
+        },
+        {
+          "boot_ns": 1188089944862853,
+          "cpu_some_avg10_percent": 1.62,
+          "loadavg": [
+            2.0029296875,
+            1.20947265625,
+            0.564453125
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 343424,
+              "runnable_wait_delta_ns": 1240000
+            },
+            {
+              "pid": 343425,
+              "runnable_wait_delta_ns": 486200
+            },
+            {
+              "pid": 343426,
+              "runnable_wait_delta_ns": 2678700
+            },
+            {
+              "pid": 343427,
+              "runnable_wait_delta_ns": 1512600
+            },
+            {
+              "pid": 343345,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343346,
+              "runnable_wait_delta_ns": 522100
+            },
+            {
+              "pid": 343348,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343349,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343358,
+              "runnable_wait_delta_ns": 3383000
+            },
+            {
+              "pid": 343359,
+              "runnable_wait_delta_ns": 2217400
+            },
+            {
+              "pid": 343391,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343392,
+              "runnable_wait_delta_ns": 1966000
+            },
+            {
+              "pid": 343393,
+              "runnable_wait_delta_ns": 9500
+            },
+            {
+              "pid": 343394,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343395,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343396,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 343781,
+              "runnable_wait_delta_ns": 1668800
+            },
+            {
+              "pid": 343397,
+              "runnable_wait_delta_ns": 1494800
+            },
+            {
+              "pid": 343398,
+              "runnable_wait_delta_ns": 658200
+            },
+            {
+              "pid": 343407,
+              "runnable_wait_delta_ns": 317700
+            },
+            {
+              "pid": 343412,
+              "runnable_wait_delta_ns": 2013400
+            },
+            {
+              "pid": 343415,
+              "runnable_wait_delta_ns": 1262600
+            },
+            {
+              "pid": 343416,
+              "runnable_wait_delta_ns": 614900
+            },
+            {
+              "pid": 343417,
+              "runnable_wait_delta_ns": 1069800
+            },
+            {
+              "pid": 343418,
+              "runnable_wait_delta_ns": 4023500
+            },
+            {
+              "pid": 343419,
+              "runnable_wait_delta_ns": 255400
+            },
+            {
+              "pid": 343420,
+              "runnable_wait_delta_ns": 1377600
+            },
+            {
+              "pid": 343421,
+              "runnable_wait_delta_ns": 682900
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition": "fast_default-off",
+      "world": "block-211",
+      "available": true,
+      "sha256": "db503ff44ce909c2ee66aacd59542e675973612cb02c19e78155658e09b3401a",
+      "samples": 525,
+      "sampling_gap": {
+        "n": 524,
+        "median_ns": 108736740,
+        "p95_ns": 111084930,
+        "p99_ns": 118389690,
+        "max_ns": 1231906050
+      },
+      "observed_main_thread_runnable_wait_delta": {
+        "n": 13415,
+        "median_ns": 96600,
+        "p95_ns": 863800,
+        "p99_ns": 2261600,
+        "max_ns": 53988700
+      },
+      "cpu_some_avg10_max_percent": 2.72,
+      "observations_near_worst_matched_command": []
+    },
+    {
+      "condition": "fast_default-off",
+      "world": "empty-210",
+      "available": true,
+      "sha256": "7393483efa343e80abd9ee9355aaf80d1d308388958dbd7248565092945eb98b",
+      "samples": 387,
+      "sampling_gap": {
+        "n": 386,
+        "median_ns": 109001070,
+        "p95_ns": 112322070,
+        "p99_ns": 124091550,
+        "max_ns": 2263761270
+      },
+      "observed_main_thread_runnable_wait_delta": {
+        "n": 9543,
+        "median_ns": 151600,
+        "p95_ns": 964800,
+        "p99_ns": 5685800,
+        "max_ns": 62226800
+      },
+      "cpu_some_avg10_max_percent": 3.08,
+      "observations_near_worst_matched_command": []
+    },
+    {
+      "condition": "fast_default-on",
+      "world": "block-211",
+      "available": true,
+      "sha256": "4ee38a8293707a7d1c2debb0c90e80995edbf73a27e80d729f0b0e1c3f5a31b1",
+      "samples": 578,
+      "sampling_gap": {
+        "n": 577,
+        "median_ns": 108689580,
+        "p95_ns": 111551400,
+        "p99_ns": 119168550,
+        "max_ns": 1893559410
+      },
+      "observed_main_thread_runnable_wait_delta": {
+        "n": 14906,
+        "median_ns": 159300,
+        "p95_ns": 1008000,
+        "p99_ns": 2429100,
+        "max_ns": 59794200
+      },
+      "cpu_some_avg10_max_percent": 2.91,
+      "observations_near_worst_matched_command": [
+        {
+          "boot_ns": 1188271750061703,
+          "cpu_some_avg10_percent": 1.38,
+          "loadavg": [
+            1.435546875,
+            1.63232421875,
+            0.8759765625
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 345216,
+              "runnable_wait_delta_ns": 115100
+            },
+            {
+              "pid": 345217,
+              "runnable_wait_delta_ns": 265100
+            },
+            {
+              "pid": 345255,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345256,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345257,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345258,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345259,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345260,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345261,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345262,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345271,
+              "runnable_wait_delta_ns": 446500
+            },
+            {
+              "pid": 345282,
+              "runnable_wait_delta_ns": 169200
+            },
+            {
+              "pid": 345284,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345286,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345287,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345288,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345289,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345290,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345291,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345292,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345295,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345296,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345305,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345203,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345204,
+              "runnable_wait_delta_ns": 610100
+            },
+            {
+              "pid": 345206,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345207,
+              "runnable_wait_delta_ns": 0
+            }
+          ]
+        },
+        {
+          "boot_ns": 1188271857106713,
+          "cpu_some_avg10_percent": 1.31,
+          "loadavg": [
+            1.435546875,
+            1.63232421875,
+            0.8759765625
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 345216,
+              "runnable_wait_delta_ns": 123700
+            },
+            {
+              "pid": 345217,
+              "runnable_wait_delta_ns": 200200
+            },
+            {
+              "pid": 345255,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345256,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345257,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345258,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345259,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345260,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345261,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345262,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345271,
+              "runnable_wait_delta_ns": 19100
+            },
+            {
+              "pid": 345282,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345284,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345286,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345287,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345288,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345289,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345290,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345291,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345292,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345295,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345296,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345305,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345203,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345204,
+              "runnable_wait_delta_ns": 95500
+            },
+            {
+              "pid": 345206,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345207,
+              "runnable_wait_delta_ns": 0
+            }
+          ]
+        },
+        {
+          "boot_ns": 1188271965907263,
+          "cpu_some_avg10_percent": 1.31,
+          "loadavg": [
+            1.435546875,
+            1.63232421875,
+            0.8759765625
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 345216,
+              "runnable_wait_delta_ns": 330000
+            },
+            {
+              "pid": 345217,
+              "runnable_wait_delta_ns": 143400
+            },
+            {
+              "pid": 345255,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345256,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345257,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345258,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345259,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345260,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345261,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345262,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345271,
+              "runnable_wait_delta_ns": 16100
+            },
+            {
+              "pid": 345282,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345284,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345286,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345287,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345288,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345289,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345290,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345291,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345292,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345295,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345296,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345305,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345203,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345204,
+              "runnable_wait_delta_ns": 80300
+            },
+            {
+              "pid": 345206,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345207,
+              "runnable_wait_delta_ns": 0
+            }
+          ]
+        },
+        {
+          "boot_ns": 1188272080914663,
+          "cpu_some_avg10_percent": 1.31,
+          "loadavg": [
+            1.435546875,
+            1.63232421875,
+            0.8759765625
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 345216,
+              "runnable_wait_delta_ns": 100200
+            },
+            {
+              "pid": 345217,
+              "runnable_wait_delta_ns": 214000
+            },
+            {
+              "pid": 345255,
+              "runnable_wait_delta_ns": 142500
+            },
+            {
+              "pid": 345256,
+              "runnable_wait_delta_ns": 42400
+            },
+            {
+              "pid": 345257,
+              "runnable_wait_delta_ns": 331000
+            },
+            {
+              "pid": 345258,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345259,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345260,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345261,
+              "runnable_wait_delta_ns": 14700
+            },
+            {
+              "pid": 345262,
+              "runnable_wait_delta_ns": 313500
+            },
+            {
+              "pid": 345271,
+              "runnable_wait_delta_ns": 123400
+            },
+            {
+              "pid": 345282,
+              "runnable_wait_delta_ns": 587500
+            },
+            {
+              "pid": 345284,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345286,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345287,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345288,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345289,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345290,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345291,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345292,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345295,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345296,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345305,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345203,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345204,
+              "runnable_wait_delta_ns": 342000
+            },
+            {
+              "pid": 345206,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 345207,
+              "runnable_wait_delta_ns": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition": "fast_default-on",
+      "world": "empty-210",
+      "available": true,
+      "sha256": "6f393f0a41936cfb2bde16c3ad9d5c3662066a6b0ff61e414d61bcdc4f0cce51",
+      "samples": 408,
+      "sampling_gap": {
+        "n": 407,
+        "median_ns": 108837540,
+        "p95_ns": 111546000,
+        "p99_ns": 115249500,
+        "max_ns": 1420438410
+      },
+      "observed_main_thread_runnable_wait_delta": {
+        "n": 10134,
+        "median_ns": 140900,
+        "p95_ns": 1037100,
+        "p99_ns": 3491200,
+        "max_ns": 56806200
+      },
+      "cpu_some_avg10_max_percent": 3.04,
+      "observations_near_worst_matched_command": [
+        {
+          "boot_ns": 1188208719262983,
+          "cpu_some_avg10_percent": 1.58,
+          "loadavg": [
+            2.35107421875,
+            1.744140625,
+            0.8505859375
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 344576,
+              "runnable_wait_delta_ns": 151100
+            },
+            {
+              "pid": 344614,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344615,
+              "runnable_wait_delta_ns": 113600
+            },
+            {
+              "pid": 344616,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344617,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344618,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344619,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344620,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344621,
+              "runnable_wait_delta_ns": 262100
+            },
+            {
+              "pid": 344636,
+              "runnable_wait_delta_ns": 54800
+            },
+            {
+              "pid": 344637,
+              "runnable_wait_delta_ns": 118600
+            },
+            {
+              "pid": 344638,
+              "runnable_wait_delta_ns": 241600
+            },
+            {
+              "pid": 344639,
+              "runnable_wait_delta_ns": 41400
+            },
+            {
+              "pid": 344640,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344641,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344642,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344643,
+              "runnable_wait_delta_ns": 59300
+            },
+            {
+              "pid": 344648,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344651,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344652,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344653,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344656,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344562,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344563,
+              "runnable_wait_delta_ns": 31100
+            },
+            {
+              "pid": 344565,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344566,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344575,
+              "runnable_wait_delta_ns": 347800
+            }
+          ]
+        },
+        {
+          "boot_ns": 1188208826683923,
+          "cpu_some_avg10_percent": 1.58,
+          "loadavg": [
+            2.35107421875,
+            1.744140625,
+            0.8505859375
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 344576,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344614,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344615,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344616,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344617,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344618,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344619,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344620,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344621,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344636,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344637,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344638,
+              "runnable_wait_delta_ns": 30500
+            },
+            {
+              "pid": 344639,
+              "runnable_wait_delta_ns": 175300
+            },
+            {
+              "pid": 344640,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344641,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344642,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344643,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344648,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344651,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344652,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344653,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344656,
+              "runnable_wait_delta_ns": 60500
+            },
+            {
+              "pid": 344562,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344563,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344565,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344566,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344575,
+              "runnable_wait_delta_ns": 11500
+            }
+          ]
+        },
+        {
+          "boot_ns": 1188208934675733,
+          "cpu_some_avg10_percent": 1.58,
+          "loadavg": [
+            2.35107421875,
+            1.744140625,
+            0.8505859375
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 344576,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344614,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344615,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344616,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344617,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344618,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344619,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344620,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344621,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344636,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344637,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344638,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344639,
+              "runnable_wait_delta_ns": 20100
+            },
+            {
+              "pid": 344640,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344641,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344642,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344643,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344648,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344651,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344652,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344653,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344656,
+              "runnable_wait_delta_ns": 33000
+            },
+            {
+              "pid": 344562,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344563,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344565,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344566,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344575,
+              "runnable_wait_delta_ns": 0
+            }
+          ]
+        },
+        {
+          "boot_ns": 1188209049742713,
+          "cpu_some_avg10_percent": 1.58,
+          "loadavg": [
+            2.35107421875,
+            1.744140625,
+            0.8505859375
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 344576,
+              "runnable_wait_delta_ns": 527500
+            },
+            {
+              "pid": 344614,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344615,
+              "runnable_wait_delta_ns": 281200
+            },
+            {
+              "pid": 344616,
+              "runnable_wait_delta_ns": 100800
+            },
+            {
+              "pid": 344617,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344618,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344619,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344620,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344621,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344636,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344637,
+              "runnable_wait_delta_ns": 18800
+            },
+            {
+              "pid": 344638,
+              "runnable_wait_delta_ns": 126800
+            },
+            {
+              "pid": 344639,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344640,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344641,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344642,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344643,
+              "runnable_wait_delta_ns": 147900
+            },
+            {
+              "pid": 344648,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344651,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344652,
+              "runnable_wait_delta_ns": 55900
+            },
+            {
+              "pid": 344653,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344656,
+              "runnable_wait_delta_ns": 108000
+            },
+            {
+              "pid": 344562,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344563,
+              "runnable_wait_delta_ns": 253700
+            },
+            {
+              "pid": 344565,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344566,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 344575,
+              "runnable_wait_delta_ns": 619100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition": "fast_udp-off",
+      "world": "block-211",
+      "available": true,
+      "sha256": "9950c61e04f10f79db85d91a7e9d8131959e1b5fb528e47d615ae880dc0274a3",
+      "samples": 536,
+      "sampling_gap": {
+        "n": 535,
+        "median_ns": 108644670,
+        "p95_ns": 111938940,
+        "p99_ns": 117673110,
+        "max_ns": 1367713080
+      },
+      "observed_main_thread_runnable_wait_delta": {
+        "n": 13741,
+        "median_ns": 117500,
+        "p95_ns": 917400,
+        "p99_ns": 2625400,
+        "max_ns": 74330900
+      },
+      "cpu_some_avg10_max_percent": 3.33,
+      "observations_near_worst_matched_command": []
+    },
+    {
+      "condition": "fast_udp-off",
+      "world": "empty-210",
+      "available": true,
+      "sha256": "4b500e8346262aa810401f653e53acc4a194ec9d6f586442d154af4733d896cd",
+      "samples": 390,
+      "sampling_gap": {
+        "n": 389,
+        "median_ns": 108938160,
+        "p95_ns": 112338180,
+        "p99_ns": 123997860,
+        "max_ns": 1707224400
+      },
+      "observed_main_thread_runnable_wait_delta": {
+        "n": 9637,
+        "median_ns": 157200,
+        "p95_ns": 1225500,
+        "p99_ns": 5835800,
+        "max_ns": 54448000
+      },
+      "cpu_some_avg10_max_percent": 4.2,
+      "observations_near_worst_matched_command": []
+    },
+    {
+      "condition": "fast_udp-on",
+      "world": "block-211",
+      "available": true,
+      "sha256": "8aeb1c3379c8b1969ac867aa300e290f68c02d3b3c0e3b3a119789b5eb404bb8",
+      "samples": 506,
+      "sampling_gap": {
+        "n": 505,
+        "median_ns": 108763290,
+        "p95_ns": 111536370,
+        "p99_ns": 115103430,
+        "max_ns": 1174580100
+      },
+      "observed_main_thread_runnable_wait_delta": {
+        "n": 12938,
+        "median_ns": 178500,
+        "p95_ns": 1034900,
+        "p99_ns": 2623500,
+        "max_ns": 39646500
+      },
+      "cpu_some_avg10_max_percent": 3.47,
+      "observations_near_worst_matched_command": [
+        {
+          "boot_ns": 1188654346982433,
+          "cpu_some_avg10_percent": 1.5,
+          "loadavg": [
+            6.13623046875,
+            3.55078125,
+            1.92724609375
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 348416,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348425,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348436,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348437,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348438,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348439,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348440,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348441,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348444,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348446,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348448,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348451,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348452,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348453,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348357,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348358,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348360,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348361,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348370,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348371,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348409,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348410,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348411,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348412,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348413,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348414,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348415,
+              "runnable_wait_delta_ns": 0
+            }
+          ]
+        },
+        {
+          "boot_ns": 1188654456379323,
+          "cpu_some_avg10_percent": 1.5,
+          "loadavg": [
+            6.13623046875,
+            3.55078125,
+            1.92724609375
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 348416,
+              "runnable_wait_delta_ns": 93700
+            },
+            {
+              "pid": 348425,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348436,
+              "runnable_wait_delta_ns": 48200
+            },
+            {
+              "pid": 348437,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348438,
+              "runnable_wait_delta_ns": 23100
+            },
+            {
+              "pid": 348439,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348440,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348441,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348444,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348446,
+              "runnable_wait_delta_ns": 12200
+            },
+            {
+              "pid": 348448,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348451,
+              "runnable_wait_delta_ns": 14100
+            },
+            {
+              "pid": 348452,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348453,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348357,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348358,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348360,
+              "runnable_wait_delta_ns": 8300
+            },
+            {
+              "pid": 348361,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348370,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348371,
+              "runnable_wait_delta_ns": 5900
+            },
+            {
+              "pid": 348409,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348410,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348411,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348412,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348413,
+              "runnable_wait_delta_ns": 96100
+            },
+            {
+              "pid": 348414,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348415,
+              "runnable_wait_delta_ns": 34800
+            }
+          ]
+        },
+        {
+          "boot_ns": 1188654564954063,
+          "cpu_some_avg10_percent": 1.5,
+          "loadavg": [
+            6.13623046875,
+            3.55078125,
+            1.92724609375
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 348416,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348425,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348436,
+              "runnable_wait_delta_ns": 72900
+            },
+            {
+              "pid": 348437,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348438,
+              "runnable_wait_delta_ns": 61000
+            },
+            {
+              "pid": 348439,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348440,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348441,
+              "runnable_wait_delta_ns": 1194700
+            },
+            {
+              "pid": 348444,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348446,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348448,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348451,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348452,
+              "runnable_wait_delta_ns": 68200
+            },
+            {
+              "pid": 348453,
+              "runnable_wait_delta_ns": 83700
+            },
+            {
+              "pid": 348357,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348358,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348360,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348361,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348370,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348371,
+              "runnable_wait_delta_ns": 63600
+            },
+            {
+              "pid": 348409,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348410,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348411,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348412,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348413,
+              "runnable_wait_delta_ns": 129300
+            },
+            {
+              "pid": 348414,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348415,
+              "runnable_wait_delta_ns": 12200
+            }
+          ]
+        },
+        {
+          "boot_ns": 1188654673288413,
+          "cpu_some_avg10_percent": 1.5,
+          "loadavg": [
+            6.13623046875,
+            3.55078125,
+            1.92724609375
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 348416,
+              "runnable_wait_delta_ns": 131700
+            },
+            {
+              "pid": 348425,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348436,
+              "runnable_wait_delta_ns": 7100
+            },
+            {
+              "pid": 348437,
+              "runnable_wait_delta_ns": 141600
+            },
+            {
+              "pid": 348438,
+              "runnable_wait_delta_ns": 10300
+            },
+            {
+              "pid": 348439,
+              "runnable_wait_delta_ns": 186400
+            },
+            {
+              "pid": 348440,
+              "runnable_wait_delta_ns": 270700
+            },
+            {
+              "pid": 348441,
+              "runnable_wait_delta_ns": 220300
+            },
+            {
+              "pid": 348444,
+              "runnable_wait_delta_ns": 203400
+            },
+            {
+              "pid": 348446,
+              "runnable_wait_delta_ns": 253400
+            },
+            {
+              "pid": 348448,
+              "runnable_wait_delta_ns": 89000
+            },
+            {
+              "pid": 348451,
+              "runnable_wait_delta_ns": 57400
+            },
+            {
+              "pid": 348452,
+              "runnable_wait_delta_ns": 170100
+            },
+            {
+              "pid": 348453,
+              "runnable_wait_delta_ns": 312000
+            },
+            {
+              "pid": 348357,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348358,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348360,
+              "runnable_wait_delta_ns": 236900
+            },
+            {
+              "pid": 348361,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348370,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348371,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348409,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348410,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348411,
+              "runnable_wait_delta_ns": 25900
+            },
+            {
+              "pid": 348412,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348413,
+              "runnable_wait_delta_ns": 68300
+            },
+            {
+              "pid": 348414,
+              "runnable_wait_delta_ns": 8800
+            },
+            {
+              "pid": 348415,
+              "runnable_wait_delta_ns": 227400
+            }
+          ]
+        },
+        {
+          "boot_ns": 1188654781556703,
+          "cpu_some_avg10_percent": 1.5,
+          "loadavg": [
+            6.13623046875,
+            3.55078125,
+            1.92724609375
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 348416,
+              "runnable_wait_delta_ns": 155800
+            },
+            {
+              "pid": 348425,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348436,
+              "runnable_wait_delta_ns": 11200
+            },
+            {
+              "pid": 348437,
+              "runnable_wait_delta_ns": 48400
+            },
+            {
+              "pid": 348438,
+              "runnable_wait_delta_ns": 111700
+            },
+            {
+              "pid": 348439,
+              "runnable_wait_delta_ns": 129000
+            },
+            {
+              "pid": 348440,
+              "runnable_wait_delta_ns": 32100
+            },
+            {
+              "pid": 348441,
+              "runnable_wait_delta_ns": 159200
+            },
+            {
+              "pid": 348444,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348446,
+              "runnable_wait_delta_ns": 14500
+            },
+            {
+              "pid": 348448,
+              "runnable_wait_delta_ns": 32800
+            },
+            {
+              "pid": 348451,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348452,
+              "runnable_wait_delta_ns": 89900
+            },
+            {
+              "pid": 348453,
+              "runnable_wait_delta_ns": 119300
+            },
+            {
+              "pid": 348357,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348358,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348360,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348361,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348370,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348371,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348409,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348410,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348411,
+              "runnable_wait_delta_ns": 11400
+            },
+            {
+              "pid": 348412,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 348413,
+              "runnable_wait_delta_ns": 81600
+            },
+            {
+              "pid": 348414,
+              "runnable_wait_delta_ns": 323600
+            },
+            {
+              "pid": 348415,
+              "runnable_wait_delta_ns": 92900
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition": "fast_udp-on",
+      "world": "empty-210",
+      "available": true,
+      "sha256": "566d2b590cb446253476dda9270c8c7c376d40c9b0a08c37ed8f057aee48f3f6",
+      "samples": 413,
+      "sampling_gap": {
+        "n": 412,
+        "median_ns": 109348560,
+        "p95_ns": 113476500,
+        "p99_ns": 123393780,
+        "max_ns": 958460580
+      },
+      "observed_main_thread_runnable_wait_delta": {
+        "n": 10308,
+        "median_ns": 110900,
+        "p95_ns": 1141300,
+        "p99_ns": 4635600,
+        "max_ns": 66112200
+      },
+      "cpu_some_avg10_max_percent": 4.21,
+      "observations_near_worst_matched_command": [
+        {
+          "boot_ns": 1187912280201123,
+          "cpu_some_avg10_percent": 4.21,
+          "loadavg": [
+            1.5341796875,
+            0.74755859375,
+            0.3212890625
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 341512,
+              "runnable_wait_delta_ns": 898500
+            },
+            {
+              "pid": 341513,
+              "runnable_wait_delta_ns": 571900
+            },
+            {
+              "pid": 341551,
+              "runnable_wait_delta_ns": 17100
+            },
+            {
+              "pid": 341552,
+              "runnable_wait_delta_ns": 29600
+            },
+            {
+              "pid": 341553,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341554,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341555,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341556,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341557,
+              "runnable_wait_delta_ns": 297300
+            },
+            {
+              "pid": 341558,
+              "runnable_wait_delta_ns": 127900
+            },
+            {
+              "pid": 341571,
+              "runnable_wait_delta_ns": 121900
+            },
+            {
+              "pid": 341578,
+              "runnable_wait_delta_ns": 286300
+            },
+            {
+              "pid": 341579,
+              "runnable_wait_delta_ns": 135200
+            },
+            {
+              "pid": 341580,
+              "runnable_wait_delta_ns": 254800
+            },
+            {
+              "pid": 341581,
+              "runnable_wait_delta_ns": 340600
+            },
+            {
+              "pid": 341582,
+              "runnable_wait_delta_ns": 434000
+            },
+            {
+              "pid": 341583,
+              "runnable_wait_delta_ns": 517500
+            },
+            {
+              "pid": 341584,
+              "runnable_wait_delta_ns": 478900
+            },
+            {
+              "pid": 341585,
+              "runnable_wait_delta_ns": 395700
+            },
+            {
+              "pid": 341586,
+              "runnable_wait_delta_ns": 1067000
+            },
+            {
+              "pid": 341587,
+              "runnable_wait_delta_ns": 281200
+            },
+            {
+              "pid": 341588,
+              "runnable_wait_delta_ns": 524500
+            },
+            {
+              "pid": 341591,
+              "runnable_wait_delta_ns": 467600
+            },
+            {
+              "pid": 341979,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341499,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341500,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341502,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341503,
+              "runnable_wait_delta_ns": 0
+            }
+          ]
+        },
+        {
+          "boot_ns": 1187912390036583,
+          "cpu_some_avg10_percent": 4.21,
+          "loadavg": [
+            1.5341796875,
+            0.74755859375,
+            0.3212890625
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 341512,
+              "runnable_wait_delta_ns": 2771300
+            },
+            {
+              "pid": 341513,
+              "runnable_wait_delta_ns": 2249600
+            },
+            {
+              "pid": 341551,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341552,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341553,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341554,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341555,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341556,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341557,
+              "runnable_wait_delta_ns": 205700
+            },
+            {
+              "pid": 341558,
+              "runnable_wait_delta_ns": 292600
+            },
+            {
+              "pid": 341571,
+              "runnable_wait_delta_ns": 595000
+            },
+            {
+              "pid": 341578,
+              "runnable_wait_delta_ns": 3773900
+            },
+            {
+              "pid": 341579,
+              "runnable_wait_delta_ns": 56200
+            },
+            {
+              "pid": 341580,
+              "runnable_wait_delta_ns": 382400
+            },
+            {
+              "pid": 341581,
+              "runnable_wait_delta_ns": 321700
+            },
+            {
+              "pid": 341582,
+              "runnable_wait_delta_ns": 454300
+            },
+            {
+              "pid": 341583,
+              "runnable_wait_delta_ns": 1399100
+            },
+            {
+              "pid": 341584,
+              "runnable_wait_delta_ns": 531700
+            },
+            {
+              "pid": 341585,
+              "runnable_wait_delta_ns": 374800
+            },
+            {
+              "pid": 341586,
+              "runnable_wait_delta_ns": 862200
+            },
+            {
+              "pid": 341587,
+              "runnable_wait_delta_ns": 784600
+            },
+            {
+              "pid": 341588,
+              "runnable_wait_delta_ns": 334600
+            },
+            {
+              "pid": 341591,
+              "runnable_wait_delta_ns": 1239200
+            },
+            {
+              "pid": 341979,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341499,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341500,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341502,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341503,
+              "runnable_wait_delta_ns": 0
+            }
+          ]
+        },
+        {
+          "boot_ns": 1187912498614743,
+          "cpu_some_avg10_percent": 4.21,
+          "loadavg": [
+            1.5341796875,
+            0.74755859375,
+            0.3212890625
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 341512,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341513,
+              "runnable_wait_delta_ns": 175800
+            },
+            {
+              "pid": 341551,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341552,
+              "runnable_wait_delta_ns": 1085800
+            },
+            {
+              "pid": 341553,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341554,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341555,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341556,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341557,
+              "runnable_wait_delta_ns": 81800
+            },
+            {
+              "pid": 341558,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341571,
+              "runnable_wait_delta_ns": 597300
+            },
+            {
+              "pid": 341578,
+              "runnable_wait_delta_ns": 291500
+            },
+            {
+              "pid": 341579,
+              "runnable_wait_delta_ns": 211800
+            },
+            {
+              "pid": 341580,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341581,
+              "runnable_wait_delta_ns": 501300
+            },
+            {
+              "pid": 341582,
+              "runnable_wait_delta_ns": 25200
+            },
+            {
+              "pid": 341583,
+              "runnable_wait_delta_ns": 584100
+            },
+            {
+              "pid": 341584,
+              "runnable_wait_delta_ns": 437100
+            },
+            {
+              "pid": 341585,
+              "runnable_wait_delta_ns": 190400
+            },
+            {
+              "pid": 341586,
+              "runnable_wait_delta_ns": 317200
+            },
+            {
+              "pid": 341587,
+              "runnable_wait_delta_ns": 304500
+            },
+            {
+              "pid": 341588,
+              "runnable_wait_delta_ns": 962700
+            },
+            {
+              "pid": 341591,
+              "runnable_wait_delta_ns": 357200
+            },
+            {
+              "pid": 341979,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341499,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341500,
+              "runnable_wait_delta_ns": 134600
+            },
+            {
+              "pid": 341502,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341503,
+              "runnable_wait_delta_ns": 0
+            }
+          ]
+        },
+        {
+          "boot_ns": 1187912608431753,
+          "cpu_some_avg10_percent": 4.21,
+          "loadavg": [
+            1.5341796875,
+            0.74755859375,
+            0.3212890625
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 341512,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341513,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341551,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341552,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341553,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341554,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341555,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341556,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341557,
+              "runnable_wait_delta_ns": 85300
+            },
+            {
+              "pid": 341558,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341571,
+              "runnable_wait_delta_ns": 382100
+            },
+            {
+              "pid": 341578,
+              "runnable_wait_delta_ns": 276300
+            },
+            {
+              "pid": 341579,
+              "runnable_wait_delta_ns": 209700
+            },
+            {
+              "pid": 341580,
+              "runnable_wait_delta_ns": 360800
+            },
+            {
+              "pid": 341581,
+              "runnable_wait_delta_ns": 585900
+            },
+            {
+              "pid": 341582,
+              "runnable_wait_delta_ns": 470700
+            },
+            {
+              "pid": 341583,
+              "runnable_wait_delta_ns": 1143700
+            },
+            {
+              "pid": 341584,
+              "runnable_wait_delta_ns": 757700
+            },
+            {
+              "pid": 341585,
+              "runnable_wait_delta_ns": 759600
+            },
+            {
+              "pid": 341586,
+              "runnable_wait_delta_ns": 771600
+            },
+            {
+              "pid": 341587,
+              "runnable_wait_delta_ns": 492600
+            },
+            {
+              "pid": 341588,
+              "runnable_wait_delta_ns": 466700
+            },
+            {
+              "pid": 341591,
+              "runnable_wait_delta_ns": 389900
+            },
+            {
+              "pid": 341979,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341499,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341500,
+              "runnable_wait_delta_ns": 399900
+            },
+            {
+              "pid": 341502,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341503,
+              "runnable_wait_delta_ns": 0
+            }
+          ]
+        },
+        {
+          "boot_ns": 1187912720390673,
+          "cpu_some_avg10_percent": 4.21,
+          "loadavg": [
+            1.5341796875,
+            0.74755859375,
+            0.3212890625
+          ],
+          "main_thread_runnable_wait_deltas": [
+            {
+              "pid": 341512,
+              "runnable_wait_delta_ns": 451600
+            },
+            {
+              "pid": 341513,
+              "runnable_wait_delta_ns": 702300
+            },
+            {
+              "pid": 341551,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341552,
+              "runnable_wait_delta_ns": 87500
+            },
+            {
+              "pid": 341553,
+              "runnable_wait_delta_ns": 16900
+            },
+            {
+              "pid": 341554,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341555,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341556,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341557,
+              "runnable_wait_delta_ns": 703400
+            },
+            {
+              "pid": 341558,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341571,
+              "runnable_wait_delta_ns": 505800
+            },
+            {
+              "pid": 341578,
+              "runnable_wait_delta_ns": 46800
+            },
+            {
+              "pid": 341579,
+              "runnable_wait_delta_ns": 602900
+            },
+            {
+              "pid": 341580,
+              "runnable_wait_delta_ns": 614500
+            },
+            {
+              "pid": 341581,
+              "runnable_wait_delta_ns": 975600
+            },
+            {
+              "pid": 341582,
+              "runnable_wait_delta_ns": 792800
+            },
+            {
+              "pid": 341583,
+              "runnable_wait_delta_ns": 765700
+            },
+            {
+              "pid": 341584,
+              "runnable_wait_delta_ns": 1249900
+            },
+            {
+              "pid": 341585,
+              "runnable_wait_delta_ns": 429300
+            },
+            {
+              "pid": 341586,
+              "runnable_wait_delta_ns": 1384700
+            },
+            {
+              "pid": 341587,
+              "runnable_wait_delta_ns": 2727300
+            },
+            {
+              "pid": 341588,
+              "runnable_wait_delta_ns": 1411900
+            },
+            {
+              "pid": 341591,
+              "runnable_wait_delta_ns": 1653300
+            },
+            {
+              "pid": 341979,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341499,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341500,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341502,
+              "runnable_wait_delta_ns": 0
+            },
+            {
+              "pid": 341503,
+              "runnable_wait_delta_ns": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Same-kernel BOOTTIME, separate sessions; no cross-session subtraction.",
+    "Sampling targets 100 ms but actual gaps are reported. Missing workers and in-flight processes prevent complete scheduler attribution.",
+    "Runnable-wait deltas cover observed intervals, not callback latency. Near means within 100 ms of the command span, not proof of cause or mutex owner.",
+    "Linux CPU pressure is not Windows host CPU utilization. No causal host contention or middleware improvement is inferred from these samples."
+  ]
+}

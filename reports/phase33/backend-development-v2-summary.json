@@ -1,0 +1,2184 @@
+{
+  "cohort": "backend-development-v2",
+  "trials": [
+    {
+      "condition": "cyclone-off",
+      "world": "block-211",
+      "planned_requests": 3,
+      "dispatched": 0,
+      "completed": 0,
+      "unattempted": 3,
+      "environment_failure": "All three bounded receiver-clock preparation handshakes failed",
+      "outcomes": [],
+      "timing": null,
+      "contact_observation": {
+        "samples": 0,
+        "pairs": 0,
+        "robot_environment_pairs": 0,
+        "available": false,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "b2e744dfc05c58013d2acaac1fff90270c06c679b95e2e7eda91d1d57b8d5024",
+      "trace_sha256": {
+        "resources.jsonl": "7df89e20708606d0ac385ee2dbb725a0a62c0bf7c5dd21cda45c41b94fc552dc"
+      }
+    },
+    {
+      "condition": "cyclone-off",
+      "world": "empty-210",
+      "planned_requests": 3,
+      "dispatched": 0,
+      "completed": 0,
+      "unattempted": 3,
+      "environment_failure": "All three bounded receiver-clock preparation handshakes failed",
+      "outcomes": [],
+      "timing": null,
+      "contact_observation": {
+        "samples": 0,
+        "pairs": 0,
+        "robot_environment_pairs": 0,
+        "available": false,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "94b9100c9ece8933521b168ce2ea6e891649f24cc5a3b1c136ae60a4307e0565",
+      "trace_sha256": {
+        "resources.jsonl": "9784fa5ff8cb303852455220a0c26500948795db11287df994b54bac7984ffb1"
+      }
+    },
+    {
+      "condition": "cyclone-on",
+      "world": "block-211",
+      "planned_requests": 3,
+      "dispatched": 0,
+      "completed": 0,
+      "unattempted": 3,
+      "environment_failure": "All three bounded receiver-clock preparation handshakes failed",
+      "outcomes": [],
+      "timing": {
+        "stage_counts": {
+          "actual_ros_writer_qos": 3,
+          "dds_publish_begin": 1478,
+          "dds_publish_end": 1478,
+          "dds_take": 656,
+          "gz_publish_begin": 1477,
+          "gz_publish_end": 1477,
+          "native_ingress": 575,
+          "native_decoded": 575,
+          "native_ingress_end": 575,
+          "preupdate_begin": 822,
+          "actuator_published": 822,
+          "expiry_state": 11,
+          "contact_sample": 3288,
+          "contact_pair": 2466,
+          "ground_truth_native": 205,
+          "guard_tick_begin": 655,
+          "guard_publish_begin": 655,
+          "guard_publish_end": 655,
+          "guard_tick_end": 655
+        },
+        "command_stream": {
+          "native_interarrival": {
+            "n": 574,
+            "median_ns": 19976850,
+            "p95_ns": 29364660,
+            "p99_ns": 62074800,
+            "max_ns": 91911960
+          },
+          "native_gaps_over_200ms": 0,
+          "gaps_following_nonzero_command": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "gaps_over_200ms_following_nonzero": 0,
+          "nonzero_guard_begin_to_native": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "native_latch_observed": false,
+          "native_state_reasons": {
+            "idle": 11
+          },
+          "limits": "Nonzero commanded velocity is not proof of actual motion. Gap counts are serial intervals, not independent trials; a missing state trace cannot establish absence of expiry."
+        },
+        "interarrival": {
+          "guard_tick_begin": {
+            "n": 654,
+            "median_ns": 20002230,
+            "p95_ns": 23540580,
+            "p99_ns": 38895300,
+            "max_ns": 61475130
+          },
+          "guard_publish_begin": {
+            "n": 654,
+            "median_ns": 20006460,
+            "p95_ns": 23592240,
+            "p99_ns": 39395790,
+            "max_ns": 61463790
+          },
+          "dds_publish_begin": {
+            "n": 1475,
+            "median_ns": 11763990,
+            "p95_ns": 21515760,
+            "p99_ns": 44719560,
+            "max_ns": 1913898060
+          },
+          "dds_publish_end": {
+            "n": 1475,
+            "median_ns": 11727540,
+            "p95_ns": 21854430,
+            "p99_ns": 47159820,
+            "max_ns": 1914013170
+          },
+          "guard_publish_end": {
+            "n": 654,
+            "median_ns": 20004030,
+            "p95_ns": 24127020,
+            "p99_ns": 40824720,
+            "max_ns": 66298320
+          },
+          "guard_tick_end": {
+            "n": 654,
+            "median_ns": 19998540,
+            "p95_ns": 24125850,
+            "p99_ns": 40826160,
+            "max_ns": 66373920
+          },
+          "dds_take": {
+            "n": 654,
+            "median_ns": 19975590,
+            "p95_ns": 26456760,
+            "p99_ns": 45669150,
+            "max_ns": 85131000
+          },
+          "gz_publish_begin": {
+            "n": 1475,
+            "median_ns": 10385190,
+            "p95_ns": 23933070,
+            "p99_ns": 44036730,
+            "max_ns": 1913928930
+          },
+          "gz_publish_end": {
+            "n": 1475,
+            "median_ns": 10392570,
+            "p95_ns": 23910930,
+            "p99_ns": 44683110,
+            "max_ns": 1913895450
+          },
+          "native_ingress": {
+            "n": 574,
+            "median_ns": 19994490,
+            "p95_ns": 28027980,
+            "p99_ns": 62067870,
+            "max_ns": 76849830
+          },
+          "native_decoded": {
+            "n": 574,
+            "median_ns": 19976850,
+            "p95_ns": 29364660,
+            "p99_ns": 62074800,
+            "max_ns": 91911960
+          },
+          "native_ingress_end": {
+            "n": 574,
+            "median_ns": 19978380,
+            "p95_ns": 29364210,
+            "p99_ns": 62083440,
+            "max_ns": 91912860
+          },
+          "contact_sample": {
+            "n": 3287,
+            "median_ns": 9270,
+            "p95_ns": 10447470,
+            "p99_ns": 18627930,
+            "max_ns": 1913846310
+          },
+          "contact_pair": {
+            "n": 2465,
+            "median_ns": 7200,
+            "p95_ns": 10923930,
+            "p99_ns": 23386860,
+            "max_ns": 1913855310
+          },
+          "preupdate_begin": {
+            "n": 821,
+            "median_ns": 10004310,
+            "p95_ns": 14953680,
+            "p99_ns": 37835730,
+            "max_ns": 1913934780
+          },
+          "actuator_published": {
+            "n": 821,
+            "median_ns": 10006290,
+            "p95_ns": 14973390,
+            "p99_ns": 37852290,
+            "max_ns": 1913895360
+          },
+          "expiry_state": {
+            "n": 10,
+            "median_ns": 1004522130,
+            "p95_ns": 1939716540,
+            "p99_ns": 1939716540,
+            "max_ns": 1939716540
+          },
+          "ground_truth_native": {
+            "n": 204,
+            "median_ns": 40052520,
+            "p95_ns": 66177000,
+            "p99_ns": 91624320,
+            "max_ns": 110191590
+          }
+        },
+        "call_wall_duration": {
+          "dds_publish": {
+            "n": 1478,
+            "median_ns": 231660,
+            "p95_ns": 423720,
+            "p99_ns": 2155950,
+            "max_ns": 57315060
+          },
+          "guard_publish": {
+            "n": 655,
+            "median_ns": 378630,
+            "p95_ns": 598770,
+            "p99_ns": 1457100,
+            "max_ns": 30691350
+          },
+          "guard_tick": {
+            "n": 655,
+            "median_ns": 555930,
+            "p95_ns": 873450,
+            "p99_ns": 3578130,
+            "max_ns": 30905910
+          },
+          "gz_publish": {
+            "n": 1477,
+            "median_ns": 70740,
+            "p95_ns": 120690,
+            "p99_ns": 302400,
+            "max_ns": 84901770
+          }
+        },
+        "call_thread_cpu_duration": {
+          "dds_publish": {
+            "n": 1478,
+            "median_ns": 250400,
+            "p95_ns": 397800,
+            "p99_ns": 2395600,
+            "max_ns": 63683600
+          },
+          "guard_publish": {
+            "n": 655,
+            "median_ns": 417800,
+            "p95_ns": 573800,
+            "p99_ns": 1620700,
+            "max_ns": 33978900
+          },
+          "guard_tick": {
+            "n": 655,
+            "median_ns": 609800,
+            "p95_ns": 837700,
+            "p99_ns": 3956800,
+            "max_ns": 34209900
+          },
+          "gz_publish": {
+            "n": 1477,
+            "median_ns": 77300,
+            "p95_ns": 122700,
+            "p99_ns": 264000,
+            "max_ns": 87626800
+          }
+        },
+        "matched_command_edges": {
+          "guard_publish_begin->dds_take": {
+            "n": 655,
+            "median_ns": 599490,
+            "p95_ns": 3271050,
+            "p99_ns": 15106500,
+            "max_ns": 65982870
+          },
+          "dds_take->gz_publish_begin": {
+            "n": 655,
+            "median_ns": 41760,
+            "p95_ns": 73350,
+            "p99_ns": 194940,
+            "max_ns": 51939720
+          },
+          "gz_publish_begin->native_decoded": {
+            "n": 575,
+            "median_ns": 415890,
+            "p95_ns": 5393610,
+            "p99_ns": 31175280,
+            "max_ns": 72180180
+          },
+          "guard_publish_begin->native_decoded": {
+            "n": 575,
+            "median_ns": 1121940,
+            "p95_ns": 8432640,
+            "p99_ns": 40812210,
+            "max_ns": 72928080
+          }
+        },
+        "clock": "All computed deltas use Linux CLOCK_BOOTTIME, same kernel only",
+        "limits": [
+          "Publish begin/end measure API duration, not a DDS wire transmission timestamp.",
+          "DDS source/received timestamps are retained as realtime fields and never subtracted from BOOTTIME.",
+          "DDS take to Gazebo publish includes conversion and callback processing; transport begins at the publication API.",
+          "One guard epoch per session is required; analyze sessions separately.",
+          "Wall duration minus thread CPU includes blocking and descheduling; it does not uniquely identify either cause."
+        ]
+      },
+      "contact_observation": {
+        "samples": 3288,
+        "pairs": 2466,
+        "robot_environment_pairs": 0,
+        "available": true,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "bcb0459cb65589005a995dd7d2a18d7709e65e3fa97b39aa0e9c0569b0ca411a",
+      "trace_sha256": {
+        "native-334740.jsonl": "d21da30f5d9293354ffbac070f369109d2f240c0629b959afd32f6b94040fc44",
+        "native-334741.jsonl": "89342559e534f493db4253148ccf2350056dd8133333f85eac92841d7dd06cb5",
+        "native-334754.jsonl": "cec75f68e2f1c560f65618c00165df0f36b7628d8331600b30388d3ee77820b6",
+        "native-334761.jsonl": "bef80d3196773a03efafdbc79949092a91a5194ed15d39a8d23c95acd5b32e69",
+        "native-334769.jsonl": "032d6d590c14388740d8ca900a987138ee2de43b518f7d1b969870ec1380b4eb",
+        "python-334740.jsonl": "bedc5b43d11aa458b50ad58ca89cd31809a41c00c2480e918e95c7a78375d36b",
+        "resources.jsonl": "fc9b9e52939332aa5147e0e50b8dd83e0ecaf282e1f0b95d6e3ed3402f60f342"
+      }
+    },
+    {
+      "condition": "cyclone-on",
+      "world": "empty-210",
+      "planned_requests": 3,
+      "dispatched": 1,
+      "completed": 0,
+      "unattempted": 2,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "failed",
+          "reason": "tf_watchdog",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 30,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.09912756711848322,
+            "moving_time_sim_s": 0.6,
+            "arrival_position_error_m": 0.8780670736973247,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": {
+        "stage_counts": {
+          "actual_ros_writer_qos": 5,
+          "dds_publish_begin": 1358,
+          "dds_publish_end": 1358,
+          "dds_take": 613,
+          "gz_publish_begin": 1294,
+          "gz_publish_end": 1294,
+          "controller_compute_begin": 10,
+          "controller_created": 10,
+          "native_ingress": 479,
+          "native_decoded": 479,
+          "native_ingress_end": 479,
+          "preupdate_begin": 743,
+          "actuator_published": 743,
+          "expiry_state": 10,
+          "contact_sample": 2972,
+          "contact_pair": 2217,
+          "ground_truth_native": 185,
+          "guard_tick_begin": 551,
+          "guard_publish_begin": 552,
+          "guard_publish_end": 552,
+          "guard_tick_end": 551,
+          "guard_receipt": 25,
+          "guard_processed": 25
+        },
+        "command_stream": {
+          "native_interarrival": {
+            "n": 478,
+            "median_ns": 19986570,
+            "p95_ns": 26285400,
+            "p99_ns": 39633570,
+            "max_ns": 79211520
+          },
+          "native_gaps_over_200ms": 0,
+          "gaps_following_nonzero_command": {
+            "n": 47,
+            "median_ns": 19938690,
+            "p95_ns": 22406670,
+            "p99_ns": 24770700,
+            "max_ns": 24770700
+          },
+          "gaps_over_200ms_following_nonzero": 0,
+          "nonzero_guard_begin_to_native": {
+            "n": 47,
+            "median_ns": 986670,
+            "p95_ns": 2424870,
+            "p99_ns": 3211650,
+            "max_ns": 3211650
+          },
+          "native_latch_observed": false,
+          "native_state_reasons": {
+            "idle": 8,
+            "forwarding": 2
+          },
+          "limits": "Nonzero commanded velocity is not proof of actual motion. Gap counts are serial intervals, not independent trials; a missing state trace cannot establish absence of expiry."
+        },
+        "interarrival": {
+          "guard_tick_begin": {
+            "n": 550,
+            "median_ns": 19995570,
+            "p95_ns": 23515650,
+            "p99_ns": 32798970,
+            "max_ns": 42414390
+          },
+          "guard_publish_begin": {
+            "n": 551,
+            "median_ns": 19999890,
+            "p95_ns": 24167160,
+            "p99_ns": 32829210,
+            "max_ns": 59722920
+          },
+          "dds_publish_begin": {
+            "n": 1352,
+            "median_ns": 11147580,
+            "p95_ns": 33319620,
+            "p99_ns": 83772900,
+            "max_ns": 1305174690
+          },
+          "dds_publish_end": {
+            "n": 1352,
+            "median_ns": 11242530,
+            "p95_ns": 32746860,
+            "p99_ns": 83778300,
+            "max_ns": 1305292770
+          },
+          "guard_publish_end": {
+            "n": 551,
+            "median_ns": 20001420,
+            "p95_ns": 24260940,
+            "p99_ns": 32734080,
+            "max_ns": 59803830
+          },
+          "guard_tick_end": {
+            "n": 550,
+            "median_ns": 19997280,
+            "p95_ns": 24259500,
+            "p99_ns": 32336190,
+            "max_ns": 59807250
+          },
+          "dds_take": {
+            "n": 609,
+            "median_ns": 20029770,
+            "p95_ns": 50171580,
+            "p99_ns": 99864090,
+            "max_ns": 108691380
+          },
+          "gz_publish_begin": {
+            "n": 1292,
+            "median_ns": 10101150,
+            "p95_ns": 22447260,
+            "p99_ns": 32356890,
+            "max_ns": 1305147150
+          },
+          "gz_publish_end": {
+            "n": 1292,
+            "median_ns": 10127340,
+            "p95_ns": 22451850,
+            "p99_ns": 32380920,
+            "max_ns": 1305157680
+          },
+          "native_ingress": {
+            "n": 478,
+            "median_ns": 19983960,
+            "p95_ns": 26287290,
+            "p99_ns": 39625830,
+            "max_ns": 79203960
+          },
+          "native_decoded": {
+            "n": 478,
+            "median_ns": 19986570,
+            "p95_ns": 26285400,
+            "p99_ns": 39633570,
+            "max_ns": 79211520
+          },
+          "native_ingress_end": {
+            "n": 478,
+            "median_ns": 19984950,
+            "p95_ns": 26286750,
+            "p99_ns": 39637440,
+            "max_ns": 79212150
+          },
+          "contact_sample": {
+            "n": 2971,
+            "median_ns": 9270,
+            "p95_ns": 10374210,
+            "p99_ns": 15037740,
+            "max_ns": 1305265860
+          },
+          "contact_pair": {
+            "n": 2216,
+            "median_ns": 7560,
+            "p95_ns": 10652310,
+            "p99_ns": 15934590,
+            "max_ns": 1305301590
+          },
+          "preupdate_begin": {
+            "n": 742,
+            "median_ns": 10000440,
+            "p95_ns": 12088620,
+            "p99_ns": 25027020,
+            "max_ns": 1305132480
+          },
+          "actuator_published": {
+            "n": 742,
+            "median_ns": 9998730,
+            "p95_ns": 12590910,
+            "p99_ns": 26295750,
+            "max_ns": 1305157860
+          },
+          "expiry_state": {
+            "n": 9,
+            "median_ns": 1005164460,
+            "p95_ns": 1331450010,
+            "p99_ns": 1331450010,
+            "max_ns": 1331450010
+          },
+          "ground_truth_native": {
+            "n": 184,
+            "median_ns": 40032630,
+            "p95_ns": 47635110,
+            "p99_ns": 95030460,
+            "max_ns": 105991020
+          },
+          "guard_receipt": {
+            "n": 24,
+            "median_ns": 43086510,
+            "p95_ns": 83580660,
+            "p99_ns": 84560220,
+            "max_ns": 84560220
+          },
+          "guard_processed": {
+            "n": 24,
+            "median_ns": 43137630,
+            "p95_ns": 83619900,
+            "p99_ns": 84620070,
+            "max_ns": 84620070
+          },
+          "controller_compute_begin": {
+            "n": 9,
+            "median_ns": 100019430,
+            "p95_ns": 104114160,
+            "p99_ns": 104114160,
+            "max_ns": 104114160
+          },
+          "controller_created": {
+            "n": 9,
+            "median_ns": 99993240,
+            "p95_ns": 104109930,
+            "p99_ns": 104109930,
+            "max_ns": 104109930
+          }
+        },
+        "call_wall_duration": {
+          "dds_publish": {
+            "n": 1358,
+            "median_ns": 233190,
+            "p95_ns": 372780,
+            "p99_ns": 1610100,
+            "max_ns": 15028920
+          },
+          "guard_publish": {
+            "n": 552,
+            "median_ns": 369000,
+            "p95_ns": 594090,
+            "p99_ns": 3138840,
+            "max_ns": 7225560
+          },
+          "guard_tick": {
+            "n": 551,
+            "median_ns": 543420,
+            "p95_ns": 941400,
+            "p99_ns": 4614840,
+            "max_ns": 20075850
+          },
+          "gz_publish": {
+            "n": 1294,
+            "median_ns": 72360,
+            "p95_ns": 110430,
+            "p99_ns": 247500,
+            "max_ns": 94336020
+          }
+        },
+        "call_thread_cpu_duration": {
+          "dds_publish": {
+            "n": 1358,
+            "median_ns": 255300,
+            "p95_ns": 395800,
+            "p99_ns": 1558000,
+            "max_ns": 16688000
+          },
+          "guard_publish": {
+            "n": 552,
+            "median_ns": 407000,
+            "p95_ns": 629200,
+            "p99_ns": 2442800,
+            "max_ns": 8030700
+          },
+          "guard_tick": {
+            "n": 551,
+            "median_ns": 596900,
+            "p95_ns": 961400,
+            "p99_ns": 4516300,
+            "max_ns": 8275800
+          },
+          "gz_publish": {
+            "n": 1294,
+            "median_ns": 79500,
+            "p95_ns": 119300,
+            "p99_ns": 228200,
+            "max_ns": 3185600
+          }
+        },
+        "matched_command_edges": {
+          "guard_publish_begin->dds_take": {
+            "n": 551,
+            "median_ns": 534690,
+            "p95_ns": 2103660,
+            "p99_ns": 12039930,
+            "max_ns": 74850480
+          },
+          "dds_take->gz_publish_begin": {
+            "n": 551,
+            "median_ns": 43380,
+            "p95_ns": 75420,
+            "p99_ns": 230940,
+            "max_ns": 882360
+          },
+          "gz_publish_begin->native_decoded": {
+            "n": 479,
+            "median_ns": 393840,
+            "p95_ns": 1672110,
+            "p99_ns": 16081380,
+            "max_ns": 29010510
+          },
+          "guard_publish_begin->native_decoded": {
+            "n": 479,
+            "median_ns": 1055160,
+            "p95_ns": 4899510,
+            "p99_ns": 19060290,
+            "max_ns": 29469330
+          }
+        },
+        "clock": "All computed deltas use Linux CLOCK_BOOTTIME, same kernel only",
+        "limits": [
+          "Publish begin/end measure API duration, not a DDS wire transmission timestamp.",
+          "DDS source/received timestamps are retained as realtime fields and never subtracted from BOOTTIME.",
+          "DDS take to Gazebo publish includes conversion and callback processing; transport begins at the publication API.",
+          "One guard epoch per session is required; analyze sessions separately.",
+          "Wall duration minus thread CPU includes blocking and descheduling; it does not uniquely identify either cause."
+        ]
+      },
+      "contact_observation": {
+        "samples": 2972,
+        "pairs": 2217,
+        "robot_environment_pairs": 0,
+        "available": true,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "b86e0b862f2197c49e1c23449763a2b0cba009f2fdca8795a9a4a9325c954668",
+      "trace_sha256": {
+        "native-331914.jsonl": "276118dee98a97a27cdc30b536a319ec17acc5764205fa1698d402d331cfbefd",
+        "native-331915.jsonl": "f2095891a58e901a73afc198669bfd7fa1347e85213e316c5b78320a1726827a",
+        "native-331932.jsonl": "caf94d062b9bd063f1129f3b65917506ed9997074ef2de9c4598ef47b5b94ae0",
+        "native-331933.jsonl": "aa879434b2e8c72086b2d645eef75afe8fafb17b503f32693bf20a103ed39b3f",
+        "native-331969.jsonl": "125aa4796af30b1f2947511b6e1ad0347be57994624271e034892c913f2d947f",
+        "native-331970.jsonl": "ffd953e548022c77e444288abca00d15d1c26bd3f319d7994c883d0ab0e74698",
+        "python-331914.jsonl": "65cab9a599f581263901b5c8217b3ac1f1c774274cfcbf7b8eb75ad3afa85d0f",
+        "resources.jsonl": "b535698440e0fa98b8c0ea1854ba3e9aad9fe5b4fc661bbcaef207954f1fd810"
+      }
+    },
+    {
+      "condition": "fast_default-off",
+      "world": "block-211",
+      "planned_requests": 3,
+      "dispatched": 0,
+      "completed": 0,
+      "unattempted": 3,
+      "environment_failure": "All three bounded receiver-clock preparation handshakes failed",
+      "outcomes": [],
+      "timing": null,
+      "contact_observation": {
+        "samples": 0,
+        "pairs": 0,
+        "robot_environment_pairs": 0,
+        "available": false,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "03d4677c1bb28096a51db4cea3db864e8292c5f3355bc51ad31eddfb87114c96",
+      "trace_sha256": {
+        "resources.jsonl": "f35499fc49c6f01f8d8168a87e7a6b3e452443313349d33835657292f1b40b38"
+      }
+    },
+    {
+      "condition": "fast_default-off",
+      "world": "empty-210",
+      "planned_requests": 3,
+      "dispatched": 0,
+      "completed": 0,
+      "unattempted": 3,
+      "environment_failure": "Session startup failed",
+      "outcomes": [],
+      "timing": null,
+      "contact_observation": {
+        "samples": 0,
+        "pairs": 0,
+        "robot_environment_pairs": 0,
+        "available": false,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "665ad7e5d23463cdfd6f41f3dbc77aec886b67b8f1bd83559e51c750c238e09b",
+      "trace_sha256": {
+        "resources.jsonl": "2a04bbce0d840cf4e0733e04bcd97796d1284e97ce959e4fb897abe8300914f6"
+      }
+    },
+    {
+      "condition": "fast_default-on",
+      "world": "block-211",
+      "planned_requests": 3,
+      "dispatched": 0,
+      "completed": 0,
+      "unattempted": 3,
+      "environment_failure": "All three bounded receiver-clock preparation handshakes failed",
+      "outcomes": [],
+      "timing": {
+        "stage_counts": {
+          "actual_ros_writer_qos": 4,
+          "actual_writer_qos": 4,
+          "dds_publish_begin": 1539,
+          "send_resource_mutex_identified": 3,
+          "send_resource_wait_begin": 7199,
+          "send_resource_acquired": 7199,
+          "send_resource_releasing": 7199,
+          "dds_publish_end": 1539,
+          "dds_take": 674,
+          "gz_publish_begin": 1538,
+          "gz_publish_end": 1538,
+          "native_ingress": 612,
+          "native_decoded": 612,
+          "native_ingress_end": 612,
+          "preupdate_begin": 864,
+          "actuator_published": 864,
+          "expiry_state": 11,
+          "contact_sample": 3456,
+          "contact_pair": 2592,
+          "ground_truth_native": 216,
+          "guard_tick_begin": 674,
+          "guard_publish_begin": 674,
+          "guard_publish_end": 674,
+          "guard_tick_end": 674
+        },
+        "command_stream": {
+          "native_interarrival": {
+            "n": 611,
+            "median_ns": 19967130,
+            "p95_ns": 33920460,
+            "p99_ns": 70239330,
+            "max_ns": 165862350
+          },
+          "native_gaps_over_200ms": 0,
+          "gaps_following_nonzero_command": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "gaps_over_200ms_following_nonzero": 0,
+          "nonzero_guard_begin_to_native": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "native_latch_observed": false,
+          "native_state_reasons": {
+            "idle": 11
+          },
+          "limits": "Nonzero commanded velocity is not proof of actual motion. Gap counts are serial intervals, not independent trials; a missing state trace cannot establish absence of expiry."
+        },
+        "interarrival": {
+          "send_resource_wait_begin": {
+            "n": 7181,
+            "median_ns": 212130,
+            "p95_ns": 30242970,
+            "p99_ns": 100076940,
+            "max_ns": 6993752490
+          },
+          "send_resource_acquired": {
+            "n": 7181,
+            "median_ns": 190170,
+            "p95_ns": 30576150,
+            "p99_ns": 100121310,
+            "max_ns": 6993747630
+          },
+          "send_resource_releasing": {
+            "n": 7181,
+            "median_ns": 214740,
+            "p95_ns": 30409650,
+            "p99_ns": 100207260,
+            "max_ns": 6993780840
+          },
+          "guard_tick_begin": {
+            "n": 673,
+            "median_ns": 19982160,
+            "p95_ns": 29238210,
+            "p99_ns": 40589910,
+            "max_ns": 93170610
+          },
+          "guard_publish_begin": {
+            "n": 673,
+            "median_ns": 19983510,
+            "p95_ns": 29256660,
+            "p99_ns": 40612860,
+            "max_ns": 95531220
+          },
+          "dds_publish_begin": {
+            "n": 1536,
+            "median_ns": 11373930,
+            "p95_ns": 26355510,
+            "p99_ns": 47086110,
+            "max_ns": 2163051720
+          },
+          "dds_publish_end": {
+            "n": 1536,
+            "median_ns": 11273040,
+            "p95_ns": 27772560,
+            "p99_ns": 53567550,
+            "max_ns": 2162998800
+          },
+          "guard_publish_end": {
+            "n": 673,
+            "median_ns": 19982430,
+            "p95_ns": 31117410,
+            "p99_ns": 53622540,
+            "max_ns": 118524510
+          },
+          "guard_tick_end": {
+            "n": 673,
+            "median_ns": 19981170,
+            "p95_ns": 31116420,
+            "p99_ns": 53676360,
+            "max_ns": 118559340
+          },
+          "dds_take": {
+            "n": 673,
+            "median_ns": 19986480,
+            "p95_ns": 32184630,
+            "p99_ns": 64664280,
+            "max_ns": 103799610
+          },
+          "gz_publish_begin": {
+            "n": 1536,
+            "median_ns": 10338390,
+            "p95_ns": 27379710,
+            "p99_ns": 59195970,
+            "max_ns": 2162991150
+          },
+          "gz_publish_end": {
+            "n": 1536,
+            "median_ns": 10359090,
+            "p95_ns": 27518670,
+            "p99_ns": 59179320,
+            "max_ns": 2162990160
+          },
+          "native_ingress": {
+            "n": 611,
+            "median_ns": 19964340,
+            "p95_ns": 33822540,
+            "p99_ns": 70233120,
+            "max_ns": 146151810
+          },
+          "native_decoded": {
+            "n": 611,
+            "median_ns": 19967130,
+            "p95_ns": 33920460,
+            "p99_ns": 70239330,
+            "max_ns": 165862350
+          },
+          "native_ingress_end": {
+            "n": 611,
+            "median_ns": 19968930,
+            "p95_ns": 33940440,
+            "p99_ns": 70238970,
+            "max_ns": 165864420
+          },
+          "contact_sample": {
+            "n": 3455,
+            "median_ns": 9360,
+            "p95_ns": 10728810,
+            "p99_ns": 24982920,
+            "max_ns": 2162898810
+          },
+          "contact_pair": {
+            "n": 2591,
+            "median_ns": 7560,
+            "p95_ns": 11480760,
+            "p99_ns": 27740520,
+            "max_ns": 2162909610
+          },
+          "preupdate_begin": {
+            "n": 863,
+            "median_ns": 10005120,
+            "p95_ns": 18592830,
+            "p99_ns": 43854030,
+            "max_ns": 2162992680
+          },
+          "actuator_published": {
+            "n": 863,
+            "median_ns": 10007190,
+            "p95_ns": 19695960,
+            "p99_ns": 43794990,
+            "max_ns": 2162989800
+          },
+          "expiry_state": {
+            "n": 10,
+            "median_ns": 1006480890,
+            "p95_ns": 2197770120,
+            "p99_ns": 2197770120,
+            "max_ns": 2197770120
+          },
+          "ground_truth_native": {
+            "n": 215,
+            "median_ns": 40109490,
+            "p95_ns": 71004780,
+            "p99_ns": 129004740,
+            "max_ns": 370151820
+          },
+          "actual_ros_writer_qos": {
+            "n": 1,
+            "median_ns": 11993222340,
+            "p95_ns": 11993222340,
+            "p99_ns": 11993222340,
+            "max_ns": 11993222340
+          },
+          "actual_writer_qos": {
+            "n": 1,
+            "median_ns": 11993195430,
+            "p95_ns": 11993195430,
+            "p99_ns": 11993195430,
+            "max_ns": 11993195430
+          }
+        },
+        "call_wall_duration": {
+          "dds_publish": {
+            "n": 1539,
+            "median_ns": 203400,
+            "p95_ns": 676620,
+            "p99_ns": 13194090,
+            "max_ns": 92334150
+          },
+          "guard_publish": {
+            "n": 674,
+            "median_ns": 330570,
+            "p95_ns": 2434500,
+            "p99_ns": 29045970,
+            "max_ns": 92474820
+          },
+          "guard_tick": {
+            "n": 674,
+            "median_ns": 508050,
+            "p95_ns": 4128660,
+            "p99_ns": 29270520,
+            "max_ns": 92691090
+          },
+          "gz_publish": {
+            "n": 1538,
+            "median_ns": 65250,
+            "p95_ns": 118530,
+            "p99_ns": 379530,
+            "max_ns": 94484070
+          }
+        },
+        "call_thread_cpu_duration": {
+          "dds_publish": {
+            "n": 1539,
+            "median_ns": 219500,
+            "p95_ns": 361900,
+            "p99_ns": 4414200,
+            "max_ns": 102593000
+          },
+          "guard_publish": {
+            "n": 674,
+            "median_ns": 358700,
+            "p95_ns": 655000,
+            "p99_ns": 12301200,
+            "max_ns": 102753700
+          },
+          "guard_tick": {
+            "n": 674,
+            "median_ns": 549600,
+            "p95_ns": 1067300,
+            "p99_ns": 13211000,
+            "max_ns": 102986300
+          },
+          "gz_publish": {
+            "n": 1538,
+            "median_ns": 71300,
+            "p95_ns": 119800,
+            "p99_ns": 299400,
+            "max_ns": 16132900
+          }
+        },
+        "matched_command_edges": {
+          "guard_publish_begin->dds_take": {
+            "n": 674,
+            "median_ns": 546300,
+            "p95_ns": 10811520,
+            "p99_ns": 55286010,
+            "max_ns": 94923360
+          },
+          "dds_take->gz_publish_begin": {
+            "n": 674,
+            "median_ns": 39960,
+            "p95_ns": 65340,
+            "p99_ns": 226800,
+            "max_ns": 62535420
+          },
+          "gz_publish_begin->native_decoded": {
+            "n": 612,
+            "median_ns": 431550,
+            "p95_ns": 7645410,
+            "p99_ns": 38535840,
+            "max_ns": 146447010
+          },
+          "guard_publish_begin->native_decoded": {
+            "n": 612,
+            "median_ns": 1112220,
+            "p95_ns": 17679960,
+            "p99_ns": 86651550,
+            "max_ns": 146930490
+          }
+        },
+        "clock": "All computed deltas use Linux CLOCK_BOOTTIME, same kernel only",
+        "limits": [
+          "Publish begin/end measure API duration, not a DDS wire transmission timestamp.",
+          "DDS source/received timestamps are retained as realtime fields and never subtracted from BOOTTIME.",
+          "DDS take to Gazebo publish includes conversion and callback processing; transport begins at the publication API.",
+          "One guard epoch per session is required; analyze sessions separately.",
+          "Wall duration minus thread CPU includes blocking and descheduling; it does not uniquely identify either cause."
+        ]
+      },
+      "contact_observation": {
+        "samples": 3456,
+        "pairs": 2592,
+        "robot_environment_pairs": 0,
+        "available": true,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "d70c31b99c2b5bd706331c01aee2c36060bab9e03bb777c30e9a34cb7ba84e07",
+      "trace_sha256": {
+        "native-333591.jsonl": "bbf91d073b75139c454ac29d21dfc76a74fc2bdab5f6c7c7d24469affe0a2443",
+        "native-333592.jsonl": "3f4164896bb96993a9e5b98f24837d0866f54d252a01d92f41d451dd4d889d0c",
+        "native-333603.jsonl": "eb69a944530b4c1c33cb1d7a9c2d66e54beb6b780d9e4f87f64cbbb27940359d",
+        "native-333756.jsonl": "cbbdfbcacbc79b6866a00f03f10071d532398b98b474a57b0f561e36cb4ed34d",
+        "python-333591.jsonl": "23920790c7b28126ab3924dab877527c0cfbe34bd8672ed7bfd2faf7a8e93f9b",
+        "resources.jsonl": "6f3bbc15126ea3abb3652a7c91b36cac9df8a3558e67e1d1013d8bc82ebc151b"
+      }
+    },
+    {
+      "condition": "fast_default-on",
+      "world": "empty-210",
+      "planned_requests": 3,
+      "dispatched": 1,
+      "completed": 0,
+      "unattempted": 2,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "failed",
+          "reason": "watchdog_not_ready_or_faulted",
+          "truth_metrics": {
+            "available": false,
+            "reason": "Fewer than two ground-truth samples"
+          }
+        }
+      ],
+      "timing": {
+        "stage_counts": {
+          "actual_ros_writer_qos": 3,
+          "actual_writer_qos": 3,
+          "dds_publish_begin": 1983,
+          "send_resource_mutex_identified": 3,
+          "send_resource_wait_begin": 6104,
+          "send_resource_acquired": 6104,
+          "send_resource_releasing": 6104,
+          "dds_publish_end": 1983,
+          "dds_take": 734,
+          "gz_publish_begin": 1978,
+          "gz_publish_end": 1978,
+          "preupdate_begin": 1245,
+          "actuator_published": 1245,
+          "expiry_state": 16,
+          "contact_sample": 4980,
+          "contact_pair": 3735,
+          "native_ingress": 733,
+          "native_decoded": 733,
+          "native_ingress_end": 733,
+          "ground_truth_native": 311,
+          "guard_tick_begin": 737,
+          "guard_publish_begin": 738,
+          "guard_publish_end": 738,
+          "guard_tick_end": 737
+        },
+        "command_stream": {
+          "native_interarrival": {
+            "n": 732,
+            "median_ns": 19850760,
+            "p95_ns": 48446550,
+            "p99_ns": 93087450,
+            "max_ns": 401395140
+          },
+          "native_gaps_over_200ms": 2,
+          "gaps_following_nonzero_command": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "gaps_over_200ms_following_nonzero": 0,
+          "nonzero_guard_begin_to_native": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "native_latch_observed": false,
+          "native_state_reasons": {
+            "idle": 16
+          },
+          "limits": "Nonzero commanded velocity is not proof of actual motion. Gap counts are serial intervals, not independent trials; a missing state trace cannot establish absence of expiry."
+        },
+        "interarrival": {
+          "contact_sample": {
+            "n": 4979,
+            "median_ns": 9360,
+            "p95_ns": 10444680,
+            "p99_ns": 21134880,
+            "max_ns": 1496377710
+          },
+          "contact_pair": {
+            "n": 3734,
+            "median_ns": 7560,
+            "p95_ns": 10896660,
+            "p99_ns": 26773200,
+            "max_ns": 1496384010
+          },
+          "preupdate_begin": {
+            "n": 1244,
+            "median_ns": 10004580,
+            "p95_ns": 16297650,
+            "p99_ns": 67355820,
+            "max_ns": 1496473830
+          },
+          "gz_publish_begin": {
+            "n": 1976,
+            "median_ns": 10051200,
+            "p95_ns": 29074590,
+            "p99_ns": 71640450,
+            "max_ns": 1496479320
+          },
+          "gz_publish_end": {
+            "n": 1976,
+            "median_ns": 10062720,
+            "p95_ns": 28582830,
+            "p99_ns": 71445240,
+            "max_ns": 1496463840
+          },
+          "actuator_published": {
+            "n": 1244,
+            "median_ns": 10009080,
+            "p95_ns": 17827290,
+            "p99_ns": 71103150,
+            "max_ns": 1496463390
+          },
+          "dds_publish_begin": {
+            "n": 1980,
+            "median_ns": 10397970,
+            "p95_ns": 26403750,
+            "p99_ns": 66577590,
+            "max_ns": 1514531160
+          },
+          "send_resource_wait_begin": {
+            "n": 6086,
+            "median_ns": 5518890,
+            "p95_ns": 43468290,
+            "p99_ns": 194663520,
+            "max_ns": 14466002490
+          },
+          "send_resource_acquired": {
+            "n": 6086,
+            "median_ns": 5279130,
+            "p95_ns": 43902360,
+            "p99_ns": 196361730,
+            "max_ns": 14466269070
+          },
+          "send_resource_releasing": {
+            "n": 6086,
+            "median_ns": 5331060,
+            "p95_ns": 44061570,
+            "p99_ns": 179534700,
+            "max_ns": 14466258000
+          },
+          "dds_publish_end": {
+            "n": 1980,
+            "median_ns": 10406430,
+            "p95_ns": 27142740,
+            "p99_ns": 66509190,
+            "max_ns": 1514410290
+          },
+          "guard_tick_begin": {
+            "n": 736,
+            "median_ns": 19996110,
+            "p95_ns": 28020690,
+            "p99_ns": 42443460,
+            "max_ns": 95172480
+          },
+          "guard_publish_begin": {
+            "n": 737,
+            "median_ns": 19999350,
+            "p95_ns": 28481940,
+            "p99_ns": 47507760,
+            "max_ns": 95126040
+          },
+          "guard_publish_end": {
+            "n": 737,
+            "median_ns": 20006910,
+            "p95_ns": 30957390,
+            "p99_ns": 50764410,
+            "max_ns": 104849820
+          },
+          "guard_tick_end": {
+            "n": 736,
+            "median_ns": 20009610,
+            "p95_ns": 31019850,
+            "p99_ns": 50306670,
+            "max_ns": 104935140
+          },
+          "dds_take": {
+            "n": 732,
+            "median_ns": 19964160,
+            "p95_ns": 36982350,
+            "p99_ns": 70014510,
+            "max_ns": 283346190
+          },
+          "native_ingress": {
+            "n": 732,
+            "median_ns": 19878570,
+            "p95_ns": 47506860,
+            "p99_ns": 95890230,
+            "max_ns": 339342750
+          },
+          "native_decoded": {
+            "n": 732,
+            "median_ns": 19850760,
+            "p95_ns": 48446550,
+            "p99_ns": 93087450,
+            "max_ns": 401395140
+          },
+          "native_ingress_end": {
+            "n": 732,
+            "median_ns": 19852290,
+            "p95_ns": 48446550,
+            "p99_ns": 93087720,
+            "max_ns": 401398380
+          },
+          "expiry_state": {
+            "n": 15,
+            "median_ns": 1009349910,
+            "p95_ns": 1513931670,
+            "p99_ns": 1513931670,
+            "max_ns": 1513931670
+          },
+          "ground_truth_native": {
+            "n": 310,
+            "median_ns": 40084650,
+            "p95_ns": 78045300,
+            "p99_ns": 158244480,
+            "max_ns": 400579470
+          }
+        },
+        "call_wall_duration": {
+          "gz_publish": {
+            "n": 1978,
+            "median_ns": 66870,
+            "p95_ns": 115920,
+            "p99_ns": 490680,
+            "max_ns": 116361270
+          },
+          "dds_publish": {
+            "n": 1983,
+            "median_ns": 182610,
+            "p95_ns": 496710,
+            "p99_ns": 16811910,
+            "max_ns": 114073290
+          },
+          "guard_publish": {
+            "n": 738,
+            "median_ns": 321660,
+            "p95_ns": 1437660,
+            "p99_ns": 21939030,
+            "max_ns": 91820970
+          },
+          "guard_tick": {
+            "n": 737,
+            "median_ns": 501660,
+            "p95_ns": 3240630,
+            "p99_ns": 22395960,
+            "max_ns": 92058840
+          }
+        },
+        "call_thread_cpu_duration": {
+          "gz_publish": {
+            "n": 1978,
+            "median_ns": 73000,
+            "p95_ns": 115200,
+            "p99_ns": 439100,
+            "max_ns": 107161400
+          },
+          "dds_publish": {
+            "n": 1983,
+            "median_ns": 198700,
+            "p95_ns": 367800,
+            "p99_ns": 13739700,
+            "max_ns": 126748200
+          },
+          "guard_publish": {
+            "n": 738,
+            "median_ns": 354700,
+            "p95_ns": 977000,
+            "p99_ns": 21109200,
+            "max_ns": 102040000
+          },
+          "guard_tick": {
+            "n": 737,
+            "median_ns": 548000,
+            "p95_ns": 2106500,
+            "p99_ns": 24647400,
+            "max_ns": 102285100
+          }
+        },
+        "matched_command_edges": {
+          "guard_publish_begin->dds_take": {
+            "n": 733,
+            "median_ns": 556020,
+            "p95_ns": 22305240,
+            "p99_ns": 68268600,
+            "max_ns": 183769740
+          },
+          "dds_take->gz_publish_begin": {
+            "n": 733,
+            "median_ns": 40320,
+            "p95_ns": 90270,
+            "p99_ns": 23713470,
+            "max_ns": 166856940
+          },
+          "gz_publish_begin->native_decoded": {
+            "n": 733,
+            "median_ns": 442260,
+            "p95_ns": 59557860,
+            "p99_ns": 215210340,
+            "max_ns": 339566850
+          },
+          "guard_publish_begin->native_decoded": {
+            "n": 733,
+            "median_ns": 1235070,
+            "p95_ns": 64188090,
+            "p99_ns": 258720480,
+            "max_ns": 382559310
+          }
+        },
+        "clock": "All computed deltas use Linux CLOCK_BOOTTIME, same kernel only",
+        "limits": [
+          "Publish begin/end measure API duration, not a DDS wire transmission timestamp.",
+          "DDS source/received timestamps are retained as realtime fields and never subtracted from BOOTTIME.",
+          "DDS take to Gazebo publish includes conversion and callback processing; transport begins at the publication API.",
+          "One guard epoch per session is required; analyze sessions separately.",
+          "Wall duration minus thread CPU includes blocking and descheduling; it does not uniquely identify either cause."
+        ]
+      },
+      "contact_observation": {
+        "samples": 4980,
+        "pairs": 3735,
+        "robot_environment_pairs": 0,
+        "available": true,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "7be74e9a603684477ea3387c21a5564c472c08c78cdcdaecc7d0455d58b2173d",
+      "trace_sha256": {
+        "native-333048.jsonl": "541f9fe5c11813e2f395812955d937928c6f49d80e60a05196edcc53898f2e95",
+        "native-333049.jsonl": "4d2146a2d705643092ccab311c237e82d95a450507d6837745c0f2079954e39e",
+        "native-333068.jsonl": "bcb07f5c0f3992ec96d0d084848c68fc5b0159315e24e7709484398d4f35f656",
+        "native-333071.jsonl": "cd9cb91e29617e5199a2d4211b3c3281b8416e41d567a187d195e24b95f67c7b",
+        "native-333088.jsonl": "88df0e24bee990e3ef128db4b4a6f88c7efc585307716ca4c6a301cffb2397a0",
+        "python-333048.jsonl": "f7a437c0616e9a37bbf0f5b479784f9c98913c811dccad0c32d3836e1cbce048",
+        "resources.jsonl": "6050d26a25cf394d2cadce8956c7ebe9f027698ffce5912308b1ea88915b0a63"
+      }
+    },
+    {
+      "condition": "fast_udp-off",
+      "world": "block-211",
+      "planned_requests": 3,
+      "dispatched": 0,
+      "completed": 0,
+      "unattempted": 3,
+      "environment_failure": "All three bounded receiver-clock preparation handshakes failed",
+      "outcomes": [],
+      "timing": null,
+      "contact_observation": {
+        "samples": 0,
+        "pairs": 0,
+        "robot_environment_pairs": 0,
+        "available": false,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "69c77461773b065d99e85ab6b01f7a9728be0f915188367ceb1a8a38d7051995",
+      "trace_sha256": {
+        "resources.jsonl": "f1f523fe6bc79cf59966b4c23fb3748b696c361915afae8522e972b769f42809"
+      }
+    },
+    {
+      "condition": "fast_udp-off",
+      "world": "empty-210",
+      "planned_requests": 3,
+      "dispatched": 2,
+      "completed": 1,
+      "unattempted": 1,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 112,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.6962363923756777,
+            "moving_time_sim_s": 4.040000000000003,
+            "arrival_position_error_m": 0.2839955500879786,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Inspect storage",
+          "status": "failed",
+          "reason": "tf_watchdog",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 173,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.6059488483115377,
+            "moving_time_sim_s": 3.6000000000000023,
+            "arrival_position_error_m": 0.3173480744221728,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": null,
+      "contact_observation": {
+        "samples": 0,
+        "pairs": 0,
+        "robot_environment_pairs": 0,
+        "available": false,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "1c879e56c64c75f5c55f0d6c4b982db9fa2c4b9e1694266f877fbac58b23492c",
+      "trace_sha256": {
+        "resources.jsonl": "76730cce88f409c39d9179ec189a589a24a90a0a67a09d8c17595655edbf38c2"
+      }
+    },
+    {
+      "condition": "fast_udp-on",
+      "world": "block-211",
+      "planned_requests": 3,
+      "dispatched": 0,
+      "completed": 0,
+      "unattempted": 3,
+      "environment_failure": "All three bounded receiver-clock preparation handshakes failed",
+      "outcomes": [],
+      "timing": {
+        "stage_counts": {
+          "actual_ros_writer_qos": 2,
+          "actual_writer_qos": 2,
+          "dds_publish_begin": 1747,
+          "dds_publish_end": 1747,
+          "send_resource_mutex_identified": 2,
+          "send_resource_wait_begin": 6332,
+          "send_resource_acquired": 6332,
+          "send_resource_releasing": 6332,
+          "dds_take": 661,
+          "gz_publish_begin": 1691,
+          "gz_publish_end": 1691,
+          "preupdate_begin": 1030,
+          "actuator_published": 1030,
+          "expiry_state": 14,
+          "contact_sample": 4120,
+          "contact_pair": 3090,
+          "native_ingress": 661,
+          "native_decoded": 661,
+          "native_ingress_end": 661,
+          "ground_truth_native": 257,
+          "guard_tick_begin": 717,
+          "guard_publish_begin": 717,
+          "guard_publish_end": 717,
+          "guard_tick_end": 717
+        },
+        "command_stream": {
+          "native_interarrival": {
+            "n": 660,
+            "median_ns": 19907190,
+            "p95_ns": 47072250,
+            "p99_ns": 84434490,
+            "max_ns": 125993790
+          },
+          "native_gaps_over_200ms": 0,
+          "gaps_following_nonzero_command": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "gaps_over_200ms_following_nonzero": 0,
+          "nonzero_guard_begin_to_native": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "native_latch_observed": false,
+          "native_state_reasons": {
+            "idle": 14
+          },
+          "limits": "Nonzero commanded velocity is not proof of actual motion. Gap counts are serial intervals, not independent trials; a missing state trace cannot establish absence of expiry."
+        },
+        "interarrival": {
+          "guard_tick_begin": {
+            "n": 716,
+            "median_ns": 20002140,
+            "p95_ns": 36169380,
+            "p99_ns": 56993400,
+            "max_ns": 92338020
+          },
+          "guard_publish_begin": {
+            "n": 716,
+            "median_ns": 19999350,
+            "p95_ns": 36277650,
+            "p99_ns": 56973060,
+            "max_ns": 92319030
+          },
+          "dds_publish_begin": {
+            "n": 1745,
+            "median_ns": 12332520,
+            "p95_ns": 33856200,
+            "p99_ns": 58818420,
+            "max_ns": 1863947790
+          },
+          "dds_publish_end": {
+            "n": 1745,
+            "median_ns": 11843550,
+            "p95_ns": 36679050,
+            "p99_ns": 67100130,
+            "max_ns": 1864410930
+          },
+          "guard_publish_end": {
+            "n": 716,
+            "median_ns": 19989900,
+            "p95_ns": 41657580,
+            "p99_ns": 67111290,
+            "max_ns": 108490320
+          },
+          "guard_tick_end": {
+            "n": 716,
+            "median_ns": 19985670,
+            "p95_ns": 41754510,
+            "p99_ns": 69924060,
+            "max_ns": 108598680
+          },
+          "contact_sample": {
+            "n": 4119,
+            "median_ns": 9090,
+            "p95_ns": 11987910,
+            "p99_ns": 30011760,
+            "max_ns": 1865837880
+          },
+          "contact_pair": {
+            "n": 3089,
+            "median_ns": 7560,
+            "p95_ns": 13682700,
+            "p99_ns": 33345450,
+            "max_ns": 1865860650
+          },
+          "preupdate_begin": {
+            "n": 1029,
+            "median_ns": 10009890,
+            "p95_ns": 24340230,
+            "p99_ns": 49637790,
+            "max_ns": 1865071530
+          },
+          "gz_publish_begin": {
+            "n": 1689,
+            "median_ns": 10321740,
+            "p95_ns": 33546510,
+            "p99_ns": 66760920,
+            "max_ns": 1865065320
+          },
+          "gz_publish_end": {
+            "n": 1689,
+            "median_ns": 10322640,
+            "p95_ns": 33963210,
+            "p99_ns": 71357670,
+            "max_ns": 1865086200
+          },
+          "actuator_published": {
+            "n": 1029,
+            "median_ns": 10015740,
+            "p95_ns": 25555410,
+            "p99_ns": 49627260,
+            "max_ns": 1865092860
+          },
+          "send_resource_wait_begin": {
+            "n": 6322,
+            "median_ns": 2261160,
+            "p95_ns": 33823710,
+            "p99_ns": 95519070,
+            "max_ns": 10422822060
+          },
+          "send_resource_acquired": {
+            "n": 6322,
+            "median_ns": 1784700,
+            "p95_ns": 34366950,
+            "p99_ns": 99560340,
+            "max_ns": 10422809280
+          },
+          "send_resource_releasing": {
+            "n": 6322,
+            "median_ns": 1746900,
+            "p95_ns": 34544970,
+            "p99_ns": 99600570,
+            "max_ns": 10422790110
+          },
+          "dds_take": {
+            "n": 660,
+            "median_ns": 19981440,
+            "p95_ns": 44723250,
+            "p99_ns": 73485360,
+            "max_ns": 111479580
+          },
+          "native_ingress": {
+            "n": 660,
+            "median_ns": 19921500,
+            "p95_ns": 46602360,
+            "p99_ns": 84434760,
+            "max_ns": 125990550
+          },
+          "native_decoded": {
+            "n": 660,
+            "median_ns": 19907190,
+            "p95_ns": 47072250,
+            "p99_ns": 84434490,
+            "max_ns": 125993790
+          },
+          "native_ingress_end": {
+            "n": 660,
+            "median_ns": 19903950,
+            "p95_ns": 47072340,
+            "p99_ns": 84433860,
+            "max_ns": 125992530
+          },
+          "expiry_state": {
+            "n": 13,
+            "median_ns": 1005614280,
+            "p95_ns": 1910231460,
+            "p99_ns": 1910231460,
+            "max_ns": 1910231460
+          },
+          "ground_truth_native": {
+            "n": 256,
+            "median_ns": 40128390,
+            "p95_ns": 81220500,
+            "p99_ns": 158211810,
+            "max_ns": 186104700
+          }
+        },
+        "call_wall_duration": {
+          "dds_publish": {
+            "n": 1747,
+            "median_ns": 188910,
+            "p95_ns": 3749580,
+            "p99_ns": 31658130,
+            "max_ns": 88678080
+          },
+          "guard_publish": {
+            "n": 717,
+            "median_ns": 338220,
+            "p95_ns": 14568300,
+            "p99_ns": 43272990,
+            "max_ns": 88892730
+          },
+          "guard_tick": {
+            "n": 717,
+            "median_ns": 519930,
+            "p95_ns": 15476130,
+            "p99_ns": 46585710,
+            "max_ns": 89173530
+          },
+          "gz_publish": {
+            "n": 1691,
+            "median_ns": 63630,
+            "p95_ns": 149400,
+            "p99_ns": 4543020,
+            "max_ns": 64410840
+          }
+        },
+        "call_thread_cpu_duration": {
+          "dds_publish": {
+            "n": 1747,
+            "median_ns": 199100,
+            "p95_ns": 1336100,
+            "p99_ns": 9864400,
+            "max_ns": 85530800
+          },
+          "guard_publish": {
+            "n": 717,
+            "median_ns": 365700,
+            "p95_ns": 3052100,
+            "p99_ns": 16915400,
+            "max_ns": 88894300
+          },
+          "guard_tick": {
+            "n": 717,
+            "median_ns": 562700,
+            "p95_ns": 5164800,
+            "p99_ns": 21377200,
+            "max_ns": 89135500
+          },
+          "gz_publish": {
+            "n": 1691,
+            "median_ns": 68900,
+            "p95_ns": 126800,
+            "p99_ns": 3475400,
+            "max_ns": 71567000
+          }
+        },
+        "matched_command_edges": {
+          "guard_publish_begin->dds_take": {
+            "n": 661,
+            "median_ns": 576540,
+            "p95_ns": 23642190,
+            "p99_ns": 55892790,
+            "max_ns": 92068020
+          },
+          "dds_take->gz_publish_begin": {
+            "n": 661,
+            "median_ns": 40140,
+            "p95_ns": 75240,
+            "p99_ns": 859050,
+            "max_ns": 108960480
+          },
+          "gz_publish_begin->native_decoded": {
+            "n": 661,
+            "median_ns": 441450,
+            "p95_ns": 13948020,
+            "p99_ns": 31954050,
+            "max_ns": 66357900
+          },
+          "guard_publish_begin->native_decoded": {
+            "n": 661,
+            "median_ns": 1375110,
+            "p95_ns": 32907870,
+            "p99_ns": 71132220,
+            "max_ns": 110118420
+          }
+        },
+        "clock": "All computed deltas use Linux CLOCK_BOOTTIME, same kernel only",
+        "limits": [
+          "Publish begin/end measure API duration, not a DDS wire transmission timestamp.",
+          "DDS source/received timestamps are retained as realtime fields and never subtracted from BOOTTIME.",
+          "DDS take to Gazebo publish includes conversion and callback processing; transport begins at the publication API.",
+          "One guard epoch per session is required; analyze sessions separately.",
+          "Wall duration minus thread CPU includes blocking and descheduling; it does not uniquely identify either cause."
+        ]
+      },
+      "contact_observation": {
+        "samples": 4120,
+        "pairs": 3090,
+        "robot_environment_pairs": 0,
+        "available": true,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "72753e732e47eb866477446fffca23a92be1afe9695dada8dddf370c02016d4e",
+      "trace_sha256": {
+        "native-336402.jsonl": "09ebec8b765257a56862542c84798372ec68aa7c5a051af12354c1e7594b39fc",
+        "native-336403.jsonl": "339222f7946e098f9d716bab254b72b9daa65865e189edcffe0ddfb270faa482",
+        "native-336420.jsonl": "d44b59379c9127fa265ccbbe915965dc6fc3a8374d1b76c2c25518e1f0ef40b4",
+        "python-336402.jsonl": "f285f3c2e2b0925ba3e53657a5ce4277387dd3c0cc4cafd8d232ba7dfc0e979b",
+        "resources.jsonl": "6125b7fc708993918dd21f0b2becb5f00d6b703fca4e388089c423921399e141"
+      }
+    },
+    {
+      "condition": "fast_udp-on",
+      "world": "empty-210",
+      "planned_requests": 3,
+      "dispatched": 0,
+      "completed": 0,
+      "unattempted": 3,
+      "environment_failure": "All three bounded receiver-clock preparation handshakes failed",
+      "outcomes": [],
+      "timing": {
+        "stage_counts": {
+          "actual_ros_writer_qos": 3,
+          "actual_writer_qos": 3,
+          "dds_publish_begin": 1766,
+          "send_resource_mutex_identified": 3,
+          "send_resource_wait_begin": 6145,
+          "send_resource_acquired": 6145,
+          "send_resource_releasing": 6145,
+          "dds_publish_end": 1766,
+          "dds_take": 1176,
+          "gz_publish_begin": 1755,
+          "gz_publish_end": 1755,
+          "native_ingress": 977,
+          "native_decoded": 977,
+          "native_ingress_end": 977,
+          "preupdate_begin": 579,
+          "actuator_published": 579,
+          "expiry_state": 8,
+          "contact_sample": 2316,
+          "contact_pair": 1737,
+          "ground_truth_native": 144,
+          "guard_tick_begin": 1186,
+          "guard_publish_begin": 1186,
+          "guard_publish_end": 1186,
+          "guard_tick_end": 1186
+        },
+        "command_stream": {
+          "native_interarrival": {
+            "n": 976,
+            "median_ns": 19963350,
+            "p95_ns": 23272560,
+            "p99_ns": 35554050,
+            "max_ns": 81164880
+          },
+          "native_gaps_over_200ms": 0,
+          "gaps_following_nonzero_command": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "gaps_over_200ms_following_nonzero": 0,
+          "nonzero_guard_begin_to_native": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "native_latch_observed": false,
+          "native_state_reasons": {
+            "idle": 8
+          },
+          "limits": "Nonzero commanded velocity is not proof of actual motion. Gap counts are serial intervals, not independent trials; a missing state trace cannot establish absence of expiry."
+        },
+        "interarrival": {
+          "send_resource_wait_begin": {
+            "n": 6128,
+            "median_ns": 5187330,
+            "p95_ns": 61505370,
+            "p99_ns": 199898640,
+            "max_ns": 19926143280
+          },
+          "send_resource_acquired": {
+            "n": 6128,
+            "median_ns": 5077980,
+            "p95_ns": 61688970,
+            "p99_ns": 199914930,
+            "max_ns": 19926144360
+          },
+          "send_resource_releasing": {
+            "n": 6128,
+            "median_ns": 5115690,
+            "p95_ns": 61085070,
+            "p99_ns": 199913760,
+            "max_ns": 19925743230
+          },
+          "guard_tick_begin": {
+            "n": 1185,
+            "median_ns": 19999260,
+            "p95_ns": 21211200,
+            "p99_ns": 32251770,
+            "max_ns": 333257400
+          },
+          "guard_publish_begin": {
+            "n": 1185,
+            "median_ns": 19998360,
+            "p95_ns": 21645630,
+            "p99_ns": 32478840,
+            "max_ns": 333181170
+          },
+          "dds_publish_begin": {
+            "n": 1763,
+            "median_ns": 19866780,
+            "p95_ns": 21103560,
+            "p99_ns": 32134770,
+            "max_ns": 13348320210
+          },
+          "dds_publish_end": {
+            "n": 1763,
+            "median_ns": 19802790,
+            "p95_ns": 22034700,
+            "p99_ns": 36084690,
+            "max_ns": 13348420740
+          },
+          "guard_publish_end": {
+            "n": 1185,
+            "median_ns": 19987920,
+            "p95_ns": 24068610,
+            "p99_ns": 39834450,
+            "max_ns": 350643060
+          },
+          "guard_tick_end": {
+            "n": 1185,
+            "median_ns": 19990170,
+            "p95_ns": 24097770,
+            "p99_ns": 39893400,
+            "max_ns": 350727120
+          },
+          "dds_take": {
+            "n": 1175,
+            "median_ns": 19982520,
+            "p95_ns": 24543180,
+            "p99_ns": 37006740,
+            "max_ns": 350686350
+          },
+          "gz_publish_begin": {
+            "n": 1753,
+            "median_ns": 19671480,
+            "p95_ns": 22500720,
+            "p99_ns": 34380450,
+            "max_ns": 13347880650
+          },
+          "gz_publish_end": {
+            "n": 1753,
+            "median_ns": 19655820,
+            "p95_ns": 22601520,
+            "p99_ns": 34385850,
+            "max_ns": 13347882900
+          },
+          "native_ingress": {
+            "n": 976,
+            "median_ns": 19958760,
+            "p95_ns": 22507380,
+            "p99_ns": 34380090,
+            "max_ns": 81167760
+          },
+          "native_decoded": {
+            "n": 976,
+            "median_ns": 19963350,
+            "p95_ns": 23272560,
+            "p99_ns": 35554050,
+            "max_ns": 81164880
+          },
+          "native_ingress_end": {
+            "n": 976,
+            "median_ns": 19963620,
+            "p95_ns": 23272830,
+            "p99_ns": 36684990,
+            "max_ns": 81164790
+          },
+          "contact_sample": {
+            "n": 2315,
+            "median_ns": 9360,
+            "p95_ns": 10462680,
+            "p99_ns": 14965200,
+            "max_ns": 13347905040
+          },
+          "contact_pair": {
+            "n": 1736,
+            "median_ns": 7650,
+            "p95_ns": 11062530,
+            "p99_ns": 16244910,
+            "max_ns": 13347918000
+          },
+          "preupdate_begin": {
+            "n": 578,
+            "median_ns": 10000170,
+            "p95_ns": 12133260,
+            "p99_ns": 22503420,
+            "max_ns": 13347859140
+          },
+          "actuator_published": {
+            "n": 578,
+            "median_ns": 9999900,
+            "p95_ns": 12716820,
+            "p99_ns": 22536540,
+            "max_ns": 13347883260
+          },
+          "expiry_state": {
+            "n": 7,
+            "median_ns": 1007104680,
+            "p95_ns": 13381495200,
+            "p99_ns": 13381495200,
+            "max_ns": 13381495200
+          },
+          "ground_truth_native": {
+            "n": 143,
+            "median_ns": 40024530,
+            "p95_ns": 44348850,
+            "p99_ns": 60918120,
+            "max_ns": 64901160
+          }
+        },
+        "call_wall_duration": {
+          "dds_publish": {
+            "n": 1766,
+            "median_ns": 232290,
+            "p95_ns": 880470,
+            "p99_ns": 10021950,
+            "max_ns": 332211600
+          },
+          "guard_publish": {
+            "n": 1186,
+            "median_ns": 373410,
+            "p95_ns": 1369350,
+            "p99_ns": 14703930,
+            "max_ns": 332383770
+          },
+          "guard_tick": {
+            "n": 1186,
+            "median_ns": 555300,
+            "p95_ns": 2292390,
+            "p99_ns": 14915790,
+            "max_ns": 332664030
+          },
+          "gz_publish": {
+            "n": 1755,
+            "median_ns": 72180,
+            "p95_ns": 121860,
+            "p99_ns": 2282310,
+            "max_ns": 36764910
+          }
+        },
+        "call_thread_cpu_duration": {
+          "dds_publish": {
+            "n": 1766,
+            "median_ns": 251600,
+            "p95_ns": 639800,
+            "p99_ns": 4871900,
+            "max_ns": 37679000
+          },
+          "guard_publish": {
+            "n": 1186,
+            "median_ns": 412000,
+            "p95_ns": 1209200,
+            "p99_ns": 8467800,
+            "max_ns": 37853300
+          },
+          "guard_tick": {
+            "n": 1186,
+            "median_ns": 604300,
+            "p95_ns": 1983800,
+            "p99_ns": 9467000,
+            "max_ns": 38119500
+          },
+          "gz_publish": {
+            "n": 1755,
+            "median_ns": 79400,
+            "p95_ns": 131200,
+            "p99_ns": 1543600,
+            "max_ns": 32006000
+          }
+        },
+        "matched_command_edges": {
+          "guard_publish_begin->dds_take": {
+            "n": 1176,
+            "median_ns": 626940,
+            "p95_ns": 4224420,
+            "p99_ns": 14864670,
+            "max_ns": 332507610
+          },
+          "dds_take->gz_publish_begin": {
+            "n": 1176,
+            "median_ns": 42300,
+            "p95_ns": 101610,
+            "p99_ns": 1474200,
+            "max_ns": 51735240
+          },
+          "gz_publish_begin->native_decoded": {
+            "n": 977,
+            "median_ns": 440280,
+            "p95_ns": 1848870,
+            "p99_ns": 10705950,
+            "max_ns": 46458270
+          },
+          "guard_publish_begin->native_decoded": {
+            "n": 977,
+            "median_ns": 1167660,
+            "p95_ns": 5225940,
+            "p99_ns": 18824220,
+            "max_ns": 61359840
+          }
+        },
+        "clock": "All computed deltas use Linux CLOCK_BOOTTIME, same kernel only",
+        "limits": [
+          "Publish begin/end measure API duration, not a DDS wire transmission timestamp.",
+          "DDS source/received timestamps are retained as realtime fields and never subtracted from BOOTTIME.",
+          "DDS take to Gazebo publish includes conversion and callback processing; transport begins at the publication API.",
+          "One guard epoch per session is required; analyze sessions separately.",
+          "Wall duration minus thread CPU includes blocking and descheduling; it does not uniquely identify either cause."
+        ]
+      },
+      "contact_observation": {
+        "samples": 2316,
+        "pairs": 1737,
+        "robot_environment_pairs": 0,
+        "available": true,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "680c0505277657a4edef1ceb0027adfdf966b260a924cce5926118c396eb8810",
+      "trace_sha256": {
+        "native-330269.jsonl": "cc591bb107b1e3fb6861b6d890e9e20d97692bd01fc91a34a04aad99361f3092",
+        "native-330270.jsonl": "c3b2fc4f358096c7fcf06187134ab551ffe395b88fd035e852def93666009c03",
+        "native-330285.jsonl": "0fb7d219bb4b8d63fc3c43c4ae76304704dc5dda9b4273a701badb7d15faff78",
+        "native-330286.jsonl": "199ebce21560e94502b814b2824bd347ef84ba2bf308090218b8a27989123a0f",
+        "python-330269.jsonl": "84f14ed7419aa535124baaa292f21c0c7c8c1987b00052fe9468e35f21581c2c",
+        "resources.jsonl": "2923ee1f10ab5dacec235ce0c66476d7bb3db0799d5f4fc8ea0a562c171028b0"
+      }
+    }
+  ],
+  "limits": [
+    "Development worlds only; not held-out efficacy evidence.",
+    "Missing/unattempted requests are not successful missions.",
+    "Report session tails separately; do not pool time series as independent worlds.",
+    "Deep tracing and harness remediation differ in v1/v2; consult remediation logs."
+  ]
+}

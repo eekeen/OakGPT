@@ -106,6 +106,12 @@ The remediation runtime requires the instrumented `expiry.launch.py` environment
 legacy launch files without the independent proof topics cannot silently bypass recovery.
 Historical installs remain unchanged and can reproduce historical launch behavior.
 
+The executor latches memory before writing its marker. An I/O error propagates but
+cannot make subsequent heartbeats advertise a cleared fault. A synthetic write-failure
+regression covers this ordering; it is not a filesystem power-loss durability test.
+The follow-up installed verification is in
+`reports/phase33/executor-marker-fix-v1`, following the initial implementation receipt.
+
 The ROS domain and local processes remain trusted infrastructure. UUIDs and sequence
 numbers provide freshness/correlation, not cryptographic authentication against a
 malicious same-domain publisher. Model text still cannot call services or publish

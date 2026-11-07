@@ -2,6 +2,7 @@
 
 import json
 import sqlite3
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -67,6 +68,25 @@ def test_unrelated_fault_is_durable_and_cannot_be_cleared_by_recovery_certificat
     node.faulted = True
     node.faulted = False
     assert node.faulted and (node.spool / "SAFETY_FAULT").exists()
+    for role in ("guard", "watchdog"):
+        node.recovery_status(role, certificate(node))
+    assert node.recovering and node.faulted
+
+
+def test_marker_io_failure_still_latches_memory_and_prevents_rearming(executor, monkeypatch):
+    node = executor
+    original = Path.open
+
+    def failing_marker(path, *args, **kwargs):
+        if path.name == "SAFETY_FAULT":
+            raise OSError("simulated marker write failure")
+        return original(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "open", failing_marker)
+    with pytest.raises(OSError, match="marker write failure"):
+        node.faulted = True
+    assert node.faulted
+    node.faulted = False
     for role in ("guard", "watchdog"):
         node.recovery_status(role, certificate(node))
     assert node.recovering and node.faulted

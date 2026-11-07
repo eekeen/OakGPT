@@ -95,10 +95,13 @@ class MissionExecutor(Node):
 
     @faulted.setter
     def faulted(self, value):
-        if value and not getattr(self, "_faulted", False):
+        previous = getattr(self, "_faulted", False)
+        # An I/O failure while persisting the marker must not prevent the
+        # in-memory latch or allow the next heartbeat to advertise faulted=False.
+        self._faulted = bool(value) or previous
+        if value and not previous:
             with (self.spool / "SAFETY_FAULT").open("a", encoding="utf-8") as stream:
                 stream.write(f"{time.time_ns()} {self.incarnation} executor_fault\n")
-        self._faulted = bool(value) or getattr(self, "_faulted", False)
 
     def watchdog_status(self, message):
         # Legacy Bool is diagnostic only; it cannot authorize a new incarnation.

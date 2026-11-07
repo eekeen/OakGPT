@@ -6,6 +6,7 @@ import math
 import sqlite3
 import subprocess
 import time
+import uuid
 from pathlib import Path
 
 import rclpy
@@ -13,12 +14,19 @@ from action_msgs.msg import GoalStatus
 from geometry_msgs.msg import PoseStamped
 from nav2_msgs.action import NavigateToPose
 from rclpy.action import ActionClient
+from rclpy.clock import Clock, ClockType
 from rclpy.node import Node
 from rclpy.qos import DurabilityPolicy, QoSProfile, qos_profile_sensor_data
 from rclpy.time import Time
 from sensor_msgs.msg import LaserScan
 from std_msgs.msg import Bool, String
 from tf2_ros import Buffer, TransformException, TransformListener
+from unique_identifier_msgs.msg import UUID
+
+from oak_mission.liveness import HEARTBEAT_PERIOD_S, readiness
+from oak_mission.recovery import boot_ns
+from oak_mission.restart_journal import invalidate_previous
+from oak_mission.timing import Timing
 
 
 class MissionExecutor(Node):
@@ -38,6 +46,14 @@ class MissionExecutor(Node):
             "CREATE TABLE IF NOT EXISTS missions (id TEXT PRIMARY KEY, status TEXT)"
         )
         self.ledger.commit()
+        self.incarnation, self.heartbeat_sequence = uuid.uuid4().hex, 0
+        self.timing = Timing()
+        self.recovering = True
+        self.rearmed_wall_ms = None
+        self.readiness = {}
+        self.invalidated_missions, self.recovery_goals = invalidate_previous(
+            self.ledger, spool, self.incarnation
+        )
         self.navigation = ActionClient(self, NavigateToPose, "navigate_to_pose")
         self.events = self.create_publisher(String, "oak/mission_events", 10)
         self.heartbeat_publisher = self.create_publisher(String, "oak/heartbeat", 10)
@@ -51,62 +67,135 @@ class MissionExecutor(Node):
             self.watchdog_status,
             QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL),
         )
-        self.create_timer(0.2, self.heartbeat)
+        self.create_timer(
+            HEARTBEAT_PERIOD_S, self.heartbeat, clock=Clock(clock_type=ClockType.STEADY_TIME)
+        )
+        for role in ("guard", "watchdog"):
+            self.create_subscription(
+                String,
+                f"oak/{role}_readiness",
+                lambda m, role=role: self.recovery_status(role, m),
+                10,
+            )
         self.create_subscription(String, "oak/watchdog_lease", self.lease_ack, 10)
         self.tf = Buffer()
         self.listener = TransformListener(self.tf, self)
         self.scan = None
         self.scan_received = 0.0
         self.create_subscription(LaserScan, "scan", self.receive_scan, qos_profile_sensor_data)
-        self.faulted = bool(list((spool / "inflight").glob("*.json"))) or bool(
-            self.ledger.execute("SELECT 1 FROM missions WHERE status='inflight' LIMIT 1").fetchone()
-        )
+        self._faulted = (spool / "SAFETY_FAULT").exists()
+
         self.current = None
         self.history = []
         self.last_feedback = 0.0
 
+    @property
+    def faulted(self):
+        return self._faulted
+
+    @faulted.setter
+    def faulted(self, value):
+        if value and not getattr(self, "_faulted", False):
+            with (self.spool / "SAFETY_FAULT").open("a", encoding="utf-8") as stream:
+                stream.write(f"{time.time_ns()} {self.incarnation} executor_fault\n")
+        self._faulted = bool(value) or getattr(self, "_faulted", False)
+
     def watchdog_status(self, message):
-        self.watchdog_received = time.monotonic()
-        if self.watchdog_ready and not message.data:
+        # Legacy Bool is diagnostic only; it cannot authorize a new incarnation.
+        pass
+
+    def recovery_status(self, role, message):
+        try:
+            value = readiness(message.data, self.incarnation, boot_ns())
+            old = self.readiness.get(role)
+            if old is not None and value["peer_id"] != old["peer_id"]:
+                self.faulted = True
+                return
+            if old is not None and value["source_ns"] <= old["source_ns"]:
+                return
+            self.readiness[role] = value
+        except (ValueError, TypeError, KeyError):
+            return
+        ready = self.peers_ready()
+        self.watchdog_ready = ready
+        self.watchdog_received = time.monotonic() if ready else self.watchdog_received
+        if self.recovering and ready and not self.faulted:
+            self.recovering = False
+            self.rearmed_wall_ms = time.time_ns() // 1000000
+            self.recovery_goals = []
+            self.event(
+                "restart_rearmed",
+                incarnation=self.incarnation,
+                invalidated_missions=self.invalidated_missions,
+            )
+        # Runtime readiness loss cannot silently resume an uncertain mission.
+        if self.active_mission is not None and not ready:
             self.faulted = True
-        self.watchdog_ready = message.data
+
+    def peers_ready(self):
+        now = boot_ns()
+        return all(
+            role in self.readiness
+            and self.readiness[role]["ready"]
+            and 0 <= now - self.readiness[role]["source_ns"] < 100000000
+            for role in ("guard", "watchdog")
+        )
 
     def lease_ack(self, message):
         try:
-            self.acknowledged_lease = json.loads(message.data)
-        except ValueError:
+            value = json.loads(message.data)
+            if (
+                value.get("incarnation") == self.incarnation
+                and type(value.get("sequence")) is int
+                and 0 < value["sequence"] <= self.heartbeat_sequence
+                and type(value.get("source_ns")) is int
+                and 0 <= boot_ns() - value["source_ns"] < 100000000
+            ):
+                self.acknowledged_lease = value
+        except (ValueError, TypeError):
             self.faulted = True
 
     def arm_watchdog(self, mission):
-        # A publish alone is insufficient: executor failure before delivery could orphan a goal.
-        # Require acknowledgement of this exact lease before sending any navigation action.
         self.acknowledged_lease = None
         self.heartbeat()
-        expected = {"mission_id": mission["mission_id"], "expires_at_ms": mission["expires_at_ms"]}
         deadline = time.monotonic() + 3
-        while self.acknowledged_lease != expected:
+        while True:
             self.live(mission)
+            ack = self.acknowledged_lease
+            if (
+                ack
+                and ack["mission_id"] == mission["mission_id"]
+                and ack["expires_at_ms"] == mission["expires_at_ms"]
+                and 0 <= boot_ns() - ack["source_ns"] < 100000000
+            ):
+                break
             if time.monotonic() >= deadline:
                 raise TimeoutError("watchdog_lease_not_acknowledged")
-            rclpy.spin_once(self, timeout_sec=0.05)
-        self.event("watchdog_armed")
+            rclpy.spin_once(self, timeout_sec=0.01)
+        self.event("watchdog_armed", incarnation=self.incarnation)
 
     def heartbeat(self):
-        self.heartbeat_publisher.publish(
-            String(
-                data=json.dumps(
-                    {
-                        "active": self.active_mission is not None,
-                        "faulted": self.faulted,
-                        "mission_id": self.active_mission["mission_id"]
-                        if self.active_mission
-                        else None,
-                        "expires_at_ms": self.active_mission["expires_at_ms"]
-                        if self.active_mission
-                        else 0,
-                    }
-                )
-            )
+        self.heartbeat_sequence += 1
+        source = boot_ns()
+        value = {
+            "version": 1,
+            "incarnation": self.incarnation,
+            "sequence": self.heartbeat_sequence,
+            "source_ns": source,
+            "phase": "recover" if self.recovering else "active" if self.active_mission else "idle",
+            "faulted": self.faulted,
+            "mission_id": self.active_mission["mission_id"] if self.active_mission else None,
+            "expires_at_ms": self.active_mission["expires_at_ms"] if self.active_mission else 0,
+            "recovery_goals": self.recovery_goals if self.recovering else [],
+        }
+        self.heartbeat_publisher.publish(String(data=json.dumps(value)))
+        # Both stamps share the same local BOOTTIME domain, including suspension.
+        self.timing.record(
+            "heartbeat_sent",
+            incarnation=self.incarnation,
+            sequence=self.heartbeat_sequence,
+            source_ns=source,
+            published_ns=boot_ns(),
         )
 
     def receive_scan(self, message):
@@ -161,7 +250,7 @@ class MissionExecutor(Node):
             self.last_feedback = time.monotonic()
 
     def live(self, mission):
-        if self.faulted or not self.watchdog_ready or time.monotonic() - self.watchdog_received > 1:
+        if self.faulted or self.recovering or not self.peers_ready():
             self.faulted = True
             raise RuntimeError("watchdog_not_ready_or_faulted")
         if not self.spool.is_dir():
@@ -219,9 +308,20 @@ class MissionExecutor(Node):
         goal.pose.pose.orientation.z = math.sin(float(pose["yaw"]) / 2)
         goal.pose.pose.orientation.w = math.cos(float(pose["yaw"]) / 2)
         deadline = time.monotonic() + timeout
+        goal_id = uuid.uuid4().hex
+        # Persist uncertainty BEFORE DDS send; a crash cannot erase an orphan identity.
+        with self.ledger:
+            self.ledger.execute(
+                "INSERT INTO navigation_goals VALUES (?,?,?)",
+                (goal_id, mission["mission_id"], "uncertain"),
+            )
         try:
             handle = self.wait_future(
-                self.navigation.send_goal_async(goal, feedback_callback=self.feedback),
+                self.navigation.send_goal_async(
+                    goal,
+                    feedback_callback=self.feedback,
+                    goal_uuid=UUID(uuid=list(bytes.fromhex(goal_id))),
+                ),
                 time.monotonic() + 5,
             )
         except Exception:
@@ -230,6 +330,10 @@ class MissionExecutor(Node):
             self.heartbeat()
             raise
         if not handle.accepted:
+            with self.ledger:
+                self.ledger.execute(
+                    "UPDATE navigation_goals SET state='rejected' WHERE id=?", (goal_id,)
+                )
             raise RuntimeError("Nav2 rejected goal")
         result = handle.get_result_async()
         try:
@@ -246,10 +350,21 @@ class MissionExecutor(Node):
                 canceled = self.wait_future(handle.cancel_goal_async(), time.monotonic() + 5)
                 if not canceled.goals_canceling:
                     raise RuntimeError("Cancellation not acknowledged")
-                self.wait_future(result, time.monotonic() + 5)
+                terminal = self.wait_future(result, time.monotonic() + 5)
+                if terminal.status not in (4, 5, 6):
+                    raise RuntimeError("Cancellation_not_terminal")
+                with self.ledger:
+                    self.ledger.execute(
+                        "UPDATE navigation_goals SET state='terminal' WHERE id=?", (goal_id,)
+                    )
             except Exception:
                 self.faulted = True
             raise
+        if result.result().status in (4, 5, 6):
+            with self.ledger:
+                self.ledger.execute(
+                    "UPDATE navigation_goals SET state='terminal' WHERE id=?", (goal_id,)
+                )
         if result.result().status != GoalStatus.STATUS_SUCCEEDED:
             raise RuntimeError(f"Nav2 status {result.result().status}")
         # Verify actual localized position, independently of the action success bit.
@@ -292,6 +407,8 @@ class MissionExecutor(Node):
         try:
             if self.faulted:
                 raise RuntimeError("latched_executor_fault")
+            if self.recovering or not self.peers_ready():
+                raise RuntimeError("replacement_not_rearmed")
             if path.stat().st_size > 16384:
                 raise ValueError("payload_size")
             # C++ parses raw bytes first, including duplicate-key rejection.
@@ -308,6 +425,8 @@ class MissionExecutor(Node):
             if result.returncode != 0 or decision.get("accepted") is not True:
                 raise ValueError(decision.get("reason", "validator_error"))
             mission = json.loads(raw)
+            if self.rearmed_wall_ms is None or mission["issued_at_ms"] < self.rearmed_wall_ms:
+                raise ValueError("mission_predates_rearm_submit_fresh_authorization")
             self.current = decision["mission_id"]
             self.ledger.execute("INSERT INTO missions VALUES (?,?)", (self.current, "inflight"))
             self.ledger.commit()
@@ -382,7 +501,8 @@ def main():
             if (
                 node.get_clock().now().nanoseconds == 0
                 or node.scan is None
-                or not node.watchdog_ready
+                or node.recovering
+                or not node.peers_ready()
                 or not node.tf.can_transform("map", "base_link", Time())
             ):
                 continue

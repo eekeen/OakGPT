@@ -8,6 +8,7 @@ from types import SimpleNamespace
 import pytest
 import rclpy
 from geometry_msgs.msg import Twist
+from oak_mission.recovery import boot_ns
 from oak_mission.velocity_guard import VelocityGuard
 from std_msgs.msg import Bool, String
 
@@ -30,13 +31,43 @@ def healthy(node):
     node.controller_ready = True
     node.controller_at = time.monotonic()
     node.receive_watchdog(Bool(data=True))
+    if node.recovery.heartbeats.incarnation is None:
+        node.receive_heartbeat(
+            String(
+                data=json.dumps(
+                    {
+                        "version": 1,
+                        "incarnation": "a" * 32,
+                        "sequence": 1,
+                        "source_ns": boot_ns(),
+                        "phase": "recover",
+                        "faulted": False,
+                        "mission_id": None,
+                        "expires_at_ms": 0,
+                        "recovery_goals": [],
+                    }
+                )
+            )
+        )
+    # Isolate existing velocity checks; independent recovery proof is covered
+    # by test_executor_recovery and actual-motion development, not this fixture.
+    node.recovery.heartbeats.blocked = False
+    node.recovery.check = lambda: (
+        not node.recovery.fault and node.recovery.heartbeats.fresh(boot_ns())
+    )
     node.receive_heartbeat(
         String(
             data=json.dumps(
                 {
-                    "active": True,
+                    "version": 1,
+                    "incarnation": "a" * 32,
+                    "sequence": node.recovery.heartbeats.sequence + 1,
+                    "source_ns": boot_ns(),
+                    "phase": "active",
                     "faulted": False,
+                    "mission_id": "m-" + "1" * 16,
                     "expires_at_ms": time.time_ns() // 1000000 + 10000,
+                    "recovery_goals": [],
                 }
             )
         )
@@ -57,7 +88,6 @@ def test_independent_freshness_and_lease_checks(guard):
     for field, age in [
         ("controller_at", 1),
         ("watchdog_at", 1),
-        ("heartbeat_at", 1),
         ("command_at", 1),
     ]:
         healthy(node)
@@ -65,6 +95,10 @@ def test_independent_freshness_and_lease_checks(guard):
         node.tick()
         assert node.reason != "forwarding"
         assert commands[-1].linear.x == commands[-1].angular.z == 0
+    healthy(node)
+    node.recovery.heartbeats.source_ns -= 1000000000
+    node.tick()
+    assert commands[-1].linear.x == 0
     healthy(node)
     node.expires = time.time_ns() // 1000000 - 1
     node.tick()
@@ -83,12 +117,15 @@ def test_invalid_command_latch_survives_fresh_heartbeat(guard):
     assert commands[-1].linear.x == 0
 
 
-def test_malformed_heartbeat_defaults_to_latched_zero(guard):
+def test_malformed_heartbeat_cannot_refresh_source_deadline(guard):
     node, commands = guard
     healthy(node)
+    previous = node.recovery.heartbeats.source_ns
     node.receive_heartbeat(String(data='{"active": 1}'))
+    assert node.recovery.heartbeats.source_ns == previous
+    node.recovery.heartbeats.source_ns -= 100000000
     node.tick()
-    assert node.latched and commands[-1].linear.x == 0
+    assert commands[-1].linear.x == 0
 
 
 def test_leased_forwarding_preserves_original_receipt_and_increments_sequence(guard):

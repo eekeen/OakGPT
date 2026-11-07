@@ -35,7 +35,11 @@ select = ["E", "F", "I", "B", "UP"]
 [tool.mypy]
 python_version = "3.11"
 strict = true
-files = ["src/oakgpt"]
+files = [
+    "src/oakgpt",
+    "robotics/ros2_ws/src/oak_mission/oak_mission/liveness.py",
+    "robotics/ros2_ws/src/oak_mission/oak_mission/restart_journal.py",
+]
 
 [[tool.mypy.overrides]]
 module = ["pyarrow.*", "matplotlib.*"]

@@ -5,6 +5,9 @@ import tarfile
 from pathlib import Path
 
 REQUIRED = [
+    "robotics/ros2_ws/src/oak_mission/oak_mission/liveness.py",
+    "robotics/ros2_ws/src/oak_mission/oak_mission/recovery.py",
+    "robotics/ros2_ws/src/oak_mission/oak_mission/restart_journal.py",
     "cpp/CMakeLists.txt",
     "robotics/timing/trace.hpp",
     "robotics/ros2_ws/src/oak_nav_trace/src/transport_trace.cpp",

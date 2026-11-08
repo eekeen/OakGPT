@@ -150,3 +150,31 @@ Only after successful development and enabled/disabled instrumentation compariso
 source/config/binary hashes and acceptance criteria be frozen. Generate genuinely new
 validation worlds after that freeze. Never reuse the consumed Phase 3.3 24-world set,
 relax the 0.50 s requirement or start LoRA to bypass a failed robotics gate.
+
+## Development probe observation
+
+After host qualification, the existing `scripts/motion_faults.py` supports
+`--cases executor_restart --require-restart-rearm --restart-probe-observation-s 35`.
+Use the verified v6 install, `expiry.launch.py`, the existing corrected Nav2 overlay,
+Cyclone configuration and a separate development world/output directory. These are
+development controls, not a new frozen validation protocol. Do not pass the historical
+Phase 3.3 freeze as if it described this remediation.
+
+The opt-in rearm check requires the original mission's recorded armed incarnation,
+a different replacement incarnation, and explicit invalidation of that old mission
+in the rearm event. Missing evidence dispatches no recovery probe. The fresh mission,
+rearm record, last independent truth sample before dispatch, observation duration
+and result are saved. Partial JSON results are retried; absent or mismatched results
+remain unavailable. The historical observer default is still two seconds.
+
+The 35-second setting extends **only result observation**, allowing a fresh mission
+to finish within its unchanged 30-second navigation deadline. It cannot improve the
+0.50-second stopping score. Score initial stopping from native/observer data before
+`restart_probe_cutoff`, then verify C++ acceptance, the new lease and independently
+observed motion/arrival for the fresh mission. Full raw trajectories must also show
+no resumption before fresh authorization. A rearm event or result JSON alone is not
+complete verification, and the old frozen fault aggregate must not classify later
+authorized probe motion as an unsafe continuation of the interrupted mission.
+
+The 2026-11-08 admission record is under
+`reports/phase33/executor-admission-20261108-v1`. No live session was dispatched there.

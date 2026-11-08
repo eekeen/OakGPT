@@ -12,6 +12,7 @@ from pathlib import Path
 from evaluate_ground_truth import tail_records
 from expiry_world import enable_expiry
 from reproduce_phase31 import wsl_path
+from restart_probe import read_records, rearm_evidence, wait_result
 from robotics_session_host import session
 from trial_clock import trial_clock
 
@@ -183,6 +184,19 @@ def trial(args, kind):
                 (root / "RESTART_EXECUTOR").touch()
             time.sleep(4)
             if kind == "executor_restart":
+                if getattr(args, "require_restart_rearm", False):
+                    deadline = time.monotonic() + 10
+                    while True:
+                        # Full stream retains old-incarnation evidence that could
+                        # have fallen outside the tail after four seconds.
+                        evidence = read_records(root / "trajectory.jsonl")
+                        rearmed = rearm_evidence(evidence, before, mission["mission_id"])
+                        if rearmed:
+                            stop["restart_rearm_evidence"] = rearmed
+                            break
+                        if time.monotonic() >= deadline:
+                            raise TimeoutError("replacement_rearm_not_proven_no_probe_dispatched")
+                        time.sleep(0.02)
                 stop["restart_receipt"] = (
                     json.loads((root / "RESTARTED_EXECUTOR.json").read_text())
                     if (root / "RESTARTED_EXECUTOR.json").exists()
@@ -197,13 +211,20 @@ def trial(args, kind):
                         mailbox=root if args.clock_mailbox else None,
                     ),
                 )
+                truth_before_probe = [
+                    r for r in tail_records(root / "trajectory.jsonl") if r["kind"] == "truth"
+                ]
+                if not truth_before_probe:
+                    raise RuntimeError("Missing independent pre-probe observation cutoff")
+                stop["restart_probe_cutoff"] = truth_before_probe[-1]
+                stop["restart_probe_mission"] = probe
+                stop["restart_probe_observation_s"] = getattr(
+                    args, "restart_probe_observation_s", 2
+                )
                 submit_spool(probe, root / "spool")
                 probe_path = root / "spool/results" / (probe["mission_id"] + ".json")
-                deadline = time.monotonic() + 2
-                while not probe_path.exists() and time.monotonic() < deadline:
-                    time.sleep(0.02)
-                stop["restart_probe_result"] = (
-                    json.loads(probe_path.read_text()) if probe_path.exists() else None
+                stop["restart_probe_result"] = wait_result(
+                    probe_path, probe["mission_id"], stop["restart_probe_observation_s"]
                 )
             rows = [
                 json.loads(line) for line in (root / "trajectory.jsonl").read_text().splitlines()
@@ -239,6 +260,18 @@ def main():
     parser.add_argument("--overlay", type=Path)
     parser.add_argument("--timing", action="store_true")
     parser.add_argument("--clock-mailbox", action="store_true")
+    parser.add_argument(
+        "--restart-probe-observation-s",
+        type=int,
+        choices=range(2, 41),
+        default=2,
+        help="Observer wait only; does not extend the 30 s navigation deadline",
+    )
+    parser.add_argument(
+        "--require-restart-rearm",
+        action="store_true",
+        help="Development: require new-incarnation rearm evidence before fresh mission",
+    )
     parser.add_argument(
         "--rmw", default="rmw_fastrtps_cpp", choices=["rmw_fastrtps_cpp", "rmw_cyclonedds_cpp"]
     )
@@ -290,6 +323,7 @@ def main():
     snapshots.mkdir()
     for name in [
         "motion_faults.py",
+        "restart_probe.py",
         "fault_precondition.py",
         "inject_robotics_fault.py",
         "inject_expiry_payload.py",
@@ -310,6 +344,8 @@ def main():
             "timing": args.timing,
             "rmw": args.rmw,
             "clock_mailbox": args.clock_mailbox,
+            "restart_probe_observation_s": args.restart_probe_observation_s,
+            "require_restart_rearm": args.require_restart_rearm,
             "cyclone_config_sha256": sha256(args.cyclone_config) if args.cyclone_config else None,
             "environment": environment(),
             "world_sha256": sha256(args.world / "world.json"),

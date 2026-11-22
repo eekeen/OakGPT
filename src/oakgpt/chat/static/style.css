@@ -79,7 +79,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .main { flex: 1; display: flex; flex-direction: column; min-width: 0; position: relative; }
 .topbar { display: flex; align-items: center; gap: 10px; padding: 10px 16px;
   border-bottom: 1px solid var(--border); }
-.topbar h1 { flex: 1; font-size: 15px; font-weight: 600; margin: 0; white-space: nowrap;
+.topbar h1 { flex: 1; min-width: 0; font-size: 15px; font-weight: 600; margin: 0; white-space: nowrap;
   overflow: hidden; text-overflow: ellipsis; }
 .icon-button { border: 0; background: none; padding: 7px; border-radius: 8px; display: flex; }
 .icon-button:hover { background: var(--bg-soft); }
@@ -184,7 +184,8 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   .sidebar.open { transform: none; }
   .scrim { position: fixed; inset: 0; background: rgb(0 0 0 / 35%); z-index: 10; }
   .menu { display: flex; }
-  .topbar { padding: 8px 12px; }
+  .topbar { padding: 8px 12px; gap: 6px; }
+  .mode button { padding: 4px 8px; }
   .messages { padding: 18px 16px 8px; }
   .composer { padding: 6px 12px 10px; }
   .suggestions { grid-template-columns: 1fr; }

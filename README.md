@@ -16,6 +16,25 @@ an actual ROS2 Jazzy/Nav2/Gazebo demonstrator. [Setup](docs/robotics.md),
 fault-driven fixes. The 60-scenario study exposes frequent unsafe raw Qwen proposals;
 independent validation prevents their execution.
 
+## Local chat assistant (Chat C1)
+
+OakGPT includes a private, ChatGPT-style assistant. A browser UI streams replies from
+Qwen3 1.7B (Q4_K_M) served by a local llama.cpp process, with multi-turn history, a
+selectable reasoning mode, Stop and Regenerate, and conversations stored as local files.
+Message text is tokenized so it can never forge chat-role delimiters, and the loopback
+web server defends against DNS rebinding and cross-site requests.
+
+```powershell
+.\.venv\Scripts\oakgpt chat --config configs/chat/qwen3_q4km.json
+```
+
+See the [chat guide](docs/chat.md) and the [C1 decision report](reports/chat/c1/report.md),
+which records every design decision with alternatives, sources and measurements.
+In a paired study on the RTX 2060, prompt caching keeps eighth-turn time to first
+token at a median of 55 ms versus 215 ms without it.
+
+![OakGPT chat](reports/chat/c1/figures/ui-conversation-1280.png)
+
 ## Phase 2 research workflow
 
 Phase 2 adds a separately installed CUDA environment, physical fp16 training/resume

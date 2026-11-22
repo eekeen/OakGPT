@@ -1,5 +1,13 @@
 # Roadmap
 
+## Chat track
+
+C1, the local multi-turn chat assistant, is implemented; see
+[the C1 report](../reports/chat/c1/report.md). C2 is fine-tuning, treated as a measured
+hypothesis. Freeze a chat evaluation set that is disjoint from all training data before
+any training. Measure LoRA/QLoRA feasibility within 6 GB, and compare against the
+unchanged base model. The chat track is independent of the robotics Phase 4 gate below.
+
 ## Measured Phase 3.3 gate
 
 The frozen 24-world comparison is complete, with 72/72 missions per backend.

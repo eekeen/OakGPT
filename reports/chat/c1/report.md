@@ -2,6 +2,9 @@
 
 **Design decisions, rationale, sources and measured results**
 
+Typeset version: [report.pdf](report.pdf), built from [report.tex](report.tex) with
+Tectonic 0.17.0. Keep the two sources in sync.
+
 | | |
 | --- | --- |
 | Track | Chat, stage C1 (independent of the robotics phase numbering) |

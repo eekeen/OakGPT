@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OakGPT</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="Conversations">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-3 0-5.5 2.2-5.9 5.1A4.5 4.5 0 0 0 4 15.5 4.5 4.5 0 0 0 8.5 20H11v2h2v-2h2.5a4.5 4.5 0 0 0 4.5-4.5 4.5 4.5 0 0 0-2.1-3.8A6 6 0 0 0 12 2Z"/></svg>
+        <span>OakGPT</span>
+      </div>
+      <button class="new-chat" id="new-chat" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        New chat
+      </button>
+      <nav class="history" id="history"></nav>
+      <div class="model-status" id="model-status">
+        <span class="dot" id="status-dot"></span>
+        <span id="status-text">Connecting…</span>
+      </div>
+    </aside>
+    <div class="scrim" id="scrim" hidden></div>
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-button menu" id="menu" type="button" aria-label="Show conversations">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <h1 id="title">New chat</h1>
+        <div class="mode" role="radiogroup" aria-label="Response mode">
+          <button type="button" role="radio" data-preset="chat" aria-checked="true">Fast</button>
+          <button type="button" role="radio" data-preset="reasoning" aria-checked="false">Reasoning</button>
+        </div>
+        <button class="icon-button" id="settings-button" type="button" aria-label="Settings" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+        </button>
+      </header>
+      <section class="settings" id="settings" hidden aria-label="Settings">
+        <label>System prompt <small>(applies to new chats)</small>
+          <textarea id="system-prompt" rows="3" maxlength="8000"></textarea>
+        </label>
+        <div class="settings-row">
+          <label>Temperature <output id="temperature-value"></output>
+            <input id="temperature" type="range" min="0" max="1.5" step="0.05">
+          </label>
+          <label>Max reply tokens
+            <input id="max-tokens" type="number" min="16" max="8192" step="16">
+          </label>
+        </div>
+        <button type="button" class="link-button" id="reset-settings">Reset to model-card defaults</button>
+      </section>
+      <div class="conversation" id="conversation" aria-live="polite">
+        <div class="empty" id="empty">
+          <h2>What can I help with?</h2>
+          <p>Everything runs on this computer. Nothing you type leaves it.</p>
+          <div class="suggestions" id="suggestions">
+            <button type="button">Explain how attention works in a Transformer</button>
+            <button type="button">Write a Python function that checks for palindromes</button>
+            <button type="button">Give me three ideas for a weekend project</button>
+            <button type="button">Summarize the pros and cons of quantization</button>
+          </div>
+        </div>
+        <div class="messages" id="messages"></div>
+      </div>
+      <form class="composer" id="composer">
+        <div class="composer-box">
+          <textarea id="input" rows="1" placeholder="Message OakGPT" maxlength="32000" aria-label="Message"></textarea>
+          <button class="send" id="send" type="submit" aria-label="Send">
+            <svg class="send-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            <svg class="stop-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5"/></svg>
+          </button>
+        </div>
+        <p class="disclaimer">OakGPT runs Qwen3 1.7B locally. Small models make mistakes, so check important facts.</p>
+      </form>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="alert" hidden></div>
+</body>
+</html>

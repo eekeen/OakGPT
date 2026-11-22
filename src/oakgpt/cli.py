@@ -50,9 +50,35 @@ def main() -> None:
     bench = commands.add_parser("benchmark", help="Write reproducible benchmark JSON")
     bench.add_argument("--config", type=Path, required=True)
     bench.add_argument("--output", type=Path, required=True)
+    chat = commands.add_parser("chat", help="Serve the local multi-turn chat web UI")
+    chat.add_argument("--config", type=Path, required=True)
+    chat.add_argument("--port", type=int, help="Override the configured web UI port")
+    chat.add_argument("--no-browser", action="store_true", help="Do not open a browser tab")
+    chat_measure = commands.add_parser(
+        "chat-measure", help="Measure multi-turn prompt-cache latency against a chat config"
+    )
+    chat_measure.add_argument("--config", type=Path, required=True)
+    chat_measure.add_argument("--script", type=Path, required=True)
+    chat_measure.add_argument("--output", type=Path, required=True)
+    chat_measure.add_argument("--repeats", type=int, default=3)
     args = parser.parse_args()
     if args.command == "train":
         print(train(TrainConfig.load(args.config), args.resume))
+        return
+    if args.command in ("chat", "chat-measure"):
+        from dataclasses import replace
+
+        from oakgpt.chat.app import ChatConfig, run_chat
+        from oakgpt.chat.measure import run_cache_study
+
+        config = ChatConfig.load(args.config)
+        if args.command == "chat":
+            if args.port is not None:
+                config = replace(config, web_port=args.port)
+            run_chat(config, open_browser=not args.no_browser)
+        else:
+            summary = run_cache_study(config, args.config, args.script, args.output, args.repeats)
+            print(json.dumps(summary, indent=2))
         return
     backend, values = backend_from_config(args.config)
     settings = GenerationConfig(**values.get("generation", {}))

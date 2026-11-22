@@ -36,3 +36,33 @@ def test_live_qwen_server():
 
 def test_no_weights_in_source_tree():
     assert not list(Path("src").rglob("*.gguf"))
+
+
+@pytest.mark.hardware
+@pytest.mark.skipif(not os.getenv("OAKGPT_LLAMA_URL"), reason="Set OAKGPT_LLAMA_URL")
+def test_chat_template_and_tokens_match_live_gguf_template():
+    """Parity with the GGUF's own Jinja template (llama.cpp /apply-template) and tokenizer."""
+    from oakgpt.chat.engine import ChatEngine, ChatSettings, LlamaChatClient
+    from oakgpt.chat.template import Message, render_qwen3, render_text
+
+    client = LlamaChatClient(os.environ["OAKGPT_LLAMA_URL"])
+    conversation = [
+        Message("system", "You are OakGPT. Be brief."),
+        Message("user", "Name a tree, please."),
+        Message("assistant", "<think>\nPick one.\n</think>\n\nAn **oak**."),
+        Message("user", "Why? Answer in one sentence, with a list:\n- a\n- b"),
+    ]
+    payload = [{"role": m.role, "content": m.content} for m in conversation]
+    engine = ChatEngine(client)
+    for thinking in (False, True):
+        expected = client.json(
+            "/apply-template",
+            {"messages": payload, "chat_template_kwargs": {"enable_thinking": thinking}},
+        )["prompt"]
+        rendered = render_text(render_qwen3(conversation, thinking=thinking))
+        assert rendered == expected
+        whole = client.json(
+            "/tokenize", {"content": expected, "add_special": False, "parse_special": True}
+        )["tokens"]
+        plan = engine.plan(conversation, ChatSettings(thinking=thinking, max_new_tokens=16))
+        assert plan.tokens == whole

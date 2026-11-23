@@ -61,11 +61,23 @@ def main() -> None:
     chat_measure.add_argument("--script", type=Path, required=True)
     chat_measure.add_argument("--output", type=Path, required=True)
     chat_measure.add_argument("--repeats", type=int, default=3)
+    chat_eval = commands.add_parser(
+        "chat-eval", help="Score the chat models on a frozen evaluation set"
+    )
+    chat_eval.add_argument("--config", type=Path, required=True)
+    chat_eval.add_argument("--dataset", type=Path, required=True)
+    chat_eval.add_argument("--output", type=Path, required=True)
+    chat_eval.add_argument("--repeats", type=int, default=3)
+    chat_eval.add_argument(
+        "--conditions",
+        default="text-chat,text-reasoning,vision,vision-on-text",
+        help="Comma-separated subset of: text-chat, text-reasoning, vision, vision-on-text",
+    )
     args = parser.parse_args()
     if args.command == "train":
         print(train(TrainConfig.load(args.config), args.resume))
         return
-    if args.command in ("chat", "chat-measure"):
+    if args.command in ("chat", "chat-measure", "chat-eval"):
         from dataclasses import replace
 
         from oakgpt.chat.app import ChatConfig, run_chat
@@ -76,6 +88,14 @@ def main() -> None:
             if args.port is not None:
                 config = replace(config, web_port=args.port)
             run_chat(config, open_browser=not args.no_browser)
+        elif args.command == "chat-eval":
+            from oakgpt.chat.evaluate import run_chat_eval
+
+            conditions = [name.strip() for name in args.conditions.split(",") if name.strip()]
+            summary = run_chat_eval(
+                config, args.config, args.dataset, args.output, args.repeats, conditions
+            )
+            print(json.dumps(summary, indent=2))
         else:
             summary = run_cache_study(config, args.config, args.script, args.output, args.repeats)
             print(json.dumps(summary, indent=2))

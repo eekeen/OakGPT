@@ -330,7 +330,7 @@ def test_static_files_and_security_headers(web):
     csp = response.getheader("Content-Security-Policy")
     assert "default-src 'self'" in csp and "frame-ancestors 'none'" in csp
     assert response.getheader("X-Content-Type-Options") == "nosniff"
-    for path in ("/static/app.js", "/static/style.css"):
+    for path in ("/static/app.js", "/static/style.css", "/static/favicon.svg"):
         assert request(server, "GET", path)[0].status == 200
     for path in ("/static/../server.py", "/static/%2e%2e/server.py", "/api/conversations/../x"):
         assert request(server, "GET", path)[0].status == 404

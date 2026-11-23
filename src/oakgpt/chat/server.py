@@ -33,6 +33,7 @@ STATIC = {
     "/": ("index.html", "text/html; charset=utf-8"),
     "/static/app.js": ("app.js", "text/javascript; charset=utf-8"),
     "/static/style.css": ("style.css", "text/css; charset=utf-8"),
+    "/static/favicon.svg": ("favicon.svg", "image/svg+xml"),
 }
 SECURITY_HEADERS = {
     "Content-Security-Policy": (

@@ -6,18 +6,28 @@ fits the server context, the oldest complete user/assistant exchanges are left o
 prompt and the number dropped is reported; nothing is truncated silently.
 """
 
+import base64
 import json
 import random
 import time
 from collections import OrderedDict
 from collections.abc import Generator, Iterator
-from dataclasses import asdict, dataclass, replace
+from dataclasses import asdict, dataclass, field, replace
 from typing import Any
 from urllib.request import ProxyHandler, Request, build_opener
 
 from oakgpt.chat.reasoning import ReasoningSplitter
-from oakgpt.chat.template import Message, Segment, render_qwen3
+from oakgpt.chat.template import (
+    DEFAULT_MEDIA_MARKER,
+    Message,
+    Segment,
+    render_qwen3,
+    render_qwen3_vl,
+    render_text,
+)
 from oakgpt.inference.llamacpp import require_loopback_origin
+
+Prompt = list[int] | dict[str, Any]
 
 
 @dataclass(frozen=True)
@@ -48,6 +58,10 @@ PRESETS: dict[str, ChatSettings] = {
     "reasoning": ChatSettings(
         thinking=True, max_new_tokens=4096, temperature=0.6, top_p=0.95, top_k=20, min_p=0.0
     ),
+    # "Generation Hyperparameters / VL" in the Qwen3-VL-2B-Instruct-GGUF model card.
+    "vision": ChatSettings(
+        thinking=False, temperature=0.7, top_p=0.8, top_k=20, min_p=0.0, presence_penalty=1.5
+    ),
 }
 
 
@@ -67,9 +81,12 @@ def settings_from(values: dict[str, Any], base: ChatSettings | None = None) -> C
 
 @dataclass(frozen=True)
 class PromptPlan:
-    tokens: list[int]
+    tokens: list[int]  # Text tokens; for the vision model these exclude image embeddings.
     dropped_exchanges: int
     context_length: int
+    prompt: Prompt = field(default_factory=list)  # What is sent as ``prompt``.
+    prompt_tokens: int = 0  # Planned size, with each image counted at its token budget.
+    images: int = 0
 
 
 class LlamaChatClient:
@@ -106,11 +123,9 @@ class LlamaChatClient:
     def context_length(self) -> int:
         return int(self.json("/props")["default_generation_settings"]["n_ctx"])
 
-    def stream(
-        self, tokens: list[int], settings: ChatSettings, seed: int
-    ) -> Iterator[dict[str, Any]]:
+    def stream(self, prompt: Prompt, settings: ChatSettings, seed: int) -> Iterator[dict[str, Any]]:
         payload = {
-            "prompt": tokens,
+            "prompt": prompt,
             "n_predict": settings.max_new_tokens,
             "temperature": settings.temperature,
             "top_p": settings.top_p,
@@ -143,8 +158,17 @@ class LlamaChatClient:
 
 
 class ChatEngine:
+    """Text chat on Qwen3: the prompt is an exact token-ID array."""
+
+    model = "text"
+
     def __init__(self, client: LlamaChatClient) -> None:
         self.client = client
+
+    def render(
+        self, messages: list[Message], settings: ChatSettings, marker: str = DEFAULT_MEDIA_MARKER
+    ) -> list[Segment]:
+        return render_qwen3(messages, thinking=settings.thinking)
 
     def _tokens(self, segments: list[Segment]) -> list[int]:
         tokens: list[int] = []
@@ -152,16 +176,25 @@ class ChatEngine:
             tokens.extend(self.client.tokenize(segment.text, segment.control))
         return tokens
 
+    def _plan(
+        self, window: list[Message], segments: list[Segment], dropped: int, context: int
+    ) -> PromptPlan:
+        tokens = self._tokens(segments)
+        return PromptPlan(tokens, dropped, context, tokens, len(tokens))
+
     def plan(self, messages: list[Message], settings: ChatSettings) -> PromptPlan:
-        context = self.client.context_length()
+        props = self.client.json("/props")
+        context = int(props["default_generation_settings"]["n_ctx"])
+        marker = str(props.get("media_marker") or DEFAULT_MEDIA_MARKER)
         system = messages[:1] if messages and messages[0].role == "system" else []
         body = messages[len(system) :]
         # Drop whole exchanges (user + assistant), oldest first; never the newest user turn.
         for dropped in range(0, len(body) // 2 + 1):
             window = system + body[dropped * 2 :]
-            tokens = self._tokens(render_qwen3(window, thinking=settings.thinking))
-            if len(tokens) + settings.max_new_tokens <= context:
-                return PromptPlan(tokens, dropped, context)
+            segments = self.render(window, settings, marker)
+            plan = self._plan(window, segments, dropped, context)
+            if plan.prompt_tokens + settings.max_new_tokens <= context:
+                return plan
         raise ValueError(
             "The latest message plus the reply budget does not fit the model context; "
             "shorten the message or lower max_new_tokens"
@@ -177,7 +210,9 @@ class ChatEngine:
         )
         yield {
             "type": "meta",
-            "prompt_tokens": len(plan.tokens),
+            "model": self.model,
+            "prompt_tokens": plan.prompt_tokens,
+            "images": plan.images,
             "context_length": plan.context_length,
             "dropped_exchanges": plan.dropped_exchanges,
             "seed": seed,
@@ -187,7 +222,7 @@ class ChatEngine:
         first_token: float | None = None
         generated = 0
         final: dict[str, Any] = {}
-        for chunk in self.client.stream(plan.tokens, settings, seed):
+        for chunk in self.client.stream(plan.prompt, settings, seed):
             if chunk.get("truncated"):
                 raise RuntimeError("llama.cpp truncated the prompt despite the context plan")
             ids = chunk.get("tokens", [])
@@ -217,3 +252,58 @@ class ChatEngine:
                 "settings": asdict(replace(settings, seed=seed)),
             },
         }
+
+
+class VisionChatEngine(ChatEngine):
+    """Image-and-text chat on Qwen3-VL through llama.cpp's multimodal prompt object.
+
+    llama.cpp only accepts images with a *string* prompt, which it tokenizes with
+    special-token parsing. To keep the role boundary of the text path, every content
+    segment must tokenize identically with and without special parsing, and must not
+    contain the media marker; otherwise the request is refused rather than sent.
+    Each image is counted at ``image_tokens`` (the server's ``--image-max-tokens`` plus
+    its two vision delimiters) when planning.
+    """
+
+    model = "vision"
+
+    def __init__(self, client: LlamaChatClient, image_tokens: int) -> None:
+        super().__init__(client)
+        if image_tokens < 1:
+            raise ValueError("image_tokens must be positive")
+        self.image_tokens = image_tokens
+        self._marker = DEFAULT_MEDIA_MARKER
+
+    def render(
+        self, messages: list[Message], settings: ChatSettings, marker: str = DEFAULT_MEDIA_MARKER
+    ) -> list[Segment]:
+        if settings.thinking:
+            raise ValueError("The vision model has no thinking mode")
+        self._marker = marker
+        return render_qwen3_vl(messages, marker)
+
+    def _check_content(self, text: str) -> None:
+        if self._marker in text or self.client.tokenize(text, True) != self.client.tokenize(
+            text, False
+        ):
+            raise ValueError(
+                "A message in this conversation contains model control text (for example "
+                "<|im_end|>), which cannot be sent together with images"
+            )
+
+    def _plan(
+        self, window: list[Message], segments: list[Segment], dropped: int, context: int
+    ) -> PromptPlan:
+        tokens: list[int] = []
+        images = 0
+        for segment in segments:
+            if segment.media:
+                images += 1
+                continue
+            if not segment.control:
+                self._check_content(segment.text)
+            tokens.extend(self.client.tokenize(segment.text, segment.control))
+        data = [base64.b64encode(image).decode() for m in window for image in m.images]
+        prompt = {"prompt_string": render_text(segments), "multimodal_data": data}
+        size = len(tokens) + images * self.image_tokens
+        return PromptPlan(tokens, dropped, context, prompt, size, images)

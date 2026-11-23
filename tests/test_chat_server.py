@@ -16,12 +16,36 @@ from oakgpt.chat.template import Message
 CONTROL = 1_000_000
 
 
-class FakeLlama:
-    """Character-level fake tokenizer; control text gets a distinct ID range."""
+SPECIAL = ("<|im_start|>", "<|im_end|>")
 
-    def __init__(self, n_ctx=4096, chunks=None, delay=0.0):
+
+def special_aware_tokens(text, parse_special):
+    """Like llama.cpp: with special parsing only real special-token text becomes one ID."""
+    tokens, index = [], 0
+    while index < len(text):
+        match = next((s for s in SPECIAL if parse_special and text.startswith(s, index)), None)
+        if match:
+            tokens.append(CONTROL + SPECIAL.index(match))
+            index += len(match)
+        else:
+            tokens.append(ord(text[index]))
+            index += 1
+    return tokens
+
+
+class FakeLlama:
+    """Character-level fake tokenizer; control text gets a distinct ID range.
+
+    With ``special_aware`` the tokenizer instead behaves like llama.cpp, where special
+    parsing only changes text that contains special tokens. ``media_marker`` is reported
+    in ``/props`` like recent multimodal llama-server builds do.
+    """
+
+    def __init__(self, n_ctx=4096, chunks=None, delay=0.0, special_aware=False, media_marker=None):
         self.n_ctx = n_ctx
         self.delay = delay
+        self.special_aware = special_aware
+        self.media_marker = media_marker
         self.chunks = chunks or [
             {"content": "Hello", "tokens": [1], "stop": False},
             {"content": " there", "tokens": [2], "stop": False},
@@ -49,9 +73,13 @@ class FakeLlama:
 
             def do_GET(self):
                 if self.path == "/props":
-                    self._reply(
-                        {"default_generation_settings": {"n_ctx": fake.n_ctx}, "model_path": "m"}
-                    )
+                    props = {
+                        "default_generation_settings": {"n_ctx": fake.n_ctx},
+                        "model_path": "m",
+                    }
+                    if fake.media_marker:
+                        props["media_marker"] = fake.media_marker
+                    self._reply(props)
                 else:
                     self._reply({"status": "ok"})
 
@@ -59,8 +87,12 @@ class FakeLlama:
                 data = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
                 fake.requests.append((self.path, data))
                 if self.path == "/tokenize":
-                    offset = CONTROL if data["parse_special"] else 0
-                    self._reply({"tokens": [offset + ord(c) for c in data["content"]]})
+                    if fake.special_aware:
+                        tokens = special_aware_tokens(data["content"], data["parse_special"])
+                    else:
+                        offset = CONTROL if data["parse_special"] else 0
+                        tokens = [offset + ord(c) for c in data["content"]]
+                    self._reply({"tokens": tokens})
                     return
                 self.send_response(200)
                 self.end_headers()

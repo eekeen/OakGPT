@@ -107,23 +107,33 @@ function renderMarkdown(source) {
 const $ = (id) => document.getElementById(id);
 const el = {
   sidebar: $("sidebar"), scrim: $("scrim"), menu: $("menu"), history: $("history"),
-  newChat: $("new-chat"), title: $("title"), messages: $("messages"), empty: $("empty"),
-  conversation: $("conversation"), composer: $("composer"), input: $("input"), send: $("send"),
-  statusDot: $("status-dot"), statusText: $("status-text"), toast: $("toast"),
-  settingsButton: $("settings-button"), settings: $("settings"), systemPrompt: $("system-prompt"),
-  temperature: $("temperature"), temperatureValue: $("temperature-value"),
-  maxTokens: $("max-tokens"), resetSettings: $("reset-settings"),
+  search: $("search"), newChat: $("new-chat"), title: $("title"), messages: $("messages"),
+  empty: $("empty"), conversation: $("conversation"), composer: $("composer"),
+  composerCard: $("composer-card"), input: $("input"), send: $("send"), attach: $("attach"),
+  file: $("file"), attachments: $("attachments"), hint: $("hint"), main: $("main"),
+  dropOverlay: $("drop-overlay"), mode: $("mode"), visionPill: $("vision-pill"),
+  engineText: $("engine-text"), engineVision: $("engine-vision"), statusText: $("status-text"),
+  toast: $("toast"), settingsButton: $("settings-button"), settings: $("settings"),
+  settingsClose: $("settings-close"), drawerScrim: $("drawer-scrim"),
+  systemPrompt: $("system-prompt"), temperature: $("temperature"),
+  temperatureValue: $("temperature-value"), maxTokens: $("max-tokens"),
+  resetSettings: $("reset-settings"), lightbox: $("lightbox"), lightboxImage: $("lightbox-image"),
 };
+const LEAF = '<svg viewBox="0 0 24 24"><path d="M12 2.5c-1.3 1.6-3.6 2-4.8 3.6-1 1.3-.8 2.9-1.9 4.1C4 11.6 4.3 14 5.6 15.4c1.2 1.4 3.2 1.7 4.9 1.2V21h3v-4.4c1.7.5 3.7.2 4.9-1.2 1.3-1.4 1.6-3.8.3-5.2-1.1-1.2-.9-2.8-1.9-4.1-1.2-1.6-3.5-2-4.8-3.6Z"/></svg>';
 const ICONS = {
   copy: '<svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>',
   retry: '<svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>',
   trash: '<svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>',
+  close: '<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  image: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>',
 };
+const MAX_IMAGES = 4;
+const MAX_IMAGE_SIDE = 1600; // The server caps each image at 1024 tokens; larger only costs upload time.
 
 const state = {
   presets: {}, defaultSystemPrompt: "", conversationId: null, conversation: null,
-  busy: false, controller: null,
-  prefs: { preset: "chat", temperature: null, maxTokens: null, systemPrompt: null },
+  busy: false, controller: null, status: null, history: [], pending: [],
+  prefs: { preset: "chat", temperature: null, maxTokens: null, systemPrompt: null, theme: "dark" },
 };
 
 function loadPrefs() {
@@ -157,12 +167,32 @@ async function api(path, options = {}) {
   return response;
 }
 
+const timeOf = (iso) => (iso ? new Date(iso).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "");
+
+// ---------- Theme ---------------------------------------------------------------------
+
+function applyTheme() {
+  const theme = state.prefs.theme;
+  if (theme === "system") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", theme === "light" ? "light" : "dark");
+  for (const button of document.querySelectorAll("[data-theme-choice]")) {
+    button.setAttribute("aria-checked", String(button.dataset.themeChoice === theme));
+  }
+}
+for (const button of document.querySelectorAll("[data-theme-choice]")) {
+  button.addEventListener("click", () => {
+    state.prefs.theme = button.dataset.themeChoice;
+    savePrefs();
+    applyTheme();
+  });
+}
+
 // ---------- Settings ------------------------------------------------------------------
 
 function preset() { return state.presets[state.prefs.preset] || state.presets.chat || {}; }
 
 function renderSettings() {
-  for (const button of document.querySelectorAll(".mode button")) {
+  for (const button of el.mode.querySelectorAll("button")) {
     button.setAttribute("aria-checked", String(button.dataset.preset === state.prefs.preset));
   }
   const temperature = state.prefs.temperature ?? preset().temperature ?? 0.7;
@@ -179,7 +209,7 @@ function requestSettings() {
   return settings;
 }
 
-for (const button of document.querySelectorAll(".mode button")) {
+for (const button of el.mode.querySelectorAll("button")) {
   button.addEventListener("click", () => {
     state.prefs.preset = button.dataset.preset;
     state.prefs.temperature = null;
@@ -188,10 +218,15 @@ for (const button of document.querySelectorAll(".mode button")) {
     renderSettings();
   });
 }
-el.settingsButton.addEventListener("click", () => {
-  el.settings.hidden = !el.settings.hidden;
-  el.settingsButton.setAttribute("aria-expanded", String(!el.settings.hidden));
-});
+function setDrawer(open) {
+  el.settings.hidden = !open;
+  el.drawerScrim.hidden = !open;
+  el.settingsButton.setAttribute("aria-expanded", String(open));
+  if (open) el.systemPrompt.focus();
+}
+el.settingsButton.addEventListener("click", () => setDrawer(el.settings.hidden));
+el.settingsClose.addEventListener("click", () => setDrawer(false));
+el.drawerScrim.addEventListener("click", () => setDrawer(false));
 el.temperature.addEventListener("input", () => {
   state.prefs.temperature = Number(el.temperature.value);
   el.temperatureValue.textContent = state.prefs.temperature.toFixed(2);
@@ -213,19 +248,43 @@ el.resetSettings.addEventListener("click", () => {
   renderSettings();
 });
 
+// A conversation with any image is answered by the vision model; show that instead of the mode.
+function usesVision() {
+  return state.pending.length > 0 ||
+    Boolean(state.conversation && state.conversation.messages.some((m) => m.images && m.images.length));
+}
+function renderModeIndicator() {
+  const vision = usesVision();
+  el.mode.hidden = vision;
+  el.visionPill.hidden = !vision;
+}
+
 // ---------- Sidebar -------------------------------------------------------------------
 
 function group(updated) {
   const days = (Date.now() - Date.parse(updated)) / 86_400_000;
   if (days < 1 && new Date(updated).toDateString() === new Date().toDateString()) return "Today";
   if (days < 2) return "Yesterday";
-  if (days < 7) return "Previous 7 days";
+  if (days < 7) return "This week";
   return "Older";
 }
 
 async function refreshHistory() {
-  const list = await (await api("/api/conversations")).json();
+  state.history = await (await api("/api/conversations")).json();
+  renderHistory();
+}
+
+function renderHistory() {
+  const query = el.search.value.trim().toLowerCase();
+  const list = state.history.filter((item) => !query || item.title.toLowerCase().includes(query));
   el.history.replaceChildren();
+  if (!list.length) {
+    const empty = document.createElement("div");
+    empty.className = "history-empty";
+    empty.textContent = query ? "No matching conversations." : "Your conversations will appear here.";
+    el.history.append(empty);
+    return;
+  }
   let current = "";
   for (const item of list) {
     const label = group(item.updated);
@@ -240,8 +299,15 @@ async function refreshHistory() {
     row.className = "history-item" + (item.id === state.conversationId ? " active" : "");
     const link = document.createElement("a");
     link.href = `#/c/${item.id}`;
-    link.textContent = item.title;
     link.title = item.title;
+    const title = document.createElement("span");
+    title.className = "item-title";
+    title.textContent = item.title;
+    const meta = document.createElement("span");
+    meta.className = "item-meta";
+    meta.textContent = `${item.messages} message${item.messages === 1 ? "" : "s"} · ${timeOf(item.updated)}`;
+    if (item.images) meta.insertAdjacentHTML("afterbegin", ICONS.image);
+    link.append(title, meta);
     const remove = document.createElement("button");
     remove.type = "button";
     remove.className = "delete";
@@ -260,33 +326,194 @@ async function refreshHistory() {
   }
 }
 
+el.search.addEventListener("input", renderHistory);
 function closeSidebar() { el.sidebar.classList.remove("open"); el.scrim.hidden = true; }
 el.menu.addEventListener("click", () => { el.sidebar.classList.add("open"); el.scrim.hidden = false; });
 el.scrim.addEventListener("click", closeSidebar);
 el.newChat.addEventListener("click", () => { location.hash = ""; closeSidebar(); el.input.focus(); });
 
+// ---------- Image attachments ---------------------------------------------------------
+
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result).split(",", 2)[1]);
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(blob);
+  });
+}
+
+// Decode in the browser and re-encode as PNG or JPEG: this strips metadata such as EXIF
+// location, bounds the size and gives llama.cpp a format it is known to decode.
+async function prepareImage(file) {
+  if (!file.type.startsWith("image/")) throw new Error(`${file.name || "That file"} is not an image.`);
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(1, MAX_IMAGE_SIDE / Math.max(bitmap.width, bitmap.height));
+  const width = Math.max(1, Math.round(bitmap.width * scale));
+  const height = Math.max(1, Math.round(bitmap.height * scale));
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const context = canvas.getContext("2d");
+  const png = file.type === "image/png";
+  if (!png) { context.fillStyle = "#ffffff"; context.fillRect(0, 0, width, height); }
+  context.drawImage(bitmap, 0, 0, width, height);
+  bitmap.close();
+  const encode = (type) => new Promise((resolve) => canvas.toBlob(resolve, type, 0.9));
+  let blob = await encode(png ? "image/png" : "image/jpeg");
+  if (png && blob.size > 4 * 1024 * 1024) blob = await encode("image/jpeg");
+  return { blob, url: URL.createObjectURL(blob), base64: await blobToBase64(blob) };
+}
+
+async function addFiles(files) {
+  const images = [...files].filter((file) => file.type.startsWith("image/"));
+  if (!images.length) { toast("Only image files can be attached."); return; }
+  if (state.status && !state.status.vision_available) { toast("No vision model is configured."); return; }
+  for (const file of images) {
+    if (state.pending.length >= MAX_IMAGES) { toast(`At most ${MAX_IMAGES} images per message.`); break; }
+    try { state.pending.push(await prepareImage(file)); } catch (error) { toast(error.message || "Could not read that image."); }
+  }
+  renderAttachments();
+  el.input.focus();
+}
+
+function clearAttachments() {
+  for (const item of state.pending) URL.revokeObjectURL(item.url);
+  state.pending = [];
+  renderAttachments();
+}
+
+function renderAttachments() {
+  el.attachments.replaceChildren();
+  el.attachments.hidden = state.pending.length === 0;
+  state.pending.forEach((item, index) => {
+    const wrap = document.createElement("div");
+    wrap.className = "attachment";
+    const img = document.createElement("img");
+    img.src = item.url;
+    img.alt = `Attached image ${index + 1}`;
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.setAttribute("aria-label", `Remove image ${index + 1}`);
+    remove.innerHTML = ICONS.close;
+    remove.addEventListener("click", () => {
+      URL.revokeObjectURL(item.url);
+      state.pending.splice(index, 1);
+      renderAttachments();
+    });
+    wrap.append(img, remove);
+    el.attachments.append(wrap);
+  });
+  el.attach.disabled = state.pending.length >= MAX_IMAGES;
+  renderModeIndicator();
+  updateSendEnabled();
+}
+
+el.attach.addEventListener("click", () => el.file.click());
+el.file.addEventListener("change", () => { addFiles(el.file.files); el.file.value = ""; });
+el.input.addEventListener("paste", (event) => {
+  const files = [...(event.clipboardData?.files || [])];
+  if (files.some((file) => file.type.startsWith("image/"))) { event.preventDefault(); addFiles(files); }
+});
+let dragDepth = 0;
+const hasFiles = (event) => [...(event.dataTransfer?.types || [])].includes("Files");
+el.main.addEventListener("dragenter", (event) => {
+  if (!hasFiles(event)) return;
+  event.preventDefault();
+  dragDepth += 1;
+  el.dropOverlay.hidden = false;
+});
+el.main.addEventListener("dragover", (event) => { if (hasFiles(event)) event.preventDefault(); });
+el.main.addEventListener("dragleave", () => {
+  dragDepth = Math.max(0, dragDepth - 1);
+  if (!dragDepth) el.dropOverlay.hidden = true;
+});
+el.main.addEventListener("drop", (event) => {
+  if (!hasFiles(event)) return;
+  event.preventDefault();
+  dragDepth = 0;
+  el.dropOverlay.hidden = true;
+  addFiles(event.dataTransfer.files);
+});
+
+function openLightbox(src, alt) {
+  el.lightboxImage.src = src;
+  el.lightboxImage.alt = alt || "";
+  el.lightbox.hidden = false;
+}
+el.lightbox.addEventListener("click", () => { el.lightbox.hidden = true; el.lightboxImage.src = ""; });
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  if (!el.lightbox.hidden) { el.lightbox.hidden = true; el.lightboxImage.src = ""; }
+  else if (!el.settings.hidden) setDrawer(false);
+});
+
 // ---------- Messages ------------------------------------------------------------------
+
+const MODEL_LABELS = { text: "Qwen3", vision: "Qwen3-VL" };
 
 function formatStats(stats) {
   if (!stats) return "";
   const parts = [`${stats.generated_tokens} tokens`];
-  if (stats.server_decode_tokens_per_second) parts.push(`${stats.server_decode_tokens_per_second.toFixed(1)} tok/s`);
+  if (stats.server_decode_tokens_per_second) parts.push(`${stats.server_decode_tokens_per_second.toFixed(0)} tok/s`);
   if (stats.ttft_s !== null && stats.ttft_s !== undefined) parts.push(`first token ${stats.ttft_s.toFixed(2)} s`);
   if (stats.stop_type === "limit") parts.push("stopped at token limit");
   return parts.join(" · ");
 }
 
-function addUser(text) {
-  const node = document.createElement("div");
-  node.className = "message user";
-  node.textContent = text;
+function entry(role, created) {
+  const node = document.createElement("article");
+  node.className = `entry ${role}`;
+  const avatar = document.createElement("div");
+  avatar.className = "avatar";
+  if (role === "user") avatar.textContent = "Y";
+  else avatar.innerHTML = LEAF;
+  const head = document.createElement("div");
+  head.className = "entry-head";
+  const name = document.createElement("span");
+  name.className = "entry-name";
+  name.textContent = role === "user" ? "You" : "OakGPT";
+  const time = document.createElement("span");
+  time.className = "entry-time";
+  time.textContent = timeOf(created || new Date().toISOString());
+  head.append(name, time);
+  const body = document.createElement("div");
+  body.className = "entry-body";
+  node.append(avatar, head, body);
   el.messages.append(node);
+  return { node, body };
+}
+
+function addUser(message, localImages = []) {
+  const { node, body } = entry("user", message.created);
+  const sources = localImages.length
+    ? localImages.map((item) => item.url)
+    : (message.images || []).map((image) => `/api/conversations/${state.conversationId}/images/${image.id}`);
+  if (sources.length) {
+    const thumbs = document.createElement("div");
+    thumbs.className = "thumbs";
+    sources.forEach((src, index) => {
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = `Image ${index + 1}`;
+      img.loading = "lazy";
+      img.addEventListener("click", () => openLightbox(src, img.alt));
+      thumbs.append(img);
+    });
+    body.append(thumbs);
+  }
+  const text = document.createElement("div");
+  text.className = "text";
+  text.textContent = message.content || "";
+  body.append(text);
   return node;
 }
 
 function addAssistant(message = {}) {
-  const node = document.createElement("div");
-  node.className = "message assistant";
+  const { node, body } = entry("assistant", message.created);
+  const status = document.createElement("div");
+  status.className = "status-line";
+  status.hidden = true;
   const notice = document.createElement("div");
   notice.className = "notice";
   notice.hidden = true;
@@ -302,21 +529,34 @@ function addAssistant(message = {}) {
   const answer = document.createElement("div");
   answer.className = "answer";
   const footer = document.createElement("div");
-  footer.className = "message-footer";
-  node.append(notice, details, answer, footer);
-  el.messages.append(node);
-  const view = { node, notice, details, summary, reasoningBody, answer, footer, text: message.content || "", reasoning: message.reasoning || "" };
+  footer.className = "entry-footer";
+  body.append(status, notice, details, answer, footer);
+  const view = { node, status, notice, details, summary, reasoningBody, answer, footer, text: message.content || "", reasoning: message.reasoning || "" };
   setNotice(view, message.meta);
   if (message.content !== undefined) answer.innerHTML = renderMarkdown(view.text);
   return view;
 }
 
+function setStatus(view, text) {
+  view.status.replaceChildren();
+  view.status.hidden = !text;
+  if (!text) return;
+  const dot = document.createElement("span");
+  dot.className = "dot";
+  const label = document.createElement("span");
+  label.textContent = text;
+  view.status.append(dot, label);
+}
+
 function setNotice(view, meta) {
+  const notes = [];
   if (meta && meta.dropped_exchanges > 0) {
     const n = meta.dropped_exchanges;
-    view.notice.textContent = `${n} earlier exchange${n === 1 ? " was" : "s were"} left out so the conversation fits the ${meta.context_length}-token context.`;
-    view.notice.hidden = false;
+    notes.push(`${n} earlier exchange${n === 1 ? " was" : "s were"} left out so the conversation fits the ${meta.context_length}-token context.`);
   }
+  if (meta && meta.model_load_s) notes.push(`Loaded the ${meta.model === "vision" ? "image" : "text"} model in ${meta.model_load_s.toFixed(1)} s.`);
+  view.notice.textContent = notes.join(" ");
+  view.notice.hidden = notes.length === 0;
 }
 
 function finishAssistant(view, message, isLast) {
@@ -336,6 +576,13 @@ function finishAssistant(view, message, isLast) {
     retry.innerHTML = ICONS.retry;
     retry.addEventListener("click", () => regenerate(view));
     view.footer.append(retry);
+  }
+  const model = message.meta && message.meta.model;
+  if (model) {
+    const chip = document.createElement("span");
+    chip.className = `model-chip ${model}`;
+    chip.textContent = MODEL_LABELS[model] || model;
+    view.footer.append(chip);
   }
   if (message.interrupted) {
     const note = document.createElement("span");
@@ -376,14 +623,15 @@ function scrollToBottom() { el.conversation.scrollTop = el.conversation.scrollHe
 
 function renderConversation(conversation) {
   el.messages.replaceChildren();
-  el.title.textContent = conversation ? conversation.title : "New chat";
+  el.title.textContent = conversation ? conversation.title : "New conversation";
   document.title = conversation ? `${conversation.title} · OakGPT` : "OakGPT";
   const messages = conversation ? conversation.messages : [];
   el.empty.hidden = messages.length > 0;
   messages.forEach((message, index) => {
-    if (message.role === "user") addUser(message.content);
+    if (message.role === "user") addUser(message);
     else finishAssistant(addAssistant(message), message, index === messages.length - 1);
   });
+  renderModeIndicator();
   scrollToBottom();
 }
 
@@ -392,12 +640,22 @@ function renderConversation(conversation) {
 function setBusy(busy) {
   state.busy = busy;
   el.send.classList.toggle("busy", busy);
+  el.send.querySelector(".send-label").textContent = busy ? "Stop" : "Send";
   el.send.setAttribute("aria-label", busy ? "Stop generating" : "Send");
   updateSendEnabled();
 }
-function updateSendEnabled() { el.send.disabled = !state.busy && !el.input.value.trim(); }
+function updateSendEnabled() {
+  el.send.disabled = !state.busy && !el.input.value.trim() && state.pending.length === 0;
+}
 
-async function streamReply(body, view) {
+function pendingStatus(vision) {
+  const active = state.status && state.status.active_model;
+  if (vision && active !== "vision") return "Loading the image model…";
+  if (!vision && active === "vision") return "Loading the text model…";
+  return vision ? "Looking at the image…" : "Thinking…";
+}
+
+async function streamReply(body, view, vision) {
   state.controller = new AbortController();
   setBusy(true);
   let rendered = false;
@@ -409,7 +667,7 @@ async function streamReply(body, view) {
     if (stick) scrollToBottom();
   };
   const schedule = () => { if (!rendered) { rendered = true; requestAnimationFrame(paint); } };
-  view.answer.innerHTML = cursor;
+  setStatus(view, pendingStatus(vision));
   let finalMessage = null;
   try {
     const response = await api(`/api/conversations/${state.conversationId}/reply`, {
@@ -428,8 +686,12 @@ async function streamReply(body, view) {
         buffer = buffer.slice(split + 2);
         const name = (block.match(/^event: (.*)$/m) || [])[1];
         const data = JSON.parse((block.match(/^data: (.*)$/m) || [, "{}"])[1]);
-        if (name === "meta") setNotice(view, data);
-        else if (name === "reasoning") {
+        if (name === "meta") {
+          setNotice(view, data);
+          setStatus(view, data.images ? "Looking at the image…" : "Thinking…");
+          checkStatus();
+        } else if (name === "reasoning") {
+          setStatus(view, "");
           view.reasoning += data.text;
           view.details.hidden = false;
           view.details.open = true;
@@ -438,6 +700,7 @@ async function streamReply(body, view) {
           view.reasoningBody.textContent = view.reasoning;
           if (nearBottom()) scrollToBottom();
         } else if (name === "answer") {
+          setStatus(view, "");
           if (view.summary.classList.contains("thinking-label")) {
             view.summary.classList.remove("thinking-label");
             view.summary.textContent = "Thought process";
@@ -462,12 +725,13 @@ async function streamReply(body, view) {
         el.input.value = body.content;
         updateSendEnabled();
         el.empty.hidden = el.messages.children.length > 0;
-        return;
+        return false;
       }
     }
   } finally {
     setBusy(false);
     state.controller = null;
+    setStatus(view, "");
     view.summary.classList.remove("thinking-label");
     if (view.summary.textContent === "Thinking") view.summary.textContent = "Thought process";
     paint();
@@ -475,6 +739,7 @@ async function streamReply(body, view) {
   finishAssistant(view, finalMessage || { interrupted: true }, true);
   // The server stores interrupted replies once it notices the closed stream.
   setTimeout(() => syncConversation().catch(() => {}), finalMessage ? 0 : 400);
+  return true;
 }
 
 async function syncConversation() {
@@ -482,6 +747,7 @@ async function syncConversation() {
   state.conversation = await (await api(`/api/conversations/${state.conversationId}`)).json();
   if (!state.busy) renderConversation(state.conversation);
   await refreshHistory();
+  checkStatus();
 }
 
 async function send(text) {
@@ -494,26 +760,34 @@ async function send(text) {
     state.conversation = created;
     history.replaceState(null, "", `#/c/${created.id}`);
   }
+  const images = state.pending;
+  const vision = usesVision();
+  state.pending = [];
+  renderAttachments();
   el.empty.hidden = true;
   for (const button of el.messages.querySelectorAll('[aria-label="Regenerate reply"]')) button.remove();
-  addUser(text);
+  addUser({ content: text }, images);
   const view = addAssistant();
   scrollToBottom();
-  await streamReply({ content: text, settings: requestSettings() }, view);
+  const body = { content: text, settings: requestSettings() };
+  if (images.length) body.images = images.map((item) => item.base64);
+  const accepted = await streamReply(body, view, vision);
+  if (accepted === false) { state.pending = images; renderAttachments(); }
+  else for (const item of images) setTimeout(() => URL.revokeObjectURL(item.url), 5000);
 }
 
 async function regenerate(view) {
   if (state.busy) return;
   const fresh = addAssistant();
   view.node.replaceWith(fresh.node);
-  await streamReply({ regenerate: true, settings: requestSettings() }, fresh);
+  await streamReply({ regenerate: true, settings: requestSettings() }, fresh, usesVision());
 }
 
 el.composer.addEventListener("submit", async (event) => {
   event.preventDefault();
   if (state.busy) { state.controller?.abort(); return; }
   const text = el.input.value.trim();
-  if (!text) return;
+  if (!text && !state.pending.length) return;
   el.input.value = "";
   autosize();
   updateSendEnabled();
@@ -527,12 +801,13 @@ el.input.addEventListener("keydown", (event) => {
 });
 function autosize() {
   el.input.style.height = "auto";
-  el.input.style.height = `${Math.min(el.input.scrollHeight, 220)}px`;
+  el.input.style.height = `${Math.min(el.input.scrollHeight, 240)}px`;
 }
 el.input.addEventListener("input", () => { autosize(); updateSendEnabled(); });
 for (const button of document.querySelectorAll("#suggestions button")) {
   button.addEventListener("click", () => {
-    el.input.value = button.textContent;
+    if (button.hasAttribute("data-attach")) { el.file.click(); return; }
+    el.input.value = button.dataset.prompt;
     autosize();
     updateSendEnabled();
     el.composer.requestSubmit();
@@ -565,25 +840,47 @@ async function route() {
 }
 window.addEventListener("hashchange", route);
 
+function setEngine(row, model, status) {
+  const dot = row.querySelector(".dot");
+  dot.className = "dot";
+  if (status.loading === model) dot.classList.add("loading");
+  else if (status.active_model === model && status.ready) dot.classList.add("loaded");
+}
+
+let statusTimer = 0;
 async function checkStatus() {
+  clearTimeout(statusTimer);
+  let next = 30_000;
   try {
     const status = await (await api("/api/status")).json();
+    state.status = status;
     state.presets = status.presets || state.presets;
     state.defaultSystemPrompt = status.system_prompt ?? state.defaultSystemPrompt;
-    el.statusDot.className = "dot " + (status.ready ? "ok" : "bad");
-    el.statusText.textContent = status.ready
-      ? `${status.model_path || "model"} · ${status.context_length} ctx`
-      : status.error || "Model server not ready";
+    el.engineVision.hidden = !status.vision_available;
+    setEngine(el.engineText, "text", status);
+    setEngine(el.engineVision, "vision", status);
+    if (status.loading) {
+      el.statusText.textContent = `Loading the ${status.loading === "vision" ? "image" : "text"} model…`;
+      next = 1_500;
+    } else if (status.ready) {
+      el.statusText.textContent = `${status.model_path} · ${status.context_length} ctx`;
+    } else {
+      el.statusText.textContent = status.error || "Model server not ready";
+      next = 5_000;
+    }
     el.statusText.title = status.identity ? JSON.stringify(status.identity, null, 1) : "";
-  } catch (error) {
-    el.statusDot.className = "dot bad";
+    el.attach.hidden = !status.vision_available;
+  } catch {
     el.statusText.textContent = "Chat server unreachable";
+    for (const row of [el.engineText, el.engineVision]) row.querySelector(".dot").className = "dot bad";
+    next = 5_000;
   }
   renderSettings();
+  statusTimer = setTimeout(checkStatus, next);
 }
 
 loadPrefs();
+applyTheme();
 checkStatus();
-setInterval(checkStatus, 30_000);
 route();
 updateSendEnabled();

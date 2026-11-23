@@ -4,6 +4,7 @@ Conversations are private user data. The default location is under the ignored `
 directory so they are never committed.
 """
 
+import hashlib
 import json
 import os
 import re
@@ -14,9 +15,13 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-FORMAT = "oakgpt-chat-v1"
+FORMAT = "oakgpt-chat-v1"  # User messages may carry an optional "images" list.
 _ID = re.compile(r"^[0-9a-f]{32}$")
+_IMAGE_ID = re.compile(r"^[0-9a-f]{64}$")
 TITLE_LENGTH = 60
+MAX_IMAGE_BYTES = 8 * 1024 * 1024
+# Formats decoded by llama.cpp (stb_image) that the UI produces; identified by content.
+IMAGE_TYPES = {b"\x89PNG\r\n\x1a\n": ("image/png", "png"), b"\xff\xd8\xff": ("image/jpeg", "jpg")}
 
 
 def now() -> str:
@@ -28,10 +33,77 @@ def title_from(text: str) -> str:
     return words if len(words) <= TITLE_LENGTH else words[: TITLE_LENGTH - 1].rstrip() + "…"
 
 
-class ConversationStore:
+def image_type(data: bytes) -> tuple[str, str]:
+    """Return (media type, extension) from the file signature; reject anything else."""
+    for signature, kind in IMAGE_TYPES.items():
+        if data.startswith(signature):
+            return kind
+    raise ValueError("Images must be PNG or JPEG")
+
+
+def _atomic_write(directory: Path, target: Path, data: bytes) -> None:
+    handle, temporary = tempfile.mkstemp(dir=directory, prefix=".tmp-")
+    try:
+        with os.fdopen(handle, "wb") as stream:
+            stream.write(data)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, target)
+    except BaseException:
+        Path(temporary).unlink(missing_ok=True)
+        raise
+
+
+class ImageStore:
+    """Image files per conversation: ``<root>/<conversation id>/<sha256>.<ext>``.
+
+    Images are named by content hash, so the same image attached twice is stored once,
+    and deleting a conversation removes its directory.
+    """
+
     def __init__(self, root: Path) -> None:
         self.root = root
+
+    def _directory(self, conversation_id: str) -> Path:
+        if not _ID.fullmatch(conversation_id):
+            raise KeyError(conversation_id)
+        return self.root / conversation_id
+
+    def save(self, conversation_id: str, data: bytes) -> dict[str, str]:
+        if not data or len(data) > MAX_IMAGE_BYTES:
+            raise ValueError(f"Each image must be 1 byte to {MAX_IMAGE_BYTES // 2**20} MiB")
+        media_type, extension = image_type(data)
+        image_id = hashlib.sha256(data).hexdigest()
+        directory = self._directory(conversation_id)
+        directory.mkdir(parents=True, exist_ok=True)
+        target = directory / f"{image_id}.{extension}"
+        if not target.is_file():
+            _atomic_write(directory, target, data)
+        return {"id": image_id, "type": media_type}
+
+    def load(self, conversation_id: str, image_id: str) -> tuple[bytes, str]:
+        if not _IMAGE_ID.fullmatch(image_id):
+            raise KeyError(image_id)
+        directory = self._directory(conversation_id)
+        for media_type, extension in IMAGE_TYPES.values():
+            path = directory / f"{image_id}.{extension}"
+            if path.is_file():
+                return path.read_bytes(), media_type
+        raise KeyError(image_id)
+
+    def delete_conversation(self, conversation_id: str) -> None:
+        directory = self._directory(conversation_id)
+        if directory.is_dir():
+            for path in directory.iterdir():
+                path.unlink()
+            directory.rmdir()
+
+
+class ConversationStore:
+    def __init__(self, root: Path, images: Path | None = None) -> None:
+        self.root = root
         self.root.mkdir(parents=True, exist_ok=True)
+        self.images = ImageStore(images if images is not None else root / "images")
         self._lock = threading.Lock()
 
     def _path(self, conversation_id: str) -> Path:
@@ -41,17 +113,8 @@ class ConversationStore:
         return self.root / f"{conversation_id}.json"
 
     def _write(self, conversation: dict[str, Any]) -> None:
-        path = self._path(conversation["id"])
-        handle, temporary = tempfile.mkstemp(dir=self.root, prefix=".tmp-", suffix=".json")
-        try:
-            with os.fdopen(handle, "w", encoding="utf-8") as stream:
-                json.dump(conversation, stream, ensure_ascii=False, indent=1)
-                stream.flush()
-                os.fsync(stream.fileno())
-            os.replace(temporary, path)
-        except BaseException:
-            Path(temporary).unlink(missing_ok=True)
-            raise
+        data = json.dumps(conversation, ensure_ascii=False, indent=1).encode("utf-8")
+        _atomic_write(self.root, self._path(conversation["id"]), data)
 
     def create(self, system_prompt: str = "") -> dict[str, Any]:
         stamp = now()
@@ -86,7 +149,7 @@ class ConversationStore:
         with self._lock:
             conversation = self.get(conversation_id)
             if message["role"] == "user" and not conversation["messages"]:
-                conversation["title"] = title_from(message["content"])
+                conversation["title"] = title_from(message["content"]) or "Image"
             conversation["messages"].append(message)
             conversation["updated"] = now()
             self._write(conversation)
@@ -108,6 +171,7 @@ class ConversationStore:
             if not path.is_file():
                 raise KeyError(conversation_id)
             path.unlink()
+            self.images.delete_conversation(conversation_id)
 
     def list(self) -> list[dict[str, Any]]:
         summaries = []
@@ -124,6 +188,7 @@ class ConversationStore:
                     "title": conversation["title"],
                     "updated": conversation["updated"],
                     "messages": len(conversation["messages"]),
+                    "images": any(m.get("images") for m in conversation["messages"]),
                 }
             )
         return sorted(summaries, key=lambda item: item["updated"], reverse=True)

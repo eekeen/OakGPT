@@ -66,3 +66,61 @@ def test_chat_template_and_tokens_match_live_gguf_template():
         )["tokens"]
         plan = engine.plan(conversation, ChatSettings(thinking=thinking, max_new_tokens=16))
         assert plan.tokens == whole
+
+
+@pytest.mark.hardware
+@pytest.mark.skipif(not os.getenv("OAKGPT_VISION_URL"), reason="Set OAKGPT_VISION_URL")
+def test_vision_template_matches_live_server_and_reads_an_image():
+    """Qwen3-VL rendering equals /apply-template with image parts, and an image is seen."""
+    import base64
+    import struct
+    import zlib
+
+    from oakgpt.chat.engine import PRESETS, LlamaChatClient, VisionChatEngine
+    from oakgpt.chat.template import Message, render_qwen3_vl, render_text
+
+    width, height = 320, 240
+    rows = b"".join(b"\x00" + b"\x14\x28\xdc" * width for _ in range(height))  # Solid blue.
+
+    def chunk(kind, body):
+        crc = struct.pack(">I", zlib.crc32(kind + body))
+        return struct.pack(">I", len(body)) + kind + body + crc
+
+    header = struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0)
+    image = b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", header) + chunk(b"IDAT", zlib.compress(rows))
+    image += chunk(b"IEND", b"")
+    client = LlamaChatClient(os.environ["OAKGPT_VISION_URL"])
+    marker = client.json("/props")["media_marker"]
+    url = "data:image/png;base64," + base64.b64encode(image).decode()
+    conversation = [
+        Message("system", "Be brief."),
+        Message("user", "Describe it.", (image,)),
+        Message("assistant", "A blue square."),
+        Message("user", "One word: which colour?", (image, image)),
+    ]
+    api_messages = [
+        {"role": "system", "content": "Be brief."},
+        {
+            "role": "user",
+            "content": [
+                {"type": "image_url", "image_url": {"url": url}},
+                {"type": "text", "text": "Describe it."},
+            ],
+        },
+        {"role": "assistant", "content": "A blue square."},
+        {
+            "role": "user",
+            "content": [
+                {"type": "image_url", "image_url": {"url": url}},
+                {"type": "image_url", "image_url": {"url": url}},
+                {"type": "text", "text": "One word: which colour?"},
+            ],
+        },
+    ]
+    expected = client.json("/apply-template", {"messages": api_messages})["prompt"]
+    assert render_text(render_qwen3_vl(conversation, marker)) == expected
+    engine = VisionChatEngine(client, image_tokens=1026)
+    settings = PRESETS["vision"].__class__(**{**PRESETS["vision"].__dict__, "temperature": 0.0})
+    events = list(engine.respond([Message("user", "One word: which colour?", (image,))], settings))
+    answer = "".join(e["text"] for e in events if e["type"] == "answer").lower()
+    assert "blue" in answer

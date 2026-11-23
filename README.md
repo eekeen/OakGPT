@@ -16,24 +16,29 @@ an actual ROS2 Jazzy/Nav2/Gazebo demonstrator. [Setup](docs/robotics.md),
 fault-driven fixes. The 60-scenario study exposes frequent unsafe raw Qwen proposals;
 independent validation prevents their execution.
 
-## Local chat assistant (Chat C1)
+## Local chat assistant (Chat C1, C1.1)
 
-OakGPT includes a private, ChatGPT-style assistant. A browser UI streams replies from
-Qwen3 1.7B (Q4_K_M) served by a local llama.cpp process, with multi-turn history, a
-selectable reasoning mode, Stop and Regenerate, and conversations stored as local files.
-Message text is tokenized so it can never forge chat-role delimiters, and the loopback
-web server defends against DNS rebinding and cross-site requests.
+OakGPT includes a private assistant with its own dark "Oak" interface. A browser UI
+streams replies from Qwen3 1.7B (Q4_K_M) served by a local llama.cpp process, with
+multi-turn history, a selectable reasoning mode, Stop and Regenerate, and conversations
+stored as local files. Attach, paste or drop images and Qwen3-VL 2B analyses them; only
+one model occupies the 6 GB GPU at a time and OakGPT swaps them on demand. Message text
+is tokenized so it can never forge chat-role delimiters, also on the image path, and the
+loopback web server defends against DNS rebinding and cross-site requests.
 
 ```powershell
+.\.venv\Scripts\python scripts\fetch_vision_model.py   # once, for image support
 .\.venv\Scripts\oakgpt chat --config configs/chat/qwen3_q4km.json
 ```
 
-See the [chat guide](docs/chat.md) and the [C1 decision report](reports/chat/c1/report.md),
-which records every design decision with alternatives, sources and measurements.
-In a paired study on the RTX 2060, prompt caching keeps eighth-turn time to first
-token at a median of 55 ms versus 215 ms without it.
+See the [chat guide](docs/chat.md) and the decision reports for
+[C1](reports/chat/c1/report.md) and [C1.1](reports/chat/c1_1/report.md) (PDF versions
+next to them), which record every design decision with alternatives, sources and
+measurements. On the RTX 2060, prompt caching keeps eighth-turn time to first token at a
+median of 55 ms versus 215 ms without it; switching to the image model takes a median of
+5.2 s, and a follow-up question about an image already seen starts answering in 0.07 s.
 
-![OakGPT chat](reports/chat/c1/figures/ui-conversation-1280.png)
+![OakGPT chat](reports/chat/c1_1/figures/ui-vision-1280.png)
 
 ## Phase 2 research workflow
 

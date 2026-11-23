@@ -1,0 +1,1545 @@
+{
+ "format": "oakgpt-chat-vision-study-v1",
+ "created": "2026-11-23T14:21:18+0100",
+ "git_revision": "e5493c9901d7d56518c0b086f20ff94692d01984",
+ "git_dirty_paths": [
+  "?? output/pdf/phase33-final-report-v2.pdf",
+  "?? output/pdf/phase33-final-report.pdf",
+  "?? output/pdf/phase33-quiet-followup-v2.pdf",
+  "?? output/pdf/phase33-quiet-followup.pdf"
+ ],
+ "environment": {
+  "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "gpu": "NVIDIA GeForce RTX 2060, 560.94, 6144 MiB"
+ },
+ "settings": {
+  "preset": "chat",
+  "temperature": 0.0,
+  "max_new_tokens": 160,
+  "seed": 2026
+ },
+ "prompts": {
+  "text": "In two sentences, what is a GGUF file?",
+  "screenshot": "This is a screenshot of an application. What is its name, and what does it offer?",
+  "follow_up": "List the four suggestion buttons shown in the screenshot.",
+  "shapes": "Describe the colours and shapes in this image in one sentence.",
+  "back_to_text": "Name one advantage of running a language model locally."
+ },
+ "screenshot": "reports\\chat\\c1\\figures\\ui-empty-1280.png",
+ "status_at_start": {
+  "ready": true,
+  "active_model": "text",
+  "model_path": "phase2-Qwen3-1.7B-Q4_K_M.gguf",
+  "context_length": 8192,
+  "build": "b11930-85cc432e2",
+  "identity": {
+   "model": "Qwen/Qwen3-1.7B",
+   "quantization": "Q4_K_M (Phase 2 conversion from original weights)",
+   "expected_server_build": "b11930",
+   "original_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+   "provenance": "reports/phase2/quantization_artifacts.json",
+   "gguf_filename": "phase2-Qwen3-1.7B-Q4_K_M.gguf",
+   "gguf_sha256": "f08493abe7a6566b9f4dc1106ff8ab238b3ee82189d6c42d0e7dbb1a50d751e5",
+   "managed_server": {
+    "log_dir": "D:\\Projects\\OakGPT\\runs\\chat\\server\\20261123-142018-401977",
+    "command": [
+     "D:\\Projects\\OakGPT\\vendor\\llama.cpp\\llama-server.exe",
+     "-m",
+     "D:\\Projects\\OakGPT\\models\\phase2-Qwen3-1.7B-Q4_K_M.gguf",
+     "-c",
+     "8192",
+     "-ngl",
+     "99",
+     "-t",
+     "8",
+     "--host",
+     "127.0.0.1",
+     "--port",
+     "18080",
+     "--parallel",
+     "1"
+    ],
+    "load_s": 4.048
+   }
+  },
+  "vision_available": true,
+  "models": {
+   "text": {
+    "model": "Qwen/Qwen3-1.7B",
+    "loaded": true
+   },
+   "vision": {
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "loaded": false
+   }
+  },
+  "cache_prompt": true,
+  "presets": {
+   "chat": {
+    "thinking": false,
+    "max_new_tokens": 1024,
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "seed": null
+   },
+   "reasoning": {
+    "thinking": true,
+    "max_new_tokens": 4096,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "seed": null
+   },
+   "vision": {
+    "thinking": false,
+    "max_new_tokens": 1024,
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 1.5,
+    "seed": null
+   }
+  },
+  "system_prompt": "You are OakGPT, a helpful assistant running entirely on the user's own computer. Answer clearly and concisely. If you are unsure, say so instead of guessing."
+ },
+ "status_at_end": {
+  "ready": true,
+  "active_model": "text",
+  "model_path": "phase2-Qwen3-1.7B-Q4_K_M.gguf",
+  "context_length": 8192,
+  "build": "b11930-85cc432e2",
+  "identity": {
+   "model": "Qwen/Qwen3-1.7B",
+   "quantization": "Q4_K_M (Phase 2 conversion from original weights)",
+   "expected_server_build": "b11930",
+   "original_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+   "provenance": "reports/phase2/quantization_artifacts.json",
+   "gguf_filename": "phase2-Qwen3-1.7B-Q4_K_M.gguf",
+   "gguf_sha256": "f08493abe7a6566b9f4dc1106ff8ab238b3ee82189d6c42d0e7dbb1a50d751e5",
+   "managed_server": {
+    "log_dir": "D:\\Projects\\OakGPT\\runs\\chat\\server\\20261123-142113-205657",
+    "command": [
+     "D:\\Projects\\OakGPT\\vendor\\llama.cpp\\llama-server.exe",
+     "-m",
+     "D:\\Projects\\OakGPT\\models\\phase2-Qwen3-1.7B-Q4_K_M.gguf",
+     "-c",
+     "8192",
+     "-ngl",
+     "99",
+     "-t",
+     "8",
+     "--host",
+     "127.0.0.1",
+     "--port",
+     "18080",
+     "--parallel",
+     "1"
+    ],
+    "load_s": 4.697
+   }
+  },
+  "vision_available": true,
+  "models": {
+   "text": {
+    "model": "Qwen/Qwen3-1.7B",
+    "loaded": true
+   },
+   "vision": {
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "loaded": false
+   }
+  },
+  "cache_prompt": true,
+  "presets": {
+   "chat": {
+    "thinking": false,
+    "max_new_tokens": 1024,
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "seed": null
+   },
+   "reasoning": {
+    "thinking": true,
+    "max_new_tokens": 4096,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "seed": null
+   },
+   "vision": {
+    "thinking": false,
+    "max_new_tokens": 1024,
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 1.5,
+    "seed": null
+   }
+  },
+  "system_prompt": "You are OakGPT, a helpful assistant running entirely on the user's own computer. Answer clearly and concisely. If you are unsure, say so instead of guessing."
+ },
+ "vram_idle_text_mib": 3208,
+ "vram_samples": [
+  [
+   0.06783969979733229,
+   3204
+  ],
+  [
+   0.33242559991776943,
+   3208
+  ],
+  [
+   0.597744699800387,
+   3208
+  ],
+  [
+   0.8623153998050839,
+   3208
+  ],
+  [
+   1.1311044998001307,
+   3208
+  ],
+  [
+   1.3946371998172253,
+   3208
+  ],
+  [
+   1.6577800998929888,
+   3203
+  ],
+  [
+   1.9276772998273373,
+   3203
+  ],
+  [
+   2.1905513999518007,
+   3203
+  ],
+  [
+   2.456967599922791,
+   3203
+  ],
+  [
+   2.7352083998266608,
+   3199
+  ],
+  [
+   3.0020655998960137,
+   1088
+  ],
+  [
+   3.2672390998341143,
+   1088
+  ],
+  [
+   3.5984177999198437,
+   1683
+  ],
+  [
+   3.8612997999880463,
+   1171
+  ],
+  [
+   4.125577399972826,
+   1171
+  ],
+  [
+   4.390192199964076,
+   2223
+  ],
+  [
+   4.671539899893105,
+   2223
+  ],
+  [
+   4.949779599905014,
+   2231
+  ],
+  [
+   5.231567699927837,
+   2231
+  ],
+  [
+   5.496743499999866,
+   2231
+  ],
+  [
+   5.778225499903783,
+   2231
+  ],
+  [
+   6.041797799989581,
+   2231
+  ],
+  [
+   6.307533899787813,
+   2231
+  ],
+  [
+   6.57163229980506,
+   3231
+  ],
+  [
+   6.852980399969965,
+   4009
+  ],
+  [
+   7.11652039992623,
+   4009
+  ],
+  [
+   7.390336299780756,
+   4009
+  ],
+  [
+   7.655326799955219,
+   4009
+  ],
+  [
+   7.938929999945685,
+   4009
+  ],
+  [
+   8.215598899871111,
+   4009
+  ],
+  [
+   8.499089799821377,
+   4009
+  ],
+  [
+   8.776791399810463,
+   4171
+  ],
+  [
+   9.056438399944454,
+   4175
+  ],
+  [
+   9.334037099964917,
+   4175
+  ],
+  [
+   9.619234099984169,
+   4229
+  ],
+  [
+   9.976254999870434,
+   4229
+  ],
+  [
+   10.252087199827656,
+   4278
+  ],
+  [
+   10.515838799998164,
+   4275
+  ],
+  [
+   10.764100699918345,
+   4275
+  ],
+  [
+   11.031418999889866,
+   4275
+  ],
+  [
+   11.31131529994309,
+   4275
+  ],
+  [
+   11.577628299826756,
+   4275
+  ],
+  [
+   11.823348899837583,
+   4275
+  ],
+  [
+   12.090443099848926,
+   1088
+  ],
+  [
+   12.356806800002232,
+   1088
+  ],
+  [
+   12.655085699865595,
+   1101
+  ],
+  [
+   12.901062799850479,
+   1171
+  ],
+  [
+   13.169001499889418,
+   1171
+  ],
+  [
+   13.438529999926686,
+   2223
+  ],
+  [
+   13.717120199929923,
+   2223
+  ],
+  [
+   13.997143299784511,
+   2223
+  ],
+  [
+   14.258629199815914,
+   2231
+  ],
+  [
+   14.610236599808559,
+   2231
+  ],
+  [
+   14.88137949979864,
+   2231
+  ],
+  [
+   15.143473699921742,
+   2231
+  ],
+  [
+   15.406592899933457,
+   2231
+  ],
+  [
+   15.668369599850848,
+   2227
+  ],
+  [
+   15.931299899937585,
+   2227
+  ],
+  [
+   16.19599339994602,
+   2227
+  ],
+  [
+   16.462084699887782,
+   3195
+  ],
+  [
+   16.724899199791253,
+   3205
+  ],
+  [
+   16.992604799801484,
+   3205
+  ],
+  [
+   17.255987899843603,
+   3205
+  ],
+  [
+   17.520486399997026,
+   3205
+  ],
+  [
+   17.786391399800777,
+   3205
+  ],
+  [
+   18.05151699995622,
+   1092
+  ],
+  [
+   18.361173199955374,
+   1092
+  ],
+  [
+   18.637915699975565,
+   1111
+  ],
+  [
+   18.907777099870145,
+   1175
+  ],
+  [
+   19.18632799992338,
+   1175
+  ],
+  [
+   19.46565489983186,
+   1171
+  ],
+  [
+   19.745555199915543,
+   2223
+  ],
+  [
+   20.027879499830306,
+   2231
+  ],
+  [
+   20.310080899856985,
+   2231
+  ],
+  [
+   20.588797999778762,
+   2231
+  ],
+  [
+   20.883311899844557,
+   2231
+  ],
+  [
+   21.14495789981447,
+   2231
+  ],
+  [
+   21.43308909982443,
+   2231
+  ],
+  [
+   21.69411289994605,
+   2227
+  ],
+  [
+   21.958187399897724,
+   2227
+  ],
+  [
+   22.221786299953237,
+   2227
+  ],
+  [
+   22.49120709998533,
+   3230
+  ],
+  [
+   22.75467269984074,
+   4011
+  ],
+  [
+   23.035996799822897,
+   4011
+  ],
+  [
+   23.29984869994223,
+   4011
+  ],
+  [
+   23.580182199832052,
+   4011
+  ],
+  [
+   23.848892799811438,
+   4011
+  ],
+  [
+   24.11011020001024,
+   4011
+  ],
+  [
+   24.37829149980098,
+   4011
+  ],
+  [
+   24.640643199905753,
+   4177
+  ],
+  [
+   24.908308999845758,
+   4172
+  ],
+  [
+   25.169857499888167,
+   4198
+  ],
+  [
+   25.455262099858373,
+   4204
+  ],
+  [
+   25.736681199865416,
+   1091
+  ],
+  [
+   26.00265449983999,
+   1091
+  ],
+  [
+   26.279551999876276,
+   1102
+  ],
+  [
+   26.57841489999555,
+   1174
+  ],
+  [
+   26.841840999899432,
+   1174
+  ],
+  [
+   27.106278899824247,
+   1174
+  ],
+  [
+   27.375258899992332,
+   2226
+  ],
+  [
+   27.653775199782103,
+   2226
+  ],
+  [
+   27.918773799901828,
+   2230
+  ],
+  [
+   28.18182529998012,
+   2230
+  ],
+  [
+   28.448507899884135,
+   2230
+  ],
+  [
+   28.710987999802455,
+   2230
+  ],
+  [
+   28.975185999879614,
+   2230
+  ],
+  [
+   29.23879299988039,
+   3198
+  ],
+  [
+   29.5037527999375,
+   3206
+  ],
+  [
+   29.76931819994934,
+   3208
+  ],
+  [
+   30.048788799904287,
+   3208
+  ],
+  [
+   30.316086599836126,
+   3206
+  ],
+  [
+   30.580280099995434,
+   3206
+  ],
+  [
+   30.84702659980394,
+   1093
+  ],
+  [
+   31.111296799965203,
+   1093
+  ],
+  [
+   31.407676999922842,
+   1176
+  ],
+  [
+   31.669960899977013,
+   1176
+  ],
+  [
+   31.937088699778542,
+   1176
+  ],
+  [
+   32.20162549987435,
+   1176
+  ],
+  [
+   32.46745349979028,
+   2228
+  ],
+  [
+   32.73370219999924,
+   2228
+  ],
+  [
+   33.057844899827614,
+   3228
+  ],
+  [
+   33.32275870000012,
+   4010
+  ],
+  [
+   33.590113799786195,
+   4010
+  ],
+  [
+   33.847139899851754,
+   4010
+  ],
+  [
+   34.131520099937916,
+   4010
+  ],
+  [
+   34.41328849992715,
+   4010
+  ],
+  [
+   34.6793319999706,
+   4010
+  ],
+  [
+   34.94272379996255,
+   4010
+  ],
+  [
+   35.209125799825415,
+   4176
+  ],
+  [
+   35.472571099875495,
+   4176
+  ],
+  [
+   35.73769939993508,
+   4194
+  ],
+  [
+   36.00191619992256,
+   4226
+  ],
+  [
+   36.298208199907094,
+   4226
+  ],
+  [
+   36.55909559992142,
+   4276
+  ],
+  [
+   36.82269859989174,
+   4276
+  ],
+  [
+   37.09076749999076,
+   4281
+  ],
+  [
+   37.35478419996798,
+   4281
+  ],
+  [
+   37.61901599983685,
+   4281
+  ],
+  [
+   37.88173469994217,
+   4281
+  ],
+  [
+   38.14740809984505,
+   4281
+  ],
+  [
+   38.450833399780095,
+   1090
+  ],
+  [
+   38.71254049986601,
+   1085
+  ],
+  [
+   38.98191349999979,
+   1093
+  ],
+  [
+   39.24192259996198,
+   1173
+  ],
+  [
+   39.50504600000568,
+   1173
+  ],
+  [
+   39.769884899957106,
+   1173
+  ],
+  [
+   40.033081099856645,
+   2225
+  ],
+  [
+   40.316220899811015,
+   2227
+  ],
+  [
+   40.58057120000012,
+   2234
+  ],
+  [
+   40.922001499915496,
+   2234
+  ],
+  [
+   41.18615849991329,
+   2234
+  ],
+  [
+   41.44728979980573,
+   2234
+  ],
+  [
+   41.711149599868804,
+   2234
+  ],
+  [
+   41.97327609988861,
+   2233
+  ],
+  [
+   42.23952119983733,
+   2233
+  ],
+  [
+   42.503237599972636,
+   2233
+  ],
+  [
+   42.76879749982618,
+   3200
+  ],
+  [
+   43.045932199805975,
+   3208
+  ],
+  [
+   43.314358999952674,
+   3210
+  ],
+  [
+   43.59836629987694,
+   3210
+  ],
+  [
+   43.921446199994534,
+   3210
+  ],
+  [
+   44.18599379993975,
+   3210
+  ],
+  [
+   44.45298279984854,
+   1097
+  ],
+  [
+   44.71471039997414,
+   1097
+  ],
+  [
+   44.97959789982997,
+   1962
+  ],
+  [
+   45.24605989991687,
+   1179
+  ],
+  [
+   45.50796979991719,
+   1178
+  ],
+  [
+   45.77376899984665,
+   1178
+  ],
+  [
+   46.03603169997223,
+   2226
+  ],
+  [
+   46.35032069985755,
+   2226
+  ],
+  [
+   46.61294019990601,
+   3224
+  ],
+  [
+   46.87653739983216,
+   4012
+  ],
+  [
+   47.155615099938586,
+   4012
+  ],
+  [
+   47.43474139994942,
+   4012
+  ],
+  [
+   47.70183099992573,
+   4012
+  ],
+  [
+   47.96241219993681,
+   4012
+  ],
+  [
+   48.22719519981183,
+   4012
+  ],
+  [
+   48.490463099908084,
+   4012
+  ],
+  [
+   48.75610090000555,
+   4178
+  ],
+  [
+   49.017957099946216,
+   4178
+  ],
+  [
+   49.28652530000545,
+   4196
+  ],
+  [
+   49.553196699824184,
+   4204
+  ],
+  [
+   49.831864199833944,
+   4208
+  ],
+  [
+   50.09846959984861,
+   1095
+  ],
+  [
+   50.36470489995554,
+   1095
+  ],
+  [
+   50.629528999794275,
+   1106
+  ],
+  [
+   50.894280599895865,
+   1178
+  ],
+  [
+   51.175649099983275,
+   1178
+  ],
+  [
+   51.43806819990277,
+   1179
+  ],
+  [
+   51.70303319999948,
+   2230
+  ],
+  [
+   52.002861299784854,
+   2227
+  ],
+  [
+   52.27056769980118,
+   2231
+  ],
+  [
+   52.54574539978057,
+   2231
+  ],
+  [
+   52.82699029985815,
+   2231
+  ],
+  [
+   53.108069699956104,
+   2234
+  ],
+  [
+   53.401829599868506,
+   2234
+  ],
+  [
+   53.685683799907565,
+   2234
+  ],
+  [
+   53.96026259986684,
+   2234
+  ],
+  [
+   54.23996669985354,
+   2234
+  ],
+  [
+   54.55434299982153,
+   3202
+  ],
+  [
+   54.8279422998894,
+   3205
+  ],
+  [
+   55.112015599850565,
+   3207
+  ],
+  [
+   55.392179699847475,
+   3207
+  ]
+ ],
+ "rounds": [
+  {
+   "round": 0,
+   "turns": [
+    {
+     "client_wall_s": 0.7184604001231492,
+     "meta": {
+      "model": "text",
+      "prompt_tokens": 64,
+      "images": 0,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": null
+     },
+     "stats": {
+      "generated_tokens": 43,
+      "stop_type": "eos",
+      "ttft_s": 0.17680989997461438,
+      "wall_s": 0.658668200019747,
+      "server_prompt_tokens": 64,
+      "server_cached_tokens": 0,
+      "server_prompt_ms": 159.934,
+      "server_decode_tokens_per_second": 87.21075100915297,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 0.0,
+       "seed": 2026
+      }
+     },
+     "answer": "A GGUF file is a format used for storing large models in the Deep Learning Framework (DLT), and it is commonly used in the context of the DeepMind's DeepMind Training Framework (DMTF).",
+     "kind": "text",
+     "image": null,
+     "vram_peak_mib": 3203
+    },
+    {
+     "client_wall_s": 8.437074899906293,
+     "meta": {
+      "model": "vision",
+      "prompt_tokens": 1094,
+      "images": 1,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": 5.969
+     },
+     "stats": {
+      "generated_tokens": 60,
+      "stop_type": "eos",
+      "ttft_s": 1.531719399848953,
+      "wall_s": 2.1608602998312563,
+      "server_prompt_tokens": 1070,
+      "server_cached_tokens": 0,
+      "server_prompt_ms": 1483.734,
+      "server_decode_tokens_per_second": 93.60354614654825,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 1.5,
+       "seed": 2026
+      }
+     },
+     "answer": "The application is called OakGPT. It offers a chat interface where users can ask questions and receive answers from the AI model. The interface includes options for different types of responses, such as \"Fast\" and \"Reasoning,\" and provides a message input field for users to type their queries.",
+     "kind": "image",
+     "image": "screenshot",
+     "vram_peak_mib": 4278
+    },
+    {
+     "client_wall_s": 0.7066877998877317,
+     "meta": {
+      "model": "vision",
+      "prompt_tokens": 1173,
+      "images": 1,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": null
+     },
+     "stats": {
+      "generated_tokens": 54,
+      "stop_type": "eos",
+      "ttft_s": 0.06615519989281893,
+      "wall_s": 0.6173060999717563,
+      "server_prompt_tokens": 20,
+      "server_cached_tokens": 1129,
+      "server_prompt_ms": 21.569,
+      "server_decode_tokens_per_second": 96.19590568445203,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 1.5,
+       "seed": 2026
+      }
+     },
+     "answer": "The four suggestion buttons shown in the screenshot are:\n- Explain how attention works in a Transformer\n- Write a Python function that checks for palindromes\n- Give me three ideas for a weekend project\n- Summarize the pros and cons of quantization",
+     "kind": "image_follow_up",
+     "image": null,
+     "vram_peak_mib": 4275
+    },
+    {
+     "client_wall_s": 5.221361899981275,
+     "meta": {
+      "model": "text",
+      "prompt_tokens": 126,
+      "images": 0,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": 4.436
+     },
+     "stats": {
+      "generated_tokens": 28,
+      "stop_type": "eos",
+      "ttft_s": 0.19310430018231273,
+      "wall_s": 0.4925105001311749,
+      "server_prompt_tokens": 126,
+      "server_cached_tokens": 0,
+      "server_prompt_ms": 188.69,
+      "server_decode_tokens_per_second": 90.23551469334964,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 0.0,
+       "seed": 2026
+      }
+     },
+     "answer": "One advantage of running a language model locally is improved privacy and data security, as it prevents sensitive data from being transmitted over the network.",
+     "kind": "back_to_text",
+     "image": null,
+     "vram_peak_mib": 3205
+    }
+   ]
+  },
+  {
+   "round": 1,
+   "turns": [
+    {
+     "client_wall_s": 0.7041912998538464,
+     "meta": {
+      "model": "text",
+      "prompt_tokens": 64,
+      "images": 0,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": null
+     },
+     "stats": {
+      "generated_tokens": 54,
+      "stop_type": "eos",
+      "ttft_s": 0.035953700076788664,
+      "wall_s": 0.6649629999883473,
+      "server_prompt_tokens": 4,
+      "server_cached_tokens": 60,
+      "server_prompt_ms": 17.536,
+      "server_decode_tokens_per_second": 84.29101712220925,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 0.0,
+       "seed": 2026
+      }
+     },
+     "answer": "A GGUF file is a format used for storing large models in the Deep Learning Framework (DLT), and it is commonly used in the context of the DeepMind's DeepMind Training Framework (DMTF). It is designed to efficiently store and load large models.",
+     "kind": "text",
+     "image": null,
+     "vram_peak_mib": 3205
+    },
+    {
+     "client_wall_s": 7.703173900023103,
+     "meta": {
+      "model": "vision",
+      "prompt_tokens": 1087,
+      "images": 1,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": 6.482
+     },
+     "stats": {
+      "generated_tokens": 17,
+      "stop_type": "eos",
+      "ttft_s": 0.7308495999313891,
+      "wall_s": 0.9146477000322193,
+      "server_prompt_tokens": 363,
+      "server_cached_tokens": 0,
+      "server_prompt_ms": 717.631,
+      "server_decode_tokens_per_second": 86.34273749649233,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 1.5,
+       "seed": 2026
+      }
+     },
+     "answer": "The image features a solid red background with a single blue rectangle in the center.",
+     "kind": "image",
+     "image": "shapes",
+     "vram_peak_mib": 4204
+    },
+    {
+     "client_wall_s": 4.464243799913675,
+     "meta": {
+      "model": "text",
+      "prompt_tokens": 137,
+      "images": 0,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": 3.656
+     },
+     "stats": {
+      "generated_tokens": 29,
+      "stop_type": "eos",
+      "ttft_s": 0.19417809997685254,
+      "wall_s": 0.4950333999004215,
+      "server_prompt_tokens": 137,
+      "server_cached_tokens": 0,
+      "server_prompt_ms": 189.602,
+      "server_decode_tokens_per_second": 93.23947226458696,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 0.0,
+       "seed": 2026
+      }
+     },
+     "answer": "One advantage of running a language model locally is that it improves privacy and security by keeping sensitive data on the device rather than in the cloud.",
+     "kind": "back_to_text",
+     "image": null,
+     "vram_peak_mib": 3208
+    }
+   ]
+  },
+  {
+   "round": 2,
+   "turns": [
+    {
+     "client_wall_s": 0.6234348998405039,
+     "meta": {
+      "model": "text",
+      "prompt_tokens": 64,
+      "images": 0,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": null
+     },
+     "stats": {
+      "generated_tokens": 57,
+      "stop_type": "eos",
+      "ttft_s": 0.037612800020724535,
+      "wall_s": 0.5888978999573737,
+      "server_prompt_tokens": 4,
+      "server_cached_tokens": 60,
+      "server_prompt_ms": 15.02,
+      "server_decode_tokens_per_second": 101.63136489108203,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 0.0,
+       "seed": 2026
+      }
+     },
+     "answer": "A GGUF file is a format used for storing large models in the Deep Learning Framework (DLT), and it is commonly used in the context of the DeepMind's DeepMind Control Suite. It is designed to efficiently store and load large models, supporting both training and inference.",
+     "kind": "text",
+     "image": null,
+     "vram_peak_mib": 3208
+    },
+    {
+     "client_wall_s": 6.847250499995425,
+     "meta": {
+      "model": "vision",
+      "prompt_tokens": 1094,
+      "images": 1,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": 4.446
+     },
+     "stats": {
+      "generated_tokens": 60,
+      "stop_type": "eos",
+      "ttft_s": 1.40105350012891,
+      "wall_s": 2.141192700015381,
+      "server_prompt_tokens": 1070,
+      "server_cached_tokens": 0,
+      "server_prompt_ms": 1360.779,
+      "server_decode_tokens_per_second": 79.73888892643075,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 1.5,
+       "seed": 2026
+      }
+     },
+     "answer": "The application is called OakGPT. It offers a chat interface where users can ask questions and receive answers from the AI model. The interface includes options for different types of responses, such as \"Fast\" and \"Reasoning,\" and provides a message input field for users to type their queries.",
+     "kind": "image",
+     "image": "screenshot",
+     "vram_peak_mib": 4281
+    },
+    {
+     "client_wall_s": 0.7953995000571012,
+     "meta": {
+      "model": "vision",
+      "prompt_tokens": 1173,
+      "images": 1,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": null
+     },
+     "stats": {
+      "generated_tokens": 54,
+      "stop_type": "eos",
+      "ttft_s": 0.06517679989337921,
+      "wall_s": 0.7523896999191493,
+      "server_prompt_tokens": 20,
+      "server_cached_tokens": 1129,
+      "server_prompt_ms": 26.639,
+      "server_decode_tokens_per_second": 77.17015582547315,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 1.5,
+       "seed": 2026
+      }
+     },
+     "answer": "The four suggestion buttons shown in the screenshot are:\n- Explain how attention works in a Transformer\n- Write a Python function that checks for palindromes\n- Give me three ideas for a weekend project\n- Summarize the pros and cons of quantization",
+     "kind": "image_follow_up",
+     "image": null,
+     "vram_peak_mib": 4281
+    },
+    {
+     "client_wall_s": 5.274522599996999,
+     "meta": {
+      "model": "text",
+      "prompt_tokens": 140,
+      "images": 0,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": 4.432
+     },
+     "stats": {
+      "generated_tokens": 28,
+      "stop_type": "eos",
+      "ttft_s": 0.19117049989290535,
+      "wall_s": 0.5066521000117064,
+      "server_prompt_tokens": 140,
+      "server_cached_tokens": 0,
+      "server_prompt_ms": 186.903,
+      "server_decode_tokens_per_second": 85.69524232710191,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 0.0,
+       "seed": 2026
+      }
+     },
+     "answer": "One advantage of running a language model locally is improved privacy and data security, as it prevents sensitive data from being transmitted over the network.",
+     "kind": "back_to_text",
+     "image": null,
+     "vram_peak_mib": 3210
+    }
+   ]
+  },
+  {
+   "round": 3,
+   "turns": [
+    {
+     "client_wall_s": 0.6238625999540091,
+     "meta": {
+      "model": "text",
+      "prompt_tokens": 64,
+      "images": 0,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": null
+     },
+     "stats": {
+      "generated_tokens": 57,
+      "stop_type": "eos",
+      "ttft_s": 0.03618389996699989,
+      "wall_s": 0.5889904000796378,
+      "server_prompt_tokens": 4,
+      "server_cached_tokens": 60,
+      "server_prompt_ms": 13.838,
+      "server_decode_tokens_per_second": 101.3991268810896,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 0.0,
+       "seed": 2026
+      }
+     },
+     "answer": "A GGUF file is a format used for storing large models in the Deep Learning Framework (DLT), and it is commonly used in the context of the DeepMind's DeepMind Control Suite. It is designed to efficiently store and load large models, supporting both training and inference.",
+     "kind": "text",
+     "image": null,
+     "vram_peak_mib": 3210
+    },
+    {
+     "client_wall_s": 5.6170049998909235,
+     "meta": {
+      "model": "vision",
+      "prompt_tokens": 1087,
+      "images": 1,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": 4.418
+     },
+     "stats": {
+      "generated_tokens": 17,
+      "stop_type": "eos",
+      "ttft_s": 0.7579045000020415,
+      "wall_s": 0.932933900039643,
+      "server_prompt_tokens": 363,
+      "server_cached_tokens": 0,
+      "server_prompt_ms": 739.721,
+      "server_decode_tokens_per_second": 91.51904454117499,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 1.5,
+       "seed": 2026
+      }
+     },
+     "answer": "The image features a solid red background with a single blue rectangle in the center.",
+     "kind": "image",
+     "image": "shapes",
+     "vram_peak_mib": 4208
+    },
+    {
+     "client_wall_s": 5.5543307000771165,
+     "meta": {
+      "model": "text",
+      "prompt_tokens": 140,
+      "images": 0,
+      "context_length": 8192,
+      "dropped_exchanges": 0,
+      "seed": 2026,
+      "model_load_s": 4.697
+     },
+     "stats": {
+      "generated_tokens": 28,
+      "stop_type": "eos",
+      "ttft_s": 0.23780310014262795,
+      "wall_s": 0.569903900148347,
+      "server_prompt_tokens": 140,
+      "server_cached_tokens": 0,
+      "server_prompt_ms": 229.896,
+      "server_decode_tokens_per_second": 81.43003199898665,
+      "settings": {
+       "thinking": false,
+       "max_new_tokens": 160,
+       "temperature": 0.0,
+       "top_p": 0.8,
+       "top_k": 20,
+       "min_p": 0.0,
+       "presence_penalty": 0.0,
+       "seed": 2026
+      }
+     },
+     "answer": "One advantage of running a language model locally is improved privacy and data security, as it prevents sensitive data from being transmitted over the network.",
+     "kind": "back_to_text",
+     "image": null,
+     "vram_peak_mib": 3207
+    }
+   ]
+  }
+ ],
+ "limitations": [
+  "One host and one run of the listed rounds; no repetition across reboots.",
+  "VRAM is device-wide nvidia-smi memory.used, sampled every 200 ms; short peaks between samples can be missed and other desktop processes are included.",
+  "Greedy decoding with a fixed seed; answers are single samples, not a quality evaluation.",
+  "TTFT is measured by the chat server and includes model-independent HTTP and Python overhead; model swap time is reported separately as model_load_s."
+ ]
+}

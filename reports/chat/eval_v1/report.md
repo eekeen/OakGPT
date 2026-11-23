@@ -235,11 +235,28 @@ simple questions right. Some errors are confident and plain wrong (Sydney, `12`)
 matches the C1 observation of hallucination. Its Swedish is poor: 1 of 18 Swedish replies was strictly correct. With thinking, the same model reaches 92%, with only a few format slips.
 This is the clearest result in the report, and its interval is far from zero.
 
-**Product consequence, not yet applied.** The UI defaults to the chat preset, which is
-fast but often wrong on these items. The reasoning preset is about 30 times slower per
-short answer, but still under 2 s at the median, and much more accurate here. Whether
-to switch the default is a decision for the project owner. Long answers would take
-proportionally longer, and a 63 s worst case was observed.
+**Product consequence.** At measurement time, the UI defaulted to the chat preset, which
+is fast but often wrong on these items. The reasoning preset is about 30 times slower per
+short answer, but still under 2 s at the median, and much more accurate here. Long
+answers would take proportionally longer, and a 63 s worst case was observed. The project
+owner chose to switch the default; see D32.
+
+### D32. Reasoning becomes the default mode (applied after this measurement)
+
+**Decision.** Both chat configs now set `"defaults": {"preset": "reasoning"}`. The server
+reports this as `default_preset` in its status, and the UI starts in Reason mode. A mode
+is stored in the browser only when the user clicks Fast or Reason. Older stored settings
+carry the previous default `chat` without that mark, so it is ignored once. Image
+conversations are unaffected: the vision model has no thinking mode (C1.1 D21).
+
+**Rationale.** On this set, reasoning raised strict accuracy by 42.5 points
+([27.5, 56.7]) at a median cost of under 2 s per short answer. A user who wants instant
+replies can still choose Fast, and that choice persists.
+
+**Verification.** A headless browser driven over the DevTools protocol confirmed four
+cases with no console errors: a fresh profile starts in Reason; a legacy stored `chat`
+is ignored; an explicit Fast survives a reload; switching back works. A unit test checks
+the config value and that only `chat` or `reasoning` is accepted.
 
 **The vision model is a reasonable text model.** Answering text directly, it beats the
 text model's chat mode, most visibly on Swedish, code and reading. That supports keeping image conversations on the vision model. It

@@ -191,6 +191,21 @@ def test_managed_vision_command_and_config_loading():
     assert "--mmproj" not in text_command and "--image-max-tokens" not in text_command
 
 
+def test_default_preset_comes_from_config_and_is_validated(tmp_path):
+    config = ChatConfig.load(ROOT / "configs/chat/qwen3_q4km.json")
+    # Evaluation v1 measured reasoning at 92% strict versus 49% for the chat preset.
+    assert config.default_preset == "reasoning" and config.defaults.thinking is True
+    bad = tmp_path / "bad.json"
+    bad.write_text(
+        json.dumps(
+            {"llama_url": "http://127.0.0.1:1", "storage": "s", "defaults": {"preset": "vision"}}
+        ),
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="chat or reasoning"):
+        ChatConfig.load(bad)
+
+
 def test_cached_sha256_reuses_and_invalidates(tmp_path):
     target = tmp_path / "weights.bin"
     cache = tmp_path / "cache.json"

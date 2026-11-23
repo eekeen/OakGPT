@@ -78,7 +78,7 @@ configuration and set `llama_url` to its loopback address.
 | `storage` | Directory for conversation JSON files. |
 | `cache_prompt` | Reuse the KV cache between turns (default `true`; see report D9). |
 | `system_prompt` | Default system prompt for new chats. |
-| `defaults` | Default sampling, e.g. `{"preset": "chat"}`. |
+| `defaults` | Default sampling and the mode the UI starts in: `{"preset": "reasoning"}` (default since evaluation v1, report D32) or `{"preset": "chat"}` for fast replies. A mode you pick in the UI is remembered in your browser. |
 | `identity` | Provenance recorded in the status endpoint. |
 | `vision` | Optional image model: `llama_url`, `image_max_tokens` (default 1024), `managed_server` with an extra `mmproj` path, and `identity`. |
 

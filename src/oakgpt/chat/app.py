@@ -92,6 +92,7 @@ class ChatConfig:
     web_port: int = 8765
     system_prompt: str = ""
     defaults: ChatSettings = field(default_factory=ChatSettings)
+    default_preset: str = "chat"  # Mode the UI starts in until the user picks one.
     identity: dict[str, Any] = field(default_factory=dict)
     cache_prompt: bool = True
     managed: ManagedServer | None = None
@@ -129,12 +130,16 @@ class ChatConfig:
                 identity=raw.get("identity", {}),
                 managed=managed(raw.get("managed_server"), image_max_tokens=image_max_tokens),
             )
+        default_preset = values.get("defaults", {}).get("preset", "chat")
+        if default_preset not in ("chat", "reasoning"):  # The two modes the UI offers.
+            raise ValueError(f"defaults.preset must be chat or reasoning, not {default_preset!r}")
         return cls(
             url=values["llama_url"],
             storage=resolve(values["storage"]),
             web_port=values.get("web_port", 8765),
             system_prompt=values.get("system_prompt", ""),
             defaults=settings_from(values.get("defaults", {})),
+            default_preset=default_preset,
             identity=values.get("identity", {}),
             cache_prompt=values.get("cache_prompt", True),
             managed=managed(values.get("managed_server")),
@@ -351,6 +356,7 @@ def run_chat(config: ChatConfig, open_browser: bool = True) -> None:
                 },
                 "cache_prompt": config.cache_prompt,
                 "presets": {name: asdict(preset) for name, preset in PRESETS.items()},
+                "default_preset": config.default_preset,
                 "system_prompt": config.system_prompt,
             }
             active = pool.active

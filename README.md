@@ -40,9 +40,9 @@ median of 55 ms versus 215 ms without it; switching to the image model takes a m
 
 Answer quality is measured on a frozen 67-item evaluation set (40 text, 27 image) that
 is never used for training; see the [evaluation report](reports/chat/eval_v1/report.md).
-Strict accuracy on that set is 49% for the text model in its fast default mode, 92% with
-reasoning, and 75% for the image model on image questions. The set is small, so these are
-project baselines, not benchmark scores.
+Strict accuracy on that set is 49% for the text model in fast mode, 92% with reasoning
+(now the default mode), and 75% for the image model on image questions. The set is small,
+so these are project baselines, not benchmark scores.
 
 ![OakGPT chat](reports/chat/c1_1/figures/ui-vision-1280.png)
 

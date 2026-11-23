@@ -133,12 +133,14 @@ const MAX_IMAGE_SIDE = 1600; // The server caps each image at 1024 tokens; large
 const state = {
   presets: {}, defaultSystemPrompt: "", conversationId: null, conversation: null,
   busy: false, controller: null, status: null, history: [], pending: [],
-  prefs: { preset: "chat", temperature: null, maxTokens: null, systemPrompt: null, theme: "dark" },
+  prefs: { preset: null, temperature: null, maxTokens: null, systemPrompt: null, theme: "dark" },
 };
 
 function loadPrefs() {
   try {
     const saved = JSON.parse(localStorage.getItem("oakgpt.prefs") || "{}");
+    // Older versions stored the default mode as if chosen; only explicit choices persist.
+    if (saved.presetChosen !== true) delete saved.preset;
     Object.assign(state.prefs, saved);
   } catch { /* Storage may be unavailable; defaults still work. */ }
 }
@@ -189,11 +191,13 @@ for (const button of document.querySelectorAll("[data-theme-choice]")) {
 
 // ---------- Settings ------------------------------------------------------------------
 
-function preset() { return state.presets[state.prefs.preset] || state.presets.chat || {}; }
+// The user's explicit choice, else the server's configured default.
+function presetName() { return state.prefs.preset ?? state.status?.default_preset ?? "chat"; }
+function preset() { return state.presets[presetName()] || state.presets.chat || {}; }
 
 function renderSettings() {
   for (const button of el.mode.querySelectorAll("button")) {
-    button.setAttribute("aria-checked", String(button.dataset.preset === state.prefs.preset));
+    button.setAttribute("aria-checked", String(button.dataset.preset === presetName()));
   }
   const temperature = state.prefs.temperature ?? preset().temperature ?? 0.7;
   el.temperature.value = temperature;
@@ -203,7 +207,7 @@ function renderSettings() {
 }
 
 function requestSettings() {
-  const settings = { preset: state.prefs.preset };
+  const settings = { preset: presetName() };
   if (state.prefs.temperature !== null) settings.temperature = Number(state.prefs.temperature);
   if (state.prefs.maxTokens !== null) settings.max_new_tokens = Number(state.prefs.maxTokens);
   return settings;
@@ -212,6 +216,7 @@ function requestSettings() {
 for (const button of el.mode.querySelectorAll("button")) {
   button.addEventListener("click", () => {
     state.prefs.preset = button.dataset.preset;
+    state.prefs.presetChosen = true;
     state.prefs.temperature = null;
     state.prefs.maxTokens = null;
     savePrefs();

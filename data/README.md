@@ -5,6 +5,9 @@ MIT license. They have separate content and are never concatenated before splitt
 Character vocabulary is fitted only to training text. Byte vocabulary covers UTF-8.
 These corpora are pipeline fixtures, not a meaningful language training dataset.
 
+`eval/chat_eval_v1/` is the frozen chat evaluation set (40 text and 27 synthetic image
+items); its own [README](eval/chat_eval_v1/README.md) is the data card.
+
 `eval/local_smoke_v1.jsonl` contains eight original, fixed, hand-authored prompts. Each
 record defines a stable ID, prompt, accepted answers and scoring rule. It covers elementary
 arithmetic, factual recall, copying, simple reading and classification. None of the

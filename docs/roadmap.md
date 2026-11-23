@@ -3,10 +3,13 @@
 ## Chat track
 
 C1, the local multi-turn chat assistant, is implemented; see
-[the C1 report](../reports/chat/c1/report.md). C2 is fine-tuning, treated as a measured
-hypothesis. Freeze a chat evaluation set that is disjoint from all training data before
-any training. Measure LoRA/QLoRA feasibility within 6 GB, and compare against the
-unchanged base model. The chat track is independent of the robotics Phase 4 gate below.
+[the C1 report](../reports/chat/c1/report.md). C1.1 adds images. The chat evaluation set
+[`chat_eval_v1`](../data/eval/chat_eval_v1/README.md) is frozen, and its baseline is
+measured in [the evaluation report](../reports/chat/eval_v1/report.md): 49% strict for
+the text model's chat preset, 92% with reasoning. C2 is fine-tuning, treated as a measured
+hypothesis. Never train on `chat_eval_v1`. Measure LoRA/QLoRA feasibility within 6 GB,
+and compare against the unchanged base model on that set. OCR with a normal typeface and
+photographs need a separate `chat_eval_v2`; v1 is not changed. The chat track is independent of the robotics Phase 4 gate below.
 
 ## Measured Phase 3.3 gate
 

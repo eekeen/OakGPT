@@ -1,0 +1,399 @@
+% OakGPT chat evaluation v1 report. LaTeX source of report.md; the two must stay in sync.
+% Build (pdfLaTeX, XeLaTeX or Tectonic) from this directory, e.g. `tectonic report.tex`.
+% The source is pure ASCII so every engine accepts it.
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
+\usepackage[margin=25mm]{geometry}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyvrb}
+\usepackage{caption}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{oak}{HTML}{3D6B35}
+\hypersetup{colorlinks=true,linkcolor=oak,urlcolor=oak,citecolor=oak,
+  pdftitle={OakGPT Chat Evaluation v1: How Good Are the Local Models?},
+  pdfauthor={OakGPT - Local LLM}}
+\setlist{itemsep=2pt,topsep=4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\renewcommand{\arraystretch}{1.15}
+\urlstyle{same}
+\setlength{\emergencystretch}{3em}
+
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\decision}[1]{\subsection*{#1}\addcontentsline{toc}{subsection}{#1}}
+\newcommand{\field}[1]{\textbf{#1}\quad}
+
+\title{\textbf{OakGPT Chat Evaluation v1:\\How Good Are the Local Models?}\\[4pt]
+  \large Design decisions, rationale, sources and measured results}
+\author{OakGPT -- Local LLM}
+\date{2026-11-23}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\small
+\begin{tabularx}{0.92\textwidth}{@{}lY@{}}
+\toprule
+Track & Chat, evaluation before C2 (fine-tuning) \\
+Branch & \path{feature/chat-c1-local-web-chat} \\
+Dataset & \path{data/eval/chat_eval_v1}, frozen in commit \code{851c057};
+  \code{items.jsonl} SHA-256 \code{61946eb4...2ecb} \\
+Raw results & \path{chat_eval_v1_results.json}: 441 replies with scores, timings, model
+  hashes and environment \\
+Hardware & NVIDIA GeForce RTX 2060, 6\,GB VRAM, Windows 10 19045 \\
+Inference & llama.cpp \code{b11930-85cc432e2}; Qwen3 1.7B Q4\_K\_M (text),
+  Qwen3-VL-2B-Instruct Q4\_K\_M + F16 encoder (images) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{abstract}
+\noindent Until now, OakGPT's answer quality was only described by anecdotes. This report
+adds a frozen evaluation set of 67 items (40 text, 27 image) with answer keys, a runner
+that uses the app's own code path, and one complete measurement: 441 replies, three fixed
+seeds per item and condition. \emph{Strict} means the reply equals the key in the
+requested form.
+
+Thinking mode raises the text model's strict accuracy from 49.2\% to 91.7\% (paired
+difference 42.5 points, 95\% interval 27.5--56.7). The cost is a median of 1.9\,s
+instead of 0.06\,s per short answer. In direct mode, the 2B vision model answers the
+text items 21.7 points better than the 1.7B text model (9.2--34.2). The vision model was
+always right on colour, shape, position and size, but read only 20\% of the pixel-font
+text correctly. These numbers are the baseline that any C2 fine-tuning must beat; they
+describe this small set only.
+\end{abstract}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}Yrllr@{}}
+\toprule
+Condition & Items & Strict accuracy & Lenient accuracy & Median time \\
+\midrule
+Text model, chat preset (UI default) & 40 & \textbf{49.2\%} [35.0, 64.2] & 60.8\% [45.8, 75.8] & 0.06\,s \\
+Text model, reasoning preset & 40 & \textbf{91.7\%} [83.3, 98.3] & 91.7\% [83.3, 98.3] & 1.92\,s \\
+Vision model, image items & 27 & \textbf{75.3\%} [60.5, 88.9] & 75.3\% [60.5, 88.9] & 0.06\,s \\
+Vision model, text items & 40 & \textbf{70.8\%} [56.7, 84.2] & 75.8\% [63.3, 88.3] & 0.05\,s \\
+\bottomrule
+\end{tabularx}
+\caption*{Item-level 95\% bootstrap intervals in brackets. Time is per reply.}
+\end{table}
+
+\tableofcontents
+
+\section{What was built}
+
+\begin{center}\small
+\begin{tabularx}{\textwidth}{@{}Yl@{}}
+\toprule
+Part & File \\
+\midrule
+Frozen set (items, 29 PNGs, data card) & \path{data/eval/chat_eval_v1/} \\
+Deterministic builder (standard library only) & \path{scripts/build_chat_eval_v1.py} \\
+Runner, scoring and statistics & \path{src/oakgpt/chat/evaluate.py} \\
+Command & \code{oakgpt chat-eval --config ... --dataset ... --output ...} \\
+CPU tests (25, no model downloads) & \path{tests/test_chat_eval.py} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Text categories, with items per category: arithmetic 6, word problems 6, facts 6,
+Swedish 6, reading Python code 7, explicit instructions 5, reading comprehension 4. Image
+categories: counting 5, colour 4, shape 3, position 4, size 2, bar chart 2, OCR 5 and
+two-image questions 2. Every prompt asks for a short answer in a stated form, for example
+``Reply with only the number.''
+
+\section{Decision records}
+
+\decision{D25. Write a small project-specific set instead of running a public benchmark}
+\field{Decision.} Write 67 items covering what OakGPT is used for: short factual,
+arithmetic, code and Swedish questions, and basic image questions. Do not run MMLU- or
+GSM8K-style suites as the first evaluation.
+
+\field{Rationale.}
+\begin{itemize}
+\item Swedish and image questions are product features that common English text suites
+  do not cover.
+\item The whole set needs about 6 minutes of generation on the RTX 2060, so it can run
+  after every change, including every C2 training run.
+\item Public suites are widely published, so pretrained models may have seen them.
+  Lessons on reproducible evaluation~\cite{biderman} show that scores also move with
+  prompt format and answer extraction. That makes a borrowed number hard to compare with
+  our own setup.
+\end{itemize}
+
+\field{Trade-off.} The set is small and written by one author, so it cannot rank OakGPT
+against published models. A public suite can be added later as a separate, complementary
+measurement.
+
+\decision{D26. Synthetic images whose answers follow from their construction}
+\field{Decision.} Draw every image from an explicit specification with the Python
+standard library (a \code{zlib} PNG encoder and a built-in 5$\times$7 pixel font).
+Examples: ``7 orange circles at seeded non-overlapping positions'' or ``bars A--D with
+heights 120, 200, 310, 160''.
+
+\field{Rationale.}
+\begin{itemize}
+\item The key is a property of the specification, not a person's reading of a photo, so
+  it cannot be wrong through labelling mistakes.
+\item No external images are needed, so there are no licence or privacy questions.
+\item The builder is byte-for-byte deterministic. A test rebuilds the set and requires
+  identical files, so any accidental change to the frozen data fails the test suite.
+\end{itemize}
+
+\field{Trade-off.} Flat shapes and a blocky pixel font are not photographs or ordinary
+typefaces. Section~\ref{sec:interpretation} shows that the font matters.
+
+\decision{D27. Freeze in Git before the first model run}
+\field{Decision.} Commit the set, the builder and the runner (\code{851c057})
+\emph{before} any model sees an item. Never change prompts, images or keys afterwards;
+changes need \code{chat\_eval\_v2}.
+
+\field{Rationale.} If keys or prompts were adjusted after reading model output, the set
+would measure the author's adjustments rather than the models. The commit order in Git is
+the evidence that this did not happen. The result file records the commit and the dataset
+hash. It also records the dirty flag; here \code{git\_dirty} is true only because of four
+unrelated untracked PDFs in \path{output/pdf/}.
+
+\decision{D28. Rule-based strict and lenient scoring, no model as judge}
+\field{Decision.} Score every reply in two ways. \emph{Strict}: NFKC normalisation, case
+folding, whitespace collapse, and stripping of surrounding punctuation, quotes and
+Markdown emphasis; the reply must then equal an accepted answer. \emph{Lenient}: an
+accepted answer appears as a whole word anywhere in the reply. Only the answer channel
+is scored, never thinking text.
+
+\field{Rationale.}
+\begin{itemize}
+\item Normalising before exact match follows SQuAD's evaluation~\cite{squad}.
+\item Strict scoring rewards what a user of a chat app wants: the right answer in the
+  form they asked for.
+\item Lenient scoring separates ``wrong'' from ``right but wordy''. For example, reading
+  comprehension scores 25\% strict and 100\% lenient in chat mode.
+\item An LLM judge was rejected for three reasons. Judges show position, verbosity and
+  self-enhancement biases~\cite{judge}. A cloud judge would break the rule that prompts
+  never leave the machine. A local 2B judge would be weaker than the models it grades.
+\end{itemize}
+
+\field{Trade-off.} Lenient scoring can pass hedged or self-contradicting replies, so all
+raw replies are kept. Strict scoring can fail a correct answer in a reasonable but
+unexpected form: \code{3,1} for the expected output \code{3 1} fails.
+
+\decision{D29. Measure the product: the app's code path, presets and three fixed seeds}
+\field{Decision.} Send every item as a fresh one-turn conversation, with the configured
+system prompt, through the same \code{ModelPool}, templates and presets as the web UI.
+Run each item with seeds 2026, 2027 and 2028, the same seeds in every condition. Do not
+use greedy decoding.
+
+\field{Rationale.}
+\begin{itemize}
+\item The point is to know what a user of OakGPT gets, so the UI's sampling settings are
+  used rather than special evaluation settings.
+\item The Qwen3 model card advises against greedy decoding in thinking mode because it
+  can cause degradation and endless repetition~\cite{qwen3card}.
+\item Fixed seeds make the run repeatable and pair the conditions item by item and seed
+  by seed.
+\end{itemize}
+
+\field{Trade-off.} Sampling makes some items flip between seeds. In chat mode, 3 of 40
+items had mixed results; three seeds are too few to estimate per-item reliability.
+
+\decision{D30. Item-level bootstrap intervals, with repeats averaged first}
+\field{Decision.} Average the three replies per item, then resample \emph{items} 2000
+times with seed 2026 for a 95\% percentile interval. Condition differences are paired by
+item.
+
+\field{Rationale.} Three samples of the same prompt are not three independent questions;
+treating them as such would shrink the intervals falsely. This follows the existing
+OakGPT convention and the bootstrap method~\cite{efron}. Miller~\cite{miller} shows that
+related questions, such as several questions on one passage, make naive intervals too
+narrow. Here only two passages carry two questions each, and the shape items share
+templates, so the reported intervals are somewhat optimistic.
+
+\decision{D31. Also run the vision model on the text items}
+\field{Decision.} Add a \code{vision-on-text} condition: the same 40 text items, answered
+by Qwen3-VL-2B with the vision preset.
+
+\field{Rationale.} In C1.1 (architecture overview and D16), any conversation with an
+image stays on the vision model, including later text-only turns. That was a speed
+decision whose effect on text quality was unknown. This condition measures it directly.
+
+\section{Results}\label{sec:results}
+
+Per-category strict accuracy, with lenient accuracy in brackets where it differs. Each
+category has 2--7 items, so a difference of one item is 14--50 points.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}YrRRR@{}}
+\toprule
+Text category & Items & Chat preset & Reasoning preset & Vision model \\
+\midrule
+Arithmetic & 6 & 83\% & 100\% & 83\% (100\%) \\
+Word problems & 6 & 50\% & 89\% & 50\% (56\%) \\
+Facts & 6 & 83\% & 100\% & 100\% \\
+Swedish & 6 & 6\% (33\%) & 83\% & 44\% \\
+Python code & 7 & 24\% & 86\% & 52\% (62\%) \\
+Instructions & 5 & 73\% & 87\% & 80\% \\
+Reading & 4 & 25\% (100\%) & 100\% & 100\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Image category & Items & Vision model \\
+\midrule
+Colour, shape, position, size & 13 & 100\% \\
+Bar chart & 2 & 83\% \\
+Counting & 5 & 73\% \\
+Two images & 2 & 50\% \\
+OCR (pixel font) & 5 & 20\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}YllR@{}}
+\toprule
+Condition & Tokens, median / p90 / max & Time, median / p90 / max & Cut off \\
+\midrule
+Chat preset & 3 / 17 / 158 & 0.06 / 0.25 / 1.99\,s & 0 \\
+Reasoning preset & 156 / 266 / 4096 & 1.92 / 3.15 / 62.95\,s & 1 \\
+Vision, image items & 2 / 6 / 7 & 0.06 / 0.40 / 0.77\,s & 0 \\
+Vision, text items & 3 / 6 / 600 & 0.05 / 0.09 / 6.54\,s & 0 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Image prompts were a median of 1090 tokens, almost all of it the image. Median decode
+speed reported by the server was 69--90 tokens/s. One server launch per model was
+recorded: 3.4\,s for the text model and 4.1\,s for the vision model.
+
+\clearpage
+\subsection*{Typical failures}
+Raw replies, all three seeds unless noted.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}llY@{}}
+\toprule
+Item (condition) & Key & Reply \\
+\midrule
+Capital of Australia (chat) & Canberra & \code{Sydney} \\
+\code{len("oakgpt")} (chat) & 6 & \code{12} \\
+\code{"ab" * 3} (chat) & ababab & \code{abcabcabc} \\
+3 * (4 + 5) $-$ 6 (chat) & 21 & \code{14} \\
+Sweden's largest lake (chat) & V\"anern & \code{Svanen}, \code{Stockholmsviken},
+  \code{Baltic Sea} (one per seed) \\
+``apple'' in Swedish (all text conditions) & \"apple & \code{appel} \\
+14:20 + 95 minutes (chat) & 15:55 & \code{14:20 + 95 minutes = 15:15} \\
+\code{print(7 // 2, 7 \% 2)} (reasoning) & 3 1 & \code{3,1} (format) \\
+Reverse ``stone'' (reasoning, 2 seeds) & enots & \code{E-N-O-T-S} \\
+Code \code{K7Q-29X} (vision) & K7Q-29X & \code{0728}, \code{0x789a} \\
+\code{MAX SPEED 50} (vision) & 50 & \code{30} \\
+More squares, first or second image (vision) & second & \code{first} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Interpretation}\label{sec:interpretation}
+
+\textbf{The text model's chat mode is weak.} Without thinking, Qwen3 1.7B gets half of
+these simple questions right. Some errors are confident and plain wrong (Sydney,
+\code{12}), which matches the C1 observation of hallucination. Its Swedish is poor: 1 of
+18 Swedish replies was strictly correct. With thinking, the same model reaches 92\%,
+with only a few format slips. This is the clearest result in the report, and its interval
+is far from zero.
+
+\textbf{Product consequence, not yet applied.} The UI defaults to the chat preset, which
+is fast but often wrong on these items. The reasoning preset is about 30 times slower per
+short answer, but still under 2\,s at the median, and much more accurate here. Whether to
+switch the default is a decision for the project owner. Long answers would take
+proportionally longer, and a 63\,s worst case was observed.
+
+\textbf{The vision model is a reasonable text model.} Answering text directly, it beats
+the text model's chat mode, most visibly on Swedish, code and reading. That supports
+keeping image conversations on the vision model. It also raises the question of whether
+the vision model should answer direct (non-thinking) text questions too. This set is too
+small to decide that, but it can be tested on \code{chat\_eval\_v2}.
+
+\textbf{Image perception is uneven.} Simple visual properties were always right.
+Counting fails near 7 objects, and one of two two-image items failed on every seed. OCR
+results need care. The same model read ordinary UI text verbatim in C1.1, and here it
+read \code{OPEN 24 HOURS} and the chart letters. It failed on the codes and numbers in
+the 5$\times$7 font. So the 20\% most likely reflects this unusual blocky font plus small
+digits rather than OCR in general. A v2 set should add text rendered in a normal
+typeface, without changing v1.
+
+\section{Limitations}
+\begin{itemize}
+\item \textbf{Small set.} 67 items. Per-category numbers rest on 2--7 items, and overall
+  intervals are 25--30 points wide in chat mode.
+\item \textbf{One author.} Templated items are not independent, and question clusters
+  make the intervals somewhat optimistic~\cite{miller}.
+\item \textbf{One run on one host.} Seeds fix sampling, but GPU arithmetic is not
+  guaranteed to be bit-identical across runs.
+\item \textbf{Synthetic images.} Shapes and pixel text test basic perception, not
+  photographs, handwriting or documents.
+\item \textbf{Contamination.} The pretrained models may have seen similar facts and
+  arithmetic. The set measures behaviour, not novelty.
+\item \textbf{Scoring heuristics.} Strict scoring penalises answers that are right but in
+  an unexpected form. Lenient scoring can pass hedged replies. Both are recorded, along
+  with the raw text.
+\item \textbf{Not a benchmark.} This is a regression and comparison set for this project,
+  not a standardised benchmark. No comparison to published scores is valid.
+\end{itemize}
+
+\section{Reproduction}
+\begin{Verbatim}[fontsize=\footnotesize,frame=single,framesep=3mm]
+.\.venv\Scripts\python scripts/build_chat_eval_v1.py <empty-dir>   # identical files
+.\.venv\Scripts\oakgpt chat-eval --config configs/chat/qwen3_q4km.json `
+  --dataset data/eval/chat_eval_v1/items.jsonl --output runs/chat/eval/rerun.json
+\end{Verbatim}
+The full run needed 5.9 minutes of generation, 5.1 of them in the reasoning condition,
+plus model loading and file hashing.
+
+\begin{thebibliography}{6}
+
+\bibitem{biderman} S. Biderman et al., ``Lessons from the Trenches on Reproducible
+  Evaluation of Language Models,'' arXiv:2405.14782, 2024.
+  \url{https://arxiv.org/abs/2405.14782}
+
+\bibitem{squad} P. Rajpurkar, J. Zhang, K. Lopyrev, P. Liang, ``SQuAD: 100,000+
+  Questions for Machine Comprehension of Text,'' EMNLP 2016, arXiv:1606.05250.
+  \url{https://arxiv.org/abs/1606.05250}
+
+\bibitem{judge} L. Zheng et al., ``Judging LLM-as-a-Judge with MT-Bench and Chatbot
+  Arena,'' NeurIPS 2023 Datasets and Benchmarks, arXiv:2306.05685.
+  \url{https://arxiv.org/abs/2306.05685}
+
+\bibitem{qwen3card} Qwen Team, ``Qwen3-1.7B'' model card, section ``Best Practices.''
+  \url{https://huggingface.co/Qwen/Qwen3-1.7B}
+
+\bibitem{efron} B. Efron, R. J. Tibshirani, \emph{An Introduction to the Bootstrap},
+  Chapman \& Hall, 1993.
+
+\bibitem{miller} E. Miller, ``Adding Error Bars to Evals: A Statistical Approach to
+  Language Model Evaluations,'' arXiv:2411.00640, 2024.
+  \url{https://arxiv.org/abs/2411.00640}
+
+\end{thebibliography}
+
+\end{document}

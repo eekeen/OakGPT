@@ -82,6 +82,24 @@ configuration and set `llama_url` to its loopback address.
 | `identity` | Provenance recorded in the status endpoint. |
 | `vision` | Optional image model: `llama_url`, `image_max_tokens` (default 1024), `managed_server` with an extra `mmproj` path, and `identity`. |
 
+## Measuring answer quality
+
+`oakgpt chat-eval` scores the configured models on the frozen
+[chat evaluation set v1](../data/eval/chat_eval_v1/README.md) (40 text and 27 image
+items with answer keys) through the same model pool, templates and presets as the UI:
+
+```powershell
+.\.venv\Scripts\oakgpt chat-eval --config configs/chat/qwen3_q4km.json `
+  --dataset data/eval/chat_eval_v1/items.jsonl --output runs/chat/eval/my_run.json
+```
+
+`--conditions` selects any of `text-chat`, `text-reasoning`, `vision` and
+`vision-on-text`. `--repeats` (default 3) runs each item with the fixed seeds 2026,
+2027, ... It refuses to overwrite an existing output. Replies are appended to
+`<output>.partial.jsonl` while it runs. The output holds every raw reply, scores,
+timings, model hashes and the environment. Results and decisions are in the
+[evaluation report](../reports/chat/eval_v1/report.md). Never train on this set.
+
 ## Security notes
 
 The server only binds to loopback. It also:

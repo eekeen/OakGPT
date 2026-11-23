@@ -38,6 +38,12 @@ measurements. On the RTX 2060, prompt caching keeps eighth-turn time to first to
 median of 55 ms versus 215 ms without it; switching to the image model takes a median of
 5.2 s, and a follow-up question about an image already seen starts answering in 0.07 s.
 
+Answer quality is measured on a frozen 67-item evaluation set (40 text, 27 image) that
+is never used for training; see the [evaluation report](reports/chat/eval_v1/report.md).
+Strict accuracy on that set is 49% for the text model in its fast default mode, 92% with
+reasoning, and 75% for the image model on image questions. The set is small, so these are
+project baselines, not benchmark scores.
+
 ![OakGPT chat](reports/chat/c1_1/figures/ui-vision-1280.png)
 
 ## Phase 2 research workflow

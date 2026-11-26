@@ -215,3 +215,18 @@ def test_seeds_are_fixed_and_validated():
     assert seeds(3) == [2026, 2027, 2028]
     with pytest.raises(ValueError):
         seeds(0)
+
+
+def test_paired_difference_between_runs():
+    from oakgpt.chat.evaluate import paired_difference
+
+    def rec(item, strict):
+        return {"item_id": item, "strict": strict}
+
+    treated = [rec("a", True), rec("a", True), rec("b", False), rec("b", True)]
+    control = [rec("a", False), rec("a", True), rec("b", True), rec("b", True)]
+    result = paired_difference(treated, control)
+    assert result["strict_difference"] == 0.0 and result["items"] == 2
+    assert result["items_better"] == 1 and result["items_worse"] == 1
+    with pytest.raises(ValueError, match="same items"):
+        paired_difference([rec("a", True)], [rec("b", True)])

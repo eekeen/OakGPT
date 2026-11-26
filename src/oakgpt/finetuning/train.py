@@ -144,6 +144,7 @@ def probe(args: argparse.Namespace) -> dict[str, Any]:
         model = load_base(Path(args.model), args.quantization, bool(args.checkpointing))
         record["load_seconds"] = time.perf_counter() - started
         record["after_load"] = memory()
+        torch.cuda.reset_peak_memory_stats()  # "peak" then covers training steps only
         lora = {"r": 16, "alpha": 32, "dropout": 0.05, "targets": TARGETS}
         setup_lora(model, lora)
         params = lora_parameters(model)

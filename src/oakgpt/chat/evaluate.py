@@ -307,3 +307,20 @@ def run_chat_eval(
         json.dump(report, stream, indent=2, ensure_ascii=False)
     partial.unlink()
     return summary
+
+
+def paired_difference(
+    treatment: list[dict[str, Any]], control: list[dict[str, Any]], field: str = "strict"
+) -> dict[str, Any]:
+    """Item-level paired difference *treatment minus control* for one condition each."""
+    a, b = _per_item(treatment, field), _per_item(control, field)
+    if set(a) != set(b):
+        raise ValueError("Paired comparison needs the same items in both runs")
+    differences = [a[item] - b[item] for item in sorted(a)]
+    return {
+        f"{field}_difference": statistics.mean(differences),
+        "ci95": _bootstrap(differences),
+        "items": len(differences),
+        "items_better": sum(d > 0 for d in differences),
+        "items_worse": sum(d < 0 for d in differences),
+    }

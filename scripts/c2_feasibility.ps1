@@ -1,6 +1,6 @@
-﻿$ErrorActionPreference = 'Continue'
+$ErrorActionPreference = 'Continue'
 $py = '.\.venv-finetune\Scripts\python'
-$out = 'runs/c2/feasibility'
+$out = 'runs/c2/feasibility-v2'
 New-Item -ItemType Directory -Force $out | Out-Null
 $grid = @(
   @('nf4',512,1,1), @('nf4',512,4,1), @('nf4',512,4,0), @('nf4',1024,4,1), @('nf4',256,8,0),

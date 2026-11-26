@@ -1,0 +1,48 @@
+{
+  "llama_url": "http://127.0.0.1:18080",
+  "managed_server": {
+    "binary": "../../vendor/llama.cpp/llama-server.exe",
+    "model": "../../models/phase2-Qwen3-1.7B-Q4_K_M.gguf",
+    "context": 8192,
+    "gpu_layers": 99,
+    "threads": 8,
+    "log_dir": "../../runs/chat/server",
+    "lora": "../../models/c2-qwen3-1.7b-lora-v1-f16.gguf"
+  },
+  "identity": {
+    "model": "Qwen/Qwen3-1.7B",
+    "quantization": "Q4_K_M (Phase 2 conversion from original weights)",
+    "expected_server_build": "b11930",
+    "original_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "provenance": "reports/phase2/quantization_artifacts.json",
+    "adapter": "C2 LoRA v1 (reports/chat/c2), self-distilled from reasoning mode"
+  },
+  "vision": {
+    "llama_url": "http://127.0.0.1:18081",
+    "image_max_tokens": 1024,
+    "managed_server": {
+      "binary": "../../vendor/llama.cpp/llama-server.exe",
+      "model": "../../models/Qwen3VL-2B-Instruct-Q4_K_M.gguf",
+      "mmproj": "../../models/mmproj-Qwen3VL-2B-Instruct-F16.gguf",
+      "context": 8192,
+      "gpu_layers": 99,
+      "threads": 8,
+      "log_dir": "../../runs/chat/server"
+    },
+    "identity": {
+      "model": "Qwen/Qwen3-VL-2B-Instruct",
+      "quantization": "Q4_K_M language model, F16 vision encoder (official Qwen GGUF files)",
+      "gguf_repository": "Qwen/Qwen3-VL-2B-Instruct-GGUF",
+      "gguf_revision": "52d6c8ffea26cc873ac5ad116f8631268d7eb503",
+      "expected_server_build": "b11930",
+      "provenance": "scripts/fetch_vision_model.py"
+    }
+  },
+  "web_port": 8765,
+  "storage": "../../runs/chat/conversations",
+  "cache_prompt": true,
+  "system_prompt": "You are OakGPT, a helpful assistant running entirely on the user's own computer. Answer clearly and concisely. If you are unsure, say so instead of guessing.",
+  "defaults": {
+    "preset": "reasoning"
+  }
+}

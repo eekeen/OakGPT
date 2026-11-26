@@ -44,6 +44,12 @@ Strict accuracy on that set is 49% for the text model in fast mode, 92% with rea
 (now the default mode), and 75% for the image model on image questions. The set is small,
 so these are project baselines, not benchmark scores.
 
+Chat C2 tested LoRA fine-tuning on the 6 GB GPU. QLoRA training fits with room to spare,
+and an adapter trained on the model's own reasoning-mode answers raised fast-mode accuracy
+from 49% to 74%. It also suppressed thinking, so reasoning-mode accuracy fell from 92% to
+57%. By the rule fixed before training, the adapter is not used; see the
+[C2 report](reports/chat/c2/report.md).
+
 ![OakGPT chat](reports/chat/c1_1/figures/ui-vision-1280.png)
 
 ## Phase 2 research workflow

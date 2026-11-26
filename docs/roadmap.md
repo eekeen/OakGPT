@@ -6,10 +6,20 @@ C1, the local multi-turn chat assistant, is implemented; see
 [the C1 report](../reports/chat/c1/report.md). C1.1 adds images. The chat evaluation set
 [`chat_eval_v1`](../data/eval/chat_eval_v1/README.md) is frozen, and its baseline is
 measured in [the evaluation report](../reports/chat/eval_v1/report.md): 49% strict for
-the text model's chat preset, 92% with reasoning. C2 is fine-tuning, treated as a measured
-hypothesis. Never train on `chat_eval_v1`. Measure LoRA/QLoRA feasibility within 6 GB,
-and compare against the unchanged base model on that set. OCR with a normal typeface and
-photographs need a separate `chat_eval_v2`; v1 is not changed. The chat track is independent of the robotics Phase 4 gate below.
+the text model's chat preset, 92% with reasoning. C2 is done and measured in
+[the C2 report](../reports/chat/c2/report.md):
+
+- **Feasibility.** QLoRA fits on 6 GB, using 1.7–3.2 GB with gradient checkpointing.
+- **Fast mode.** A self-distilled adapter raises fast-mode accuracy from 49% to 74%.
+- **Reasoning mode.** The same adapter suppresses thinking and lowers reasoning-mode
+  accuracy from 92% to 57%.
+- **Outcome.** It was not adopted.
+
+Next is C2.1: apply the adapter only to fast-mode requests (llama-server's per-request
+LoRA scale). It needs a new frozen `chat_eval_v2`, because v1 has now selected that
+design. `chat_eval_v2` should also cover OCR with a normal typeface and photographs.
+v1 is not changed and is never used for training. The chat track is independent of the
+robotics Phase 4 gate below.
 
 ## Measured Phase 3.3 gate
 

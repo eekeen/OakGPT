@@ -1,0 +1,110 @@
+{
+  "study": "c2-self-distillation-v1",
+  "environment": {
+    "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "logical_cpu_count": 16,
+    "torch": "2.9.1",
+    "cuda_runtime": null,
+    "cudnn": null,
+    "cuda_available": false,
+    "gpu": null,
+    "git_revision": "215881b3426f66c0f4f423d4af13339f2a5763ce",
+    "git_dirty": true
+  },
+  "config_path": "configs\\chat\\qwen3_q4km.json",
+  "config_sha256": "7ebc429e7c0c9b816e717a73b6883d295a48971d5787c047eb382892fc07c211",
+  "prompts_path": "data\\finetune\\c2_distill_v1\\prompts.jsonl",
+  "prompts_sha256": "924b916c37151d1cf260dfda3c5292110760e801fc7835d8d2d903551558e045",
+  "teacher_preset": {
+    "thinking": true,
+    "max_new_tokens": 4096,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "seed": 2026
+  },
+  "system_prompt": "You are OakGPT, a helpful assistant running entirely on the user's own computer. Answer clearly and concisely. If you are unsure, say so instead of guessing.",
+  "identity": {
+    "model": "Qwen/Qwen3-1.7B",
+    "quantization": "Q4_K_M (Phase 2 conversion from original weights)",
+    "expected_server_build": "b11930",
+    "original_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "provenance": "reports/phase2/quantization_artifacts.json",
+    "gguf_filename": "phase2-Qwen3-1.7B-Q4_K_M.gguf",
+    "gguf_sha256": "f08493abe7a6566b9f4dc1106ff8ab238b3ee82189d6c42d0e7dbb1a50d751e5"
+  },
+  "server": {
+    "build_info": "b11930-85cc432e2",
+    "model_path": "D:\\Projects\\OakGPT\\models\\phase2-Qwen3-1.7B-Q4_K_M.gguf"
+  },
+  "launches": {
+    "text": {
+      "log_dir": "D:\\Projects\\OakGPT\\runs\\chat\\server\\20261126-210932-924549",
+      "command": [
+        "D:\\Projects\\OakGPT\\vendor\\llama.cpp\\llama-server.exe",
+        "-m",
+        "D:\\Projects\\OakGPT\\models\\phase2-Qwen3-1.7B-Q4_K_M.gguf",
+        "-c",
+        "8192",
+        "-ngl",
+        "99",
+        "-t",
+        "8",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "18080",
+        "--parallel",
+        "1"
+      ],
+      "load_s": 6.113
+    }
+  },
+  "verdicts_by_category": {
+    "arithmetic": {
+      "kept": 192,
+      "wrong": 1
+    },
+    "word_problem": {
+      "kept": 119,
+      "wrong": 4,
+      "truncated": 1
+    },
+    "facts": {
+      "kept": 64,
+      "wrong": 1
+    },
+    "swedish": {
+      "kept": 78,
+      "wrong": 47
+    },
+    "code": {
+      "wrong": 24,
+      "kept": 165
+    },
+    "instructions": {
+      "kept": 83,
+      "wrong": 27
+    },
+    "reading": {
+      "kept": 192,
+      "wrong": 1
+    },
+    "open": {
+      "kept": 77
+    }
+  },
+  "kept": {
+    "train": 882,
+    "dev": 88
+  },
+  "files": {
+    "teacher.jsonl": "97243244fab16502a4e64083289529f491d93629646880e37b871a283f7d08d7",
+    "train.jsonl": "5f482ce0990e8c04d99c80162407077abc1c28baf4ee6cac9037736a7d86297d",
+    "dev.jsonl": "0c857f34195e43d7557932a32e6899a0d64a2be4be359a5dc90a43ce74fd75af"
+  }
+}

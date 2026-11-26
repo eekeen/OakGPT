@@ -8,6 +8,11 @@ These corpora are pipeline fixtures, not a meaningful language training dataset.
 `eval/chat_eval_v1/` is the frozen chat evaluation set (40 text and 27 synthetic image
 items); its own [README](eval/chat_eval_v1/README.md) is the data card.
 
+`finetune/c2_distill_v1/` is the Chat C2 training data. It contains generated prompts,
+contamination statistics, and the local model's reasoning-mode answers (`distilled/`).
+`eval/c2_open_probe_v1/` holds 12 open-ended prompts used only to measure reply length.
+Both are described in the [C2 protocol](../reports/chat/c2/protocol.md).
+
 `eval/local_smoke_v1.jsonl` contains eight original, fixed, hand-authored prompts. Each
 record defines a stable ID, prompt, accepted answers and scoring rule. It covers elementary
 arithmetic, factual recall, copying, simple reading and classification. None of the

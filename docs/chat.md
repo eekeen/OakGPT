@@ -80,6 +80,7 @@ configuration and set `llama_url` to its loopback address.
 | `system_prompt` | Default system prompt for new chats. |
 | `defaults` | Default sampling and the mode the UI starts in: `{"preset": "reasoning"}` (default since evaluation v1, report D32) or `{"preset": "chat"}` for fast replies. A mode you pick in the UI is remembered in your browser. |
 | `identity` | Provenance recorded in the status endpoint. |
+| `managed_server.lora` | Optional GGUF LoRA adapter passed to llama-server with `--lora`; its hash is recorded in the status identity. Used only by the experimental `configs/chat/qwen3_q4km_c2.json` ([C2 report](../reports/chat/c2/report.md)). |
 | `vision` | Optional image model: `llama_url`, `image_max_tokens` (default 1024), `managed_server` with an extra `mmproj` path, and `identity`. |
 
 ## Measuring answer quality

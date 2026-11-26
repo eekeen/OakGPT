@@ -48,6 +48,7 @@ class ManagedServer:
     log_dir: Path = Path("runs/chat/server")
     mmproj: Path | None = None
     image_max_tokens: int | None = None
+    lora: Path | None = None  # GGUF LoRA adapter applied by llama-server (Chat C2).
 
     def command(self, port: int) -> list[str]:
         command = [
@@ -71,10 +72,13 @@ class ManagedServer:
             command += ["--mmproj", str(self.mmproj)]
         if self.image_max_tokens is not None:
             command += ["--image-max-tokens", str(self.image_max_tokens)]
+        if self.lora is not None:
+            command += ["--lora", str(self.lora)]
         return command
 
     def files(self) -> list[Path]:
-        return [self.model] + ([self.mmproj] if self.mmproj is not None else [])
+        optional = [path for path in (self.mmproj, self.lora) if path is not None]
+        return [self.model, *optional]
 
 
 @dataclass(frozen=True)
@@ -111,11 +115,13 @@ class ChatConfig:
                 return None
             server = dict(raw)
             mmproj = server.pop("mmproj", None)
+            lora = server.pop("lora", None)
             return ManagedServer(
                 binary=resolve(server.pop("binary")),
                 model=resolve(server.pop("model")),
                 log_dir=resolve(server.pop("log_dir", "../../runs/chat/server")),
                 mmproj=None if mmproj is None else resolve(mmproj),
+                lora=None if lora is None else resolve(lora),
                 **server,
                 **extra,
             )
@@ -319,6 +325,9 @@ def _identity(base: dict[str, Any], managed: ManagedServer | None, cache: Path) 
         if managed.mmproj is not None:
             identity["mmproj_filename"] = managed.mmproj.name
             identity["mmproj_sha256"] = cached_sha256(managed.mmproj, cache)
+        if managed.lora is not None:
+            identity["lora_filename"] = managed.lora.name
+            identity["lora_sha256"] = cached_sha256(managed.lora, cache)
     return identity
 
 

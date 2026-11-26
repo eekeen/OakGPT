@@ -73,9 +73,37 @@ def main() -> None:
         default="text-chat,text-reasoning,vision,vision-on-text",
         help="Comma-separated subset of: text-chat, text-reasoning, vision, vision-on-text",
     )
+    distill = commands.add_parser(
+        "c2-distill", help="Collect reasoning-mode teacher answers for fast-mode fine-tuning"
+    )
+    distill.add_argument("--config", type=Path, required=True)
+    distill.add_argument("--prompts", type=Path, required=True)
+    distill.add_argument("--output", type=Path, required=True)
+    probe = commands.add_parser(
+        "c2-open-probe", help="Record fast-mode reply lengths on open-ended prompts"
+    )
+    probe.add_argument("--config", type=Path, required=True)
+    probe.add_argument("--prompts", type=Path, required=True)
+    probe.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.command == "train":
         print(train(TrainConfig.load(args.config), args.resume))
+        return
+    if args.command == "c2-distill":
+        from oakgpt.chat.app import ChatConfig
+        from oakgpt.finetuning.distill import run_distill
+
+        summary = run_distill(ChatConfig.load(args.config), args.config, args.prompts, args.output)
+        print(json.dumps({"kept": summary["kept"], "verdicts": summary["verdicts_by_category"]}))
+        return
+    if args.command == "c2-open-probe":
+        from oakgpt.chat.app import ChatConfig
+        from oakgpt.finetuning.distill import run_open_probe
+
+        report = run_open_probe(
+            ChatConfig.load(args.config), args.config, args.prompts, args.output
+        )
+        print(json.dumps({"generated_tokens_median": report["generated_tokens_median"]}))
         return
     if args.command in ("chat", "chat-measure", "chat-eval"):
         from dataclasses import replace

@@ -1,0 +1,26 @@
+{
+  "base_model_dir": "../../models/qwen3-original",
+  "base_model_id": "Qwen/Qwen3-1.7B",
+  "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "train": "../../data/finetune/c2_distill_v1/distilled/train.jsonl",
+  "dev": "../../data/finetune/c2_distill_v1/distilled/dev.jsonl",
+  "quantization": "nf4",
+  "seed": 2026,
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "targets": ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+  },
+  "optimizer": {
+    "lr": 0.0002,
+    "weight_decay": 0.0,
+    "epochs": 2,
+    "micro_batch": 4,
+    "accumulation": 4,
+    "warmup_ratio": 0.03,
+    "max_grad_norm": 1.0,
+    "max_length": 768,
+    "gradient_checkpointing": true
+  }
+}

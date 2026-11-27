@@ -13,6 +13,11 @@ items); its own [README](eval/chat_eval_v1/README.md) is the data card.
 their own licences. Its text was checked to share no prompt or 8-gram with v1 or the C2
 training data; see its [README](eval/chat_eval_v2/README.md).
 
+`eval/rag_eval_v1/` is the Chat C3 document-answering set: 120 questions (30 dev, 90
+test) over a 65-file corpus of OakGPT's own documentation at commit `02b9d7b` plus four
+invented notes, two in Swedish and two with planted prompt injections. See its
+[README](eval/rag_eval_v1/README.md).
+
 `finetune/c2_distill_v1/` is the Chat C2 training data. It contains generated prompts,
 contamination statistics, and the local model's reasoning-mode answers (`distilled/`).
 `eval/c2_open_probe_v1/` holds 12 open-ended prompts used only to measure reply length.

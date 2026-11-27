@@ -27,13 +27,27 @@ or the training data.
   post-hoc diagnosis traced the failure to the check's design, not to the mechanism.
 - **Image model.** On v2 it scores 84%.
 
+C3 is done and measured in [the C3 report](../reports/chat/c3/report.md). It first froze
+[`rag_eval_v1`](../data/eval/rag_eval_v1/README.md): 120 questions about OakGPT's own
+documentation and four invented notes.
+
+- **Feature.** Hybrid search (BM25 and a local Qwen3-Embedding model on the CPU) over
+  the user's Markdown and text files. Answers carry numbered citations that open the
+  passage they came from.
+- **Results.** 75% of answerable test questions were answered correctly with documents,
+  against 4% without. No planted injection took over reasoning mode.
+- **Outcome.** It was not adopted. Abstention on unanswerable questions (67%, target
+  70%) and citations of the exact evidence (52%, target 60%) missed their thresholds.
+  It stays an experimental configuration.
+
 Possible next steps:
 
 - **C2.2.** Confirm the mode-scoped adapter with a corrected mechanism check and a small,
   fresh `chat_eval_v3`.
-- **C3.** Answers grounded in the user's local documents (RAG) with citations.
+- **C3.1.** Improve refusal and citations, for example with a reranker, quoted evidence
+  and a refusal threshold, then measure on a fresh document set.
 
-v1 and v2 are never changed or used for training. The chat track is independent of the
+v1, v2 and `rag_eval_v1` are never changed or used for training. The chat track is independent of the
 robotics Phase 4 gate below.
 
 ## Measured Phase 3.3 gate

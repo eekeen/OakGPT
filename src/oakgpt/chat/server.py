@@ -15,14 +15,16 @@ from collections.abc import Callable, Generator
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.resources import files
-from typing import Any
+from typing import Any, Protocol
 from urllib.parse import urlsplit
 
+from oakgpt.chat.documents import Hit, ground, public_sources
 from oakgpt.chat.engine import ChatSettings, settings_from
 from oakgpt.chat.store import ConversationStore, ImageStore, now
 from oakgpt.chat.template import Message
 
 MAX_BODY_BYTES = 256 * 1024
+MAX_UPLOAD_BODY_BYTES = 8 * 1024 * 1024  # A JSON-encoded text document (see DocumentLibrary).
 MAX_REPLY_BODY_BYTES = 48 * 1024 * 1024  # Room for MAX_IMAGES base64-encoded images.
 MAX_IMAGES = 4
 MAX_MESSAGE_CHARS = 32_000
@@ -52,6 +54,15 @@ SECURITY_HEADERS = {
 Responder = Callable[[list[Message], ChatSettings], Generator[dict[str, Any], None, None]]
 
 
+class Library(Protocol):
+    """The document library seen by the web server (``app.DocumentLibrary``)."""
+
+    def search(self, query: str) -> list[Hit]: ...
+    def status(self) -> dict[str, Any]: ...
+    def add(self, name: str, text: str) -> str: ...
+    def reindex_async(self) -> bool: ...
+
+
 class ApiError(Exception):
     def __init__(self, status: HTTPStatus, message: str) -> None:
         super().__init__(message)
@@ -69,6 +80,7 @@ class ChatApp:
         defaults: ChatSettings,
         system_prompt: str = "",
         vision: bool = False,
+        documents: Library | None = None,
     ) -> None:
         self.store = store
         self.respond = respond
@@ -76,6 +88,7 @@ class ChatApp:
         self.defaults = defaults
         self.system_prompt = system_prompt
         self.vision = vision  # Whether a vision model is configured.
+        self.documents = documents
         # llama.cpp runs one slot; overlapping generations would queue invisibly.
         self.generation = threading.Lock()
 
@@ -218,6 +231,14 @@ class Handler(BaseHTTPRequestHandler):
             self._json(HTTPStatus.OK, status)
         elif parts == ["api", "conversations"]:
             self._json(HTTPStatus.OK, self.app.store.list())
+        elif parts == ["api", "documents"]:
+            library = self.app.documents
+            self._json(
+                HTTPStatus.OK,
+                {"available": False}
+                if library is None
+                else {"available": True, **library.status()},
+            )
         elif len(parts) == 3 and parts[:2] == ["api", "conversations"]:
             self._json(HTTPStatus.OK, self.app.store.get(parts[2]))
         elif len(parts) == 5 and parts[:2] == ["api", "conversations"] and parts[3] == "images":
@@ -235,8 +256,13 @@ class Handler(BaseHTTPRequestHandler):
 
     def _post(self, parts: list[str]) -> None:
         is_reply = len(parts) == 4 and parts[:2] == ["api", "conversations"] and parts[3] == "reply"
-        body = self._body(MAX_REPLY_BODY_BYTES if is_reply else MAX_BODY_BYTES)
-        if parts == ["api", "conversations"]:
+        limit = MAX_REPLY_BODY_BYTES if is_reply else MAX_BODY_BYTES
+        if parts == ["api", "documents"]:
+            limit = MAX_UPLOAD_BODY_BYTES
+        body = self._body(limit)
+        if parts[:2] == ["api", "documents"]:
+            self._documents(parts[2:], body)
+        elif parts == ["api", "conversations"]:
             system_prompt = body.get("system_prompt", self.app.system_prompt)
             if not isinstance(system_prompt, str) or len(system_prompt) > MAX_SYSTEM_CHARS:
                 raise ApiError(HTTPStatus.BAD_REQUEST, "Invalid system prompt")
@@ -246,11 +272,34 @@ class Handler(BaseHTTPRequestHandler):
         else:
             raise KeyError(self.path)
 
+    def _documents(self, rest: list[str], body: dict[str, Any]) -> None:
+        library = self.app.documents
+        if library is None:
+            raise ApiError(HTTPStatus.NOT_FOUND, "Document search is not configured")
+        if rest == ["reindex"]:
+            started = library.reindex_async()
+            self._json(HTTPStatus.ACCEPTED, {"started": started, **library.status()})
+        elif not rest:
+            name, text = body.get("name"), body.get("text")
+            if not isinstance(name, str) or not isinstance(text, str):
+                raise ApiError(HTTPStatus.BAD_REQUEST, "Send a name and the document text")
+            try:
+                saved = library.add(name, text)
+            except ValueError as error:
+                raise ApiError(HTTPStatus.BAD_REQUEST, str(error)) from None
+            library.reindex_async()
+            self._json(HTTPStatus.CREATED, {"saved": saved, **library.status()})
+        else:
+            raise KeyError(self.path)
+
     # ----- generation --------------------------------------------------------------------
 
     def _reply(self, conversation_id: str, body: dict[str, Any]) -> None:
         content = body.get("content", "")
         regenerate = body.get("regenerate", False) is True
+        documents = body.get("documents", False) is True
+        if documents and self.app.documents is None:
+            raise ApiError(HTTPStatus.BAD_REQUEST, "Document search is not configured")
         images = [] if regenerate else decode_images(body.get("images"))
         if images and not self.app.vision:
             raise ApiError(HTTPStatus.BAD_REQUEST, "Image input is not configured")
@@ -293,8 +342,17 @@ class Handler(BaseHTTPRequestHandler):
                         raise ApiError(HTTPStatus.BAD_REQUEST, str(error)) from None
                 conversation = store.append(conversation_id, user)
             # A conversation with any image is answered by the vision model from then on.
-            chosen = vision_settings if uses_vision(conversation) else settings
-            self._stream_reply(conversation, chosen, rollback_user=not regenerate)
+            vision = uses_vision(conversation)
+            if documents and vision:
+                if not regenerate:
+                    conversation["messages"].pop()
+                    store.save(conversation)
+                raise ApiError(
+                    HTTPStatus.BAD_REQUEST,
+                    "Document answers are not available in conversations with images",
+                )
+            chosen = vision_settings if vision else settings
+            self._stream_reply(conversation, chosen, not regenerate, documents)
         finally:
             self.app.generation.release()
 
@@ -305,16 +363,29 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.flush()
 
     def _stream_reply(
-        self, conversation: dict[str, Any], settings: ChatSettings, rollback_user: bool
+        self,
+        conversation: dict[str, Any],
+        settings: ChatSettings,
+        rollback_user: bool,
+        documents: bool = False,
     ) -> None:
         store = self.app.store
         answer: list[str] = []
         reasoning: list[str] = []
         meta: dict[str, Any] = {}
         stats: dict[str, Any] | None = None
-        events = self.app.respond(conversation_messages(conversation, store.images), settings)
+        messages = conversation_messages(conversation, store.images)
+        sources: list[dict[str, Any]] | None = None
         try:
+            if documents and self.app.documents is not None:
+                # The search uses the user's own words; the model sees them with sources.
+                hits = self.app.documents.search(messages[-1].content)
+                messages = ground(messages, hits)
+                sources = public_sources(hits)
+            events = self.app.respond(messages, settings)
             first = next(events)  # Context planning errors surface before the stream opens.
+            if sources is not None:
+                first["sources"] = sources
         except (ValueError, RuntimeError, OSError) as error:
             if rollback_user:
                 conversation["messages"].pop()

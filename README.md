@@ -38,17 +38,28 @@ measurements. On the RTX 2060, prompt caching keeps eighth-turn time to first to
 median of 55 ms versus 215 ms without it; switching to the image model takes a median of
 5.2 s, and a follow-up question about an image already seen starts answering in 0.07 s.
 
-Answer quality is measured on a frozen 67-item evaluation set (40 text, 27 image) that
-is never used for training; see the [evaluation report](reports/chat/eval_v1/report.md).
-Strict accuracy on that set is 49% for the text model in fast mode, 92% with reasoning
-(now the default mode), and 75% for the image model on image questions. The set is small,
-so these are project baselines, not benchmark scores.
+Answer quality is measured on frozen evaluation sets that are never used for training.
+The current set, [chat_eval_v2](data/eval/chat_eval_v2/README.md), has 124 text and 63
+image items, including typeset documents, real photographs and prompt-injection
+attempts. On it, strict accuracy is:
 
-Chat C2 tested LoRA fine-tuning on the 6 GB GPU. QLoRA training fits with room to spare,
-and an adapter trained on the model's own reasoning-mode answers raised fast-mode accuracy
-from 49% to 74%. It also suppressed thinking, so reasoning-mode accuracy fell from 92% to
-57%. By the rule fixed before training, the adapter is not used; see the
-[C2 report](reports/chat/c2/report.md).
+- 31% for the text model in fast mode
+- 83% with reasoning, which is the default mode
+- 84% for the image model, including 100% on OCR in real fonts and 90% on photographs
+
+The sets are small, so these are project baselines, not benchmark scores. The first set,
+v1, is described in the [evaluation report](reports/chat/eval_v1/report.md).
+
+Chat C2 tested LoRA fine-tuning on the 6 GB GPU. QLoRA training fits with room to spare.
+An adapter trained on the model's own reasoning-mode answers raised fast-mode accuracy,
+but it also suppressed thinking, so it was not adopted
+([C2 report](reports/chat/c2/report.md)).
+
+Chat C2.1 applied the same adapter only to fast-mode requests. On v2 this raised
+fast-mode accuracy from 31% to 60% and left reasoning mode unchanged. A correctness check
+fixed in advance still failed, so the adapter stays experimental. A follow-up diagnosis
+traced the failure to prompt-cache effects in the check itself, not to the mechanism
+([C2.1 report](reports/chat/c21/report.md)).
 
 ![OakGPT chat](reports/chat/c1_1/figures/ui-vision-1280.png)
 

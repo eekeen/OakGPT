@@ -1,0 +1,410 @@
+{
+  "prompts": [
+    "arithmetic-0008",
+    "arithmetic-0112",
+    "word_problem-0045",
+    "word_problem-0114",
+    "facts-0043",
+    "swedish-0100",
+    "code-0105",
+    "code-0142",
+    "instructions-0078",
+    "reading-0041",
+    "reading-0133",
+    "open-0012"
+  ],
+  "checks": {
+    "scoped_fast_after_start_equals_full_adapter": false,
+    "scoped_reasoning_after_fast_equals_base": false,
+    "scoped_fast_after_reasoning_equals_full_adapter": false,
+    "adapter_changes_fast_replies": 8
+  },
+  "base": {
+    "config": "configs\\chat\\qwen3_q4km.json",
+    "replies": {
+      "fast": [
+        "18",
+        "8",
+        "6",
+        "150",
+        "N2",
+        "Sveriges högsta berg är Mount Vatnajökull.",
+        "The output is \"ard\".",
+        "The code will print: `[6, 7, 8, 9]`",
+        "VIOLIN",
+        "7",
+        "17:00",
+        "1. Plan your meals ahead of time.  \n2. Compare prices at different stores.  \n3. Use coupons and sales effectively."
+      ],
+      "reasoning": [
+        "18",
+        "8",
+        "22",
+        "540",
+        "N",
+        "Mjölnir",
+        "der",
+        "[6, 7, 8, 9]",
+        "VIOLIN",
+        "8",
+        "17:00",
+        "1. **Plan meals in advance** to avoid last-minute, impulse purchases.  \n2. **Use coupons or deals** for items you'll need regularly.  \n3. **Compare prices** at different stores before buying."
+      ]
+    },
+    "lora_sent": {
+      "fast": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "reasoning": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "lora_adapters": []
+  },
+  "full": {
+    "config": "configs\\chat\\qwen3_q4km_c2.json",
+    "replies": {
+      "fast": [
+        "18",
+        "8",
+        "23",
+        "540",
+        "N",
+        "Kvistberg",
+        "den",
+        "[6, 7, 8, 9]",
+        "VIOLIN",
+        "8",
+        "17:00",
+        "1. **Compare prices** before buying to avoid overpaying.  \n2. **Buy in bulk** when items are on sale to save money.  \n3. **Plan meals** ahead to avoid waste and avoid impulse purchases."
+      ]
+    },
+    "lora_sent": {
+      "fast": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "lora_adapters": [
+      {
+        "id": 0,
+        "path": "D:\\Projects\\OakGPT\\models\\c2-qwen3-1.7b-lora-v1-f16.gguf",
+        "scale": 1.0,
+        "task_name": "",
+        "prompt_prefix": ""
+      }
+    ]
+  },
+  "scoped": {
+    "config": "configs\\chat\\qwen3_q4km_c21.json",
+    "replies": {
+      "fast_1": [
+        "18",
+        "8",
+        "23",
+        "540",
+        "N",
+        "Kvistberg",
+        "den",
+        "[6, 7, 8, 9]",
+        "VIOLIN",
+        "8",
+        "17:00",
+        "1. **Compare prices** before buying to avoid overpaying.  \n2. **Buy in bulk** when items are on sale to save costs.  \n3. **Plan meals** in advance to avoid impulse purchases."
+      ],
+      "reasoning": [
+        "18",
+        "8",
+        "22",
+        "540",
+        "N",
+        "Måljarpsjön",
+        "rde",
+        "[6, 7, 8, 9]",
+        "VIOLIN",
+        "8",
+        "17:00",
+        "1. **Buy in bulk** for items you use frequently (e.g., grains, pasta) to get better prices.  \n2. **Use coupons** and apps like Honey or Instacart to find deals.  \n3. **Plan meals** in advance to avoid impulse purchases and reduce food waste."
+      ],
+      "fast_2": [
+        "18",
+        "8",
+        "23",
+        "540",
+        "N",
+        "Kvistberg",
+        "dর",
+        "[6, 7, 8, 9]",
+        "VIOLIN",
+        "8",
+        "17:00",
+        "1. **Compare prices** before buying to avoid overpaying.  \n2. **Buy in bulk** when items are on sale for better value.  \n3. **Plan meals** in advance to avoid last-minute, expensive purchases."
+      ]
+    },
+    "lora_sent": {
+      "fast_1": [
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ]
+      ],
+      "reasoning": [
+        [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ]
+      ],
+      "fast_2": [
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ]
+      ]
+    },
+    "lora_adapters": [
+      {
+        "id": 0,
+        "path": "D:\\Projects\\OakGPT\\models\\c2-qwen3-1.7b-lora-v1-f16.gguf",
+        "scale": 1.0,
+        "task_name": "",
+        "prompt_prefix": ""
+      }
+    ]
+  }
+}

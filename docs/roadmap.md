@@ -15,10 +15,25 @@ the text model's chat preset, 92% with reasoning. C2 is done and measured in
   accuracy from 92% to 57%.
 - **Outcome.** It was not adopted.
 
-Next is C2.1: apply the adapter only to fast-mode requests (llama-server's per-request
-LoRA scale). It needs a new frozen `chat_eval_v2`, because v1 has now selected that
-design. `chat_eval_v2` should also cover OCR with a normal typeface and photographs.
-v1 is not changed and is never used for training. The chat track is independent of the
+C2.1 is done and measured in [the C2.1 report](../reports/chat/c21/report.md). It first
+froze [`chat_eval_v2`](../data/eval/chat_eval_v2/README.md): 124 text and 63 image
+items, including typeset OCR, photographs and prompt injection, with no overlap with v1
+or the training data.
+
+- **Fast mode.** Applying the C2 adapter only to fast-mode requests raised fast-mode
+  accuracy from 31% to 60% on v2.
+- **Reasoning mode.** Reasoning-mode accuracy was unchanged at 83%.
+- **Outcome.** It was not adopted. The pre-registered switch check failed, and a
+  post-hoc diagnosis traced the failure to the check's design, not to the mechanism.
+- **Image model.** On v2 it scores 84%.
+
+Possible next steps:
+
+- **C2.2.** Confirm the mode-scoped adapter with a corrected mechanism check and a small,
+  fresh `chat_eval_v3`.
+- **C3.** Answers grounded in the user's local documents (RAG) with citations.
+
+v1 and v2 are never changed or used for training. The chat track is independent of the
 robotics Phase 4 gate below.
 
 ## Measured Phase 3.3 gate

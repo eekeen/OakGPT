@@ -10,7 +10,8 @@ from test_chat_server import FakeLlama
 from torch import nn
 
 from oakgpt.chat.app import ChatConfig, ManagedServer, ModelPool, Profile
-from oakgpt.chat.engine import ChatEngine, LlamaChatClient
+from oakgpt.chat.engine import PRESETS, ChatEngine, LlamaChatClient
+from oakgpt.chat.template import Message
 from oakgpt.finetuning import distill
 from oakgpt.finetuning.data import END, IGNORE, Example, batches, encode, load_examples
 from oakgpt.finetuning.lora import (
@@ -288,3 +289,42 @@ def test_open_probe_prompts_are_not_training_prompts():
     probe_prompts = {module.norm(json.loads(line)["prompt"]) for line in probe}
     train = {module.norm(i["prompt"]) for i in distill.load_prompts(PROMPTS / "prompts.jsonl")}
     assert len(probe_prompts) == 12 and not probe_prompts & train
+
+
+def test_mode_scoped_adapter_launch_flags_and_config(tmp_path):
+    spec = ManagedServer(
+        Path("server.exe"), Path("m.gguf"), lora=Path("a.gguf"), lora_scales=(1.0, 0.0)
+    )
+    command = spec.command(18080)
+    assert "--lora-init-without-apply" in command
+    assert command[command.index("--cache-ram") + 1] == "0"
+    with pytest.raises(ValueError, match="needs a lora"):
+        ManagedServer(Path("s.exe"), Path("m.gguf"), lora_scales=(1.0, 0.0))
+    with pytest.raises(ValueError, match=r"\[0, 2\]"):
+        ManagedServer(Path("s.exe"), Path("m.gguf"), lora=Path("a.gguf"), lora_scales=(3.0, 0))
+    server = {"binary": "s.exe", "model": "m.gguf", "lora": "a.gguf"}
+    for scales, ok in (({"chat": 1, "reasoning": 0}, True), ({"chat": 1}, False)):
+        config = tmp_path / "chat.json"
+        raw = {"llama_url": "http://127.0.0.1:18080", "storage": "conv"}
+        config.write_text(json.dumps({**raw, "managed_server": {**server, "lora_scales": scales}}))
+        if ok:
+            assert ChatConfig.load(config).managed.lora_scales == (1.0, 0.0)
+        else:
+            with pytest.raises(ValueError, match="chat and reasoning"):
+                ChatConfig.load(config)
+
+
+def test_engine_sends_an_explicit_lora_scale_for_each_mode():
+    fake = FakeLlama(n_ctx=8192, chunks=chunks("ok"))
+    try:
+        engine = ChatEngine(LlamaChatClient(fake.url), lora_scales=(1.0, 0.0))
+        for preset, expected in (("chat", 1.0), ("reasoning", 0.0), ("chat", 1.0)):
+            events = list(engine.respond([Message("user", "hi")], PRESETS[preset]))
+            assert events[-1]["stats"]["lora"] == [{"id": 0, "scale": expected}]
+        sent = [data["lora"] for path, data in fake.requests if path == "/completion"]
+        assert sent == [[{"id": 0, "scale": s}] for s in (1.0, 0.0, 1.0)]
+        plain = ChatEngine(LlamaChatClient(fake.url))
+        list(plain.respond([Message("user", "hi")], PRESETS["chat"]))
+        assert "lora" not in fake.requests[-1][1]
+    finally:
+        fake.close()

@@ -123,8 +123,14 @@ class LlamaChatClient:
     def context_length(self) -> int:
         return int(self.json("/props")["default_generation_settings"]["n_ctx"])
 
-    def stream(self, prompt: Prompt, settings: ChatSettings, seed: int) -> Iterator[dict[str, Any]]:
-        payload = {
+    def stream(
+        self,
+        prompt: Prompt,
+        settings: ChatSettings,
+        seed: int,
+        lora: list[dict[str, float]] | None = None,
+    ) -> Iterator[dict[str, Any]]:
+        payload: dict[str, Any] = {
             "prompt": prompt,
             "n_predict": settings.max_new_tokens,
             "temperature": settings.temperature,
@@ -137,6 +143,8 @@ class LlamaChatClient:
             "cache_prompt": self.cache_prompt,
             "return_tokens": True,
         }
+        if lora is not None:
+            payload["lora"] = lora
         request = self._request("/completion", payload)
         request.add_header("Accept", "text/event-stream")
         # Closing the response (generator close on client abort) stops server-side generation.
@@ -162,8 +170,20 @@ class ChatEngine:
 
     model = "text"
 
-    def __init__(self, client: LlamaChatClient) -> None:
+    def __init__(
+        self, client: LlamaChatClient, lora_scales: tuple[float, float] | None = None
+    ) -> None:
         self.client = client
+        # (fast, reasoning) scale of adapter 0, sent explicitly with every request. An
+        # explicit list is required even for scale 0: llama-server only compares LoRA
+        # settings, and clears a stale KV cache, when the request carries a "lora" field.
+        self.lora_scales = lora_scales
+
+    def lora_for(self, settings: ChatSettings) -> list[dict[str, float]] | None:
+        if self.lora_scales is None:
+            return None
+        scale = self.lora_scales[1] if settings.thinking else self.lora_scales[0]
+        return [{"id": 0, "scale": scale}]
 
     def render(
         self, messages: list[Message], settings: ChatSettings, marker: str = DEFAULT_MEDIA_MARKER
@@ -222,7 +242,8 @@ class ChatEngine:
         first_token: float | None = None
         generated = 0
         final: dict[str, Any] = {}
-        for chunk in self.client.stream(plan.prompt, settings, seed):
+        lora = self.lora_for(settings)
+        for chunk in self.client.stream(plan.prompt, settings, seed, lora):
             if chunk.get("truncated"):
                 raise RuntimeError("llama.cpp truncated the prompt despite the context plan")
             ids = chunk.get("tokens", [])
@@ -249,6 +270,7 @@ class ChatEngine:
                 "server_cached_tokens": timings.get("cache_n"),
                 "server_prompt_ms": timings.get("prompt_ms"),
                 "server_decode_tokens_per_second": timings.get("predicted_per_second"),
+                "lora": lora,
                 "settings": asdict(replace(settings, seed=seed)),
             },
         }

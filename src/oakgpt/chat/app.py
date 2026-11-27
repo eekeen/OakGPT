@@ -49,6 +49,17 @@ class ManagedServer:
     mmproj: Path | None = None
     image_max_tokens: int | None = None
     lora: Path | None = None  # GGUF LoRA adapter applied by llama-server (Chat C2).
+    # (fast, reasoning) adapter scales sent with every request (Chat C2.1). The adapter is
+    # then loaded unapplied, and llama-server's RAM prompt cache is disabled because it
+    # matches cached prompts by tokens only, not by the LoRA scale they were computed with.
+    lora_scales: tuple[float, float] | None = None
+
+    def __post_init__(self) -> None:
+        if self.lora_scales is not None:
+            if self.lora is None:
+                raise ValueError("lora_scales needs a lora adapter")
+            if not all(0 <= scale <= 2 for scale in self.lora_scales):
+                raise ValueError("lora_scales must be in [0, 2]")
 
     def command(self, port: int) -> list[str]:
         command = [
@@ -74,6 +85,8 @@ class ManagedServer:
             command += ["--image-max-tokens", str(self.image_max_tokens)]
         if self.lora is not None:
             command += ["--lora", str(self.lora)]
+        if self.lora_scales is not None:
+            command += ["--lora-init-without-apply", "--cache-ram", "0"]
         return command
 
     def files(self) -> list[Path]:
@@ -116,12 +129,18 @@ class ChatConfig:
             server = dict(raw)
             mmproj = server.pop("mmproj", None)
             lora = server.pop("lora", None)
+            scales = server.pop("lora_scales", None)
+            if scales is not None and set(scales) != {"chat", "reasoning"}:
+                raise ValueError("lora_scales needs exactly the keys chat and reasoning")
             return ManagedServer(
                 binary=resolve(server.pop("binary")),
                 model=resolve(server.pop("model")),
                 log_dir=resolve(server.pop("log_dir", "../../runs/chat/server")),
                 mmproj=None if mmproj is None else resolve(mmproj),
                 lora=None if lora is None else resolve(lora),
+                lora_scales=None
+                if scales is None
+                else (float(scales["chat"]), float(scales["reasoning"])),
                 **server,
                 **extra,
             )
@@ -328,6 +347,11 @@ def _identity(base: dict[str, Any], managed: ManagedServer | None, cache: Path) 
         if managed.lora is not None:
             identity["lora_filename"] = managed.lora.name
             identity["lora_sha256"] = cached_sha256(managed.lora, cache)
+        if managed.lora_scales is not None:
+            identity["lora_scales"] = {
+                "chat": managed.lora_scales[0],
+                "reasoning": managed.lora_scales[1],
+            }
     return identity
 
 
@@ -335,9 +359,12 @@ def build_pool(config: ChatConfig) -> ModelPool:
     cache = config.storage.parent / "hash-cache.json"
     print("Checking model file hashes for provenance ...", flush=True)
     text = LlamaChatClient(config.url, cache_prompt=config.cache_prompt)
+    scales = None if config.managed is None else config.managed.lora_scales
     profiles = {
         "text": Profile(
-            ChatEngine(text), _identity(config.identity, config.managed, cache), config.managed
+            ChatEngine(text, lora_scales=scales),
+            _identity(config.identity, config.managed, cache),
+            config.managed,
         )
     }
     if config.vision is not None:

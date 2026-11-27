@@ -1252,7 +1252,7 @@ def build(out: Path) -> dict:
         "corpus": {path: sha(data) for path, data in sorted(files.items())},
         "corpus_words": sum(len(d.decode().split()) for d in files.values()),
     }
-    (out / "manifest.json").write_text(json.dumps(manifest, indent=1) + "\n", encoding="utf-8")
+    (out / "manifest.json").write_bytes((json.dumps(manifest, indent=1) + "\n").encode())
     return manifest
 
 

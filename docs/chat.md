@@ -1,4 +1,4 @@
-# Local chat (C1, C1.1)
+# Local chat (C1-C3)
 
 `oakgpt chat` serves OakGPT's web UI on `http://127.0.0.1:8765/`. Qwen3 1.7B answers
 text through a local llama.cpp server, and Qwen3-VL 2B answers questions about images.

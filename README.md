@@ -16,7 +16,7 @@ an actual ROS2 Jazzy/Nav2/Gazebo demonstrator. [Setup](docs/robotics.md),
 fault-driven fixes. The 60-scenario study exposes frequent unsafe raw Qwen proposals;
 independent validation prevents their execution.
 
-## Local chat assistant (Chat C1, C1.1)
+## Local chat assistant (Chat C1-C3)
 
 OakGPT includes a private assistant with its own dark "Oak" interface. A browser UI
 streams replies from Qwen3 1.7B (Q4_K_M) served by a local llama.cpp process, with
@@ -60,6 +60,24 @@ fast-mode accuracy from 31% to 60% and left reasoning mode unchanged. A correctn
 fixed in advance still failed, so the adapter stays experimental. A follow-up diagnosis
 traced the failure to prompt-cache effects in the check itself, not to the mechanism
 ([C2.1 report](reports/chat/c21/report.md)).
+
+Chat C3 lets OakGPT answer from your own Markdown and text files, with numbered citations
+that open the passage they came from. It searches by keywords (BM25) and by meaning, using
+a local embedding model on the CPU, and fuses the two rankings. It was measured on a
+frozen set of 120 questions about OakGPT's own documentation, which the model cannot have
+seen. Answers were correct for 75% of the answerable test questions, against 4% without
+the documents, and no planted prompt injection took over the default mode. Two criteria
+fixed in advance failed: the model admitted that the documents lacked an answer for only
+67% of the questions that had none (the target was 70%), and too few citations pointed at
+the exact supporting passage. Document answers therefore stay an experimental
+configuration ([C3 report](reports/chat/c3/report.md), [chat guide](docs/chat.md)):
+
+```powershell
+.\.venv\Scripts\python scripts\fetch_embedding_model.py   # once, 639 MB
+.\.venv\Scripts\oakgpt chat --config configs/chat/qwen3_q4km_rag.json
+```
+
+![OakGPT answering from its own documents](reports/chat/c3/figures/ui-docs-dark-1280.png)
 
 ![OakGPT chat](reports/chat/c1_1/figures/ui-vision-1280.png)
 

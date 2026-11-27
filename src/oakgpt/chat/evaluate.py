@@ -147,6 +147,7 @@ def run_items(
                     "condition": condition,
                     "item_id": item["id"],
                     "category": item["category"],
+                    "family": item.get("family"),
                     "repeat": repeat,
                     "seed": seed,
                     **result,
@@ -197,6 +198,13 @@ def summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
                 "strict": statistics.mean(_per_item(selected, "strict").values()),
                 "lenient": statistics.mean(_per_item(selected, "lenient").values()),
             }
+        families = {}
+        for family in sorted({r["family"] for r in rows if r.get("family") is not None}):
+            selected = [record for record in rows if record.get("family") == family]
+            families[family] = {
+                "items": len({record["item_id"] for record in selected}),
+                "strict": _accuracy(selected, "strict"),
+            }
         summary["conditions"][condition] = {
             "items": len({record["item_id"] for record in rows}),
             "replies": len(rows),
@@ -204,6 +212,7 @@ def summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
             "lenient": _accuracy(rows, "lenient"),
             "truncated_replies": sum(record["truncated"] for record in rows),
             "categories": categories,
+            "families": families,
             "generated_tokens_median": _median([r.get("generated_tokens") for r in rows]),
             "wall_s_median": _median([r.get("wall_s") for r in rows]),
             "ttft_s_median": _median([r.get("ttft_s") for r in rows]),
@@ -271,7 +280,7 @@ def run_chat_eval(
         pool.close()
     summary = summarize(records)
     report = {
-        "study": "chat-eval-v1",
+        "study": f"chat-eval:{dataset.parent.name}",
         "environment": environment(),
         "config_path": str(config_path),
         "config_sha256": sha256(config_path),
@@ -295,8 +304,7 @@ def run_chat_eval(
         },
         "limitations": [
             "One host and one run; seeds fix sampling but GPU arithmetic may still vary.",
-            "Small hand-made set: per-category results rest on 2-7 items each.",
-            "Synthetic images test basic perception, not photographs or documents.",
+            "Small hand-made set; the dataset card states its size, sources and limits.",
             "Pretrained models may have seen similar facts and arithmetic.",
             "Lenient scoring is a heuristic and can pass hedged or contradicting replies.",
         ],

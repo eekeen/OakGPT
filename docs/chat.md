@@ -101,6 +101,11 @@ items with answer keys) through the same model pool, templates and presets as th
 timings, model hashes and the environment. Results and decisions are in the
 [evaluation report](../reports/chat/eval_v1/report.md). Never train on this set.
 
+[Chat evaluation set v2](../data/eval/chat_eval_v2/README.md) (124 text and 63 image
+items, with typeset documents and photographs) is used for decisions after C2, because
+v1 was used to choose between C2 configurations. Pass
+`--dataset data/eval/chat_eval_v2/items.jsonl` to use it.
+
 ## Security notes
 
 The server only binds to loopback. It also:

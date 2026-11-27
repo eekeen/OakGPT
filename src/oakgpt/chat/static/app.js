@@ -118,6 +118,9 @@ const el = {
   systemPrompt: $("system-prompt"), temperature: $("temperature"),
   temperatureValue: $("temperature-value"), maxTokens: $("max-tokens"),
   resetSettings: $("reset-settings"), lightbox: $("lightbox"), lightboxImage: $("lightbox-image"),
+  docsToggle: $("docs-toggle"), library: $("library"), libraryDot: $("library-dot"),
+  librarySummary: $("library-summary"), libraryNote: $("library-note"),
+  libraryAdd: $("library-add"), libraryReindex: $("library-reindex"), libraryFile: $("library-file"),
 };
 const LEAF = '<svg viewBox="0 0 24 24"><path d="M12 2.5c-1.3 1.6-3.6 2-4.8 3.6-1 1.3-.8 2.9-1.9 4.1C4 11.6 4.3 14 5.6 15.4c1.2 1.4 3.2 1.7 4.9 1.2V21h3v-4.4c1.7.5 3.7.2 4.9-1.2 1.3-1.4 1.6-3.8.3-5.2-1.1-1.2-.9-2.8-1.9-4.1-1.2-1.6-3.5-2-4.8-3.6Z"/></svg>';
 const ICONS = {
@@ -132,8 +135,8 @@ const MAX_IMAGE_SIDE = 1600; // The server caps each image at 1024 tokens; large
 
 const state = {
   presets: {}, defaultSystemPrompt: "", conversationId: null, conversation: null,
-  busy: false, controller: null, status: null, history: [], pending: [],
-  prefs: { preset: null, temperature: null, maxTokens: null, systemPrompt: null, theme: "dark" },
+  busy: false, controller: null, status: null, history: [], pending: [], documents: null,
+  prefs: { preset: null, temperature: null, maxTokens: null, systemPrompt: null, theme: "dark", documents: false },
 };
 
 function loadPrefs() {
@@ -262,7 +265,154 @@ function renderModeIndicator() {
   const vision = usesVision();
   el.mode.hidden = vision;
   el.visionPill.hidden = !vision;
+  renderDocsToggle();
 }
+
+// ---------- Documents -----------------------------------------------------------------
+
+// Document answers are text-only: a conversation with images goes to the vision model.
+function docsActive() {
+  return Boolean(state.documents && state.documents.available) && state.prefs.documents && !usesVision();
+}
+function renderDocsToggle() {
+  const available = Boolean(state.documents && state.documents.available);
+  el.docsToggle.hidden = !available;
+  el.docsToggle.disabled = usesVision();
+  el.docsToggle.setAttribute("aria-pressed", String(available && state.prefs.documents));
+  el.input.placeholder = docsActive()
+    ? "Ask about your documents"
+    : "Ask OakGPT anything, or attach an image";
+}
+el.docsToggle.addEventListener("click", () => {
+  state.prefs.documents = !state.prefs.documents;
+  savePrefs();
+  renderDocsToggle();
+  el.input.focus();
+});
+
+let documentsTimer = 0;
+async function checkDocuments() {
+  clearTimeout(documentsTimer);
+  let next = 30_000;
+  try {
+    const status = await (await api("/api/documents")).json();
+    state.documents = status;
+    el.library.hidden = !status.available;
+    if (status.available) {
+      const dot = el.libraryDot;
+      dot.className = "dot";
+      if (status.state === "indexing") { dot.classList.add("loading"); next = 1_500; }
+      else if (status.state === "ready") dot.classList.add("loaded");
+      else if (status.state === "error") dot.classList.add("bad");
+      const counts = status.chunks === undefined
+        ? "Not indexed yet"
+        : `${status.files} file${status.files === 1 ? "" : "s"} · ${status.chunks} passages`;
+      el.librarySummary.textContent = status.state === "indexing" ? `Indexing… ${status.chunks === undefined ? "" : counts}` : counts;
+      el.libraryNote.textContent = status.error || `${status.method} search · ${status.folder}`;
+      el.libraryNote.title = status.folder || "";
+    }
+  } catch { next = 10_000; }
+  renderDocsToggle();
+  documentsTimer = setTimeout(checkDocuments, next);
+}
+el.libraryAdd.addEventListener("click", () => el.libraryFile.click());
+el.libraryFile.addEventListener("change", async () => {
+  for (const file of el.libraryFile.files) {
+    try {
+      const text = await file.text();
+      await api("/api/documents", { method: "POST", body: JSON.stringify({ name: file.name, text }) });
+      toast(`Added ${file.name}. Indexing…`);
+    } catch (error) { toast(`${file.name}: ${error.message}`); }
+  }
+  el.libraryFile.value = "";
+  checkDocuments();
+});
+el.libraryReindex.addEventListener("click", async () => {
+  try { await api("/api/documents/reindex", { method: "POST", body: "{}" }); }
+  catch (error) { toast(error.message); }
+  checkDocuments();
+});
+
+// Citation markers such as [2] or [1, 3] become buttons that open their source card.
+const CITATION = /\[(\d{1,2}(?:\s*[,;]\s*\d{1,2})*)\]/g;
+function citedNumbers(text, count) {
+  const cited = new Set();
+  for (const match of text.matchAll(CITATION)) {
+    for (const part of match[1].split(/[,;]/)) {
+      const n = Number(part.trim());
+      if (n >= 1 && n <= count) cited.add(n);
+    }
+  }
+  return cited;
+}
+function linkCitations(html, count) {
+  return html.split(/(<pre>[\s\S]*?<\/pre>|<code>[\s\S]*?<\/code>)/).map((part, index) => {
+    if (index % 2) return part;
+    return part.replace(CITATION, (whole, list) => {
+      const numbers = list.split(/[,;]/).map((x) => Number(x.trim()));
+      if (!numbers.every((n) => n >= 1 && n <= count)) return whole;
+      return numbers.map((n) => `<button type="button" class="cite" data-cite="${n}" aria-label="Source ${n}">${n}</button>`).join("");
+    });
+  }).join("");
+}
+function renderAnswer(view) {
+  const html = renderMarkdown(view.text);
+  return view.sources && view.sources.length ? linkCitations(html, view.sources.length) : html;
+}
+
+function sourceCard(source, cited) {
+  const card = document.createElement("details");
+  card.className = cited ? "source cited" : "source";
+  card.dataset.n = String(source.n);
+  const summary = document.createElement("summary");
+  const number = document.createElement("span");
+  number.className = "source-n";
+  number.textContent = String(source.n);
+  const path = document.createElement("span");
+  path.className = "source-path";
+  path.textContent = source.path;
+  const heading = document.createElement("span");
+  heading.className = "source-heading";
+  heading.textContent = source.heading || "";
+  summary.append(number, path, heading);
+  const excerpt = document.createElement("div");
+  excerpt.className = "source-excerpt";
+  excerpt.textContent = source.excerpt + (source.excerpt.length >= 600 ? "…" : "");
+  card.append(summary, excerpt);
+  return card;
+}
+function renderSources(view) {
+  view.sourcesBox.replaceChildren();
+  const sources = view.sources || [];
+  view.sourcesBox.hidden = sources.length === 0;
+  if (!sources.length) return;
+  const cited = citedNumbers(view.text, sources.length);
+  const title = document.createElement("div");
+  title.className = "sources-title";
+  title.textContent = cited.size ? "Sources" : `Searched ${sources.length} passages from your documents`;
+  view.sourcesBox.append(title);
+  for (const source of sources) if (cited.has(source.n)) view.sourcesBox.append(sourceCard(source, true));
+  const rest = sources.filter((source) => !cited.has(source.n));
+  if (!rest.length) return;
+  const more = document.createElement("details");
+  more.className = "sources-more";
+  const label = document.createElement("summary");
+  label.textContent = cited.size ? `${rest.length} more searched passage${rest.length === 1 ? "" : "s"}` : "Show passages";
+  more.append(label, ...rest.map((source) => sourceCard(source, false)));
+  view.sourcesBox.append(more);
+}
+el.messages.addEventListener("click", (event) => {
+  const button = event.target.closest(".cite");
+  if (!button) return;
+  const card = button.closest(".entry").querySelector(`.source[data-n="${button.dataset.cite}"]`);
+  if (!card) return;
+  const group = card.closest(".sources-more");
+  if (group) group.open = true;
+  card.open = true;
+  card.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  card.classList.add("flash");
+  setTimeout(() => card.classList.remove("flash"), 1200);
+});
 
 // ---------- Sidebar -------------------------------------------------------------------
 
@@ -533,12 +683,20 @@ function addAssistant(message = {}) {
   details.append(summary, reasoningBody);
   const answer = document.createElement("div");
   answer.className = "answer";
+  const sourcesBox = document.createElement("div");
+  sourcesBox.className = "sources";
+  sourcesBox.hidden = true;
   const footer = document.createElement("div");
   footer.className = "entry-footer";
-  body.append(status, notice, details, answer, footer);
-  const view = { node, status, notice, details, summary, reasoningBody, answer, footer, text: message.content || "", reasoning: message.reasoning || "" };
+  body.append(status, notice, details, answer, sourcesBox, footer);
+  const view = {
+    node, status, notice, details, summary, reasoningBody, answer, sourcesBox, footer,
+    text: message.content || "", reasoning: message.reasoning || "",
+    sources: (message.meta && message.meta.sources) || null,
+  };
   setNotice(view, message.meta);
-  if (message.content !== undefined) answer.innerHTML = renderMarkdown(view.text);
+  if (message.content !== undefined) answer.innerHTML = renderAnswer(view);
+  renderSources(view);
   return view;
 }
 
@@ -565,6 +723,7 @@ function setNotice(view, meta) {
 }
 
 function finishAssistant(view, message, isLast) {
+  renderSources(view);
   view.footer.replaceChildren();
   const copy = document.createElement("button");
   copy.type = "button";
@@ -587,6 +746,12 @@ function finishAssistant(view, message, isLast) {
     const chip = document.createElement("span");
     chip.className = `model-chip ${model}`;
     chip.textContent = MODEL_LABELS[model] || model;
+    view.footer.append(chip);
+  }
+  if (view.sources && view.sources.length) {
+    const chip = document.createElement("span");
+    chip.className = "model-chip docs";
+    chip.textContent = "Docs";
     view.footer.append(chip);
   }
   if (message.interrupted) {
@@ -668,11 +833,11 @@ async function streamReply(body, view, vision) {
   const paint = () => {
     rendered = false;
     const stick = nearBottom();
-    view.answer.innerHTML = renderMarkdown(view.text) + (state.busy ? cursor : "");
+    view.answer.innerHTML = renderAnswer(view) + (state.busy ? cursor : "");
     if (stick) scrollToBottom();
   };
   const schedule = () => { if (!rendered) { rendered = true; requestAnimationFrame(paint); } };
-  setStatus(view, pendingStatus(vision));
+  setStatus(view, body.documents ? "Searching your documents…" : pendingStatus(vision));
   let finalMessage = null;
   try {
     const response = await api(`/api/conversations/${state.conversationId}/reply`, {
@@ -693,6 +858,7 @@ async function streamReply(body, view, vision) {
         const data = JSON.parse((block.match(/^data: (.*)$/m) || [, "{}"])[1]);
         if (name === "meta") {
           setNotice(view, data);
+          if (data.sources) { view.sources = data.sources; renderSources(view); }
           setStatus(view, data.images ? "Looking at the image…" : "Thinking…");
           checkStatus();
         } else if (name === "reasoning") {
@@ -776,6 +942,7 @@ async function send(text) {
   scrollToBottom();
   const body = { content: text, settings: requestSettings() };
   if (images.length) body.images = images.map((item) => item.base64);
+  else if (docsActive()) body.documents = true;
   const accepted = await streamReply(body, view, vision);
   if (accepted === false) { state.pending = images; renderAttachments(); }
   else for (const item of images) setTimeout(() => URL.revokeObjectURL(item.url), 5000);
@@ -785,7 +952,9 @@ async function regenerate(view) {
   if (state.busy) return;
   const fresh = addAssistant();
   view.node.replaceWith(fresh.node);
-  await streamReply({ regenerate: true, settings: requestSettings() }, fresh, usesVision());
+  const body = { regenerate: true, settings: requestSettings() };
+  if (view.sources && view.sources.length) body.documents = true; // Keep the reply's mode.
+  await streamReply(body, fresh, usesVision());
 }
 
 el.composer.addEventListener("submit", async (event) => {
@@ -887,5 +1056,6 @@ async function checkStatus() {
 loadPrefs();
 applyTheme();
 checkStatus();
+checkDocuments();
 route();
 updateSendEnabled();

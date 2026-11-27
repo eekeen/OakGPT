@@ -73,6 +73,31 @@ def main() -> None:
         default="text-chat,text-reasoning,vision,vision-on-text",
         help="Comma-separated subset of: text-chat, text-reasoning, vision, vision-on-text",
     )
+    rag_retrieval = commands.add_parser(
+        "rag-retrieval", help="Measure document retrieval alone on a frozen answer set"
+    )
+    rag_retrieval.add_argument("--config", type=Path, required=True)
+    rag_retrieval.add_argument("--dataset", type=Path, required=True)
+    rag_retrieval.add_argument("--output", type=Path, required=True)
+    rag_retrieval.add_argument("--split", choices=["dev", "test"], required=True)
+    rag_retrieval.add_argument("--methods", default="bm25,dense,hybrid")
+    rag_retrieval.add_argument("--chunk-words", default="200")
+    rag_retrieval.add_argument("--ks", default="1,3,6,10")
+    rag_retrieval.add_argument("--index-dir", type=Path, default=Path("runs/c3/index"))
+    rag_eval = commands.add_parser(
+        "rag-eval", help="Score cited document answers on a frozen answer set"
+    )
+    rag_eval.add_argument("--config", type=Path, required=True)
+    rag_eval.add_argument("--dataset", type=Path, required=True)
+    rag_eval.add_argument("--output", type=Path, required=True)
+    rag_eval.add_argument("--split", choices=["dev", "test"], required=True)
+    rag_eval.add_argument("--repeats", type=int, default=3)
+    rag_eval.add_argument(
+        "--conditions",
+        default="closed-reasoning,rag-reasoning",
+        help="Comma-separated subset of: closed-chat, closed-reasoning, rag-chat, rag-reasoning",
+    )
+    rag_eval.add_argument("--index", type=Path, default=Path("runs/c3/index/eval-index.json"))
     distill = commands.add_parser(
         "c2-distill", help="Collect reasoning-mode teacher answers for fast-mode fine-tuning"
     )
@@ -88,6 +113,36 @@ def main() -> None:
     args = parser.parse_args()
     if args.command == "train":
         print(train(TrainConfig.load(args.config), args.resume))
+        return
+    if args.command in ("rag-retrieval", "rag-eval"):
+        from oakgpt.chat.app import ChatConfig
+        from oakgpt.chat.rag_eval import run_rag_eval, run_retrieval
+
+        config = ChatConfig.load(args.config)
+        if args.command == "rag-retrieval":
+            run_retrieval(
+                config,
+                args.dataset,
+                args.output,
+                [m.strip() for m in args.methods.split(",") if m.strip()],
+                [int(w) for w in args.chunk_words.split(",")],
+                [int(k) for k in args.ks.split(",")],
+                args.split,
+                args.index_dir,
+            )
+        else:
+            conditions = [name.strip() for name in args.conditions.split(",") if name.strip()]
+            summary = run_rag_eval(
+                config,
+                args.config,
+                args.dataset,
+                args.output,
+                args.repeats,
+                conditions,
+                args.split,
+                args.index,
+            )
+            print(json.dumps(summary, indent=2))
         return
     if args.command == "c2-distill":
         from oakgpt.chat.app import ChatConfig

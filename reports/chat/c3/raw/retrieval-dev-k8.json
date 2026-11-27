@@ -1,0 +1,214 @@
+{
+  "study": "rag-retrieval:rag_eval_v1",
+  "environment": {
+    "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "logical_cpu_count": 16,
+    "torch": "2.9.1",
+    "cuda_runtime": null,
+    "cudnn": null,
+    "cuda_available": false,
+    "gpu": null,
+    "git_revision": "e361ce43521cef6e2ad78f57782aefb8b42d37c6",
+    "git_dirty": true
+  },
+  "dataset_sha256": "f4e61d771bf821f2e595203a16bc33df73f53c0e3c4776bd97780378d5b65e61",
+  "split": "dev",
+  "query": "item prompt (question plus format sentence), as a user would type it",
+  "hit_rule": "a retrieved chunk contains an evidence passage after normalization",
+  "embedding_identity": {
+    "model": "Qwen/Qwen3-Embedding-0.6B",
+    "quantization": "Q8_0 (official Qwen GGUF)",
+    "gguf_repository": "Qwen/Qwen3-Embedding-0.6B-GGUF",
+    "gguf_revision": "370f27d7550e0def9b39c1f16d3fbaa13aa67728",
+    "expected_server_build": "b11930",
+    "provenance": "scripts/fetch_embedding_model.py",
+    "gguf_filename": "Qwen3-Embedding-0.6B-Q8_0.gguf",
+    "gguf_sha256": "06507c7b42688469c4e7298b0a1e16deff06caf291cf0a5b278c308249c3e439",
+    "query_task": "Given a question, retrieve passages from the user's documents that answer it"
+  },
+  "query_task": "Given a question, retrieve passages from the user's documents that answer it",
+  "builds": {
+    "120": {
+      "chunks": 800,
+      "build_s": 0.167,
+      "reused_vectors": true
+    }
+  },
+  "results": {
+    "bm25/120": {
+      "items": 23,
+      "mrr": 0.6068840579710145,
+      "recall@4": {
+        "mean": 0.6086956521739131,
+        "ci95": [
+          0.391304347826087,
+          0.782608695652174
+        ],
+        "items": 23
+      },
+      "recall@6": {
+        "mean": 0.6956521739130435,
+        "ci95": [
+          0.5217391304347826,
+          0.8695652173913043
+        ],
+        "items": 23
+      },
+      "recall@8": {
+        "mean": 0.7391304347826086,
+        "ci95": [
+          0.5652173913043478,
+          0.9130434782608695
+        ],
+        "items": 23
+      },
+      "families": {
+        "en": {
+          "recall@4": 0.6666666666666666,
+          "recall@6": 0.8333333333333334,
+          "recall@8": 0.9166666666666666
+        },
+        "injection": {
+          "recall@4": 1.0,
+          "recall@6": 1.0,
+          "recall@8": 1.0
+        },
+        "notes": {
+          "recall@4": 1.0,
+          "recall@6": 1.0,
+          "recall@8": 1.0
+        },
+        "sv": {
+          "recall@4": 0.0,
+          "recall@6": 0.0,
+          "recall@8": 0.0
+        }
+      },
+      "missed_at_max_k": [
+        "en-image-mib",
+        "sv-attempts",
+        "sv-license",
+        "sv-quant",
+        "sv-ubuntu",
+        "sv-v1-reasoning"
+      ],
+      "search_s_median": 0.004963399842381477
+    },
+    "dense/120": {
+      "items": 23,
+      "mrr": 0.6702898550724637,
+      "recall@4": {
+        "mean": 0.7391304347826086,
+        "ci95": [
+          0.5652173913043478,
+          0.9130434782608695
+        ],
+        "items": 23
+      },
+      "recall@6": {
+        "mean": 0.8260869565217391,
+        "ci95": [
+          0.6521739130434783,
+          0.9565217391304348
+        ],
+        "items": 23
+      },
+      "recall@8": {
+        "mean": 0.8260869565217391,
+        "ci95": [
+          0.6521739130434783,
+          0.9565217391304348
+        ],
+        "items": 23
+      },
+      "families": {
+        "en": {
+          "recall@4": 0.6666666666666666,
+          "recall@6": 0.8333333333333334,
+          "recall@8": 0.8333333333333334
+        },
+        "injection": {
+          "recall@4": 1.0,
+          "recall@6": 1.0,
+          "recall@8": 1.0
+        },
+        "notes": {
+          "recall@4": 1.0,
+          "recall@6": 1.0,
+          "recall@8": 1.0
+        },
+        "sv": {
+          "recall@4": 0.6,
+          "recall@6": 0.6,
+          "recall@8": 0.6
+        }
+      },
+      "missed_at_max_k": [
+        "en-decode-c1",
+        "en-image-mib",
+        "sv-attempts",
+        "sv-v1-reasoning"
+      ],
+      "search_s_median": 0.3791609000181779
+    },
+    "hybrid/120": {
+      "items": 23,
+      "mrr": 0.7091097308488613,
+      "recall@4": {
+        "mean": 0.782608695652174,
+        "ci95": [
+          0.6086956521739131,
+          0.9565217391304348
+        ],
+        "items": 23
+      },
+      "recall@6": {
+        "mean": 0.782608695652174,
+        "ci95": [
+          0.6086956521739131,
+          0.9565217391304348
+        ],
+        "items": 23
+      },
+      "recall@8": {
+        "mean": 0.8260869565217391,
+        "ci95": [
+          0.6521739130434783,
+          0.9565217391304348
+        ],
+        "items": 23
+      },
+      "families": {
+        "en": {
+          "recall@4": 0.9166666666666666,
+          "recall@6": 0.9166666666666666,
+          "recall@8": 0.9166666666666666
+        },
+        "injection": {
+          "recall@4": 1.0,
+          "recall@6": 1.0,
+          "recall@8": 1.0
+        },
+        "notes": {
+          "recall@4": 1.0,
+          "recall@6": 1.0,
+          "recall@8": 1.0
+        },
+        "sv": {
+          "recall@4": 0.2,
+          "recall@6": 0.2,
+          "recall@8": 0.4
+        }
+      },
+      "missed_at_max_k": [
+        "en-image-mib",
+        "sv-attempts",
+        "sv-license",
+        "sv-v1-reasoning"
+      ],
+      "search_s_median": 0.3883098498918116
+    }
+  }
+}

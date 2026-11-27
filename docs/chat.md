@@ -69,6 +69,43 @@ configuration and set `llama_url` to its loopback address.
 - When a conversation outgrows the context, the oldest exchanges are left out of the
   prompt and a note says how many. The stored conversation is not changed.
 
+## Answers from your documents (C3)
+
+With a configuration that has a `documents` block, such as
+`configs/chat/qwen3_q4km_rag.json`, OakGPT can answer from your own Markdown and text
+files and cite them:
+
+1. Download the embedding model once:
+   `.\.venv\Scripts\python scripts\fetch_embedding_model.py` (639 MB, pinned revision,
+   SHA-256 checked).
+2. Put `.md`, `.markdown` or `.txt` files in `runs/chat/documents/`, or click
+   **Add files** in the **Documents** panel of the sidebar. Subfolders are included.
+   Hidden folders and files over 2 MiB are skipped.
+3. Turn on **Docs** in the composer and ask.
+
+The answer cites sources as numbered markers. Click a marker to open the passage it
+refers to; the passages that were searched but not cited are listed below it. When the
+documents do not contain the answer, the model is told to reply "I could not find this
+in your documents."
+
+How it works:
+
+- Files are split into passages of at most 120 words that follow the Markdown headings.
+- Each question is matched against them twice: by keywords (BM25) and by meaning
+  (embeddings from Qwen3-Embedding-0.6B). The two rankings are fused, and the top 8
+  passages are sent with the question.
+- The embedding model runs in its own llama-server on port 18082, on the CPU. The GPU
+  therefore still holds only the chat model.
+- The index is rebuilt at start and after **Re-index** or an upload. Unchanged passages
+  reuse their stored embeddings, from `runs/chat/document-index.json`.
+- Document answers use the text model only. A conversation with images cannot use them.
+- Only the newest question is searched. A follow-up such as "and the other one?" is
+  searched on its own words.
+
+Documents are treated as untrusted text. The model is told not to follow instructions
+inside them, but a document can still try to steer the answer, as the
+[C3 report](../reports/chat/c3/report.md) measures.
+
 ## Configuration keys
 
 | Key | Meaning |
@@ -82,6 +119,7 @@ configuration and set `llama_url` to its loopback address.
 | `identity` | Provenance recorded in the status endpoint. |
 | `managed_server.lora` | Optional GGUF LoRA adapter passed to llama-server with `--lora`; its hash is recorded in the status identity. Used only by the experimental `configs/chat/qwen3_q4km_c2.json` ([C2 report](../reports/chat/c2/report.md)). |
 | `managed_server.lora_scales` | Optional `{"chat": s1, "reasoning": s2}`: the adapter is loaded unapplied and each request carries an explicit scale for its mode, with llama-server's RAM prompt cache disabled. Used only by the experimental `configs/chat/qwen3_q4km_c21.json` ([C2.1 report](../reports/chat/c21/report.md)). |
+| `documents` | Optional document search: `folder`, `index` (cache file), `method` (`bm25`, `dense` or `hybrid`), `top_k`, `max_words` per passage, and `embedding` with `llama_url`, `managed_server` (an embedding GGUF; `gpu_layers: 0` keeps it on the CPU) and `identity`. `bm25` needs no embedding model. |
 | `vision` | Optional image model: `llama_url`, `image_max_tokens` (default 1024), `managed_server` with an extra `mmproj` path, and `identity`. |
 
 ## Measuring answer quality

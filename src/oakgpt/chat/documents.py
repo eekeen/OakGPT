@@ -476,7 +476,7 @@ def ground(messages: list[Message], hits: list[Hit]) -> list[Message]:
     return [*messages[:-1], replace(last, content=grounded_content(last.content, hits))]
 
 
-def public_sources(hits: list[Hit], excerpt: int = 600) -> list[dict[str, Any]]:
+def public_sources(hits: list[Hit], excerpt: int = 2000) -> list[dict[str, Any]]:
     """What the UI shows and the conversation stores for each numbered source."""
     return [
         {

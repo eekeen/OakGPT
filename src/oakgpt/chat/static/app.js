@@ -308,7 +308,8 @@ async function checkDocuments() {
         ? "Not indexed yet"
         : `${status.files} file${status.files === 1 ? "" : "s"} · ${status.chunks} passages`;
       el.librarySummary.textContent = status.state === "indexing" ? `Indexing… ${status.chunks === undefined ? "" : counts}` : counts;
-      el.libraryNote.textContent = status.error || `${status.method} search · ${status.folder}`;
+      const folderName = (status.folder || "").split(/[\\/]/).filter(Boolean).pop() || "";
+      el.libraryNote.textContent = status.error || `${status.method} search · ${folderName}`;
       el.libraryNote.title = status.folder || "";
     }
   } catch { next = 10_000; }
@@ -377,7 +378,7 @@ function sourceCard(source, cited) {
   summary.append(number, path, heading);
   const excerpt = document.createElement("div");
   excerpt.className = "source-excerpt";
-  excerpt.textContent = source.excerpt + (source.excerpt.length >= 600 ? "…" : "");
+  excerpt.textContent = source.excerpt + (source.excerpt.length >= 2000 ? "…" : "");
   card.append(summary, excerpt);
   return card;
 }

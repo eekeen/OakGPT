@@ -257,7 +257,8 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
   background: var(--accent-soft); color: var(--accent); font: 600 11px var(--font);
   vertical-align: 2px; cursor: pointer; }
 .cite:hover, .cite:focus-visible { background: var(--accent); color: var(--accent-text); }
-.sources { margin-top: 12px; display: grid; gap: 6px; }
+.sources { margin-top: 12px; display: grid; gap: 6px; min-width: 0; }
+.sources > *, .sources-more > * { min-width: 0; }
 .sources-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
 .sources-more > summary { cursor: pointer; font-size: 12.5px; color: var(--muted); padding: 2px 0; }
 .sources-more[open] { display: grid; gap: 6px; }
@@ -270,7 +271,11 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
   border-radius: 5px; background: var(--surface-2); color: var(--muted); font-size: 11px;
   font-weight: 600; }
 .source.cited .source-n { background: var(--accent-soft); color: var(--accent); }
-.source-path { font-family: var(--mono); font-size: 12px; overflow-wrap: anywhere; }
+.source-path { font-family: var(--mono); font-size: 12px; overflow-wrap: anywhere; min-width: 0; }
+@media (max-width: 640px) {
+  .source summary { flex-wrap: wrap; }
+  .source-heading { flex-basis: 100%; white-space: normal; }
+}
 .source-heading { flex: 1; min-width: 0; color: var(--muted); font-size: 12px; overflow: hidden;
   text-overflow: ellipsis; white-space: nowrap; }
 .source-excerpt { white-space: pre-wrap; font-size: 12.5px; color: var(--muted);

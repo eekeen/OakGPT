@@ -8,16 +8,22 @@ import uuid
 import rclpy
 from geometry_msgs.msg import Twist, TwistStamped
 from lifecycle_msgs.srv import GetState
+from rclpy.clock import Clock, ClockType
 from rclpy.node import Node
 from rclpy.qos import DurabilityPolicy, QoSProfile
 from std_msgs.msg import Bool, String
 
 from oak_mission.guard_rules import command_allowed
+from oak_mission.recovery import RecoveryPeer
+from oak_mission.timing import Timing
 
 
 class VelocityGuard(Node):
     def __init__(self):
         super().__init__("oak_velocity_guard")
+        self.timing = Timing()
+        self.recovery = RecoveryPeer(self, "guard")
+        self.previous_tick_ns = 0
         self.leased_output = self.declare_parameter("leased_output", False).value
         self.publisher = self.create_publisher(
             TwistStamped if self.leased_output else Twist,
@@ -44,7 +50,7 @@ class VelocityGuard(Node):
             QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL),
         )
         # Wall clock: paused simulation time must not retain a nonzero command.
-        self.create_timer(0.02, self.tick)
+        self.create_timer(0.02, self.tick, clock=Clock(clock_type=ClockType.STEADY_TIME))
         self.create_timer(0.2, self.controller_health)
 
     def controller_health(self):
@@ -61,6 +67,7 @@ class VelocityGuard(Node):
             self.controller_pending = self.controller.call_async(GetState.Request())
 
     def receive_command(self, message):
+        self.timing.record("guard_receipt", vx=message.linear.x, wz=message.angular.z)
         values = [
             message.linear.x,
             message.linear.y,
@@ -86,53 +93,45 @@ class VelocityGuard(Node):
         self.command, self.command_at = message, time.monotonic()
         if self.leased_output:
             self.command_boottime_ns = time.clock_gettime_ns(time.CLOCK_BOOTTIME)
+        self.timing.record("guard_processed", issued_ns=self.command_boottime_ns)
 
     def receive_heartbeat(self, message):
-        try:
-            if len(message.data) > 1024:
-                raise ValueError("heartbeat_size")
-            data = json.loads(message.data)
-            if (
-                type(data["active"]) is not bool
-                or type(data["faulted"]) is not bool
-                or type(data["expires_at_ms"]) is not int
-            ):
-                raise ValueError("heartbeat_types")
-            self.active, self.expires = data["active"], data["expires_at_ms"]
-            if self.active and not 0 < self.expires <= time.time_ns() // 1000000 + 180000:
-                raise ValueError("lease_bounds")
-            self.latched |= data["faulted"]
+        previous = self.recovery.heartbeats.incarnation
+        value = self.recovery.receive(message.data)
+        if value is not None:
+            if previous != value["incarnation"]:
+                self.command_at = 0.0
+                self.command = Twist()
+            self.active = value["phase"] == "active"
+            self.expires = value["expires_at_ms"]
+            self.latched |= value["faulted"]
             self.heartbeat_at = time.monotonic()
-        except (ValueError, TypeError, KeyError) as error:
-            self.latched = True
-            self.events.publish(
-                String(
-                    data=json.dumps(
-                        {
-                            "event": "invalid_heartbeat",
-                            "reason": str(error),
-                            "wall_time_ns": time.time_ns(),
-                        }
-                    )
-                )
-            )
 
     def receive_watchdog(self, message):
         self.ready, self.watchdog_at = message.data, time.monotonic()
 
     def tick(self):
+        started = time.monotonic_ns()
+        self.timing.record(
+            "guard_tick_begin",
+            interval_ns=started - self.previous_tick_ns if self.previous_tick_ns else None,
+        )
+        self.previous_tick_ns = started
         now = time.monotonic()
+        self.recovery.fault |= self.latched
+        self.recovery.available = self.controller_ready and now - self.controller_at <= 0.5
+        recovery_ready = self.recovery.check()
         reason = (
             "latched_fault"
             if self.latched
             else "controller_unavailable"
             if not self.controller_ready or now - self.controller_at > 0.5
+            else "executor_not_rearmed"
+            if not recovery_ready
             else "watchdog_unavailable"
             if not self.ready or now - self.watchdog_at > (0.2 if self.leased_output else 0.5)
             else "no_active_lease"
-            if not self.active
-            or now - self.heartbeat_at > 0.5
-            or time.time_ns() // 1000000 >= self.expires
+            if not self.active or time.time_ns() // 1000000 >= self.expires
             else "command_timeout"
             if now - self.command_at > (0.15 if self.leased_output else 0.25)
             else "forwarding"
@@ -143,6 +142,9 @@ class VelocityGuard(Node):
                 String(data=json.dumps({"event": reason, "wall_time_ns": time.time_ns()}))
             )
             self.reason = reason
+        self.timing.record(
+            "guard_tick_end", duration_ns=time.monotonic_ns() - started, reason=reason
+        )
 
     def publish_command(self, forwarding):
         command = self.command if forwarding else Twist()
@@ -158,7 +160,15 @@ class VelocityGuard(Node):
             )
             message.header.stamp.sec, message.header.stamp.nanosec = divmod(issued, 1000000000)
             message.twist = command
+            self.timing.record(
+                "guard_publish_begin",
+                sequence=self.sequence,
+                issued_ns=issued,
+                vx=command.linear.x,
+                wz=command.angular.z,
+            )
             self.publisher.publish(message)
+            self.timing.record("guard_publish_end", sequence=self.sequence)
         else:
             self.publisher.publish(command)
 

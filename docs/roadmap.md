@@ -1,5 +1,51 @@
 # Roadmap
 
+## Chat track
+
+C1, the local multi-turn chat assistant, is implemented; see
+[the C1 report](../reports/chat/c1/report.md). C1.1 adds images. The chat evaluation set
+[`chat_eval_v1`](../data/eval/chat_eval_v1/README.md) is frozen, and its baseline is
+measured in [the evaluation report](../reports/chat/eval_v1/report.md): 49% strict for
+the text model's chat preset, 92% with reasoning. C2 is done and measured in
+[the C2 report](../reports/chat/c2/report.md):
+
+- **Feasibility.** QLoRA fits on 6 GB, using 1.7–3.2 GB with gradient checkpointing.
+- **Fast mode.** A self-distilled adapter raises fast-mode accuracy from 49% to 74%.
+- **Reasoning mode.** The same adapter suppresses thinking and lowers reasoning-mode
+  accuracy from 92% to 57%.
+- **Outcome.** It was not adopted.
+
+C2.1 is done and measured in [the C2.1 report](../reports/chat/c21/report.md). It first
+froze [`chat_eval_v2`](../data/eval/chat_eval_v2/README.md): 124 text and 63 image
+items, including typeset OCR, photographs and prompt injection, with no overlap with v1
+or the training data.
+
+- **Fast mode.** Applying the C2 adapter only to fast-mode requests raised fast-mode
+  accuracy from 31% to 60% on v2.
+- **Reasoning mode.** Reasoning-mode accuracy was unchanged at 83%.
+- **Outcome.** It was not adopted. The pre-registered switch check failed, and a
+  post-hoc diagnosis traced the failure to the check's design, not to the mechanism.
+- **Image model.** On v2 it scores 84%.
+
+Possible next steps:
+
+- **C2.2.** Confirm the mode-scoped adapter with a corrected mechanism check and a small,
+  fresh `chat_eval_v3`.
+- **C3.** Answers grounded in the user's local documents (RAG) with citations.
+
+v1 and v2 are never changed or used for training. The chat track is independent of the
+robotics Phase 4 gate below.
+
+## Measured Phase 3.3 gate
+
+The frozen 24-world comparison is complete, with 72/72 missions per backend.
+Phase 4 remains **NO-GO**: executor restart settles in 0.60 simulated seconds,
+exceeding the original 0.50 s target; its restart probe response is unavailable.
+Resolve only this narrow detection/recovery question in separate development trials,
+then freeze and independently evaluate a changed candidate. Do not tune the consumed
+held-out worlds, relax thresholds, expand robotics features or start LoRA yet.
+See [the final evaluation](phase33-final-evaluation.md).
+
 ## Priorities after Phase 3.1
 
 1. **Navigation reliability before broader autonomy.** Preserve the nine-world results,

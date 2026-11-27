@@ -1,0 +1,24 @@
+﻿{
+    "recorded_utc":  "2026-11-04T21:06:48.7538617Z",
+    "logical_processors":  16,
+    "samples":  [
+                    {
+                        "sample":  0,
+                        "system_busy_percent":  7.1852845372676777,
+                        "selected_external_core_equivalents":  0.1350985770956967
+                    },
+                    {
+                        "sample":  1,
+                        "system_busy_percent":  3.8269230769230722,
+                        "selected_external_core_equivalents":  0.11067176521764553
+                    },
+                    {
+                        "sample":  2,
+                        "system_busy_percent":  5.404885554914407,
+                        "selected_external_core_equivalents":  0.22754118294289641
+                    }
+                ],
+    "quiet_baseline":  true,
+    "criterion":  "All three five-second samples: system busy \u003c20%, selected unrelated workload \u003c0.5 CPU cores",
+    "limits":  "Short baseline, not a scheduling bound. Selected external process names and command lines intentionally omitted. Recheck during trials."
+}

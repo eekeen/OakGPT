@@ -1,0 +1,390 @@
+{
+  "prompts": [
+    "arithmetic-0008",
+    "arithmetic-0112",
+    "word_problem-0045",
+    "word_problem-0114",
+    "facts-0043",
+    "swedish-0100",
+    "code-0105",
+    "code-0142",
+    "instructions-0078",
+    "reading-0041",
+    "reading-0133",
+    "open-0012"
+  ],
+  "runs": {
+    "base/cache=on": {
+      "replies": {
+        "fast": [
+          "18",
+          "8",
+          "6",
+          "150",
+          "N2",
+          "Sveriges högsta berg är Mount Vatnajökull.",
+          "The output is \"ard\".",
+          "The code will print: `[6, 7, 8, 9]`",
+          "VIOLIN",
+          "7",
+          "17:00",
+          "1. Plan your meals ahead of time.  \n2. Compare prices at different stores.  \n3. Use coupons and sales effectively."
+        ],
+        "reasoning": [
+          "18",
+          "8",
+          "22",
+          "540",
+          "N",
+          "Mjölnir",
+          "der",
+          "[6, 7, 8, 9]",
+          "VIOLIN",
+          "8",
+          "17:00",
+          "1. **Plan meals in advance** to avoid last-minute, impulse purchases.  \n2. **Use coupons or deals** for items you'll need regularly.  \n3. **Compare prices** at different stores before buying."
+        ]
+      },
+      "server_cached_tokens": {
+        "fast": [
+          0,
+          44,
+          44,
+          44,
+          44,
+          44,
+          45,
+          58,
+          44,
+          44,
+          54,
+          44
+        ],
+        "reasoning": [
+          66,
+          63,
+          85,
+          75,
+          62,
+          67,
+          70,
+          71,
+          65,
+          108,
+          112,
+          58
+        ]
+      }
+    },
+    "full/cache=on": {
+      "replies": {
+        "fast": [
+          "18",
+          "8",
+          "23",
+          "540",
+          "N",
+          "Kvistberg",
+          "den",
+          "[6, 7, 8, 9]",
+          "VIOLIN",
+          "8",
+          "17:00",
+          "1. **Compare prices** before buying to avoid overpaying.  \n2. **Buy in bulk** when items are on sale to save money.  \n3. **Plan meals** ahead to avoid waste and avoid impulse purchases."
+        ]
+      },
+      "server_cached_tokens": {
+        "fast": [
+          0,
+          44,
+          44,
+          44,
+          44,
+          44,
+          44,
+          58,
+          44,
+          44,
+          54,
+          44
+        ]
+      }
+    },
+    "scoped/cache=on": {
+      "replies": {
+        "fast_1": [
+          "18",
+          "8",
+          "23",
+          "540",
+          "N",
+          "Kvistberg",
+          "den",
+          "[6, 7, 8, 9]",
+          "VIOLIN",
+          "8",
+          "17:00",
+          "1. **Compare prices** before buying to avoid overpaying.  \n2. **Buy in bulk** when items are on sale to save costs.  \n3. **Plan meals** in advance to avoid impulse purchases."
+        ],
+        "reasoning": [
+          "18",
+          "8",
+          "22",
+          "540",
+          "N",
+          "Måljarpsjön",
+          "rde",
+          "[6, 7, 8, 9]",
+          "VIOLIN",
+          "8",
+          "17:00",
+          "1. **Buy in bulk** for items you use frequently (e.g., grains, pasta) to get better prices.  \n2. **Use coupons** and apps like Honey or Instacart to find deals.  \n3. **Plan meals** in advance to avoid impulse purchases and reduce food waste."
+        ],
+        "fast_2": [
+          "18",
+          "8",
+          "23",
+          "540",
+          "N",
+          "Kvistberg",
+          "dর",
+          "[6, 7, 8, 9]",
+          "VIOLIN",
+          "8",
+          "17:00",
+          "1. **Compare prices** before buying to avoid overpaying.  \n2. **Buy in bulk** when items are on sale for better value.  \n3. **Plan meals** in advance to avoid last-minute, expensive purchases."
+        ]
+      },
+      "server_cached_tokens": {
+        "fast_1": [
+          0,
+          44,
+          44,
+          44,
+          44,
+          44,
+          44,
+          58,
+          44,
+          44,
+          54,
+          44
+        ],
+        "reasoning": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "fast_2": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "base/cache=off": {
+      "replies": {
+        "fast": [
+          "18",
+          "8",
+          "6",
+          "90*6=540",
+          "N2",
+          "Sveriges högsta berg är Mount Aconcagua, men det är inte i Sverige. Sveriges högsta berg är Vattnet, som ligger i Skåne.",
+          "The code prints \"ard\".",
+          "The code will print: `[6, 7, 8, 9]`",
+          "VIOLIN",
+          "7",
+          "17:00",
+          "1. Plan your meals ahead of time.  \n2. Compare prices at different stores.  \n3. Use coupons and sales effectively."
+        ],
+        "reasoning": [
+          "18",
+          "8",
+          "22",
+          "540",
+          "N",
+          "Måljarpsjön",
+          "rde",
+          "[6, 7, 8, 9]",
+          "VIOLIN",
+          "8",
+          "17:00",
+          "1. **Buy in bulk** for items you use frequently (e.g., grains, pasta) to get better prices.  \n2. **Use coupons** and apps like Honey or Instacart to find deals.  \n3. **Plan meals** in advance to avoid impulse purchases and reduce food waste."
+        ]
+      },
+      "server_cached_tokens": {
+        "fast": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reasoning": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "full/cache=off": {
+      "replies": {
+        "fast": [
+          "18",
+          "8",
+          "23",
+          "540",
+          "N",
+          "Kvistberg",
+          "dর",
+          "[6, 7, 8, 9]",
+          "VIOLIN",
+          "8",
+          "17:00",
+          "1. **Compare prices** before buying to avoid overpaying.  \n2. **Buy in bulk** when items are on sale for better value.  \n3. **Plan meals** in advance to avoid last-minute, expensive purchases."
+        ]
+      },
+      "server_cached_tokens": {
+        "fast": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "scoped/cache=off": {
+      "replies": {
+        "fast_1": [
+          "18",
+          "8",
+          "23",
+          "540",
+          "N",
+          "Kvistberg",
+          "dর",
+          "[6, 7, 8, 9]",
+          "VIOLIN",
+          "8",
+          "17:00",
+          "1. **Compare prices** before buying to avoid overpaying.  \n2. **Buy in bulk** when items are on sale for better value.  \n3. **Plan meals** in advance to avoid last-minute, expensive purchases."
+        ],
+        "reasoning": [
+          "18",
+          "8",
+          "22",
+          "540",
+          "N",
+          "Måljarpsjön",
+          "rde",
+          "[6, 7, 8, 9]",
+          "VIOLIN",
+          "8",
+          "17:00",
+          "1. **Buy in bulk** for items you use frequently (e.g., grains, pasta) to get better prices.  \n2. **Use coupons** and apps like Honey or Instacart to find deals.  \n3. **Plan meals** in advance to avoid impulse purchases and reduce food waste."
+        ],
+        "fast_2": [
+          "18",
+          "8",
+          "23",
+          "540",
+          "N",
+          "Kvistberg",
+          "dর",
+          "[6, 7, 8, 9]",
+          "VIOLIN",
+          "8",
+          "17:00",
+          "1. **Compare prices** before buying to avoid overpaying.  \n2. **Buy in bulk** when items are on sale for better value.  \n3. **Plan meals** in advance to avoid last-minute, expensive purchases."
+        ]
+      },
+      "server_cached_tokens": {
+        "fast_1": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reasoning": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "fast_2": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  }
+}

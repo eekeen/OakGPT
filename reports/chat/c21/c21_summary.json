@@ -1,0 +1,564 @@
+{
+  "conditions": {
+    "text-chat": {
+      "base": {
+        "strict": {
+          "mean": 0.3064516129032258,
+          "ci95": [
+            0.22849462365591397,
+            0.3870967741935484
+          ]
+        },
+        "lenient": {
+          "mean": 0.42473118279569894,
+          "ci95": [
+            0.3440860215053763,
+            0.5080645161290323
+          ]
+        },
+        "categories": {
+          "arithmetic": {
+            "items": 14,
+            "strict": 0.42857142857142855,
+            "lenient": 0.5476190476190477
+          },
+          "code": {
+            "items": 15,
+            "strict": 0.35555555555555557,
+            "lenient": 0.4888888888888889
+          },
+          "facts": {
+            "items": 14,
+            "strict": 0.5476190476190477,
+            "lenient": 0.6428571428571429
+          },
+          "injection": {
+            "items": 2,
+            "strict": 0.0,
+            "lenient": 0.0
+          },
+          "instructions": {
+            "items": 15,
+            "strict": 0.26666666666666666,
+            "lenient": 0.3111111111111111
+          },
+          "logic": {
+            "items": 12,
+            "strict": 0.4166666666666667,
+            "lenient": 0.4166666666666667
+          },
+          "reading": {
+            "items": 14,
+            "strict": 0.16666666666666666,
+            "lenient": 0.4523809523809524
+          },
+          "swedish": {
+            "items": 24,
+            "strict": 0.19444444444444445,
+            "lenient": 0.3333333333333333
+          },
+          "word_problem": {
+            "items": 14,
+            "strict": 0.21428571428571427,
+            "lenient": 0.3333333333333333
+          }
+        },
+        "families": {
+          "familiar": {
+            "items": 21,
+            "strict": {
+              "mean": 0.23809523809523808,
+              "ci95": [
+                0.09523809523809523,
+                0.42857142857142855
+              ]
+            }
+          },
+          "novel": {
+            "items": 103,
+            "strict": {
+              "mean": 0.32038834951456313,
+              "ci95": [
+                0.23300970873786409,
+                0.4077669902912621
+              ]
+            }
+          }
+        },
+        "truncated_replies": 1,
+        "generated_tokens_median": 3.0,
+        "wall_s_median": 0.058820700040087104,
+        "ttft_s_median": 0.019739449955523014
+      },
+      "scoped": {
+        "strict": {
+          "mean": 0.5967741935483871,
+          "ci95": [
+            0.5188172043010753,
+            0.6774193548387096
+          ]
+        },
+        "lenient": {
+          "mean": 0.6075268817204301,
+          "ci95": [
+            0.5295698924731183,
+            0.6854838709677419
+          ]
+        },
+        "categories": {
+          "arithmetic": {
+            "items": 14,
+            "strict": 0.6428571428571429,
+            "lenient": 0.6428571428571429
+          },
+          "code": {
+            "items": 15,
+            "strict": 0.5555555555555556,
+            "lenient": 0.5555555555555556
+          },
+          "facts": {
+            "items": 14,
+            "strict": 0.8571428571428571,
+            "lenient": 0.8571428571428571
+          },
+          "injection": {
+            "items": 2,
+            "strict": 0.5,
+            "lenient": 0.5
+          },
+          "instructions": {
+            "items": 15,
+            "strict": 0.5555555555555556,
+            "lenient": 0.5777777777777777
+          },
+          "logic": {
+            "items": 12,
+            "strict": 0.6666666666666666,
+            "lenient": 0.6666666666666666
+          },
+          "reading": {
+            "items": 14,
+            "strict": 0.5,
+            "lenient": 0.5
+          },
+          "swedish": {
+            "items": 24,
+            "strict": 0.4166666666666667,
+            "lenient": 0.4166666666666667
+          },
+          "word_problem": {
+            "items": 14,
+            "strict": 0.7380952380952381,
+            "lenient": 0.8095238095238095
+          }
+        },
+        "families": {
+          "familiar": {
+            "items": 21,
+            "strict": {
+              "mean": 0.6507936507936508,
+              "ci95": [
+                0.4603174603174603,
+                0.8253968253968254
+              ]
+            }
+          },
+          "novel": {
+            "items": 103,
+            "strict": {
+              "mean": 0.5857605177993528,
+              "ci95": [
+                0.4919093851132686,
+                0.6731391585760518
+              ]
+            }
+          }
+        },
+        "truncated_replies": 0,
+        "generated_tokens_median": 3.0,
+        "wall_s_median": 0.06231344991829246,
+        "ttft_s_median": 0.029570199898444116
+      }
+    },
+    "text-reasoning": {
+      "base": {
+        "strict": {
+          "mean": 0.8279569892473119,
+          "ci95": [
+            0.7661290322580645,
+            0.8897849462365591
+          ]
+        },
+        "lenient": {
+          "mean": 0.8575268817204301,
+          "ci95": [
+            0.7983870967741935,
+            0.9139784946236559
+          ]
+        },
+        "categories": {
+          "arithmetic": {
+            "items": 14,
+            "strict": 1.0,
+            "lenient": 1.0
+          },
+          "code": {
+            "items": 15,
+            "strict": 0.9777777777777777,
+            "lenient": 0.9777777777777777
+          },
+          "facts": {
+            "items": 14,
+            "strict": 1.0,
+            "lenient": 1.0
+          },
+          "injection": {
+            "items": 2,
+            "strict": 0.3333333333333333,
+            "lenient": 0.3333333333333333
+          },
+          "instructions": {
+            "items": 15,
+            "strict": 0.7333333333333333,
+            "lenient": 0.8
+          },
+          "logic": {
+            "items": 12,
+            "strict": 1.0,
+            "lenient": 1.0
+          },
+          "reading": {
+            "items": 14,
+            "strict": 0.9047619047619048,
+            "lenient": 0.9047619047619048
+          },
+          "swedish": {
+            "items": 24,
+            "strict": 0.4027777777777778,
+            "lenient": 0.5138888888888888
+          },
+          "word_problem": {
+            "items": 14,
+            "strict": 1.0,
+            "lenient": 1.0
+          }
+        },
+        "families": {
+          "familiar": {
+            "items": 21,
+            "strict": {
+              "mean": 0.7142857142857143,
+              "ci95": [
+                0.5238095238095238,
+                0.9047619047619048
+              ]
+            }
+          },
+          "novel": {
+            "items": 103,
+            "strict": {
+              "mean": 0.8511326860841424,
+              "ci95": [
+                0.7864077669902912,
+                0.9093851132686084
+              ]
+            }
+          }
+        },
+        "truncated_replies": 0,
+        "generated_tokens_median": 197.0,
+        "wall_s_median": 2.3276450000703335,
+        "ttft_s_median": 0.04632279998622835
+      },
+      "scoped": {
+        "strict": {
+          "mean": 0.8279569892473119,
+          "ci95": [
+            0.7661290322580645,
+            0.8897849462365591
+          ]
+        },
+        "lenient": {
+          "mean": 0.8575268817204301,
+          "ci95": [
+            0.7983870967741935,
+            0.9139784946236559
+          ]
+        },
+        "categories": {
+          "arithmetic": {
+            "items": 14,
+            "strict": 1.0,
+            "lenient": 1.0
+          },
+          "code": {
+            "items": 15,
+            "strict": 0.9777777777777777,
+            "lenient": 0.9777777777777777
+          },
+          "facts": {
+            "items": 14,
+            "strict": 1.0,
+            "lenient": 1.0
+          },
+          "injection": {
+            "items": 2,
+            "strict": 0.16666666666666666,
+            "lenient": 0.3333333333333333
+          },
+          "instructions": {
+            "items": 15,
+            "strict": 0.7333333333333333,
+            "lenient": 0.8
+          },
+          "logic": {
+            "items": 12,
+            "strict": 1.0,
+            "lenient": 1.0
+          },
+          "reading": {
+            "items": 14,
+            "strict": 0.9047619047619048,
+            "lenient": 0.9047619047619048
+          },
+          "swedish": {
+            "items": 24,
+            "strict": 0.4166666666666667,
+            "lenient": 0.5138888888888888
+          },
+          "word_problem": {
+            "items": 14,
+            "strict": 1.0,
+            "lenient": 1.0
+          }
+        },
+        "families": {
+          "familiar": {
+            "items": 21,
+            "strict": {
+              "mean": 0.7142857142857143,
+              "ci95": [
+                0.5238095238095238,
+                0.9047619047619048
+              ]
+            }
+          },
+          "novel": {
+            "items": 103,
+            "strict": {
+              "mean": 0.8511326860841424,
+              "ci95": [
+                0.7864077669902912,
+                0.9093851132686084
+              ]
+            }
+          }
+        },
+        "truncated_replies": 0,
+        "generated_tokens_median": 197.0,
+        "wall_s_median": 1.7124231001362205,
+        "ttft_s_median": 0.018564849975518882
+      }
+    }
+  },
+  "paired": {
+    "text-chat": {
+      "strict_difference": 0.2903225806451613,
+      "ci95": [
+        0.21236559139784947,
+        0.3763440860215054
+      ],
+      "items": 124,
+      "items_better": 47,
+      "items_worse": 4
+    },
+    "text-chat (familiar)": {
+      "strict_difference": 0.4126984126984127,
+      "ci95": [
+        0.2222222222222222,
+        0.6190476190476191
+      ],
+      "items": 21,
+      "items_better": 11,
+      "items_worse": 1
+    },
+    "text-chat (novel)": {
+      "strict_difference": 0.26537216828478966,
+      "ci95": [
+        0.1779935275080906,
+        0.3559870550161812
+      ],
+      "items": 103,
+      "items_better": 36,
+      "items_worse": 3
+    },
+    "text-reasoning": {
+      "strict_difference": 0.0,
+      "ci95": [
+        -0.008064516129032258,
+        0.008064516129032258
+      ],
+      "items": 124,
+      "items_better": 1,
+      "items_worse": 1
+    },
+    "text-reasoning (familiar)": {
+      "strict_difference": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "items": 21,
+      "items_better": 0,
+      "items_worse": 0
+    },
+    "text-reasoning (novel)": {
+      "strict_difference": 0.0,
+      "ci95": [
+        -0.009708737864077669,
+        0.009708737864077669
+      ],
+      "items": 103,
+      "items_better": 1,
+      "items_worse": 1
+    }
+  },
+  "vision_baseline": {
+    "items": 63,
+    "replies": 189,
+    "strict": {
+      "mean": 0.8359788359788359,
+      "ci95": [
+        0.7407407407407407,
+        0.9153439153439153
+      ]
+    },
+    "lenient": {
+      "mean": 0.8359788359788359,
+      "ci95": [
+        0.7407407407407407,
+        0.9153439153439153
+      ]
+    },
+    "truncated_replies": 0,
+    "categories": {
+      "chart": {
+        "items": 4,
+        "strict": 0.16666666666666666,
+        "lenient": 0.16666666666666666
+      },
+      "color": {
+        "items": 5,
+        "strict": 1.0,
+        "lenient": 1.0
+      },
+      "count": {
+        "items": 6,
+        "strict": 0.5555555555555556,
+        "lenient": 0.5555555555555556
+      },
+      "injection_image": {
+        "items": 2,
+        "strict": 0.5,
+        "lenient": 0.5
+      },
+      "multi_image": {
+        "items": 3,
+        "strict": 0.6666666666666666,
+        "lenient": 0.6666666666666666
+      },
+      "ocr_font": {
+        "items": 15,
+        "strict": 1.0,
+        "lenient": 1.0
+      },
+      "photo": {
+        "items": 21,
+        "strict": 0.9047619047619048,
+        "lenient": 0.9047619047619048
+      },
+      "position": {
+        "items": 4,
+        "strict": 1.0,
+        "lenient": 1.0
+      },
+      "size": {
+        "items": 3,
+        "strict": 0.8888888888888888,
+        "lenient": 0.8888888888888888
+      }
+    },
+    "families": {
+      "photo": {
+        "items": 21,
+        "strict": {
+          "mean": 0.9047619047619048,
+          "ci95": [
+            0.7619047619047619,
+            1.0
+          ]
+        }
+      },
+      "synthetic": {
+        "items": 25,
+        "strict": {
+          "mean": 0.7066666666666667,
+          "ci95": [
+            0.5466666666666666,
+            0.8533333333333333
+          ]
+        }
+      },
+      "typeset": {
+        "items": 17,
+        "strict": {
+          "mean": 0.9411764705882353,
+          "ci95": [
+            0.8235294117647058,
+            1.0
+          ]
+        }
+      }
+    },
+    "generated_tokens_median": 2.0,
+    "wall_s_median": 0.0695799000095576,
+    "ttft_s_median": 0.04115429986268282
+  },
+  "switch_check": {
+    "scoped_fast_after_start_equals_full_adapter": false,
+    "scoped_reasoning_after_fast_equals_base": false,
+    "scoped_fast_after_reasoning_equals_full_adapter": false,
+    "adapter_changes_fast_replies": 8
+  },
+  "decision": {
+    "criteria": {
+      "1_fast_gain_ci_excludes_zero": true,
+      "2_reasoning_drop_at_most_2_points": true,
+      "3_novel_fast_difference_not_negative": true,
+      "4_switch_check_equalities_hold": false
+    },
+    "adopt": false
+  },
+  "sources": {
+    "base": "runs\\c21\\eval\\chat_eval_v2_base.json",
+    "scoped": "runs\\c21\\eval\\chat_eval_v2_scoped.json",
+    "switch_check": "runs\\c21\\switch-check.json",
+    "scoped_identity": {
+      "model": "Qwen/Qwen3-1.7B",
+      "quantization": "Q4_K_M (Phase 2 conversion from original weights)",
+      "expected_server_build": "b11930",
+      "original_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "provenance": "reports/phase2/quantization_artifacts.json",
+      "adapter": "C2 LoRA v1 (reports/chat/c2), applied only in fast mode (Chat C2.1)",
+      "gguf_filename": "phase2-Qwen3-1.7B-Q4_K_M.gguf",
+      "gguf_sha256": "f08493abe7a6566b9f4dc1106ff8ab238b3ee82189d6c42d0e7dbb1a50d751e5",
+      "lora_filename": "c2-qwen3-1.7b-lora-v1-f16.gguf",
+      "lora_sha256": "2ead4472791a82fa7b13626a2d1b23502d0d962707b045ccde67e5d219707b0d",
+      "lora_scales": {
+        "chat": 1.0,
+        "reasoning": 0.0
+      }
+    },
+    "dataset_sha256": "14bae5d1ad6b4d605de9d3e732e998ac5f69155abf4999c1bac31c5579749ab0"
+  }
+}

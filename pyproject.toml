@@ -13,7 +13,7 @@ dependencies = ["torch>=2.6,<3"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.11,<1", "mypy>=1.15,<2", "build>=1,<2"]
-research = ["pyarrow>=18,<24", "matplotlib>=3.9,<4", "PyYAML>=6,<7"]
+research = ["pyarrow>=18,<24", "matplotlib>=3.9,<4", "PyYAML>=6,<7", "Pillow>=10,<13"]
 report = ["reportlab>=4,<6", "pymupdf>=1.24,<2"]
 
 [project.scripts]
@@ -23,6 +23,9 @@ oakgpt-robot = "oakgpt.robotics.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"oakgpt.chat" = ["static/*.html", "static/*.css", "static/*.js", "static/*.svg"]
 
 [tool.ruff]
 line-length = 100
@@ -35,10 +38,14 @@ select = ["E", "F", "I", "B", "UP"]
 [tool.mypy]
 python_version = "3.11"
 strict = true
-files = ["src/oakgpt"]
+files = [
+    "src/oakgpt",
+    "robotics/ros2_ws/src/oak_mission/oak_mission/liveness.py",
+    "robotics/ros2_ws/src/oak_mission/oak_mission/restart_journal.py",
+]
 
 [[tool.mypy.overrides]]
-module = ["pyarrow.*", "matplotlib.*"]
+module = ["pyarrow.*", "matplotlib.*", "transformers.*", "bitsandbytes.*", "safetensors.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

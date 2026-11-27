@@ -12,6 +12,7 @@ from pathlib import Path
 from evaluate_ground_truth import tail_records
 from expiry_world import enable_expiry
 from reproduce_phase31 import wsl_path
+from restart_probe import read_records, rearm_evidence, wait_result
 from robotics_session_host import session
 from trial_clock import trial_clock
 
@@ -30,11 +31,19 @@ def trial(args, kind):
     shutil.copytree(args.world, world)
     if args.launch == "expiry.launch.py":
         enable_expiry(world)
+    if getattr(args, "timing", False):
+        from phase33_world import instrument_world
+
+        instrument_world(world)
     if args.overlay:
         import yaml
 
         parameters = yaml.safe_load((world / "nav2.yaml").read_text())
         parameters = parameter_overlay(parameters, json.loads(args.overlay.read_text()))
+        if getattr(args, "timing", False):
+            parameters["controller_server"]["ros__parameters"]["FollowPath"]["plugin"] = (
+                "oak_nav_trace::ControllerTrace"
+            )
         (world / "nav2.yaml").write_text(yaml.safe_dump(parameters, sort_keys=False))
     config = json.loads(Path("configs/robotics/study_wsl.json").read_text())
     stop = {"kind": kind}
@@ -48,6 +57,11 @@ def trial(args, kind):
             navigation_trace=False,
             expiry_plugin_dir=args.expiry_plugin_dir,
             fastdds_profile=args.fastdds_profile,
+            timing=getattr(args, "timing", False),
+            publication_mode=getattr(args, "publication_mode", "SYNCHRONOUS"),
+            allow_executor_exit=kind == "executor_restart",
+            rmw=args.rmw,
+            cyclone_config=args.cyclone_config,
         ):
             if kind in {"stale_command", "replayed_command"}:
                 payload_process = subprocess.Popen(
@@ -56,6 +70,20 @@ def trial(args, kind):
                         "-d",
                         "Ubuntu-24.04",
                         "--",
+                        "env",
+                        "RMW_IMPLEMENTATION=" + args.rmw,
+                        "CYCLONEDDS_URI="
+                        + (
+                            "file://" + wsl_path(args.cyclone_config) if args.cyclone_config else ""
+                        ),
+                        *(
+                            [
+                                "FASTRTPS_DEFAULT_PROFILES_FILE=" + wsl_path(args.fastdds_profile),
+                                "RMW_FASTRTPS_USE_QOS_FROM_XML=0",
+                            ]
+                            if args.fastdds_profile
+                            else []
+                        ),
                         "bash",
                         wsl_path(Path("scripts/inject_expiry_payload.sh")),
                         args.install,
@@ -84,8 +112,11 @@ def trial(args, kind):
                 "Go to station",
                 baseline("Go to station"),
                 receiver_now_ms=trial_clock(
-                    config["clock_command"], root / "clock_handshakes.jsonl"
+                    config["clock_command"],
+                    root / "clock_handshakes.jsonl",
+                    mailbox=root if args.clock_mailbox else None,
                 ),
+                ttl_ms=3000 if kind == "mission_expiration" else 180000,
             )
             submit_spool(mission, root / "spool")
             stop["mission"] = mission
@@ -126,21 +157,75 @@ def trial(args, kind):
                         "watchdog_crash": "mission_watchdog",
                         "command_bridge_crash": "command_bridge",
                         "simulator_process_stall": "simulator",
+                        "unexpected_gap": "velocity_guard",
+                        "executor_restart": "mission_executor",
+                        "mission_expiration": "mission_expiration",
                     }[kind],
                     "--pause-seconds",
-                    "1" if kind in {"guard_suspend", "simulator_process_stall"} else "0",
+                    "1"
+                    if kind in {"guard_suspend", "simulator_process_stall"}
+                    else "0.25"
+                    if kind == "unexpected_gap"
+                    else "0",
                     "--ready",
                     wsl_path(root / "READY.json"),
                     "--spool",
                     wsl_path(root / "spool"),
                 ]
                 injection += ["--motion-trace", wsl_path(root / "trajectory.jsonl")]
+                if kind == "mission_expiration":
+                    injection += ["--expires-at-ms", str(mission["expires_at_ms"])]
                 response = subprocess.check_output(injection, text=True, timeout=10)
             stop["injection"] = json.loads(response)
             if args.active_capture and kind in {"stale_command", "replayed_command"}:
                 stop["nonzero_payload"] = abs(stop["injection"]["vx"]) > 0.01
             before = stop["injection"]["before_monotonic_ns"]
+            if kind == "executor_restart":
+                (root / "RESTART_EXECUTOR").touch()
             time.sleep(4)
+            if kind == "executor_restart":
+                if getattr(args, "require_restart_rearm", False):
+                    deadline = time.monotonic() + 10
+                    while True:
+                        # Full stream retains old-incarnation evidence that could
+                        # have fallen outside the tail after four seconds.
+                        evidence = read_records(root / "trajectory.jsonl")
+                        rearmed = rearm_evidence(evidence, before, mission["mission_id"])
+                        if rearmed:
+                            stop["restart_rearm_evidence"] = rearmed
+                            break
+                        if time.monotonic() >= deadline:
+                            raise TimeoutError("replacement_rearm_not_proven_no_probe_dispatched")
+                        time.sleep(0.02)
+                stop["restart_receipt"] = (
+                    json.loads((root / "RESTARTED_EXECUTOR.json").read_text())
+                    if (root / "RESTARTED_EXECUTOR.json").exists()
+                    else None
+                )
+                probe = envelope(
+                    "Go to station",
+                    baseline("Go to station"),
+                    receiver_now_ms=trial_clock(
+                        config["clock_command"],
+                        root / "clock_handshakes.jsonl",
+                        mailbox=root if args.clock_mailbox else None,
+                    ),
+                )
+                truth_before_probe = [
+                    r for r in tail_records(root / "trajectory.jsonl") if r["kind"] == "truth"
+                ]
+                if not truth_before_probe:
+                    raise RuntimeError("Missing independent pre-probe observation cutoff")
+                stop["restart_probe_cutoff"] = truth_before_probe[-1]
+                stop["restart_probe_mission"] = probe
+                stop["restart_probe_observation_s"] = getattr(
+                    args, "restart_probe_observation_s", 2
+                )
+                submit_spool(probe, root / "spool")
+                probe_path = root / "spool/results" / (probe["mission_id"] + ".json")
+                stop["restart_probe_result"] = wait_result(
+                    probe_path, probe["mission_id"], stop["restart_probe_observation_s"]
+                )
             rows = [
                 json.loads(line) for line in (root / "trajectory.jsonl").read_text().splitlines()
             ]
@@ -173,6 +258,27 @@ def main():
     parser.add_argument("--freeze", type=Path)
     parser.add_argument("--fastdds-profile", type=Path)
     parser.add_argument("--overlay", type=Path)
+    parser.add_argument("--timing", action="store_true")
+    parser.add_argument("--clock-mailbox", action="store_true")
+    parser.add_argument(
+        "--restart-probe-observation-s",
+        type=int,
+        choices=range(2, 41),
+        default=2,
+        help="Observer wait only; does not extend the 30 s navigation deadline",
+    )
+    parser.add_argument(
+        "--require-restart-rearm",
+        action="store_true",
+        help="Development: require new-incarnation rearm evidence before fresh mission",
+    )
+    parser.add_argument(
+        "--rmw", default="rmw_fastrtps_cpp", choices=["rmw_fastrtps_cpp", "rmw_cyclonedds_cpp"]
+    )
+    parser.add_argument("--cyclone-config", type=Path)
+    parser.add_argument(
+        "--publication-mode", choices=["SYNCHRONOUS", "ASYNCHRONOUS"], default="SYNCHRONOUS"
+    )
     parser.add_argument("--active-capture", action="store_true")
     parser.add_argument(
         "--cases",
@@ -185,6 +291,9 @@ def main():
             "simulator_process_stall",
             "stale_command",
             "replayed_command",
+            "unexpected_gap",
+            "executor_restart",
+            "mission_expiration",
         ],
         default=["guard_crash"],
     )
@@ -200,22 +309,28 @@ def main():
             or args.expiry_plugin_dir != freeze["expiry_plugin_dir"]
         ):
             raise ValueError("Fault runtime differs from frozen runtime")
-        if (
-            args.fastdds_profile is None
-            or args.fastdds_profile.as_posix() != freeze["fastdds_profile"]
-        ):
+        actual_profile = args.fastdds_profile.as_posix() if args.fastdds_profile else None
+        actual_cyclone = args.cyclone_config.as_posix() if args.cyclone_config else None
+        if actual_profile != freeze["fastdds_profile"]:
             raise ValueError("Fault middleware profile differs from frozen profile")
+        if args.rmw != freeze.get("rmw", "rmw_fastrtps_cpp") or actual_cyclone != freeze.get(
+            "cyclone_config"
+        ):
+            raise ValueError("Fault RMW differs from frozen configuration")
+
     args.output.mkdir(parents=True, exist_ok=False)
     snapshots = args.output / "source"
     snapshots.mkdir()
     for name in [
         "motion_faults.py",
+        "restart_probe.py",
         "fault_precondition.py",
         "inject_robotics_fault.py",
         "inject_expiry_payload.py",
         "inject_expiry_payload.sh",
         "expiry_world.py",
         "trial_clock.py",
+        "receiver_clock_mailbox.py",
         "robotics_session.py",
         "robotics_session_host.py",
     ]:
@@ -225,6 +340,13 @@ def main():
         {
             "cases": args.cases,
             "active_capture": args.active_capture,
+            "publication_mode": args.publication_mode,
+            "timing": args.timing,
+            "rmw": args.rmw,
+            "clock_mailbox": args.clock_mailbox,
+            "restart_probe_observation_s": args.restart_probe_observation_s,
+            "require_restart_rearm": args.require_restart_rearm,
+            "cyclone_config_sha256": sha256(args.cyclone_config) if args.cyclone_config else None,
             "environment": environment(),
             "world_sha256": sha256(args.world / "world.json"),
             "install": args.install,

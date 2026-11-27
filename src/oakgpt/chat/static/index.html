@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>OakGPT</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="Conversations">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5c-1.3 1.6-3.6 2-4.8 3.6-1 1.3-.8 2.9-1.9 4.1C4 11.6 4.3 14 5.6 15.4c1.2 1.4 3.2 1.7 4.9 1.2V21h3v-4.4c1.7.5 3.7.2 4.9-1.2 1.3-1.4 1.6-3.8.3-5.2-1.1-1.2-.9-2.8-1.9-4.1-1.2-1.6-3.5-2-4.8-3.6Z"/></svg>
+        <span class="wordmark">OakGPT</span>
+        <span class="badge">local</span>
+      </div>
+      <button class="primary-button" id="new-chat" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        New conversation
+      </button>
+      <label class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>
+        <input id="search" type="search" placeholder="Search conversations" aria-label="Search conversations">
+      </label>
+      <nav class="history" id="history"></nav>
+      <section class="engine" aria-label="Models">
+        <div class="engine-title">Engine</div>
+        <div class="engine-row" id="engine-text"><span class="dot"></span><span class="engine-name">Qwen3 1.7B</span><span class="engine-role">text</span></div>
+        <div class="engine-row" id="engine-vision" hidden><span class="dot"></span><span class="engine-name">Qwen3-VL 2B</span><span class="engine-role">images</span></div>
+        <div class="engine-note" id="status-text">Connecting…</div>
+        <div class="theme-switch" role="radiogroup" aria-label="Theme">
+          <button type="button" role="radio" data-theme-choice="dark" aria-checked="true">Dark</button>
+          <button type="button" role="radio" data-theme-choice="light" aria-checked="false">Light</button>
+          <button type="button" role="radio" data-theme-choice="system" aria-checked="false">Auto</button>
+        </div>
+      </section>
+    </aside>
+    <div class="scrim" id="scrim" hidden></div>
+    <main class="main" id="main">
+      <header class="topbar">
+        <button class="icon-button menu" id="menu" type="button" aria-label="Show conversations">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <h1 id="title">New conversation</h1>
+        <div class="mode" id="mode" role="radiogroup" aria-label="Response mode">
+          <button type="button" role="radio" data-preset="chat" aria-checked="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5 13h6l-1 8 8-10h-6l1-8Z"/></svg>Fast
+          </button>
+          <button type="button" role="radio" data-preset="reasoning" aria-checked="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3Z"/></svg>Reason
+          </button>
+        </div>
+        <span class="vision-pill" id="vision-pill" hidden title="Conversations with images are answered by Qwen3-VL 2B">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>Vision
+        </span>
+        <button class="icon-button" id="settings-button" type="button" aria-label="Settings" aria-expanded="false" aria-controls="settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+        </button>
+      </header>
+      <div class="conversation" id="conversation" aria-live="polite">
+        <div class="empty" id="empty">
+          <svg class="emblem" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5c-1.3 1.6-3.6 2-4.8 3.6-1 1.3-.8 2.9-1.9 4.1C4 11.6 4.3 14 5.6 15.4c1.2 1.4 3.2 1.7 4.9 1.2V21h3v-4.4c1.7.5 3.7.2 4.9-1.2 1.3-1.4 1.6-3.8.3-5.2-1.1-1.2-.9-2.8-1.9-4.1-1.2-1.6-3.5-2-4.8-3.6Z"/></svg>
+          <h2>What shall we work on?</h2>
+          <p>Everything runs on this computer. Nothing you type or attach leaves it.</p>
+          <div class="suggestions" id="suggestions">
+            <button type="button" data-prompt="Explain how attention works in a Transformer, with a small example."><span class="tag">Explain</span>How attention works in a Transformer</button>
+            <button type="button" data-prompt="Write a Python function that checks whether a string is a palindrome, ignoring spaces and case."><span class="tag">Code</span>A palindrome checker in Python</button>
+            <button type="button" data-prompt="Give me three ideas for a weekend electronics project, with a rough parts list."><span class="tag">Plan</span>Three weekend project ideas</button>
+            <button type="button" data-attach><span class="tag">Look</span>Attach an image and ask about it</button>
+          </div>
+        </div>
+        <div class="messages" id="messages"></div>
+      </div>
+      <form class="composer" id="composer">
+        <div class="composer-card" id="composer-card">
+          <div class="attachments" id="attachments" hidden></div>
+          <textarea id="input" rows="1" placeholder="Ask OakGPT anything, or attach an image" maxlength="32000" aria-label="Message"></textarea>
+          <div class="toolbar">
+            <button class="tool-button" id="attach" type="button" title="Attach images (or paste / drop them)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>
+              <span>Image</span>
+            </button>
+            <input id="file" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" multiple hidden>
+            <span class="hint" id="hint">Enter to send · Shift+Enter for a new line</span>
+            <button class="send" id="send" type="submit">
+              <span class="send-label">Send</span>
+              <svg class="send-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <svg class="stop-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5"/></svg>
+            </button>
+          </div>
+        </div>
+        <p class="disclaimer">Local models make mistakes. Check anything important.</p>
+      </form>
+      <div class="drop-overlay" id="drop-overlay" hidden><div>Drop images to attach</div></div>
+      <div class="drawer-scrim" id="drawer-scrim" hidden></div>
+      <aside class="drawer" id="settings" hidden aria-label="Settings">
+        <div class="drawer-head">
+          <h2>Settings</h2>
+          <button class="icon-button" id="settings-close" type="button" aria-label="Close settings">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+        <label>System prompt <small>applies to new conversations</small>
+          <textarea id="system-prompt" rows="5" maxlength="8000"></textarea>
+        </label>
+        <label>Temperature <output id="temperature-value"></output>
+          <input id="temperature" type="range" min="0" max="1.5" step="0.05">
+          <small>Lower is more focused, higher is more varied.</small>
+        </label>
+        <label>Max reply tokens
+          <input id="max-tokens" type="number" min="16" max="8192" step="16">
+        </label>
+        <button type="button" class="link-button" id="reset-settings">Reset to model-card defaults</button>
+        <p class="drawer-note">Image conversations use the Qwen3-VL sampling preset; temperature and the reply limit above still apply.</p>
+      </aside>
+    </main>
+  </div>
+  <div class="lightbox" id="lightbox" hidden><img id="lightbox-image" alt=""></div>
+  <div class="toast" id="toast" role="alert" hidden></div>
+</body>
+</html>

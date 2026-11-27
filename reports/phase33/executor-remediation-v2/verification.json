@@ -1,0 +1,243 @@
+{
+  "date": "2026-11-07",
+  "branch": "remediation/phase33-executor-restart",
+  "starting_commit": "7c8008a",
+  "software_verification": "passed",
+  "actual_motion_verified": false,
+  "candidate_frozen": false,
+  "phase4_decision": "NO-GO",
+  "gate_reason": "Actual stopping and safe restart recovery remain unverified; original failed criterion is not waived",
+  "python": {
+    "passed": 130,
+    "hardware_skipped": 2,
+    "protocol_subset_passed": 29
+  },
+  "ros": {
+    "installed_package_tests": 28,
+    "failures": 0,
+    "skipped": 0,
+    "synthetic_only": true,
+    "separate_installed_expiry_tests": 2
+  },
+  "cpp": {
+    "validator_checks_per_mode": 10031,
+    "expiry_checks_per_mode": 15036,
+    "modes": [
+      "Release",
+      "ASan/UBSan"
+    ],
+    "oracle_cases": 60,
+    "mailbox_fresh_accepted_stale_future_rejected": true,
+    "source_unchanged": true
+  },
+  "static": {
+    "ruff_check": true,
+    "ruff_format": true,
+    "mypy_modules": 38
+  },
+  "packaging": {
+    "wheel": true,
+    "sdist": true,
+    "required_native_ros_sources": 17
+  },
+  "archives": {
+    "original_phase33_archives": 161,
+    "original_phase33_members": 8503,
+    "phase31_phase32_verified": true
+  },
+  "runtime": {
+    "passed": true,
+    "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "runtime": {
+      "timing.py": {
+        "source_sha256": "2231e7fb0a7c4f32402f3f1fdf673ace4a4b125d1ef74daf28fe2a2f478f3f14",
+        "installed_sha256": "2231e7fb0a7c4f32402f3f1fdf673ace4a4b125d1ef74daf28fe2a2f478f3f14",
+        "installed": "/home/eekeen/projects/oak-phase33-executor-remediation-v5/lib/python3.12/site-packages/oak_mission/timing.py"
+      },
+      "executor.py": {
+        "source_sha256": "8d043b5c983243f3f0b9e25cfbd9e039d6d2934657717f21b413ad46a2275ff9",
+        "installed_sha256": "8d043b5c983243f3f0b9e25cfbd9e039d6d2934657717f21b413ad46a2275ff9",
+        "installed": "/home/eekeen/projects/oak-phase33-executor-remediation-v5/lib/python3.12/site-packages/oak_mission/executor.py"
+      },
+      "restart_journal.py": {
+        "source_sha256": "cb8fcc756c8f9010281076fbf11c72d7d751939be334bf4f363022a42a765a7d",
+        "installed_sha256": "cb8fcc756c8f9010281076fbf11c72d7d751939be334bf4f363022a42a765a7d",
+        "installed": "/home/eekeen/projects/oak-phase33-executor-remediation-v5/lib/python3.12/site-packages/oak_mission/restart_journal.py"
+      },
+      "observer.py": {
+        "source_sha256": "ad14f3448dfc4a4bee7319c45715b7cdfbdd1fc33cace29a043d2def30b4b535",
+        "installed_sha256": "ad14f3448dfc4a4bee7319c45715b7cdfbdd1fc33cace29a043d2def30b4b535",
+        "installed": "/home/eekeen/projects/oak-phase33-executor-remediation-v5/lib/python3.12/site-packages/oak_mission/observer.py"
+      },
+      "liveness.py": {
+        "source_sha256": "b6c4c7f30fa14be82a158f82759df2a65a7f8940fa4c19a634f706c77d1b7a7a",
+        "installed_sha256": "b6c4c7f30fa14be82a158f82759df2a65a7f8940fa4c19a634f706c77d1b7a7a",
+        "installed": "/home/eekeen/projects/oak-phase33-executor-remediation-v5/lib/python3.12/site-packages/oak_mission/liveness.py"
+      },
+      "watchdog.py": {
+        "source_sha256": "15496f45e1ac30ae91fdafe35304d0b00d1b2f1a09d6c6ff93b6e3a26b1358cd",
+        "installed_sha256": "15496f45e1ac30ae91fdafe35304d0b00d1b2f1a09d6c6ff93b6e3a26b1358cd",
+        "installed": "/home/eekeen/projects/oak-phase33-executor-remediation-v5/lib/python3.12/site-packages/oak_mission/watchdog.py"
+      },
+      "recovery.py": {
+        "source_sha256": "5902df3680ae4db7077e9dde9f20b05ac9038921eecc0590abe47f542e5dd47e",
+        "installed_sha256": "5902df3680ae4db7077e9dde9f20b05ac9038921eecc0590abe47f542e5dd47e",
+        "installed": "/home/eekeen/projects/oak-phase33-executor-remediation-v5/lib/python3.12/site-packages/oak_mission/recovery.py"
+      },
+      "velocity_guard.py": {
+        "source_sha256": "9ee3a5485733451ff8d261b453090586586d447457a5c9b1ec8044aabdd0604f",
+        "installed_sha256": "9ee3a5485733451ff8d261b453090586586d447457a5c9b1ec8044aabdd0604f",
+        "installed": "/home/eekeen/projects/oak-phase33-executor-remediation-v5/lib/python3.12/site-packages/oak_mission/velocity_guard.py"
+      },
+      "__init__.py": {
+        "source_sha256": "44101ff48ade12c5716387a5681666b8bd91226b3e9d86162933bf9329fd4e40",
+        "installed_sha256": "44101ff48ade12c5716387a5681666b8bd91226b3e9d86162933bf9329fd4e40",
+        "installed": "/home/eekeen/projects/oak-phase33-executor-remediation-v5/lib/python3.12/site-packages/oak_mission/__init__.py"
+      },
+      "guard_rules.py": {
+        "source_sha256": "47d29194ea9e53d540407558b933f811dec02e618bcf6f0dff8a301fcfb21da5",
+        "installed_sha256": "47d29194ea9e53d540407558b933f811dec02e618bcf6f0dff8a301fcfb21da5",
+        "installed": "/home/eekeen/projects/oak-phase33-executor-remediation-v5/lib/python3.12/site-packages/oak_mission/guard_rules.py"
+      }
+    },
+    "binaries": {
+      "/home/eekeen/projects/oak-phase33-executor-remediation-v5/lib/liboak_progress_trace.so": "27a72acbd9e1387091ba5097a400c936f0513216e3d175306f5186c752fe2a84",
+      "/home/eekeen/projects/oak-phase33-executor-remediation-v5/lib/liboak_controller_trace.so": "8c99d6f92f17de3fac12e712f5a3ff2530645ca467e8dc84502c8ef1f73ffa58",
+      "/home/eekeen/projects/oak-phase33-executor-remediation-v5/lib/liboak_transport_trace.so": "72783252a272c9ced8652ae5d7ea13755400faac7ef00f8435bd888f81152591",
+      "/home/eekeen/projects/oak-phase33-executor-remediation-v5-expiry/liboak_command_expiry.so": "c4ad9ea96bb858801aac197869ef58713a73ee63073cbfb464bae4966b821227"
+    },
+    "source_snapshot_input_sha256": "46d3ff53cd3e03282451935c3ca409b5fd2b543c45539f6387a7eb509fcc9a45"
+  },
+  "current_runtime_source_sha256": {
+    "robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\executor.py": "8d043b5c983243f3f0b9e25cfbd9e039d6d2934657717f21b413ad46a2275ff9",
+    "robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\guard_rules.py": "47d29194ea9e53d540407558b933f811dec02e618bcf6f0dff8a301fcfb21da5",
+    "robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\liveness.py": "b6c4c7f30fa14be82a158f82759df2a65a7f8940fa4c19a634f706c77d1b7a7a",
+    "robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\observer.py": "ad14f3448dfc4a4bee7319c45715b7cdfbdd1fc33cace29a043d2def30b4b535",
+    "robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\recovery.py": "5902df3680ae4db7077e9dde9f20b05ac9038921eecc0590abe47f542e5dd47e",
+    "robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\restart_journal.py": "cb8fcc756c8f9010281076fbf11c72d7d751939be334bf4f363022a42a765a7d",
+    "robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\timing.py": "2231e7fb0a7c4f32402f3f1fdf673ace4a4b125d1ef74daf28fe2a2f478f3f14",
+    "robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\velocity_guard.py": "9ee3a5485733451ff8d261b453090586586d447457a5c9b1ec8044aabdd0604f",
+    "robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\watchdog.py": "15496f45e1ac30ae91fdafe35304d0b00d1b2f1a09d6c6ff93b6e3a26b1358cd",
+    "robotics\\ros2_ws\\src\\oak_mission\\oak_mission\\__init__.py": "44101ff48ade12c5716387a5681666b8bd91226b3e9d86162933bf9329fd4e40"
+  },
+  "host_admission": {
+    "recorded_utc": "2026-11-07T16:06:17.6808408Z",
+    "logical_processors": 16,
+    "samples": [
+      {
+        "sample": 0,
+        "system_busy_percent": 25.55091185410334,
+        "selected_external_core_equivalents": 2.184057544121558
+      },
+      {
+        "sample": 1,
+        "system_busy_percent": 24.751529051987763,
+        "selected_external_core_equivalents": 2.5471033232781375
+      },
+      {
+        "sample": 2,
+        "system_busy_percent": 25.457317073170728,
+        "selected_external_core_equivalents": 2.5471406406815085
+      }
+    ],
+    "quiet_baseline": false,
+    "criterion": "All three five-second samples: system busy <20%, selected unrelated workload <0.5 CPU cores",
+    "limits": "Short baseline, not a scheduling bound. Selected external process names and command lines intentionally omitted. Recheck during trials."
+  },
+  "live_runs_dispatched": 0,
+  "independent_validation_worlds_generated": 0,
+  "pr6": {
+    "head": "e163d31d19ea27a3c954096469cc86b6876c70c4",
+    "draft": true,
+    "changed": false
+  },
+  "known_limits": [
+    "Budget is conditional, not a measured worst-case bound",
+    "Normal-host scheduling, false stops, stopping and complete restart arrival need Gazebo development",
+    "Unknown prior action results or ambiguous cancellation block recovery",
+    "Peer/native/unrelated faults are not cleared",
+    "Trusted local ROS domain, not cryptographic publisher authentication",
+    "Legacy environments without independent proof topics cannot bypass rearming",
+    "No physical stopping claim"
+  ],
+  "raw_source": "runs\\phase33\\executor-remediation-v2\\publish-evidence-v1",
+  "qa_commands": {
+    "pytest": {
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "-m",
+        "pytest"
+      ],
+      "returncode": 0
+    },
+    "ruff-check": {
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "returncode": 0
+    },
+    "ruff-format": {
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "returncode": 0
+    },
+    "mypy": {
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "-m",
+        "mypy"
+      ],
+      "returncode": 0
+    },
+    "phase31-archives": {
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "scripts/verify_phase31_archive.py"
+      ],
+      "returncode": 0
+    },
+    "phase32-archives": {
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "scripts/verify_phase32_archive.py"
+      ],
+      "returncode": 0
+    },
+    "phase33-archives": {
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "scripts/verify_phase33_archive.py"
+      ],
+      "returncode": 0
+    },
+    "package-build": {
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "-m",
+        "build",
+        "--outdir",
+        "runs\\phase33\\executor-remediation-v2\\qa-publish-v1\\package"
+      ],
+      "returncode": 0
+    },
+    "package-verify": {
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "scripts/verify_source_package.py",
+        "--dist-dir",
+        "runs\\phase33\\executor-remediation-v2\\qa-publish-v1\\package"
+      ],
+      "returncode": 0
+    }
+  }
+}

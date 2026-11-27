@@ -35,7 +35,13 @@ class Observer(Node):
         self.create_subscription(
             GoalStatusArray, "navigate_to_pose/_action/status", self.status, 100
         )
-        for topic in ["mission_events", "watchdog_events", "guard_events", "expiry_events"]:
+        for topic in [
+            "mission_events",
+            "watchdog_events",
+            "guard_events",
+            "expiry_events",
+            "recovery_events",
+        ]:
             self.create_subscription(
                 String, "oak/" + topic, lambda m, name=topic: self.event(name, m), 100
             )

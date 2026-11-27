@@ -1,0 +1,94 @@
+{
+  "baseline": "34b8ba9",
+  "date": "2026-11-08",
+  "branch": "remediation/phase33-executor-restart",
+  "python_passed": 134,
+  "hardware_skipped": 2,
+  "new_harness_tests": 4,
+  "ruff_lint_format_passed": true,
+  "mypy_modules": 38,
+  "package_verified": true,
+  "runtime_cpp_configs_ros_source_unchanged": true,
+  "native_ros_cpp_checks_reused": "reports/phase33/executor-marker-fix-v1/verification.json",
+  "installed_runtime_identity_reverified": true,
+  "host_admitted": false,
+  "gate_original_criteria_unchanged": true,
+  "live_runs_dispatched": 0,
+  "frozen_candidate": false,
+  "phase4": "NO-GO",
+  "pr6_unchanged": true,
+  "qa_commands": {
+    "pytest": {
+      "returncode": 0,
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "-m",
+        "pytest"
+      ]
+    },
+    "ruff-check": {
+      "returncode": 0,
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ]
+    },
+    "ruff-format": {
+      "returncode": 0,
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ]
+    },
+    "mypy": {
+      "returncode": 0,
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "-m",
+        "mypy"
+      ]
+    },
+    "archives": {
+      "returncode": 0,
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "scripts/verify_phase33_archive.py"
+      ]
+    },
+    "package": {
+      "returncode": 0,
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "-m",
+        "build",
+        "--outdir",
+        "runs\\phase33\\executor-development-20261108-v1\\qa\\package"
+      ]
+    },
+    "package-verify": {
+      "returncode": 0,
+      "command": [
+        "D:\\Projects\\OakGPT\\.venv-phase31-verify\\Scripts\\python.exe",
+        "scripts/verify_source_package.py",
+        "--dist-dir",
+        "runs\\phase33\\executor-development-20261108-v1\\qa\\package"
+      ]
+    }
+  },
+  "diagnostic_summary": {
+    "main_competing_workload": "separate ROS simulation/job in WSL, domain 117",
+    "windows_vmmem_percent_processor_time": 325,
+    "equivalent_cores_in_separate_diagnostic": 3.25,
+    "note": "Separate CIM snapshot; not a replacement qualification sample",
+    "signals_sent": false,
+    "oak_runtime_orphans_observed": false,
+    "private_process_details": "Retained outside Git"
+  }
+}

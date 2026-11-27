@@ -1,0 +1,16 @@
+{
+  "id": "chat_cache_script_v1",
+  "purpose": "Latency-only multi-turn replay for prompt-cache measurement. Not a quality benchmark; never use for training.",
+  "license": "MIT, original OakGPT fixture",
+  "system_prompt": "You are OakGPT, a helpful assistant running entirely on the user's own computer. Answer clearly and concisely. If you are unsure, say so instead of guessing.",
+  "turns": [
+    "I want to learn how a small language model works. Explain what a token is in two or three sentences.",
+    "How does the model turn those tokens into numbers it can compute with?",
+    "What role does attention play once the tokens are vectors?",
+    "Why is a causal mask needed when the model generates text?",
+    "Summarize the four previous answers as a short numbered list.",
+    "Which of those steps is usually the most expensive on a GPU, and why?",
+    "Suggest one small experiment I could run on a 6 GB GPU to see that cost.",
+    "Thank you. Give me a one-sentence recap of the whole conversation."
+  ]
+}

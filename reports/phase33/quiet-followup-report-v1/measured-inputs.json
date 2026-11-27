@@ -1,0 +1,134 @@
+{
+  "summary_sha256": "8af23553396aac7b10ef2a954819a08ce75a98656d4972fbc68ddc1de43f2445",
+  "freeze_sha256": "2d036fab6212951b99d6fbb15232a8856b49f335a398ad707db91de95440e658",
+  "logging_mean_mission_seconds": {
+    "fast_default": {
+      "on": 11.617951740006296,
+      "off": 10.71752075998423
+    },
+    "fast_udp": {
+      "on": 10.131577739996525,
+      "off": 10.830639104979733
+    },
+    "cyclone": {
+      "on": 10.480899299921779,
+      "off": 11.36269620002713
+    }
+  },
+  "current_host_baselines": [
+    {
+      "path": "runs/phase33/host-baseline-v12.json",
+      "sha256": "c71728a57757c1da051c85c3b1b2522ac32673cc1b5d195635f5ce8eaedcd988",
+      "measurement": {
+        "recorded_utc": "2026-11-04T18:24:28.4591790Z",
+        "logical_processors": 16,
+        "samples": [
+          {
+            "sample": 0,
+            "system_busy_percent": 16.615853658536583,
+            "selected_external_core_equivalents": 0.2565769873730311
+          },
+          {
+            "sample": 1,
+            "system_busy_percent": 21.74079754601227,
+            "selected_external_core_equivalents": 0.10452533708305017
+          },
+          {
+            "sample": 2,
+            "system_busy_percent": 28.727064220183486,
+            "selected_external_core_equivalents": 0.1164058196819984
+          }
+        ],
+        "quiet_baseline": false,
+        "criterion": "All three five-second samples: system busy <20%, selected unrelated workload <0.5 CPU cores",
+        "limits": "Short baseline, not a scheduling bound. Selected external process names and command lines intentionally omitted. Recheck during trials."
+      }
+    },
+    {
+      "path": "runs/phase33/host-baseline-v13.json",
+      "sha256": "f923fb2c23587d182f893d360c29b5e6961a164f4cb83012825a9ecb46550226",
+      "measurement": {
+        "recorded_utc": "2026-11-04T18:40:44.0047367Z",
+        "logical_processors": 16,
+        "samples": [
+          {
+            "sample": 0,
+            "system_busy_percent": 34.23507462686567,
+            "selected_external_core_equivalents": 0.16336618566716685
+          },
+          {
+            "sample": 1,
+            "system_busy_percent": 44.38432835820896,
+            "selected_external_core_equivalents": 0.1791873111154433
+          },
+          {
+            "sample": 2,
+            "system_busy_percent": 41.014437689969604,
+            "selected_external_core_equivalents": 0.18257957595334948
+          }
+        ],
+        "quiet_baseline": false,
+        "criterion": "All three five-second samples: system busy <20%, selected unrelated workload <0.5 CPU cores",
+        "limits": "Short baseline, not a scheduling bound. Selected external process names and command lines intentionally omitted. Recheck during trials."
+      }
+    },
+    {
+      "path": "runs/phase33/host-baseline-v14.json",
+      "sha256": "6447db71508adbd18eca2ab9942c2854bca2d9a480f1088cff7bfff32611f543",
+      "measurement": {
+        "recorded_utc": "2026-11-04T18:41:14.8899846Z",
+        "logical_processors": 16,
+        "samples": [
+          {
+            "sample": 0,
+            "system_busy_percent": 35.423018292682926,
+            "selected_external_core_equivalents": 0.14923108549584646
+          },
+          {
+            "sample": 1,
+            "system_busy_percent": 25.476371951219512,
+            "selected_external_core_equivalents": 0.18335311196061307
+          },
+          {
+            "sample": 2,
+            "system_busy_percent": 32.088414634146346,
+            "selected_external_core_equivalents": 0.2808328316743239
+          }
+        ],
+        "quiet_baseline": false,
+        "criterion": "All three five-second samples: system busy <20%, selected unrelated workload <0.5 CPU cores",
+        "limits": "Short baseline, not a scheduling bound. Selected external process names and command lines intentionally omitted. Recheck during trials."
+      }
+    },
+    {
+      "path": "runs/phase33/held-out-replication-v1/host-preflight/phase32_sync-empty-457527270-1793817721976586000.json",
+      "sha256": "85ef34d8ba2b79fcc9f8a131ebff37536bdbae50acb06fec4f79441bef3747b9",
+      "measurement": {
+        "recorded_utc": "2026-11-04T18:42:18.0871416Z",
+        "logical_processors": 16,
+        "samples": [
+          {
+            "sample": 0,
+            "system_busy_percent": 21.703506097560975,
+            "selected_external_core_equivalents": 0.10076805512523083
+          },
+          {
+            "sample": 1,
+            "system_busy_percent": 23.742378048780488,
+            "selected_external_core_equivalents": 0.12231298129019619
+          },
+          {
+            "sample": 2,
+            "system_busy_percent": 29.529816513761464,
+            "selected_external_core_equivalents": 0.10412398817144301
+          }
+        ],
+        "quiet_baseline": false,
+        "criterion": "All three five-second samples: system busy <20%, selected unrelated workload <0.5 CPU cores",
+        "limits": "Short baseline, not a scheduling bound. Selected external process names and command lines intentionally omitted. Recheck during trials."
+      }
+    }
+  ],
+  "held_out_dispatched": 0,
+  "decision": "NO-GO: held-out and actual-motion verification missing"
+}

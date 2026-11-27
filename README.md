@@ -16,6 +16,53 @@ an actual ROS2 Jazzy/Nav2/Gazebo demonstrator. [Setup](docs/robotics.md),
 fault-driven fixes. The 60-scenario study exposes frequent unsafe raw Qwen proposals;
 independent validation prevents their execution.
 
+## Local chat assistant (Chat C1, C1.1)
+
+OakGPT includes a private assistant with its own dark "Oak" interface. A browser UI
+streams replies from Qwen3 1.7B (Q4_K_M) served by a local llama.cpp process, with
+multi-turn history, a selectable reasoning mode, Stop and Regenerate, and conversations
+stored as local files. Attach, paste or drop images and Qwen3-VL 2B analyses them; only
+one model occupies the 6 GB GPU at a time and OakGPT swaps them on demand. Message text
+is tokenized so it can never forge chat-role delimiters, also on the image path, and the
+loopback web server defends against DNS rebinding and cross-site requests.
+
+```powershell
+.\.venv\Scripts\python scripts\fetch_vision_model.py   # once, for image support
+.\.venv\Scripts\oakgpt chat --config configs/chat/qwen3_q4km.json
+```
+
+See the [chat guide](docs/chat.md) and the decision reports for
+[C1](reports/chat/c1/report.md) and [C1.1](reports/chat/c1_1/report.md) (PDF versions
+next to them), which record every design decision with alternatives, sources and
+measurements. On the RTX 2060, prompt caching keeps eighth-turn time to first token at a
+median of 55 ms versus 215 ms without it; switching to the image model takes a median of
+5.2 s, and a follow-up question about an image already seen starts answering in 0.07 s.
+
+Answer quality is measured on frozen evaluation sets that are never used for training.
+The current set, [chat_eval_v2](data/eval/chat_eval_v2/README.md), has 124 text and 63
+image items, including typeset documents, real photographs and prompt-injection
+attempts. On it, strict accuracy is:
+
+- 31% for the text model in fast mode
+- 83% with reasoning, which is the default mode
+- 84% for the image model, including 100% on OCR in real fonts and 90% on photographs
+
+The sets are small, so these are project baselines, not benchmark scores. The first set,
+v1, is described in the [evaluation report](reports/chat/eval_v1/report.md).
+
+Chat C2 tested LoRA fine-tuning on the 6 GB GPU. QLoRA training fits with room to spare.
+An adapter trained on the model's own reasoning-mode answers raised fast-mode accuracy,
+but it also suppressed thinking, so it was not adopted
+([C2 report](reports/chat/c2/report.md)).
+
+Chat C2.1 applied the same adapter only to fast-mode requests. On v2 this raised
+fast-mode accuracy from 31% to 60% and left reasoning mode unchanged. A correctness check
+fixed in advance still failed, so the adapter stays experimental. A follow-up diagnosis
+traced the failure to prompt-cache effects in the check itself, not to the mechanism
+([C2.1 report](reports/chat/c21/report.md)).
+
+![OakGPT chat](reports/chat/c1_1/figures/ui-vision-1280.png)
+
 ## Phase 2 research workflow
 
 Phase 2 adds a separately installed CUDA environment, physical fp16 training/resume
@@ -153,6 +200,15 @@ uncertainty interval includes zero. A protective expiry trip still causes one mi
 failure. Actual-motion faults, unavailable injections and follow-ups are preserved.
 See [verification](docs/phase32-verification.md), [reproduction](docs/phase32-reproduction.md)
 and the [measured report](reports/phase32/report.md). These are simulation observations.
+
+Phase 3.3 completes a frozen 24-world middleware replication: Fast DDS and Cyclone
+each complete 72/72 missions, with no observed robot/environment contacts or nominal
+expiry latches. Timing results are mixed: Cyclone lowers whole-session tail maxima
+but has a higher observed nonzero-command maximum. Nine of ten eligible motion-fault
+cases meet the frozen 0.50 s target; executor restart takes 0.60 simulated seconds.
+**Phase 4 remains NO-GO.** No lease, deadline or threshold was relaxed. See the
+[final evaluation and reproduction guide](docs/phase33-final-evaluation.md) and
+[IEEE-style report](reports/phase33/final-report-v2/report.pdf).
 
 | Area | Documentation |
 | --- | --- |

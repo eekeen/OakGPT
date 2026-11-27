@@ -1,0 +1,1095 @@
+{
+  "plan_sha256": "874ca38cafbe127281c40b52662861fcfdb1991dcd430e8e0258151cbb32fc5d",
+  "trials": [
+    {
+      "case": "guard_crash",
+      "result_sha256": "fe8ba775fd931991ecc5f8031918ba234e3bfd40bbf0685f95526fdbb2a45ea4",
+      "trace_sha256": {
+        "native-36574.jsonl": "2f38c99c51981e48e0a1bbf9e2491821c69db7c7e4b232f77df89cc1aa499739",
+        "native-36575.jsonl": "cf7c771a222b6d935b495e895a449c4f9f41a73f4e056acc9f261bc7b3486741",
+        "native-36595.jsonl": "31af92af3a016dbd07ec454e97b19adae1d43162474509f588a5c4ae7679293a",
+        "native-36599.jsonl": "d652862661e5ed44511b5865e60226054ef3b62441eed099338a5060e91a855f",
+        "native-36608.jsonl": "a5d8a4b268ddcdbac3a40c77dfd4fbb84b0eece4e483a7c0b850608f6515cd30",
+        "native-36609.jsonl": "0fc08665e6e3fbc5952e943fd3123ff540c9f9110c648450cdb65965c429920f",
+        "python-36574.jsonl": "2abb61adf31a7b681582544cd50a4d29cdb47bc67e68f22e96c359b705ceceda",
+        "resources.jsonl": "7c8118e7b2647c690b330bfa43c22d440c00cf5891a44655a755c222889aa38c"
+      },
+      "observer_analysis": {
+        "case": "guard_crash",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": null,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.17988759239843882,
+          "truth_age_s": 0.01696131,
+          "command_age_s": 0.01001619,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793924407062534555,
+            "monotonic_ns": 97614321091436,
+            "vx": 0.18,
+            "wz": -0.1678477437120043
+          }
+        },
+        "response": {
+          "settled": true,
+          "stop_latency_sim_s": 0.36,
+          "confirmed_after_sim_s": 0.68,
+          "stop_path_m": 0.03632620223070042,
+          "stop_displacement_m": 0.030274740984970655,
+          "speed_threshold_m_s": 0.01,
+          "yaw_threshold_rad_s": 0.03,
+          "hold_s": 0.3
+        },
+        "injected_payload": {},
+        "within_0_5_sim_s": true,
+        "first_latch_reason": "command_expired",
+        "all_observed_post_latch_commands_zero": true,
+        "max_post_fault_truth_monotonic_gap_s": 0.04144239,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793924406649600605,
+          "monotonic_ns": 97613908157216,
+          "goals": [
+            {
+              "id": "c2982b3768bf41018640fc2b85a5828b",
+              "status": 2
+            }
+          ]
+        },
+        "mission_result": null,
+        "settling_onset_monotonic_s": 0.34108848
+      },
+      "native_motion_precondition": {
+        "speed_m_s": 0.17988759240133964,
+        "truth_age_s": 0.02029437,
+        "sample_gap_sim_s": 0.04,
+        "eligible": true
+      },
+      "native_stopping": {
+        "settled": true,
+        "stop_latency_sim_s": 0.36,
+        "confirmed_after_sim_s": 0.68,
+        "stop_path_m": 0.036326202230239246,
+        "stop_displacement_m": 0.030274740984492083,
+        "speed_threshold_m_s": 0.01,
+        "yaw_threshold_rad_s": 0.03,
+        "hold_s": 0.3,
+        "onset_monotonic_s_from_injection": 0.33960447
+      },
+      "payload_delivery_verified": null,
+      "payload_evidence": null,
+      "post_confirmation_motion": {
+        "sample_intervals": 73,
+        "max_gap_sim_s": 0.04,
+        "max_speed_m_s": 0.00013587738008503632,
+        "max_yaw_rate_rad_s": 9.999800000201618e-07,
+        "remained_within_settled_thresholds": true
+      },
+      "eligible": true,
+      "within_0_5_sim_s": true,
+      "passed": true,
+      "environment_failure": null,
+      "executor_restart_receipt": null,
+      "executor_restart_probe": null
+    },
+    {
+      "case": "guard_suspend",
+      "result_sha256": "44d504b7fa10ec6d8ee7f19857916212b0c972d6845a346d04197b54c647bc52",
+      "trace_sha256": {
+        "native-37084.jsonl": "47572e5481fa74dbb75ecd93aa87261f18b19f49412d56ddbfbd3f8940a42afb",
+        "native-37085.jsonl": "eb1bc474c9df1d866fc6637732fd8c5ffc7368d2f60593fbcf88314b59091e62",
+        "native-37099.jsonl": "68a2ccb462416f6b999b4fd3a93a9acdca93987a1fe4e3d562f8bf11b46aaf0f",
+        "native-37107.jsonl": "7d89ebbc546c220887cc0f8b8ce35cbe51bd0727d386f622ed4b09bafefa2fd4",
+        "native-37114.jsonl": "997ba1900fa0c0919c7a8616c009deb1b0cef01ad5a1c8bce42927a7a30f9ccd",
+        "native-37115.jsonl": "1ec26c2bc9e8ceefb21bb190b2cb9ff9d89e37db79f6042929e62b91a8b5f90c",
+        "python-37084.jsonl": "afb4934613b5acd9e0f1097b22496622f9ddbe73aea25f911805bc108628ad9f",
+        "resources.jsonl": "73eeac53beb0bd9764fd5473b8e9e38c3a3027d3f161d24f786d43c8ca8ede5a"
+      },
+      "observer_analysis": {
+        "case": "guard_suspend",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": null,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.17988301437941864,
+          "truth_age_s": 0.00769023,
+          "command_age_s": 0.00852498,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793924447553856522,
+            "monotonic_ns": 97651228851416,
+            "vx": 0.18,
+            "wz": -0.1679043618827343
+          }
+        },
+        "response": {
+          "settled": true,
+          "stop_latency_sim_s": 0.36,
+          "confirmed_after_sim_s": 0.68,
+          "stop_path_m": 0.03632452221344575,
+          "stop_displacement_m": 0.03027217162651142,
+          "speed_threshold_m_s": 0.01,
+          "yaw_threshold_rad_s": 0.03,
+          "hold_s": 0.3
+        },
+        "injected_payload": {},
+        "within_0_5_sim_s": true,
+        "first_latch_reason": "command_expired",
+        "all_observed_post_latch_commands_zero": true,
+        "max_post_fault_truth_monotonic_gap_s": 0.04182723,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793924447186013382,
+          "monotonic_ns": 97650861008456,
+          "goals": [
+            {
+              "id": "98d506960ba54b63b7caac9ce27767d4",
+              "status": 2
+            }
+          ]
+        },
+        "mission_result": null,
+        "settling_onset_monotonic_s": 0.3523635
+      },
+      "native_motion_precondition": {
+        "speed_m_s": 0.1798830143815728,
+        "truth_age_s": 0.00900648,
+        "sample_gap_sim_s": 0.04,
+        "eligible": true
+      },
+      "native_stopping": {
+        "settled": true,
+        "stop_latency_sim_s": 0.36,
+        "confirmed_after_sim_s": 0.68,
+        "stop_path_m": 0.036324522213197034,
+        "stop_displacement_m": 0.030272171626228594,
+        "speed_threshold_m_s": 0.01,
+        "yaw_threshold_rad_s": 0.03,
+        "hold_s": 0.3,
+        "onset_monotonic_s_from_injection": 0.3509874
+      },
+      "payload_delivery_verified": null,
+      "payload_evidence": null,
+      "post_confirmation_motion": {
+        "sample_intervals": 98,
+        "max_gap_sim_s": 0.04,
+        "max_speed_m_s": 0.00013503614502891436,
+        "max_yaw_rate_rad_s": 9.456225000953333e-07,
+        "remained_within_settled_thresholds": true
+      },
+      "eligible": true,
+      "within_0_5_sim_s": true,
+      "passed": true,
+      "environment_failure": null,
+      "executor_restart_receipt": null,
+      "executor_restart_probe": null
+    },
+    {
+      "case": "command_bridge_crash",
+      "result_sha256": "577732e6e29498c29d7f07c4065fcaa765dbc239253850233fbf252c484cf4a9",
+      "trace_sha256": {
+        "native-37591.jsonl": "8625bbaf0c3cd0bfffb7b6655308997dd83d8e13deab85927b241e4f65273758",
+        "native-37592.jsonl": "0c964e1ea484369a258e98e03698d2134c6bc390f0ab1be52bc0dd8497ddb4a9",
+        "native-37608.jsonl": "5ea1251b4f4e27b2f9a6c42655e828a2da6c1900fbbfdbb9798f852b85c80fe3",
+        "native-37618.jsonl": "6e1968bdb5911458a6cd5cecc5b412e20d987df1a6c1cf6dc4baa1289150ede9",
+        "native-37636.jsonl": "2415866576a0fc05caf5e1257e6a4cc904372e92c4cddf10d9f82bb1e2cb850a",
+        "native-37637.jsonl": "aa26f7fbd931d531a45276498b526bc6aa3da65f25c2b6810561764534dfcc25",
+        "python-37591.jsonl": "2b3d0d8f96830dd357de14fcc07590fe6fbcebdbfb70ec19f9cc2725b2f44363",
+        "resources.jsonl": "ffbbcde38a7ef48b4e41bdab517f991a3cd31a608671b35e8a16252d6d73c84d"
+      },
+      "observer_analysis": {
+        "case": "command_bridge_crash",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": null,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.17987857411173908,
+          "truth_age_s": 0.02570004,
+          "command_age_s": 0.00661842,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793924488464933873,
+            "monotonic_ns": 97688556462476,
+            "vx": 0.18,
+            "wz": -0.17958745443612073
+          }
+        },
+        "response": {
+          "settled": true,
+          "stop_latency_sim_s": 0.4,
+          "confirmed_after_sim_s": 0.72,
+          "stop_path_m": 0.04352009251373211,
+          "stop_displacement_m": 0.037465284528129666,
+          "speed_threshold_m_s": 0.01,
+          "yaw_threshold_rad_s": 0.03,
+          "hold_s": 0.3
+        },
+        "injected_payload": {},
+        "within_0_5_sim_s": true,
+        "first_latch_reason": "command_expired",
+        "all_observed_post_latch_commands_zero": null,
+        "max_post_fault_truth_monotonic_gap_s": 0.0415062,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793924488138510623,
+          "monotonic_ns": 97688230038866,
+          "goals": [
+            {
+              "id": "c85317ba332748e89c7fe915c48f2ee0",
+              "status": 2
+            }
+          ]
+        },
+        "mission_result": null,
+        "settling_onset_monotonic_s": 0.3744279
+      },
+      "native_motion_precondition": {
+        "speed_m_s": 0.1798785740934481,
+        "truth_age_s": 0.02710098,
+        "sample_gap_sim_s": 0.04,
+        "eligible": true
+      },
+      "native_stopping": {
+        "settled": true,
+        "stop_latency_sim_s": 0.4,
+        "confirmed_after_sim_s": 0.72,
+        "stop_path_m": 0.04352009251411338,
+        "stop_displacement_m": 0.037465284528649154,
+        "speed_threshold_m_s": 0.01,
+        "yaw_threshold_rad_s": 0.03,
+        "hold_s": 0.3,
+        "onset_monotonic_s_from_injection": 0.37272924
+      },
+      "payload_delivery_verified": null,
+      "payload_evidence": null,
+      "post_confirmation_motion": {
+        "sample_intervals": 73,
+        "max_gap_sim_s": 0.04,
+        "max_speed_m_s": 0.0001350971850764843,
+        "max_yaw_rate_rad_s": 9.494800000051096e-07,
+        "remained_within_settled_thresholds": true
+      },
+      "eligible": true,
+      "within_0_5_sim_s": true,
+      "passed": true,
+      "environment_failure": null,
+      "executor_restart_receipt": null,
+      "executor_restart_probe": null
+    },
+    {
+      "case": "watchdog_crash",
+      "result_sha256": "befa164fda63bdf12a3c212cd987505dec0695f5b5358eae17df13d7e23c5d51",
+      "trace_sha256": {
+        "native-38101.jsonl": "c6572da27ac9372aad3a01efd48532ffc5490544f4c92a39969074a0349ea846",
+        "native-38102.jsonl": "971703e5f6d0c5e39ac605172039c5adc4f3e4a1071bcac6092ca738274f3bbd",
+        "native-38117.jsonl": "4f7da6b4ce1e5a3c84d336d275447daf49af0b064152cb8c30a9e6c2f23437ac",
+        "native-38124.jsonl": "b460bf7eac4cc2cfcd1de0487af03c0d62010e4f4341cc0df974d1537c631389",
+        "native-38125.jsonl": "9534834112614d3191f4b5fa50156feb6d83eba4397edafec600799f29c4a6e2",
+        "native-38140.jsonl": "1c364266952dee2072fdcda5133ff5fc99c6bb21ebefa21fe80618ab10ca553a",
+        "python-38101.jsonl": "1883e68c136df272a6488ada47f6d71e79347189365ef8adde2dbc3a52307bf4",
+        "resources.jsonl": "6a5b6fda17d8c689a14fc21a93995ac724b43433c8357f89c8a92381b660d70d"
+      },
+      "observer_analysis": {
+        "case": "watchdog_crash",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": null,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.17987852502111393,
+          "truth_age_s": 0.02586654,
+          "command_age_s": 0.00737973,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793924528330764825,
+            "monotonic_ns": 97724838716156,
+            "vx": 0.18,
+            "wz": -0.1791050921806541
+          }
+        },
+        "response": {
+          "settled": true,
+          "stop_latency_sim_s": 0.36,
+          "confirmed_after_sim_s": 0.68,
+          "stop_path_m": 0.0404720585342871,
+          "stop_displacement_m": 0.03387070294900623,
+          "speed_threshold_m_s": 0.01,
+          "yaw_threshold_rad_s": 0.03,
+          "hold_s": 0.3
+        },
+        "injected_payload": {},
+        "within_0_5_sim_s": true,
+        "first_latch_reason": null,
+        "all_observed_post_latch_commands_zero": null,
+        "max_post_fault_truth_monotonic_gap_s": 0.04163994,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793924529298124425,
+          "monotonic_ns": 97725806075576,
+          "goals": [
+            {
+              "id": "fbf10ea8f00147a88a53eada2e57ce7a",
+              "status": 5
+            }
+          ]
+        },
+        "mission_result": {
+          "status": "failed",
+          "reason": "watchdog_not_ready_or_faulted",
+          "mission_id": "m-0e2ebe21dabd4ef8",
+          "execution_seconds": 1.364682690007612,
+          "events": [
+            {
+              "event": "accepted",
+              "mission_id": "m-0e2ebe21dabd4ef8",
+              "wall_time_ns": 1793924527966376155,
+              "sim_time_ns": 4980000000
+            },
+            {
+              "event": "watchdog_armed",
+              "mission_id": "m-0e2ebe21dabd4ef8",
+              "wall_time_ns": 1793924527968551005,
+              "sim_time_ns": 5010000000
+            },
+            {
+              "event": "step_started",
+              "mission_id": "m-0e2ebe21dabd4ef8",
+              "wall_time_ns": 1793924527974484345,
+              "sim_time_ns": 5010000000,
+              "index": 0,
+              "action": "navigate"
+            },
+            {
+              "event": "navigation_feedback",
+              "mission_id": "m-0e2ebe21dabd4ef8",
+              "wall_time_ns": 1793924527980076855,
+              "sim_time_ns": 5020000000,
+              "distance_remaining": 0.0
+            },
+            {
+              "event": "navigation_feedback",
+              "mission_id": "m-0e2ebe21dabd4ef8",
+              "wall_time_ns": 1793924528986667455,
+              "sim_time_ns": 6030000000,
+              "distance_remaining": 0.8957107067108154
+            },
+            {
+              "event": "failed",
+              "mission_id": "m-0e2ebe21dabd4ef8",
+              "wall_time_ns": 1793924529297995275,
+              "sim_time_ns": 6340000000,
+              "reason": "watchdog_not_ready_or_faulted"
+            }
+          ]
+        },
+        "settling_onset_monotonic_s": 0.33410043
+      },
+      "native_motion_precondition": {
+        "speed_m_s": 0.17987852501868173,
+        "truth_age_s": 0.02737809,
+        "sample_gap_sim_s": 0.04,
+        "eligible": true
+      },
+      "native_stopping": {
+        "settled": true,
+        "stop_latency_sim_s": 0.36,
+        "confirmed_after_sim_s": 0.68,
+        "stop_path_m": 0.040472058534617036,
+        "stop_displacement_m": 0.033870702949211406,
+        "speed_threshold_m_s": 0.01,
+        "yaw_threshold_rad_s": 0.03,
+        "hold_s": 0.3,
+        "onset_monotonic_s_from_injection": 0.33262245
+      },
+      "payload_delivery_verified": null,
+      "payload_evidence": null,
+      "post_confirmation_motion": {
+        "sample_intervals": 74,
+        "max_gap_sim_s": 0.04,
+        "max_speed_m_s": 0.00013738233877881557,
+        "max_yaw_rate_rad_s": 9.558500000186878e-07,
+        "remained_within_settled_thresholds": true
+      },
+      "eligible": true,
+      "within_0_5_sim_s": true,
+      "passed": true,
+      "environment_failure": null,
+      "executor_restart_receipt": null,
+      "executor_restart_probe": null
+    },
+    {
+      "case": "stale_command",
+      "result_sha256": "2bdc71a3d72ca97de19f67ac82676ace3550833d0e947db8555ec10e31bb1c33",
+      "trace_sha256": {
+        "native-38606.jsonl": "16e90e08766f73097a78e2deb1e22fabe384d1f27535c59fdf9a61260ed6dd22",
+        "native-38607.jsonl": "9f544be2efcdd636127123f86ad83324cc141a091d1b2e98feb3ac816a97829c",
+        "native-38623.jsonl": "8404297784d14b06be7c8e7c79412dd8506ea8e4182f89c7e028ff34e310e498",
+        "native-38637.jsonl": "087d32b028cbb9c194f0cfa19653f84b6070456f2ab58cab145faa092725500a",
+        "native-38653.jsonl": "15e35f18e67ff98d3f7382a2f0c7faf3157179b489b7aea2a63f60b06e92bef8",
+        "native-38654.jsonl": "9606d9f46ef2d3430e26622c34d35e2db7d24a2531e033d575fbd1c8118679fb",
+        "python-38606.jsonl": "169c6dbc78812c8f984b170a3c9fe1a61b1fee1765ddf7e87a5301f8c589bcf0",
+        "resources.jsonl": "30cdb475c0b6b043372feb5892a0e4e83725c87e63867e812f133286da23eb24"
+      },
+      "observer_analysis": {
+        "case": "stale_command",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": true,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.15024690870078208,
+          "truth_age_s": 0.00993456,
+          "command_age_s": 0.00099558,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793924569731158434,
+            "monotonic_ns": 97762655647586,
+            "vx": 0.18,
+            "wz": -0.19546830589250958
+          }
+        },
+        "response": {
+          "settled": true,
+          "stop_latency_sim_s": 0.2,
+          "confirmed_after_sim_s": 0.52,
+          "stop_path_m": 0.009645805251576354,
+          "stop_displacement_m": 0.0032633880888602194,
+          "speed_threshold_m_s": 0.01,
+          "yaw_threshold_rad_s": 0.03,
+          "hold_s": 0.3
+        },
+        "injected_payload": {
+          "frame_id": "oak-boottime-v1/1c4e40e2c8994869b2384ae0a5ae0e86/10453",
+          "issued_boottime_ns": 97761577441996,
+          "vx": 0.125,
+          "wz": -0.16
+        },
+        "within_0_5_sim_s": true,
+        "first_latch_reason": "invalid_command_age",
+        "all_observed_post_latch_commands_zero": true,
+        "max_post_fault_truth_monotonic_gap_s": 0.06235875,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793924569597889494,
+          "monotonic_ns": 97762522378106,
+          "goals": [
+            {
+              "id": "65251d2881054ff3bd38eb05b1b24261",
+              "status": 2
+            }
+          ]
+        },
+        "mission_result": null,
+        "settling_onset_monotonic_s": 0.18957276,
+        "payload_rejection_observed": true
+      },
+      "native_motion_precondition": {
+        "speed_m_s": 0.15024690869328391,
+        "truth_age_s": 0.01123866,
+        "sample_gap_sim_s": 0.04,
+        "eligible": true
+      },
+      "native_stopping": {
+        "settled": true,
+        "stop_latency_sim_s": 0.2,
+        "confirmed_after_sim_s": 0.52,
+        "stop_path_m": 0.009645805251435038,
+        "stop_displacement_m": 0.003263388089488534,
+        "speed_threshold_m_s": 0.01,
+        "yaw_threshold_rad_s": 0.03,
+        "hold_s": 0.3,
+        "onset_monotonic_s_from_injection": 0.18866592
+      },
+      "payload_delivery_verified": true,
+      "payload_evidence": {
+        "bridge_take_matching_records": 3,
+        "gazebo_publish_matching_records": 3,
+        "native_decode_matching_records": 3,
+        "original_native_header_seen_before_injection": false,
+        "replay_identity_confirmed": true,
+        "expected_rejection_observed": true,
+        "nonzero_payload": true,
+        "frame_id": "oak-boottime-v1/1c4e40e2c8994869b2384ae0a5ae0e86/10453",
+        "issued_boottime_ns": 97761577441996
+      },
+      "post_confirmation_motion": {
+        "sample_intervals": 96,
+        "max_gap_sim_s": 0.04,
+        "max_speed_m_s": 0.00014628944546789637,
+        "max_yaw_rate_rad_s": 8.425250001137252e-07,
+        "remained_within_settled_thresholds": true
+      },
+      "eligible": true,
+      "within_0_5_sim_s": true,
+      "passed": true,
+      "environment_failure": null,
+      "executor_restart_receipt": null,
+      "executor_restart_probe": null
+    },
+    {
+      "case": "replayed_command",
+      "result_sha256": "365a53ab9b1fa7934ba9ac0014c17b393f2033cc315c73dfc6e05eec5ed70d2a",
+      "trace_sha256": {
+        "native-39141.jsonl": "4ef41f35ca4de4c89da927f606c3e31e6cffb18d29d4e455ca70cd996b4ec7ef",
+        "native-39142.jsonl": "404effcbd99735b0ae9dc7d4458532723571e086bf9b34de595531cdf1223e59",
+        "native-39158.jsonl": "ce8f3a00bc1cacecb1ea57b2c95f6ab1144eefae8506c1925ff5942442104ce8",
+        "native-39160.jsonl": "ee5b784ef4e6681515d0f7cc7d10ed41eacec77ff6f2dae634ef226a513ad29b",
+        "native-39173.jsonl": "6129d7c81294bd8ea1ca1711799fb59ebf5b5bd8cbb95d3a7ecd31ea0e51db33",
+        "native-39174.jsonl": "38fb601bfc4c689f627c55c23d58b082c0968546c9fbd3190ace2b14b66fc3d4",
+        "python-39141.jsonl": "28f1ecc52a63a5b138950ebb6aa45242523edb73009d61155516b664d2f245e5",
+        "resources.jsonl": "99116475225e9d74cd62d8df2415415d69d79ffa6aeef14c83d694f1982b6926"
+      },
+      "observer_analysis": {
+        "case": "replayed_command",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": true,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.12540497594849292,
+          "truth_age_s": 0.01208592,
+          "command_age_s": 0.00227637,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793924615579184856,
+            "monotonic_ns": 97801336518176,
+            "vx": 0.18,
+            "wz": -0.19546830589250958
+          }
+        },
+        "response": {
+          "settled": true,
+          "stop_latency_sim_s": 0.2,
+          "confirmed_after_sim_s": 0.52,
+          "stop_path_m": 0.009637104816500867,
+          "stop_displacement_m": 0.0031824209087248537,
+          "speed_threshold_m_s": 0.01,
+          "yaw_threshold_rad_s": 0.03,
+          "hold_s": 0.3
+        },
+        "injected_payload": {
+          "frame_id": "oak-boottime-v1/e54b2b86ddca461c98b7f426daf81483/442",
+          "issued_boottime_ns": 97801254487676,
+          "vx": 0.125,
+          "wz": -0.16
+        },
+        "within_0_5_sim_s": true,
+        "first_latch_reason": "identity_or_replay",
+        "all_observed_post_latch_commands_zero": true,
+        "max_post_fault_truth_monotonic_gap_s": 0.04187502,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793924615415841786,
+          "monotonic_ns": 97801173174656,
+          "goals": [
+            {
+              "id": "5a70fbd755264c31ba7ff3dacc4d67ca",
+              "status": 2
+            }
+          ]
+        },
+        "mission_result": null,
+        "settling_onset_monotonic_s": 0.18874674,
+        "payload_rejection_observed": true
+      },
+      "native_motion_precondition": {
+        "speed_m_s": 0.1254049759473659,
+        "truth_age_s": 0.01265661,
+        "sample_gap_sim_s": 0.04,
+        "eligible": true
+      },
+      "native_stopping": {
+        "settled": true,
+        "stop_latency_sim_s": 0.2,
+        "confirmed_after_sim_s": 0.52,
+        "stop_path_m": 0.009637104816360985,
+        "stop_displacement_m": 0.003182420908216062,
+        "speed_threshold_m_s": 0.01,
+        "yaw_threshold_rad_s": 0.03,
+        "hold_s": 0.3,
+        "onset_monotonic_s_from_injection": 0.18730422
+      },
+      "payload_delivery_verified": true,
+      "payload_evidence": {
+        "bridge_take_matching_records": 3,
+        "gazebo_publish_matching_records": 3,
+        "native_decode_matching_records": 3,
+        "original_native_header_seen_before_injection": true,
+        "replay_identity_confirmed": true,
+        "expected_rejection_observed": true,
+        "nonzero_payload": true,
+        "frame_id": "oak-boottime-v1/e54b2b86ddca461c98b7f426daf81483/442",
+        "issued_boottime_ns": 97801254487676
+      },
+      "post_confirmation_motion": {
+        "sample_intervals": 96,
+        "max_gap_sim_s": 0.04,
+        "max_speed_m_s": 0.00012265419717625068,
+        "max_yaw_rate_rad_s": 6.113499997906224e-07,
+        "remained_within_settled_thresholds": true
+      },
+      "eligible": true,
+      "within_0_5_sim_s": true,
+      "passed": true,
+      "environment_failure": null,
+      "executor_restart_receipt": null,
+      "executor_restart_probe": null
+    },
+    {
+      "case": "simulator_process_stall",
+      "result_sha256": "ee6ccac3d9c4cf082735bd407d76357088c5efbc8aeed1fe12d43e829f92e17d",
+      "trace_sha256": {
+        "native-39678.jsonl": "1af27f1f5a3cc8e604b8dcd0f064e36e2fb5bc370f1df48b15115458e32fee96",
+        "native-39679.jsonl": "8188eb750c4dda49200462616a2e3de48d1ddbede1bf357b26ea532113af2cbe",
+        "native-39701.jsonl": "c8e678c4e4609a755f77c77ed8aa95e6e46dec4ead2394ae720f583d8f2ec763",
+        "native-39705.jsonl": "5e54a45f8377922fec26e2c298dae657878a189d5b59dc46baff80fa1d8ce0b2",
+        "native-39712.jsonl": "cf6830520ea3862ecbaff86503ef2e46a8fd26a6a7449fc1f05cacba2bbba2a2",
+        "native-39713.jsonl": "c8e63e9bd6c1d03d3912ae8b7ef13d2ed59c5f44bec5811c346a57007f282586",
+        "python-39678.jsonl": "f3cf8bb88a0767cc56a4e68e4f97ff71114ad10b0dcf193933572451f452d920",
+        "resources.jsonl": "3c59e0e3e30ee9e4265e5b37ad6254ba6bf13e3286058da4775b6145e8cd514f"
+      },
+      "observer_analysis": {
+        "case": "simulator_process_stall",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": null,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.17988066815612958,
+          "truth_age_s": 0.00701865,
+          "command_age_s": 0.0080109,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793924656804718438,
+            "monotonic_ns": 97838978737016,
+            "vx": 0.18,
+            "wz": -0.17637017978449074
+          }
+        },
+        "response": {
+          "settled": true,
+          "stop_latency_sim_s": 0.2,
+          "confirmed_after_sim_s": 0.52,
+          "stop_path_m": 0.007539584646812386,
+          "stop_displacement_m": 0.0014891187396385396,
+          "speed_threshold_m_s": 0.01,
+          "yaw_threshold_rad_s": 0.03,
+          "hold_s": 0.3
+        },
+        "injected_payload": {},
+        "within_0_5_sim_s": true,
+        "first_latch_reason": "update_gap",
+        "all_observed_post_latch_commands_zero": true,
+        "max_post_fault_truth_monotonic_gap_s": 0.041013,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793924656478363948,
+          "monotonic_ns": 97838652381716,
+          "goals": [
+            {
+              "id": "fc58120740664ec688adce1655d1c81c",
+              "status": 2
+            }
+          ]
+        },
+        "mission_result": null,
+        "settling_onset_monotonic_s": 1.19293776
+      },
+      "native_motion_precondition": {
+        "speed_m_s": 0.17988066815449308,
+        "truth_age_s": 0.00842922,
+        "sample_gap_sim_s": 0.04,
+        "eligible": true
+      },
+      "native_stopping": {
+        "settled": true,
+        "stop_latency_sim_s": 0.2,
+        "confirmed_after_sim_s": 0.52,
+        "stop_path_m": 0.00753958464762722,
+        "stop_displacement_m": 0.0014891187391617077,
+        "speed_threshold_m_s": 0.01,
+        "yaw_threshold_rad_s": 0.03,
+        "hold_s": 0.3,
+        "onset_monotonic_s_from_injection": 1.19127978
+      },
+      "payload_delivery_verified": null,
+      "payload_evidence": null,
+      "post_confirmation_motion": {
+        "sample_intervals": 77,
+        "max_gap_sim_s": 0.04,
+        "max_speed_m_s": 0.00013659997417183228,
+        "max_yaw_rate_rad_s": 8.393225000430382e-07,
+        "remained_within_settled_thresholds": true
+      },
+      "eligible": true,
+      "within_0_5_sim_s": true,
+      "passed": true,
+      "environment_failure": null,
+      "executor_restart_receipt": null,
+      "executor_restart_probe": null
+    },
+    {
+      "case": "unexpected_gap",
+      "result_sha256": "a5ce82550adaff94ba0b15fedcefeb8c3172c6a4127c42044db4045c938637af",
+      "trace_sha256": {
+        "native-40186.jsonl": "f6062b77667fc5585e1e692ecfa2375aa50e79f3a10c6fb0f86cf29509055393",
+        "native-40187.jsonl": "d709f3a3a6cdc79dd776106c2a6a3541b4d88735f1cc5aad3a442d4f87ff9b55",
+        "native-40200.jsonl": "82e54414ec49ab01efa5fae65f1934dfd5f4b037e1b9543581fd68a4b0a5cc6b",
+        "native-40209.jsonl": "a64f33865f4a411f0258c20a6309617c26b8d823b3b3eb83641a019772c83bea",
+        "native-40210.jsonl": "27eb5602a2dc6a9f28ab02e8c00a816984a20aa40f803900370bb0418beb6933",
+        "native-40219.jsonl": "783b123e99651d6010fde85680bd97ac7d145d219a264f68a54a40ef028f6ecf",
+        "python-40186.jsonl": "37fec76f64b67cd04e1793c7309f8bd56eb7ab10a46d6e6004f5cd08667b9248",
+        "resources.jsonl": "bbe5984cbf67829eeef29efa27a45849df009c82b274e57849e0d618ce0521dc"
+      },
+      "observer_analysis": {
+        "case": "unexpected_gap",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": null,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.1798796063842626,
+          "truth_age_s": 0.0270837,
+          "command_age_s": 0.00817281,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793924697666249523,
+            "monotonic_ns": 97876256560526,
+            "vx": 0.18,
+            "wz": -0.1668023124973727
+          }
+        },
+        "response": {
+          "settled": true,
+          "stop_latency_sim_s": 0.4,
+          "confirmed_after_sim_s": 0.72,
+          "stop_path_m": 0.043520229387043564,
+          "stop_displacement_m": 0.03746622268747701,
+          "speed_threshold_m_s": 0.01,
+          "yaw_threshold_rad_s": 0.03,
+          "hold_s": 0.3
+        },
+        "injected_payload": {},
+        "within_0_5_sim_s": true,
+        "first_latch_reason": "command_expired",
+        "all_observed_post_latch_commands_zero": true,
+        "max_post_fault_truth_monotonic_gap_s": 0.04108032,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793924697323351233,
+          "monotonic_ns": 97875913661876,
+          "goals": [
+            {
+              "id": "ae5e8f4f539f496885edbde1fc1a7287",
+              "status": 2
+            }
+          ]
+        },
+        "mission_result": null,
+        "settling_onset_monotonic_s": 0.37194723
+      },
+      "native_motion_precondition": {
+        "speed_m_s": 0.17987960638093814,
+        "truth_age_s": 0.02860821,
+        "sample_gap_sim_s": 0.04,
+        "eligible": true
+      },
+      "native_stopping": {
+        "settled": true,
+        "stop_latency_sim_s": 0.4,
+        "confirmed_after_sim_s": 0.72,
+        "stop_path_m": 0.043520229387384333,
+        "stop_displacement_m": 0.03746622268785387,
+        "speed_threshold_m_s": 0.01,
+        "yaw_threshold_rad_s": 0.03,
+        "hold_s": 0.3,
+        "onset_monotonic_s_from_injection": 0.37132164
+      },
+      "payload_delivery_verified": null,
+      "payload_evidence": null,
+      "post_confirmation_motion": {
+        "sample_intervals": 79,
+        "max_gap_sim_s": 0.04,
+        "max_speed_m_s": 0.0001350680677950199,
+        "max_yaw_rate_rad_s": 9.524999998802853e-07,
+        "remained_within_settled_thresholds": true
+      },
+      "eligible": true,
+      "within_0_5_sim_s": true,
+      "passed": true,
+      "environment_failure": null,
+      "executor_restart_receipt": null,
+      "executor_restart_probe": null
+    },
+    {
+      "case": "executor_restart",
+      "result_sha256": "281b3bbe7af7d2cfe4c8b247ff6ee81c04c640208f6207874bfafd4352fbea1e",
+      "trace_sha256": {
+        "native-40696.jsonl": "663b0a4ef5c739b8f516ee8d33c2ccc632b21ce713836d0d4d8ebe86c0645a50",
+        "native-40697.jsonl": "a772ae68c1b04c3bc1e961e4820e44b1ade69983cdb8685b7015f33915cd71b2",
+        "native-40711.jsonl": "d86d1bc8c3c8dbf4af1d8e448f7254ea89b7a6cbb6ba116f855a99c37f51cddd",
+        "native-40723.jsonl": "45b30a3aa99c7e24215b00413ada84a987eccdc4565a2685c246238d28177249",
+        "native-40734.jsonl": "b2b36be78492f4d2975dd26779347d632a95436183568c8ca3efa0ab56dfcb9d",
+        "native-40737.jsonl": "14c458c02c01e0dfa74c89c95d8ff46536f36e3e57548b40b7f11700c3bb6c5d",
+        "python-40696.jsonl": "fb6436ed750053f6e8381b84c0b3bf4adb501778e0d1aeca195396964a869fcc",
+        "resources.jsonl": "97bea94f5cb78223debb375f9ffc1955f897e107be91878dc9f9f5be926c5ab1"
+      },
+      "observer_analysis": {
+        "case": "executor_restart",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": null,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.17988431326126592,
+          "truth_age_s": 0.01706787,
+          "command_age_s": 0.00796986,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793924737644953147,
+            "monotonic_ns": 97912651697156,
+            "vx": 0.18,
+            "wz": -0.177703427383604
+          }
+        },
+        "response": {
+          "settled": true,
+          "stop_latency_sim_s": 0.6,
+          "confirmed_after_sim_s": 0.92,
+          "stop_path_m": 0.08506489336013107,
+          "stop_displacement_m": 0.0788427951694758,
+          "speed_threshold_m_s": 0.01,
+          "yaw_threshold_rad_s": 0.03,
+          "hold_s": 0.3
+        },
+        "injected_payload": {},
+        "within_0_5_sim_s": false,
+        "first_latch_reason": null,
+        "all_observed_post_latch_commands_zero": null,
+        "max_post_fault_truth_monotonic_gap_s": 0.04301388,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793924738453010497,
+          "monotonic_ns": 97913459754236,
+          "goals": [
+            {
+              "id": "cf21f591b2f34c4dba7a997d0b5f483a",
+              "status": 5
+            }
+          ]
+        },
+        "mission_result": null,
+        "settling_onset_monotonic_s": 0.58281264
+      },
+      "native_motion_precondition": {
+        "speed_m_s": 0.17988431325253276,
+        "truth_age_s": 0.01838448,
+        "sample_gap_sim_s": 0.04,
+        "eligible": true
+      },
+      "native_stopping": {
+        "settled": true,
+        "stop_latency_sim_s": 0.6,
+        "confirmed_after_sim_s": 0.92,
+        "stop_path_m": 0.08506489336011334,
+        "stop_displacement_m": 0.07884279516943922,
+        "speed_threshold_m_s": 0.01,
+        "yaw_threshold_rad_s": 0.03,
+        "hold_s": 0.3,
+        "onset_monotonic_s_from_injection": 0.58163625
+      },
+      "payload_delivery_verified": null,
+      "payload_evidence": null,
+      "post_confirmation_motion": {
+        "sample_intervals": 114,
+        "max_gap_sim_s": 0.04,
+        "max_speed_m_s": 0.0001404146544051695,
+        "max_yaw_rate_rad_s": 1.3010337499832698e-06,
+        "remained_within_settled_thresholds": true
+      },
+      "eligible": true,
+      "within_0_5_sim_s": false,
+      "passed": false,
+      "environment_failure": null,
+      "executor_restart_receipt": {
+        "pid": 41117,
+        "monotonic_ns": 97912764444116,
+        "wall_ns": 1793924737757701907
+      },
+      "executor_restart_probe": null
+    },
+    {
+      "case": "mission_expiration",
+      "result_sha256": "76ff6bb56a9d1f5ff7187a97f2ba6f0aa4d16d4935c408e5159f3f5c6fbe448c",
+      "trace_sha256": {
+        "native-41224.jsonl": "1ea2dde0560b6f423c1c10418bf86a7e14e7350fce027cc3007350e975faf02a",
+        "native-41225.jsonl": "39b2779538486d3cf4d01c404298cb4dc7330432ec86071ff24bdebef7665d61",
+        "native-41244.jsonl": "0d5d70e523b1da3acc831fa1397e9e4dac7ed2c354d1f95194b58d1885abbe8d",
+        "native-41251.jsonl": "5f320da476bf5eeb068a52150feab5cd766cd2db4045e9d899b57c274b861869",
+        "native-41254.jsonl": "4f7a84ba987660627805b23cfc6b28b0650b2bfb4687099961efab1d512af336",
+        "native-41255.jsonl": "f600c9aec7993fe697c19dbf16cb8acf8817656e53f706cd0d78341fd045fde5",
+        "python-41224.jsonl": "154169ea110f5761a8ad6a95e8332c8665c841b32ed8dd837930a3194acc038b",
+        "resources.jsonl": "187ccf51bfe053aefae86e644410cadebb29154a2a4ebed23b63dd8bd1ae2a18"
+      },
+      "observer_analysis": {
+        "case": "mission_expiration",
+        "environment_failure": null,
+        "eligible": true,
+        "nonzero_payload_required_and_captured": null,
+        "precondition_at_injection": {
+          "eligible": true,
+          "speed_m_s": 0.17998877063203045,
+          "truth_age_s": 0.01367334,
+          "command_age_s": 0.00481176,
+          "truth_sample_gap_sim_s": 0.04,
+          "last_command": {
+            "kind": "command",
+            "wall_ns": 1793924783622522653,
+            "monotonic_ns": 97955045926436,
+            "vx": 0.18,
+            "wz": 0.025510257495916153
+          }
+        },
+        "response": {
+          "settled": true,
+          "stop_latency_sim_s": 0.2,
+          "confirmed_after_sim_s": 0.52,
+          "stop_path_m": 0.009633039806904376,
+          "stop_displacement_m": 0.0033703615789108057,
+          "speed_threshold_m_s": 0.01,
+          "yaw_threshold_rad_s": 0.03,
+          "hold_s": 0.3
+        },
+        "injected_payload": {},
+        "within_0_5_sim_s": true,
+        "first_latch_reason": null,
+        "all_observed_post_latch_commands_zero": null,
+        "max_post_fault_truth_monotonic_gap_s": 0.0411678,
+        "last_action_status": {
+          "kind": "action_status",
+          "wall_ns": 1793924783658899123,
+          "monotonic_ns": 97955082302996,
+          "goals": [
+            {
+              "id": "9117400440dc4cd3b43170d02065201d",
+              "status": 5
+            }
+          ]
+        },
+        "mission_result": {
+          "status": "failed",
+          "reason": "mission_expired",
+          "mission_id": "m-873a0a9234bd4879",
+          "execution_seconds": 2.9339483399962774,
+          "events": [
+            {
+              "event": "accepted",
+              "mission_id": "m-873a0a9234bd4879",
+              "wall_time_ns": 1793924780758291193,
+              "sim_time_ns": 5390000000
+            },
+            {
+              "event": "watchdog_armed",
+              "mission_id": "m-873a0a9234bd4879",
+              "wall_time_ns": 1793924780760862583,
+              "sim_time_ns": 5420000000
+            },
+            {
+              "event": "step_started",
+              "mission_id": "m-873a0a9234bd4879",
+              "wall_time_ns": 1793924780765956223,
+              "sim_time_ns": 5420000000,
+              "index": 0,
+              "action": "navigate"
+            },
+            {
+              "event": "navigation_feedback",
+              "mission_id": "m-873a0a9234bd4879",
+              "wall_time_ns": 1793924780770823423,
+              "sim_time_ns": 5430000000,
+              "distance_remaining": 0.0
+            },
+            {
+              "event": "navigation_feedback",
+              "mission_id": "m-873a0a9234bd4879",
+              "wall_time_ns": 1793924781778215563,
+              "sim_time_ns": 6440000000,
+              "distance_remaining": 0.7957106828689575
+            },
+            {
+              "event": "navigation_feedback",
+              "mission_id": "m-873a0a9234bd4879",
+              "wall_time_ns": 1793924782788075503,
+              "sim_time_ns": 7450000000,
+              "distance_remaining": 0.6207106709480286
+            },
+            {
+              "event": "failed",
+              "mission_id": "m-873a0a9234bd4879",
+              "wall_time_ns": 1793924783658789593,
+              "sim_time_ns": 8320000000,
+              "reason": "mission_expired"
+            }
+          ]
+        },
+        "settling_onset_monotonic_s": 0.18624501
+      },
+      "native_motion_precondition": {
+        "speed_m_s": 0.17998877062939453,
+        "truth_age_s": 0.01516257,
+        "sample_gap_sim_s": 0.04,
+        "eligible": true
+      },
+      "native_stopping": {
+        "settled": true,
+        "stop_latency_sim_s": 0.2,
+        "confirmed_after_sim_s": 0.52,
+        "stop_path_m": 0.009633039806783279,
+        "stop_displacement_m": 0.0033703615792968307,
+        "speed_threshold_m_s": 0.01,
+        "yaw_threshold_rad_s": 0.03,
+        "hold_s": 0.3,
+        "onset_monotonic_s_from_injection": 0.18492534
+      },
+      "payload_delivery_verified": null,
+      "payload_evidence": null,
+      "post_confirmation_motion": {
+        "sample_intervals": 79,
+        "max_gap_sim_s": 0.04,
+        "max_speed_m_s": 0.00013120336941820426,
+        "max_yaw_rate_rad_s": 1.463492499929886e-06,
+        "remained_within_settled_thresholds": true
+      },
+      "eligible": true,
+      "within_0_5_sim_s": true,
+      "passed": true,
+      "environment_failure": null,
+      "executor_restart_receipt": null,
+      "executor_restart_probe": null
+    }
+  ],
+  "planned": 10,
+  "eligible": 10,
+  "passed": 9,
+  "all_ten_passed": false,
+  "limits": [
+    "Native PostUpdate and Gazebo pose observer share simulator physics; neither is a physical robot stopping measurement.",
+    "Both observer and native motion metrics must meet the unchanged target. Missing observations are not passes.",
+    "Settling is simulated onset sustained for 0.3 s; wall/monotonic latency is reported separately, including simulator stalls.",
+    "Only records preceding the explicit observation cutoff are scored; cleanup-induced stopping is excluded.",
+    "Delivery uses same-kernel MONOTONIC matches; BOOTTIME issued headers are compared for equality, never subtracted from MONOTONIC."
+  ]
+}

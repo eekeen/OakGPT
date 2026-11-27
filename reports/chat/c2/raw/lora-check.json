@@ -1,0 +1,67 @@
+{
+  "prompts": [
+    "arithmetic-0008",
+    "arithmetic-0112",
+    "word_problem-0045",
+    "word_problem-0114",
+    "facts-0043",
+    "swedish-0100",
+    "code-0105",
+    "code-0142",
+    "instructions-0078",
+    "reading-0041",
+    "reading-0133",
+    "open-0012"
+  ],
+  "adapters": {
+    "base": null,
+    "zero_adapter": "016938d9895b52b75379b1cc9bc47b6107103eb0393893593dc39bfd5bb3463c",
+    "trained_adapter": "2ead4472791a82fa7b13626a2d1b23502d0d962707b045ccde67e5d219707b0d"
+  },
+  "replies": {
+    "base": [
+      "18",
+      "8",
+      "6",
+      "150",
+      "N2",
+      "Sveriges högsta berg är Mount Vatnajökull.",
+      "The output is \"ard\".",
+      "The code will print: `[6, 7, 8, 9]`",
+      "VIOLIN",
+      "7",
+      "17:00",
+      "1. Plan your meals ahead of time.  \n2. Compare prices at different stores.  \n3. Use coupons and sales effectively."
+    ],
+    "zero_adapter": [
+      "18",
+      "8",
+      "6",
+      "150",
+      "N2",
+      "Sveriges högsta berg är Mount Vatnajökull.",
+      "The output is \"ard\".",
+      "The code will print: `[6, 7, 8, 9]`",
+      "VIOLIN",
+      "7",
+      "17:00",
+      "1. Plan your meals ahead of time.  \n2. Compare prices at different stores.  \n3. Use coupons and sales effectively."
+    ],
+    "trained_adapter": [
+      "18",
+      "8",
+      "23",
+      "540",
+      "N",
+      "Kvistberg",
+      "den",
+      "[6, 7, 8, 9]",
+      "VIOLIN",
+      "8",
+      "17:00",
+      "1. **Compare prices** before buying to avoid overpaying.  \n2. **Buy in bulk** when items are on sale to save money.  \n3. **Plan meals** ahead to avoid waste and avoid impulse purchases."
+    ]
+  },
+  "zero_equals_base": true,
+  "trained_differs": 8
+}

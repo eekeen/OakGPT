@@ -1,0 +1,3174 @@
+{
+  "cohort": "backend-development-quiet-v1",
+  "trials": [
+    {
+      "condition": "cyclone-off",
+      "world": "block-211",
+      "planned_requests": 3,
+      "dispatched": 3,
+      "completed": 3,
+      "unattempted": 0,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 228,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.9375993744488207,
+            "moving_time_sim_s": 6.440000000000005,
+            "arrival_position_error_m": 0.20943758910232702,
+            "minimum_circle_obstacle_clearance_m": 0.13699113379356323,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Inspect storage",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 586,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 1.8297757879128005,
+            "moving_time_sim_s": 10.839999999999945,
+            "arrival_position_error_m": 0.17960254759837777,
+            "minimum_circle_obstacle_clearance_m": 0.21444768499637915,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Go to dock",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 265,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.8538353113464783,
+            "moving_time_sim_s": 5.440000000000004,
+            "arrival_position_error_m": 0.19544047348858504,
+            "minimum_circle_obstacle_clearance_m": 0.2147874369307833,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": null,
+      "contact_observation": {
+        "samples": 0,
+        "pairs": 0,
+        "robot_environment_pairs": 0,
+        "available": false,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "979d365fc1b12ddb6efa36a7f027661dda1a7569b94f5d210bf75c5980ccc5cc",
+      "trace_sha256": {
+        "resources.jsonl": "4544e20dc61af59c8e1b9835b2825fcfc55292e72da02813647e1a4dc241479a"
+      }
+    },
+    {
+      "condition": "cyclone-off",
+      "world": "empty-210",
+      "planned_requests": 3,
+      "dispatched": 3,
+      "completed": 3,
+      "unattempted": 0,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 110,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.7230208500106958,
+            "moving_time_sim_s": 4.280000000000003,
+            "arrival_position_error_m": 0.25828240897796306,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Inspect storage",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 260,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.6965108531997497,
+            "moving_time_sim_s": 4.360000000000003,
+            "arrival_position_error_m": 0.2437747499347923,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Go to dock",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 257,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.41915338365178495,
+            "moving_time_sim_s": 2.7200000000000015,
+            "arrival_position_error_m": 0.24815293745800546,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": null,
+      "contact_observation": {
+        "samples": 0,
+        "pairs": 0,
+        "robot_environment_pairs": 0,
+        "available": false,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "0c2d267cb3f612753f258a88feb6d35b307d6b2b2014e45f7aa71efb2aaf4e17",
+      "trace_sha256": {
+        "resources.jsonl": "4e0475d35fc5e46970b9cf55b7365dc7f15a7732c9ca98eaa2234eac772190d9"
+      }
+    },
+    {
+      "condition": "cyclone-on",
+      "world": "block-211",
+      "planned_requests": 3,
+      "dispatched": 3,
+      "completed": 3,
+      "unattempted": 0,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 203,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.9249572240961061,
+            "moving_time_sim_s": 5.920000000000004,
+            "arrival_position_error_m": 0.23182874354403482,
+            "minimum_circle_obstacle_clearance_m": 0.1370088007086235,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Inspect storage",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 483,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 1.7697746227239386,
+            "moving_time_sim_s": 10.439999999999953,
+            "arrival_position_error_m": 0.1983365502011471,
+            "minimum_circle_obstacle_clearance_m": 0.2213305907773189,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Go to dock",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 257,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.7846136074049304,
+            "moving_time_sim_s": 5.240000000000004,
+            "arrival_position_error_m": 0.2285318297790822,
+            "minimum_circle_obstacle_clearance_m": 0.22181564165754705,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": {
+        "stage_counts": {
+          "actual_ros_writer_qos": 5,
+          "dds_publish_begin": 9159,
+          "dds_publish_end": 9159,
+          "dds_take": 4352,
+          "gz_publish_begin": 7323,
+          "gz_publish_end": 7323,
+          "controller_compute_begin": 354,
+          "controller_created": 354,
+          "native_ingress": 2504,
+          "native_decoded": 2504,
+          "native_ingress_end": 2504,
+          "preupdate_begin": 4807,
+          "actuator_published": 4807,
+          "expiry_state": 49,
+          "contact_sample": 19228,
+          "contact_pair": 14371,
+          "ground_truth_native": 1201,
+          "guard_tick_begin": 2516,
+          "guard_publish_begin": 2516,
+          "guard_publish_end": 2516,
+          "guard_tick_end": 2516,
+          "guard_receipt": 739,
+          "guard_processed": 739
+        },
+        "worst_matched_command": {
+          "sequence": 1228,
+          "stages_boottime_ns": {
+            "guard_publish_begin": 1188449797551753,
+            "guard_publish_end": 1188449797925793,
+            "dds_take": 1188449798523663,
+            "gz_publish_begin": 1188449798552373,
+            "gz_publish_end": 1188449798632653,
+            "native_decoded": 1188449798926683
+          },
+          "nonzero_command": true
+        },
+        "send_resource_mutex": {
+          "acquisition_wait": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "known_hold_duration": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "unknown_hold_records": 0,
+          "long_events": [],
+          "limit": "Observed selected participant mutex only; acquisition duration includes small tracing overhead and descheduling. Deep stacks may extend holds. A recorded owner is not retrospective proof of the historical event's owner."
+        },
+        "command_stream": {
+          "native_interarrival": {
+            "n": 2503,
+            "median_ns": 20000250,
+            "p95_ns": 20282850,
+            "p99_ns": 20527470,
+            "max_ns": 21426480
+          },
+          "native_gaps_over_200ms": 0,
+          "gaps_following_nonzero_command": {
+            "n": 1778,
+            "median_ns": 19998270,
+            "p95_ns": 20296170,
+            "p99_ns": 20528460,
+            "max_ns": 21426480
+          },
+          "gaps_over_200ms_following_nonzero": 0,
+          "nonzero_guard_begin_to_native": {
+            "n": 1778,
+            "median_ns": 538740,
+            "p95_ns": 727290,
+            "p99_ns": 1063170,
+            "max_ns": 1374930
+          },
+          "native_latch_observed": false,
+          "native_state_reasons": {
+            "idle": 10,
+            "forwarding": 39
+          },
+          "limits": "Nonzero commanded velocity is not proof of actual motion. Gap counts are serial intervals, not independent trials; a missing state trace cannot establish absence of expiry."
+        },
+        "interarrival": {
+          "guard_tick_begin": {
+            "n": 2515,
+            "median_ns": 19999710,
+            "p95_ns": 20113740,
+            "p99_ns": 20197350,
+            "max_ns": 20885850
+          },
+          "guard_publish_begin": {
+            "n": 2515,
+            "median_ns": 19999620,
+            "p95_ns": 20143890,
+            "p99_ns": 20235240,
+            "max_ns": 20935710
+          },
+          "dds_publish_begin": {
+            "n": 9152,
+            "median_ns": 10134900,
+            "p95_ns": 80236620,
+            "p99_ns": 100057050,
+            "max_ns": 1449976770
+          },
+          "dds_publish_end": {
+            "n": 9152,
+            "median_ns": 10164780,
+            "p95_ns": 80256960,
+            "p99_ns": 100059390,
+            "max_ns": 1449925740
+          },
+          "guard_publish_end": {
+            "n": 2515,
+            "median_ns": 19997820,
+            "p95_ns": 20183220,
+            "p99_ns": 20295720,
+            "max_ns": 21003030
+          },
+          "guard_tick_end": {
+            "n": 2515,
+            "median_ns": 19998090,
+            "p95_ns": 20194290,
+            "p99_ns": 20303730,
+            "max_ns": 21006630
+          },
+          "dds_take": {
+            "n": 4348,
+            "median_ns": 20130570,
+            "p95_ns": 99973710,
+            "p99_ns": 100142190,
+            "max_ns": 2433577770
+          },
+          "gz_publish_begin": {
+            "n": 7321,
+            "median_ns": 10018350,
+            "p95_ns": 20129400,
+            "p99_ns": 20289600,
+            "max_ns": 273457530
+          },
+          "gz_publish_end": {
+            "n": 7321,
+            "median_ns": 10025010,
+            "p95_ns": 20140560,
+            "p99_ns": 20301930,
+            "max_ns": 273497490
+          },
+          "native_ingress": {
+            "n": 2503,
+            "median_ns": 19999350,
+            "p95_ns": 20286090,
+            "p99_ns": 20528640,
+            "max_ns": 21435120
+          },
+          "native_decoded": {
+            "n": 2503,
+            "median_ns": 20000250,
+            "p95_ns": 20282850,
+            "p99_ns": 20527470,
+            "max_ns": 21426480
+          },
+          "native_ingress_end": {
+            "n": 2503,
+            "median_ns": 20000520,
+            "p95_ns": 20281860,
+            "p99_ns": 20526930,
+            "max_ns": 21427020
+          },
+          "contact_sample": {
+            "n": 19227,
+            "median_ns": 7830,
+            "p95_ns": 10061640,
+            "p99_ns": 10171890,
+            "max_ns": 273550410
+          },
+          "contact_pair": {
+            "n": 14370,
+            "median_ns": 7200,
+            "p95_ns": 10094310,
+            "p99_ns": 10200330,
+            "max_ns": 273557070
+          },
+          "preupdate_begin": {
+            "n": 4806,
+            "median_ns": 9999450,
+            "p95_ns": 10042740,
+            "p99_ns": 10068930,
+            "max_ns": 273465990
+          },
+          "actuator_published": {
+            "n": 4806,
+            "median_ns": 9998640,
+            "p95_ns": 10069200,
+            "p99_ns": 10103220,
+            "max_ns": 273502980
+          },
+          "ground_truth_native": {
+            "n": 1200,
+            "median_ns": 39996180,
+            "p95_ns": 40212450,
+            "p99_ns": 40342230,
+            "max_ns": 40705740
+          },
+          "expiry_state": {
+            "n": 48,
+            "median_ns": 1009926990,
+            "p95_ns": 1010033460,
+            "p99_ns": 1010088180,
+            "max_ns": 1010088180
+          },
+          "guard_receipt": {
+            "n": 738,
+            "median_ns": 39924450,
+            "p95_ns": 80480160,
+            "p99_ns": 80693550,
+            "max_ns": 1440280710
+          },
+          "guard_processed": {
+            "n": 738,
+            "median_ns": 39929490,
+            "p95_ns": 80500590,
+            "p99_ns": 80711550,
+            "max_ns": 1440270630
+          },
+          "controller_compute_begin": {
+            "n": 351,
+            "median_ns": 100001520,
+            "p95_ns": 100157130,
+            "p99_ns": 100217610,
+            "max_ns": 100305540
+          },
+          "controller_created": {
+            "n": 351,
+            "median_ns": 100004490,
+            "p95_ns": 100176840,
+            "p99_ns": 100276650,
+            "max_ns": 100360080
+          }
+        },
+        "call_wall_duration": {
+          "dds_publish": {
+            "n": 9159,
+            "median_ns": 163350,
+            "p95_ns": 209880,
+            "p99_ns": 248130,
+            "max_ns": 763560
+          },
+          "guard_publish": {
+            "n": 2516,
+            "median_ns": 223920,
+            "p95_ns": 287910,
+            "p99_ns": 337320,
+            "max_ns": 887940
+          },
+          "guard_tick": {
+            "n": 2516,
+            "median_ns": 309060,
+            "p95_ns": 405810,
+            "p99_ns": 478800,
+            "max_ns": 1020330
+          },
+          "gz_publish": {
+            "n": 7323,
+            "median_ns": 47160,
+            "p95_ns": 69480,
+            "p99_ns": 92700,
+            "max_ns": 86953500
+          }
+        },
+        "call_thread_cpu_duration": {
+          "dds_publish": {
+            "n": 9159,
+            "median_ns": 181000,
+            "p95_ns": 230200,
+            "p99_ns": 265200,
+            "max_ns": 848100
+          },
+          "guard_publish": {
+            "n": 2516,
+            "median_ns": 249100,
+            "p95_ns": 315700,
+            "p99_ns": 370600,
+            "max_ns": 987400
+          },
+          "guard_tick": {
+            "n": 2516,
+            "median_ns": 341400,
+            "p95_ns": 443000,
+            "p99_ns": 514900,
+            "max_ns": 1130900
+          },
+          "gz_publish": {
+            "n": 7323,
+            "median_ns": 51800,
+            "p95_ns": 75700,
+            "p99_ns": 90400,
+            "max_ns": 194800
+          }
+        },
+        "matched_command_edges": {
+          "guard_publish_begin->dds_take": {
+            "n": 2516,
+            "median_ns": 274860,
+            "p95_ns": 369720,
+            "p99_ns": 755730,
+            "max_ns": 67323060
+          },
+          "dds_take->gz_publish_begin": {
+            "n": 2516,
+            "median_ns": 23400,
+            "p95_ns": 40230,
+            "p99_ns": 59400,
+            "max_ns": 119790
+          },
+          "gz_publish_begin->native_decoded": {
+            "n": 2504,
+            "median_ns": 231930,
+            "p95_ns": 326700,
+            "p99_ns": 454410,
+            "max_ns": 990180
+          },
+          "guard_publish_begin->native_decoded": {
+            "n": 2504,
+            "median_ns": 534690,
+            "p95_ns": 718470,
+            "p99_ns": 1059840,
+            "max_ns": 1374930
+          }
+        },
+        "clock": "All computed deltas use Linux CLOCK_BOOTTIME, same kernel only",
+        "limits": [
+          "Publish begin/end measure API duration, not a DDS wire transmission timestamp.",
+          "DDS source/received timestamps are retained as realtime fields and never subtracted from BOOTTIME.",
+          "DDS take to Gazebo publish includes conversion and callback processing; transport begins at the publication API.",
+          "One guard epoch per session is required; analyze sessions separately.",
+          "Wall duration minus thread CPU includes blocking and descheduling; it does not uniquely identify either cause."
+        ]
+      },
+      "contact_observation": {
+        "samples": 19228,
+        "pairs": 14371,
+        "robot_environment_pairs": 0,
+        "available": true,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "e157eb1d5d14e18d9f1c7f4a8b0b5148370e3b7c8d30939b178d620b7086d907",
+      "trace_sha256": {
+        "native-346550.jsonl": "0f632e2b5f1c8d61fba11f4204d17666a6e9fcfe58dffde009b2a85df1c6466b",
+        "native-346551.jsonl": "20e6128e90ed8d5ec50d5c533c74b43363f1104614609ec08c90a333e36becaf",
+        "native-346566.jsonl": "2d6ec612b1df31dadda5958791f1f2ebc2e5f1e1e7b4be0112c06484c60f1156",
+        "native-346575.jsonl": "51b865e5b3396d38fdf3776bc5a06d15e542169cacb7df4991fed24fd52c92b1",
+        "native-346576.jsonl": "48844020565666e2c143a569dd4b4534faf6e0592ebb131b3cc272ed19591f85",
+        "native-346582.jsonl": "2459242947464f588751e925411705a27ca1a9bcb2f5eb452e7e19512f51037f",
+        "python-346550.jsonl": "531baa61fa06feb446cb4d7c6c1f309ad77b91977f8d892dab0627eaa49749aa",
+        "resources.jsonl": "98cdd62c72c804810100e58b23d420b0a8e94c86389a8e2c58673983aea73b1d"
+      }
+    },
+    {
+      "condition": "cyclone-on",
+      "world": "empty-210",
+      "planned_requests": 3,
+      "dispatched": 3,
+      "completed": 3,
+      "unattempted": 0,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 110,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.729230005320329,
+            "moving_time_sim_s": 4.240000000000003,
+            "arrival_position_error_m": 0.2516604927782827,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Inspect storage",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 270,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.7284250189819858,
+            "moving_time_sim_s": 4.520000000000003,
+            "arrival_position_error_m": 0.22336424555378698,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Go to dock",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 250,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.39994033826823394,
+            "moving_time_sim_s": 2.7200000000000015,
+            "arrival_position_error_m": 0.28742767812492725,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": {
+        "stage_counts": {
+          "actual_ros_writer_qos": 5,
+          "dds_publish_begin": 6642,
+          "dds_publish_end": 6642,
+          "dds_take": 3097,
+          "gz_publish_begin": 5432,
+          "gz_publish_end": 5432,
+          "native_ingress": 1873,
+          "native_decoded": 1873,
+          "native_ingress_end": 1873,
+          "preupdate_begin": 3545,
+          "actuator_published": 3545,
+          "expiry_state": 36,
+          "contact_sample": 14180,
+          "contact_pair": 10608,
+          "ground_truth_native": 886,
+          "controller_compute_begin": 229,
+          "controller_created": 229,
+          "guard_tick_begin": 1887,
+          "guard_publish_begin": 1887,
+          "guard_publish_end": 1887,
+          "guard_tick_end": 1887,
+          "guard_receipt": 489,
+          "guard_processed": 489
+        },
+        "worst_matched_command": {
+          "sequence": 270,
+          "stages_boottime_ns": {
+            "guard_publish_begin": 1188089899016583,
+            "guard_publish_end": 1188089899380273,
+            "dds_take": 1188089899437963,
+            "gz_publish_begin": 1188089899470813,
+            "gz_publish_end": 1188089899534533,
+            "native_decoded": 1188089901386373
+          },
+          "nonzero_command": false
+        },
+        "send_resource_mutex": {
+          "acquisition_wait": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "known_hold_duration": {
+            "n": 0,
+            "median_ns": null,
+            "p95_ns": null,
+            "p99_ns": null,
+            "max_ns": null
+          },
+          "unknown_hold_records": 0,
+          "long_events": [],
+          "limit": "Observed selected participant mutex only; acquisition duration includes small tracing overhead and descheduling. Deep stacks may extend holds. A recorded owner is not retrospective proof of the historical event's owner."
+        },
+        "command_stream": {
+          "native_interarrival": {
+            "n": 1872,
+            "median_ns": 19989270,
+            "p95_ns": 20256930,
+            "p99_ns": 20465190,
+            "max_ns": 21955140
+          },
+          "native_gaps_over_200ms": 0,
+          "gaps_following_nonzero_command": {
+            "n": 1149,
+            "median_ns": 19987110,
+            "p95_ns": 20254050,
+            "p99_ns": 20410020,
+            "max_ns": 20996190
+          },
+          "gaps_over_200ms_following_nonzero": 0,
+          "nonzero_guard_begin_to_native": {
+            "n": 1149,
+            "median_ns": 532620,
+            "p95_ns": 670770,
+            "p99_ns": 802260,
+            "max_ns": 1356030
+          },
+          "native_latch_observed": false,
+          "native_state_reasons": {
+            "idle": 10,
+            "forwarding": 26
+          },
+          "limits": "Nonzero commanded velocity is not proof of actual motion. Gap counts are serial intervals, not independent trials; a missing state trace cannot establish absence of expiry."
+        },
+        "interarrival": {
+          "guard_tick_begin": {
+            "n": 1886,
+            "median_ns": 19997280,
+            "p95_ns": 20119050,
+            "p99_ns": 20200050,
+            "max_ns": 21589740
+          },
+          "guard_publish_begin": {
+            "n": 1886,
+            "median_ns": 19996740,
+            "p95_ns": 20145420,
+            "p99_ns": 20229840,
+            "max_ns": 21601620
+          },
+          "dds_publish_begin": {
+            "n": 6635,
+            "median_ns": 10126440,
+            "p95_ns": 80193600,
+            "p99_ns": 100046160,
+            "max_ns": 1399924170
+          },
+          "dds_publish_end": {
+            "n": 6635,
+            "median_ns": 10183860,
+            "p95_ns": 80208540,
+            "p99_ns": 100053090,
+            "max_ns": 1399941000
+          },
+          "guard_publish_end": {
+            "n": 1886,
+            "median_ns": 19993950,
+            "p95_ns": 20194830,
+            "p99_ns": 20332530,
+            "max_ns": 21747330
+          },
+          "guard_tick_end": {
+            "n": 1886,
+            "median_ns": 19993320,
+            "p95_ns": 20203470,
+            "p99_ns": 20337930,
+            "max_ns": 21755970
+          },
+          "dds_take": {
+            "n": 3093,
+            "median_ns": 20100780,
+            "p95_ns": 99957060,
+            "p99_ns": 100145700,
+            "max_ns": 2333314530
+          },
+          "gz_publish_begin": {
+            "n": 5430,
+            "median_ns": 10014840,
+            "p95_ns": 20126340,
+            "p99_ns": 20246040,
+            "max_ns": 288072990
+          },
+          "gz_publish_end": {
+            "n": 5430,
+            "median_ns": 10019970,
+            "p95_ns": 20131560,
+            "p99_ns": 20265480,
+            "max_ns": 288083160
+          },
+          "native_ingress": {
+            "n": 1872,
+            "median_ns": 19990890,
+            "p95_ns": 20251800,
+            "p99_ns": 20467440,
+            "max_ns": 21948930
+          },
+          "native_decoded": {
+            "n": 1872,
+            "median_ns": 19989270,
+            "p95_ns": 20256930,
+            "p99_ns": 20465190,
+            "max_ns": 21955140
+          },
+          "native_ingress_end": {
+            "n": 1872,
+            "median_ns": 19989180,
+            "p95_ns": 20260800,
+            "p99_ns": 20464020,
+            "max_ns": 21955950
+          },
+          "contact_sample": {
+            "n": 14179,
+            "median_ns": 8460,
+            "p95_ns": 10077750,
+            "p99_ns": 10227510,
+            "max_ns": 288238860
+          },
+          "contact_pair": {
+            "n": 10607,
+            "median_ns": 7290,
+            "p95_ns": 10122300,
+            "p99_ns": 10269630,
+            "max_ns": 288248220
+          },
+          "preupdate_begin": {
+            "n": 3544,
+            "median_ns": 9999180,
+            "p95_ns": 10038240,
+            "p99_ns": 10092150,
+            "max_ns": 288067140
+          },
+          "actuator_published": {
+            "n": 3544,
+            "median_ns": 9998910,
+            "p95_ns": 10067220,
+            "p99_ns": 10128690,
+            "max_ns": 288083610
+          },
+          "ground_truth_native": {
+            "n": 885,
+            "median_ns": 40000860,
+            "p95_ns": 40189500,
+            "p99_ns": 40313160,
+            "max_ns": 41192460
+          },
+          "expiry_state": {
+            "n": 35,
+            "median_ns": 1009873890,
+            "p95_ns": 1010069010,
+            "p99_ns": 1010082870,
+            "max_ns": 1010082870
+          },
+          "guard_receipt": {
+            "n": 488,
+            "median_ns": 39982860,
+            "p95_ns": 80357940,
+            "p99_ns": 80540190,
+            "max_ns": 1399928400
+          },
+          "guard_processed": {
+            "n": 488,
+            "median_ns": 39991680,
+            "p95_ns": 80353620,
+            "p99_ns": 80550360,
+            "max_ns": 1399933710
+          },
+          "controller_compute_begin": {
+            "n": 226,
+            "median_ns": 99999090,
+            "p95_ns": 100183140,
+            "p99_ns": 100235610,
+            "max_ns": 100288440
+          },
+          "controller_created": {
+            "n": 226,
+            "median_ns": 100000800,
+            "p95_ns": 100177920,
+            "p99_ns": 100253070,
+            "max_ns": 101030220
+          }
+        },
+        "call_wall_duration": {
+          "dds_publish": {
+            "n": 6642,
+            "median_ns": 171720,
+            "p95_ns": 233370,
+            "p99_ns": 296460,
+            "max_ns": 914670
+          },
+          "guard_publish": {
+            "n": 1887,
+            "median_ns": 233280,
+            "p95_ns": 315360,
+            "p99_ns": 380430,
+            "max_ns": 649530
+          },
+          "guard_tick": {
+            "n": 1887,
+            "median_ns": 324990,
+            "p95_ns": 447480,
+            "p99_ns": 527670,
+            "max_ns": 875610
+          },
+          "gz_publish": {
+            "n": 5432,
+            "median_ns": 46890,
+            "p95_ns": 67500,
+            "p99_ns": 94770,
+            "max_ns": 81770130
+          }
+        },
+        "call_thread_cpu_duration": {
+          "dds_publish": {
+            "n": 6642,
+            "median_ns": 190400,
+            "p95_ns": 251900,
+            "p99_ns": 300000,
+            "max_ns": 530700
+          },
+          "guard_publish": {
+            "n": 1887,
+            "median_ns": 259100,
+            "p95_ns": 348400,
+            "p99_ns": 402000,
+            "max_ns": 667700
+          },
+          "guard_tick": {
+            "n": 1887,
+            "median_ns": 359200,
+            "p95_ns": 491500,
+            "p99_ns": 570400,
+            "max_ns": 809300
+          },
+          "gz_publish": {
+            "n": 5432,
+            "median_ns": 51600,
+            "p95_ns": 74100,
+            "p99_ns": 101600,
+            "max_ns": 317400
+          }
+        },
+        "matched_command_edges": {
+          "guard_publish_begin->dds_take": {
+            "n": 1887,
+            "median_ns": 288000,
+            "p95_ns": 388890,
+            "p99_ns": 477000,
+            "max_ns": 62110620
+          },
+          "dds_take->gz_publish_begin": {
+            "n": 1887,
+            "median_ns": 24120,
+            "p95_ns": 41220,
+            "p99_ns": 55800,
+            "max_ns": 129330
+          },
+          "gz_publish_begin->native_decoded": {
+            "n": 1873,
+            "median_ns": 221310,
+            "p95_ns": 310860,
+            "p99_ns": 391500,
+            "max_ns": 1915560
+          },
+          "guard_publish_begin->native_decoded": {
+            "n": 1873,
+            "median_ns": 537930,
+            "p95_ns": 704430,
+            "p99_ns": 859410,
+            "max_ns": 2369790
+          }
+        },
+        "clock": "All computed deltas use Linux CLOCK_BOOTTIME, same kernel only",
+        "limits": [
+          "Publish begin/end measure API duration, not a DDS wire transmission timestamp.",
+          "DDS source/received timestamps are retained as realtime fields and never subtracted from BOOTTIME.",
+          "DDS take to Gazebo publish includes conversion and callback processing; transport begins at the publication API.",
+          "One guard epoch per session is required; analyze sessions separately.",
+          "Wall duration minus thread CPU includes blocking and descheduling; it does not uniquely identify either cause."
+        ]
+      },
+      "contact_observation": {
+        "samples": 14180,
+        "pairs": 10608,
+        "robot_environment_pairs": 0,
+        "available": true,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "de469a7a1645f2af66f6fd73abaabdd0b50c0ff55865b769ef8eefa70e31d5d3",
+      "trace_sha256": {
+        "native-343392.jsonl": "bf05a5d00b27c2e713247f88cd38c901a91faf60e86a48edb754e94d2cc49ef5",
+        "native-343393.jsonl": "8066f6e635bf42aa2139cee8c84ab40192063702e9f7120597217a65f0c5df24",
+        "native-343407.jsonl": "5af254fc89bf399d8dab4fa69122d0c157f0dbfabcdba0ec1416eae0a7762bea",
+        "native-343415.jsonl": "a3e58f9c800d571925587dd8ce22adca69908d5b135de1ba93fac4e47c0bf2bd",
+        "native-343424.jsonl": "1a3a726c464e88a48103a8f44fcaa68af3b37b53fc2a9bdfc08722e868006421",
+        "native-343425.jsonl": "01a0e20cee715db6bd0b541e6571a4412fae91f9cf33ef3b338ba7025721f23b",
+        "python-343392.jsonl": "e20255076a0d7dc457887f8326927fb172f3d43a5a7d502c4d65a4cb816a5505",
+        "resources.jsonl": "6c51402c27976ee310b079ade245158d5b28432a3af52124f1fe6fe222e60307"
+      }
+    },
+    {
+      "condition": "fast_default-off",
+      "world": "block-211",
+      "planned_requests": 3,
+      "dispatched": 3,
+      "completed": 3,
+      "unattempted": 0,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 195,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.9269885729767476,
+            "moving_time_sim_s": 6.0400000000000045,
+            "arrival_position_error_m": 0.23797005478787325,
+            "minimum_circle_obstacle_clearance_m": 0.13506938758835849,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Inspect storage",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 516,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 1.8018786239728213,
+            "moving_time_sim_s": 11.119999999999939,
+            "arrival_position_error_m": 0.23038929576298461,
+            "minimum_circle_obstacle_clearance_m": 0.23162063967130078,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Go to dock",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 265,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.7788059000714387,
+            "moving_time_sim_s": 5.080000000000004,
+            "arrival_position_error_m": 0.21426567332570054,
+            "minimum_circle_obstacle_clearance_m": 0.21181992954966736,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": null,
+      "contact_observation": {
+        "samples": 0,
+        "pairs": 0,
+        "robot_environment_pairs": 0,
+        "available": false,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "788c7dc0aa148e537a829023a6056c7d916481890668c37605eba7ea9d193f3d",
+      "trace_sha256": {
+        "resources.jsonl": "db503ff44ce909c2ee66aacd59542e675973612cb02c19e78155658e09b3401a"
+      }
+    },
+    {
+      "condition": "fast_default-off",
+      "world": "empty-210",
+      "planned_requests": 3,
+      "dispatched": 3,
+      "completed": 3,
+      "unattempted": 0,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 108,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.7100303352209841,
+            "moving_time_sim_s": 4.200000000000003,
+            "arrival_position_error_m": 0.27068939680265675,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Inspect storage",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 266,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.6850532984084937,
+            "moving_time_sim_s": 4.160000000000003,
+            "arrival_position_error_m": 0.24522051337328585,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Go to dock",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 260,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.3632363492733968,
+            "moving_time_sim_s": 2.4000000000000012,
+            "arrival_position_error_m": 0.3000262116529397,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": null,
+      "contact_observation": {
+        "samples": 0,
+        "pairs": 0,
+        "robot_environment_pairs": 0,
+        "available": false,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "8151e5c2803719df13621a186fc6d9854d625b9b5d47aa6e90948bc85dea51d8",
+      "trace_sha256": {
+        "resources.jsonl": "7393483efa343e80abd9ee9355aaf80d1d308388958dbd7248565092945eb98b"
+      }
+    },
+    {
+      "condition": "fast_default-on",
+      "world": "block-211",
+      "planned_requests": 3,
+      "dispatched": 3,
+      "completed": 3,
+      "unattempted": 0,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 185,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.9094257499530258,
+            "moving_time_sim_s": 5.560000000000004,
+            "arrival_position_error_m": 0.2400749805741235,
+            "minimum_circle_obstacle_clearance_m": 0.1368901554406504,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Inspect storage",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 665,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 1.7906709899586213,
+            "moving_time_sim_s": 11.199999999999937,
+            "arrival_position_error_m": 0.19717995505610977,
+            "minimum_circle_obstacle_clearance_m": 0.22969102546670797,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Go to dock",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 258,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.8080508293627751,
+            "moving_time_sim_s": 5.200000000000004,
+            "arrival_position_error_m": 0.2199477603490486,
+            "minimum_circle_obstacle_clearance_m": 0.22580297610310338,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": {
+        "stage_counts": {
+          "actual_ros_writer_qos": 5,
+          "actual_writer_qos": 5,
+          "dds_publish_begin": 10699,
+          "dds_publish_end": 10699,
+          "send_resource_mutex_identified": 5,
+          "send_resource_wait_begin": 29744,
+          "send_resource_acquired": 29744,
+          "send_resource_releasing": 29744,
+          "dds_take": 5055,
+          "gz_publish_begin": 8530,
+          "gz_publish_end": 8530,
+          "native_ingress": 2888,
+          "native_decoded": 2888,
+          "native_ingress_end": 2888,
+          "preupdate_begin": 5642,
+          "actuator_published": 5642,
+          "expiry_state": 57,
+          "contact_sample": 22568,
+          "contact_pair": 16862,
+          "ground_truth_native": 1410,
+          "controller_compute_begin": 420,
+          "controller_created": 420,
+          "guard_tick_begin": 2890,
+          "guard_publish_begin": 2890,
+          "guard_publish_end": 2890,
+          "guard_tick_end": 2890,
+          "guard_receipt": 872,
+          "guard_processed": 872
+        },
+        "worst_matched_command": {
+          "sequence": 137,
+          "stages_boottime_ns": {
+            "guard_publish_begin": 1188271753074543,
+            "guard_publish_end": 1188272071672113,
+            "dds_take": 1188272071748613,
+            "gz_publish_begin": 1188272071788663,
+            "gz_publish_end": 1188272071831593,
+            "native_decoded": 1188272072055963
+          },
+          "nonzero_command": false
+        },
+        "send_resource_mutex": {
+          "acquisition_wait": {
+            "n": 29744,
+            "median_ns": 7830,
+            "p95_ns": 21150,
+            "p99_ns": 40860,
+            "max_ns": 326821680
+          },
+          "known_hold_duration": {
+            "n": 29744,
+            "median_ns": 39330,
+            "p95_ns": 238860,
+            "p99_ns": 365760,
+            "max_ns": 333655290
+          },
+          "unknown_hold_records": 0,
+          "long_events": [
+            {
+              "stage": "send_resource_releasing",
+              "boot_ns": 1188272071407963,
+              "mono_ns": 1188272071407963,
+              "thread_cpu_ns": 85482600,
+              "native_dropped": 0,
+              "pid": 345256,
+              "tid": 345542,
+              "held_ns": 333655290,
+              "duration_known": true
+            },
+            {
+              "stage": "send_resource_acquired",
+              "boot_ns": 1188272071461153,
+              "mono_ns": 1188272071461063,
+              "thread_cpu_ns": 51923500,
+              "native_dropped": 0,
+              "pid": 345256,
+              "tid": 345541,
+              "wait_ns": 326821680
+            },
+            {
+              "stage": "send_resource_acquired",
+              "boot_ns": 1188272071557453,
+              "mono_ns": 1188272071557453,
+              "thread_cpu_ns": 491850500,
+              "native_dropped": 0,
+              "pid": 345256,
+              "tid": 345256,
+              "wait_ns": 318404250
+            }
+          ],
+          "limit": "Observed selected participant mutex only; acquisition duration includes small tracing overhead and descheduling. Deep stacks may extend holds. A recorded owner is not retrospective proof of the historical event's owner."
+        },
+        "command_stream": {
+          "native_interarrival": {
+            "n": 2887,
+            "median_ns": 20002590,
+            "p95_ns": 20231640,
+            "p99_ns": 20421630,
+            "max_ns": 338342850
+          },
+          "native_gaps_over_200ms": 1,
+          "gaps_following_nonzero_command": {
+            "n": 2105,
+            "median_ns": 20002770,
+            "p95_ns": 20225700,
+            "p99_ns": 20416500,
+            "max_ns": 21438540
+          },
+          "gaps_over_200ms_following_nonzero": 0,
+          "nonzero_guard_begin_to_native": {
+            "n": 2105,
+            "median_ns": 551070,
+            "p95_ns": 690030,
+            "p99_ns": 818100,
+            "max_ns": 2132820
+          },
+          "native_latch_observed": false,
+          "native_state_reasons": {
+            "idle": 12,
+            "forwarding": 45
+          },
+          "limits": "Nonzero commanded velocity is not proof of actual motion. Gap counts are serial intervals, not independent trials; a missing state trace cannot establish absence of expiry."
+        },
+        "interarrival": {
+          "guard_tick_begin": {
+            "n": 2889,
+            "median_ns": 20002140,
+            "p95_ns": 20091420,
+            "p99_ns": 20158560,
+            "max_ns": 319172130
+          },
+          "guard_publish_begin": {
+            "n": 2889,
+            "median_ns": 20002140,
+            "p95_ns": 20112660,
+            "p99_ns": 20188710,
+            "max_ns": 319171950
+          },
+          "dds_publish_begin": {
+            "n": 10692,
+            "median_ns": 10132020,
+            "p95_ns": 80285400,
+            "p99_ns": 100094220,
+            "max_ns": 1320237900
+          },
+          "dds_publish_end": {
+            "n": 10692,
+            "median_ns": 10152900,
+            "p95_ns": 80299890,
+            "p99_ns": 100101060,
+            "max_ns": 1320227640
+          },
+          "guard_publish_end": {
+            "n": 2889,
+            "median_ns": 20004750,
+            "p95_ns": 20164680,
+            "p99_ns": 20309490,
+            "max_ns": 338353290
+          },
+          "guard_tick_end": {
+            "n": 2889,
+            "median_ns": 20005380,
+            "p95_ns": 20169180,
+            "p99_ns": 20324070,
+            "max_ns": 338394690
+          },
+          "send_resource_wait_begin": {
+            "n": 29713,
+            "median_ns": 9988830,
+            "p95_ns": 81959130,
+            "p99_ns": 199976220,
+            "max_ns": 45300313890
+          },
+          "send_resource_acquired": {
+            "n": 29713,
+            "median_ns": 9988650,
+            "p95_ns": 81954360,
+            "p99_ns": 199977660,
+            "max_ns": 45302545530
+          },
+          "send_resource_releasing": {
+            "n": 29713,
+            "median_ns": 9987570,
+            "p95_ns": 81967500,
+            "p99_ns": 199976400,
+            "max_ns": 45302547960
+          },
+          "dds_take": {
+            "n": 5051,
+            "median_ns": 20107890,
+            "p95_ns": 99963360,
+            "p99_ns": 100294650,
+            "max_ns": 2242524600
+          },
+          "gz_publish_begin": {
+            "n": 8528,
+            "median_ns": 10014120,
+            "p95_ns": 20102040,
+            "p99_ns": 20230020,
+            "max_ns": 338341770
+          },
+          "gz_publish_end": {
+            "n": 8528,
+            "median_ns": 10018530,
+            "p95_ns": 20107350,
+            "p99_ns": 20234790,
+            "max_ns": 338338890
+          },
+          "native_ingress": {
+            "n": 2887,
+            "median_ns": 20002590,
+            "p95_ns": 20232900,
+            "p99_ns": 20418480,
+            "max_ns": 338342400
+          },
+          "native_decoded": {
+            "n": 2887,
+            "median_ns": 20002590,
+            "p95_ns": 20231640,
+            "p99_ns": 20421630,
+            "max_ns": 338342850
+          },
+          "native_ingress_end": {
+            "n": 2887,
+            "median_ns": 20002860,
+            "p95_ns": 20234070,
+            "p99_ns": 20418660,
+            "max_ns": 338344470
+          },
+          "contact_sample": {
+            "n": 22567,
+            "median_ns": 7740,
+            "p95_ns": 10093320,
+            "p99_ns": 10282140,
+            "max_ns": 293403510
+          },
+          "contact_pair": {
+            "n": 16861,
+            "median_ns": 6840,
+            "p95_ns": 10140120,
+            "p99_ns": 10334160,
+            "max_ns": 293414220
+          },
+          "preupdate_begin": {
+            "n": 5641,
+            "median_ns": 9998640,
+            "p95_ns": 10047060,
+            "p99_ns": 10086570,
+            "max_ns": 293209920
+          },
+          "actuator_published": {
+            "n": 5641,
+            "median_ns": 9998280,
+            "p95_ns": 10069470,
+            "p99_ns": 10121310,
+            "max_ns": 293218200
+          },
+          "ground_truth_native": {
+            "n": 1409,
+            "median_ns": 39998250,
+            "p95_ns": 40251780,
+            "p99_ns": 40467600,
+            "max_ns": 41564790
+          },
+          "expiry_state": {
+            "n": 56,
+            "median_ns": 1007529480,
+            "p95_ns": 1010024190,
+            "p99_ns": 1010074500,
+            "max_ns": 1010074500
+          },
+          "guard_receipt": {
+            "n": 871,
+            "median_ns": 39930750,
+            "p95_ns": 80493570,
+            "p99_ns": 80594820,
+            "max_ns": 1320211620
+          },
+          "guard_processed": {
+            "n": 871,
+            "median_ns": 39936060,
+            "p95_ns": 80479350,
+            "p99_ns": 80597160,
+            "max_ns": 1320175350
+          },
+          "controller_compute_begin": {
+            "n": 417,
+            "median_ns": 99999630,
+            "p95_ns": 100295280,
+            "p99_ns": 100605870,
+            "max_ns": 101638170
+          },
+          "controller_created": {
+            "n": 417,
+            "median_ns": 99994140,
+            "p95_ns": 100344510,
+            "p99_ns": 100603080,
+            "max_ns": 101543220
+          }
+        },
+        "call_wall_duration": {
+          "dds_publish": {
+            "n": 10699,
+            "median_ns": 143370,
+            "p95_ns": 189900,
+            "p99_ns": 262350,
+            "max_ns": 318510360
+          },
+          "guard_publish": {
+            "n": 2890,
+            "median_ns": 209520,
+            "p95_ns": 286920,
+            "p99_ns": 389340,
+            "max_ns": 318597570
+          },
+          "guard_tick": {
+            "n": 2890,
+            "median_ns": 299610,
+            "p95_ns": 411840,
+            "p99_ns": 545400,
+            "max_ns": 318729150
+          },
+          "gz_publish": {
+            "n": 8530,
+            "median_ns": 43110,
+            "p95_ns": 66510,
+            "p99_ns": 83610,
+            "max_ns": 198810
+          }
+        },
+        "call_thread_cpu_duration": {
+          "dds_publish": {
+            "n": 10699,
+            "median_ns": 158800,
+            "p95_ns": 207600,
+            "p99_ns": 254900,
+            "max_ns": 2070700
+          },
+          "guard_publish": {
+            "n": 2890,
+            "median_ns": 233000,
+            "p95_ns": 312200,
+            "p99_ns": 392900,
+            "max_ns": 1799300
+          },
+          "guard_tick": {
+            "n": 2890,
+            "median_ns": 330900,
+            "p95_ns": 447300,
+            "p99_ns": 556900,
+            "max_ns": 1947800
+          },
+          "gz_publish": {
+            "n": 8530,
+            "median_ns": 47300,
+            "p95_ns": 73200,
+            "p99_ns": 90600,
+            "max_ns": 219900
+          }
+        },
+        "matched_command_edges": {
+          "guard_publish_begin->dds_take": {
+            "n": 2888,
+            "median_ns": 271440,
+            "p95_ns": 367380,
+            "p99_ns": 475470,
+            "max_ns": 318674070
+          },
+          "dds_take->gz_publish_begin": {
+            "n": 2888,
+            "median_ns": 25830,
+            "p95_ns": 42030,
+            "p99_ns": 57600,
+            "max_ns": 182070
+          },
+          "gz_publish_begin->native_decoded": {
+            "n": 2888,
+            "median_ns": 244710,
+            "p95_ns": 323640,
+            "p99_ns": 402390,
+            "max_ns": 766890
+          },
+          "guard_publish_begin->native_decoded": {
+            "n": 2888,
+            "median_ns": 548190,
+            "p95_ns": 696330,
+            "p99_ns": 867960,
+            "max_ns": 318981420
+          }
+        },
+        "clock": "All computed deltas use Linux CLOCK_BOOTTIME, same kernel only",
+        "limits": [
+          "Publish begin/end measure API duration, not a DDS wire transmission timestamp.",
+          "DDS source/received timestamps are retained as realtime fields and never subtracted from BOOTTIME.",
+          "DDS take to Gazebo publish includes conversion and callback processing; transport begins at the publication API.",
+          "One guard epoch per session is required; analyze sessions separately.",
+          "Wall duration minus thread CPU includes blocking and descheduling; it does not uniquely identify either cause."
+        ]
+      },
+      "contact_observation": {
+        "samples": 22568,
+        "pairs": 16862,
+        "robot_environment_pairs": 0,
+        "available": true,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "ede120d027c45988ab2b85b8ec54c46e0b7bf52bd1e00e45c6365044bbbc33bc",
+      "trace_sha256": {
+        "native-345256.jsonl": "e5ab7284a14729c93e7a431abcefd19531dc519594612752cb37dd125a00fa70",
+        "native-345257.jsonl": "dfd8892a3edc689172cb0748a9546b0147a6f3c7485c53fb83a38b5618e1586f",
+        "native-345271.jsonl": "a55bdfabe03e9950969fabd23da03b03255672e0f7d1f0e23362152e934bcb22",
+        "native-345284.jsonl": "c61d8f2deec3067d0805207ed001480be34909f4c275fd2ac917943fce747b90",
+        "native-345292.jsonl": "9484e11eda491c820363b5519f7820a8ea2bdb3643ba6a1a32bc3a426e2e1ad3",
+        "native-345295.jsonl": "86e8ed50c743909b9e39d7b6307468852ef0d1ca7db76f8122786b5145da71ee",
+        "python-345256.jsonl": "8614f75bb6f0602d2a34dd0284cf2dc027ad000f27f5e0fafc4a1ce74d717dd8",
+        "resources.jsonl": "4ee38a8293707a7d1c2debb0c90e80995edbf73a27e80d729f0b0e1c3f5a31b1"
+      }
+    },
+    {
+      "condition": "fast_default-on",
+      "world": "empty-210",
+      "planned_requests": 3,
+      "dispatched": 3,
+      "completed": 3,
+      "unattempted": 0,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 116,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.7546256422392134,
+            "moving_time_sim_s": 4.520000000000003,
+            "arrival_position_error_m": 0.22911278211315417,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Inspect storage",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 265,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.6849899332740522,
+            "moving_time_sim_s": 4.160000000000003,
+            "arrival_position_error_m": 0.2615788456177056,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Go to dock",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 255,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.33610554950076943,
+            "moving_time_sim_s": 2.200000000000001,
+            "arrival_position_error_m": 0.3015914224089563,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": {
+        "stage_counts": {
+          "actual_ros_writer_qos": 5,
+          "actual_writer_qos": 5,
+          "dds_publish_begin": 6871,
+          "dds_publish_end": 6871,
+          "send_resource_mutex_identified": 5,
+          "send_resource_wait_begin": 21864,
+          "send_resource_acquired": 21864,
+          "send_resource_releasing": 21864,
+          "dds_take": 3150,
+          "gz_publish_begin": 5653,
+          "gz_publish_end": 5653,
+          "native_ingress": 1933,
+          "native_decoded": 1933,
+          "native_ingress_end": 1933,
+          "preupdate_begin": 3720,
+          "actuator_published": 3720,
+          "expiry_state": 38,
+          "contact_sample": 14880,
+          "contact_pair": 11128,
+          "ground_truth_native": 930,
+          "controller_compute_begin": 231,
+          "controller_created": 231,
+          "guard_tick_begin": 1934,
+          "guard_publish_begin": 1934,
+          "guard_publish_end": 1934,
+          "guard_tick_end": 1934,
+          "guard_receipt": 491,
+          "guard_processed": 491
+        },
+        "worst_matched_command": {
+          "sequence": 131,
+          "stages_boottime_ns": {
+            "guard_publish_begin": 1188208713788103,
+            "guard_publish_end": 1188209038407753,
+            "dds_take": 1188209038681083,
+            "gz_publish_begin": 1188209038707273,
+            "gz_publish_end": 1188209038751463,
+            "native_decoded": 1188209039251863
+          },
+          "nonzero_command": false
+        },
+        "send_resource_mutex": {
+          "acquisition_wait": {
+            "n": 21864,
+            "median_ns": 7740,
+            "p95_ns": 22860,
+            "p99_ns": 53100,
+            "max_ns": 324377820
+          },
+          "known_hold_duration": {
+            "n": 21864,
+            "median_ns": 36180,
+            "p95_ns": 234630,
+            "p99_ns": 395460,
+            "max_ns": 333558450
+          },
+          "unknown_hold_records": 0,
+          "long_events": [
+            {
+              "stage": "send_resource_releasing",
+              "boot_ns": 1188209038191573,
+              "mono_ns": 1188209038191483,
+              "thread_cpu_ns": 132192400,
+              "native_dropped": 0,
+              "pid": 344615,
+              "tid": 344888,
+              "held_ns": 333558450,
+              "duration_known": true
+            },
+            {
+              "stage": "send_resource_acquired",
+              "boot_ns": 1188209038311453,
+              "mono_ns": 1188209038311453,
+              "thread_cpu_ns": 521611000,
+              "native_dropped": 0,
+              "pid": 344615,
+              "tid": 344615,
+              "wait_ns": 324377820
+            }
+          ],
+          "limit": "Observed selected participant mutex only; acquisition duration includes small tracing overhead and descheduling. Deep stacks may extend holds. A recorded owner is not retrospective proof of the historical event's owner."
+        },
+        "command_stream": {
+          "native_interarrival": {
+            "n": 1932,
+            "median_ns": 19995660,
+            "p95_ns": 20255130,
+            "p99_ns": 20670570,
+            "max_ns": 345128580
+          },
+          "native_gaps_over_200ms": 1,
+          "gaps_following_nonzero_command": {
+            "n": 1162,
+            "median_ns": 19996650,
+            "p95_ns": 20220840,
+            "p99_ns": 20388690,
+            "max_ns": 21391290
+          },
+          "gaps_over_200ms_following_nonzero": 0,
+          "nonzero_guard_begin_to_native": {
+            "n": 1162,
+            "median_ns": 562950,
+            "p95_ns": 684990,
+            "p99_ns": 784890,
+            "max_ns": 1930500
+          },
+          "native_latch_observed": false,
+          "native_state_reasons": {
+            "idle": 12,
+            "forwarding": 26
+          },
+          "limits": "Nonzero commanded velocity is not proof of actual motion. Gap counts are serial intervals, not independent trials; a missing state trace cannot establish absence of expiry."
+        },
+        "interarrival": {
+          "guard_tick_begin": {
+            "n": 1933,
+            "median_ns": 19998900,
+            "p95_ns": 20128140,
+            "p99_ns": 20286720,
+            "max_ns": 325212480
+          },
+          "guard_publish_begin": {
+            "n": 1933,
+            "median_ns": 19999440,
+            "p95_ns": 20154780,
+            "p99_ns": 20305260,
+            "max_ns": 325172160
+          },
+          "dds_publish_begin": {
+            "n": 6863,
+            "median_ns": 10119690,
+            "p95_ns": 80113500,
+            "p99_ns": 100044450,
+            "max_ns": 1400596830
+          },
+          "send_resource_wait_begin": {
+            "n": 21832,
+            "median_ns": 9874800,
+            "p95_ns": 69341760,
+            "p99_ns": 199944990,
+            "max_ns": 26319330720
+          },
+          "send_resource_acquired": {
+            "n": 21832,
+            "median_ns": 9872460,
+            "p95_ns": 69345810,
+            "p99_ns": 199943010,
+            "max_ns": 26319322080
+          },
+          "send_resource_releasing": {
+            "n": 21832,
+            "median_ns": 9866700,
+            "p95_ns": 69329520,
+            "p99_ns": 199935900,
+            "max_ns": 26319305700
+          },
+          "dds_publish_end": {
+            "n": 6863,
+            "median_ns": 10138500,
+            "p95_ns": 80125560,
+            "p99_ns": 100050570,
+            "max_ns": 1400623470
+          },
+          "guard_publish_end": {
+            "n": 1933,
+            "median_ns": 19999800,
+            "p95_ns": 20201850,
+            "p99_ns": 20465460,
+            "max_ns": 344622060
+          },
+          "guard_tick_end": {
+            "n": 1933,
+            "median_ns": 19998540,
+            "p95_ns": 20209320,
+            "p99_ns": 20511360,
+            "max_ns": 344661570
+          },
+          "dds_take": {
+            "n": 3146,
+            "median_ns": 20114910,
+            "p95_ns": 99946890,
+            "p99_ns": 100185840,
+            "max_ns": 2336285250
+          },
+          "gz_publish_begin": {
+            "n": 5651,
+            "median_ns": 10037340,
+            "p95_ns": 20137500,
+            "p99_ns": 20292390,
+            "max_ns": 375164910
+          },
+          "gz_publish_end": {
+            "n": 5651,
+            "median_ns": 10040580,
+            "p95_ns": 20140650,
+            "p99_ns": 20294370,
+            "max_ns": 375161310
+          },
+          "native_ingress": {
+            "n": 1932,
+            "median_ns": 19994760,
+            "p95_ns": 20251710,
+            "p99_ns": 20665440,
+            "max_ns": 345126510
+          },
+          "native_decoded": {
+            "n": 1932,
+            "median_ns": 19995660,
+            "p95_ns": 20255130,
+            "p99_ns": 20670570,
+            "max_ns": 345128580
+          },
+          "native_ingress_end": {
+            "n": 1932,
+            "median_ns": 19995300,
+            "p95_ns": 20254500,
+            "p99_ns": 20670930,
+            "max_ns": 345129300
+          },
+          "contact_sample": {
+            "n": 14879,
+            "median_ns": 7830,
+            "p95_ns": 10107270,
+            "p99_ns": 10292040,
+            "max_ns": 374643360
+          },
+          "contact_pair": {
+            "n": 11127,
+            "median_ns": 6660,
+            "p95_ns": 10154340,
+            "p99_ns": 10342350,
+            "max_ns": 374654700
+          },
+          "preupdate_begin": {
+            "n": 3719,
+            "median_ns": 9998640,
+            "p95_ns": 10066230,
+            "p99_ns": 10110870,
+            "max_ns": 375167520
+          },
+          "actuator_published": {
+            "n": 3719,
+            "median_ns": 9998280,
+            "p95_ns": 10086390,
+            "p99_ns": 10143900,
+            "max_ns": 375161670
+          },
+          "ground_truth_native": {
+            "n": 929,
+            "median_ns": 39999330,
+            "p95_ns": 40311000,
+            "p99_ns": 40636800,
+            "max_ns": 42336360
+          },
+          "expiry_state": {
+            "n": 37,
+            "median_ns": 1000068030,
+            "p95_ns": 1010031930,
+            "p99_ns": 1010142810,
+            "max_ns": 1010142810
+          },
+          "guard_receipt": {
+            "n": 490,
+            "median_ns": 39966570,
+            "p95_ns": 80602110,
+            "p99_ns": 80793900,
+            "max_ns": 1400769720
+          },
+          "guard_processed": {
+            "n": 490,
+            "median_ns": 39972780,
+            "p95_ns": 80620290,
+            "p99_ns": 80809020,
+            "max_ns": 1400793480
+          },
+          "controller_compute_begin": {
+            "n": 227,
+            "median_ns": 100004310,
+            "p95_ns": 100226520,
+            "p99_ns": 100352700,
+            "max_ns": 100548720
+          },
+          "controller_created": {
+            "n": 227,
+            "median_ns": 100000800,
+            "p95_ns": 100275480,
+            "p99_ns": 100612530,
+            "max_ns": 100640610
+          }
+        },
+        "call_wall_duration": {
+          "dds_publish": {
+            "n": 6871,
+            "median_ns": 147870,
+            "p95_ns": 201240,
+            "p99_ns": 319320,
+            "max_ns": 324495000
+          },
+          "guard_publish": {
+            "n": 1934,
+            "median_ns": 214290,
+            "p95_ns": 297450,
+            "p99_ns": 427500,
+            "max_ns": 324619650
+          },
+          "guard_tick": {
+            "n": 1934,
+            "median_ns": 306630,
+            "p95_ns": 440190,
+            "p99_ns": 587880,
+            "max_ns": 324783000
+          },
+          "gz_publish": {
+            "n": 5653,
+            "median_ns": 43380,
+            "p95_ns": 67410,
+            "p99_ns": 95310,
+            "max_ns": 1382400
+          }
+        },
+        "call_thread_cpu_duration": {
+          "dds_publish": {
+            "n": 6871,
+            "median_ns": 163600,
+            "p95_ns": 213800,
+            "p99_ns": 255400,
+            "max_ns": 1799600
+          },
+          "guard_publish": {
+            "n": 1934,
+            "median_ns": 238300,
+            "p95_ns": 322800,
+            "p99_ns": 382500,
+            "max_ns": 1713300
+          },
+          "guard_tick": {
+            "n": 1934,
+            "median_ns": 338700,
+            "p95_ns": 473700,
+            "p99_ns": 554900,
+            "max_ns": 1842300
+          },
+          "gz_publish": {
+            "n": 5653,
+            "median_ns": 47700,
+            "p95_ns": 73900,
+            "p99_ns": 101200,
+            "max_ns": 312800
+          }
+        },
+        "matched_command_edges": {
+          "guard_publish_begin->dds_take": {
+            "n": 1933,
+            "median_ns": 283500,
+            "p95_ns": 389520,
+            "p99_ns": 1148490,
+            "max_ns": 324892980
+          },
+          "dds_take->gz_publish_begin": {
+            "n": 1933,
+            "median_ns": 24840,
+            "p95_ns": 39240,
+            "p99_ns": 57060,
+            "max_ns": 171540
+          },
+          "gz_publish_begin->native_decoded": {
+            "n": 1933,
+            "median_ns": 249930,
+            "p95_ns": 334530,
+            "p99_ns": 421830,
+            "max_ns": 1906110
+          },
+          "guard_publish_begin->native_decoded": {
+            "n": 1933,
+            "median_ns": 565020,
+            "p95_ns": 731610,
+            "p99_ns": 1466640,
+            "max_ns": 325463760
+          }
+        },
+        "clock": "All computed deltas use Linux CLOCK_BOOTTIME, same kernel only",
+        "limits": [
+          "Publish begin/end measure API duration, not a DDS wire transmission timestamp.",
+          "DDS source/received timestamps are retained as realtime fields and never subtracted from BOOTTIME.",
+          "DDS take to Gazebo publish includes conversion and callback processing; transport begins at the publication API.",
+          "One guard epoch per session is required; analyze sessions separately.",
+          "Wall duration minus thread CPU includes blocking and descheduling; it does not uniquely identify either cause."
+        ]
+      },
+      "contact_observation": {
+        "samples": 14880,
+        "pairs": 11128,
+        "robot_environment_pairs": 0,
+        "available": true,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "82f6fdd9acb8e88b45f1f88456a21b7d48da6379d114c03b99d944a0085e851b",
+      "trace_sha256": {
+        "native-344615.jsonl": "a82a6b0221153e72b0d0114b2db6653fbb82555fec1b06ca18f37c34365c33ce",
+        "native-344616.jsonl": "84234fa9b1754fc133c79876eef9854ea86387fa283498b07cf25e5dd3a70e28",
+        "native-344636.jsonl": "00cc1b6888ba09885ad0636d149c486786d706f55b201da99f9fce8dd44efa56",
+        "native-344638.jsonl": "5f169b4250a9c54942780401cb9be4d1b61b79db181b1c0e58b1e12144b8ade4",
+        "native-344651.jsonl": "e6c0f8ac4c5c2fe2d56cbb8b06e4084768d8e5b872b119c246335a4c0ab52faa",
+        "native-344652.jsonl": "8056a210f9d3892d84a5ec0179156db7732baabcadfb0a695c4faec4df9f7528",
+        "python-344615.jsonl": "902f3f79a2066201f87b3136b1cb2520ad2fb3517a2e711aeab4907341966c59",
+        "resources.jsonl": "6f393f0a41936cfb2bde16c3ad9d5c3662066a6b0ff61e414d61bcdc4f0cce51"
+      }
+    },
+    {
+      "condition": "fast_udp-off",
+      "world": "block-211",
+      "planned_requests": 3,
+      "dispatched": 3,
+      "completed": 3,
+      "unattempted": 0,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 208,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.9419498432358615,
+            "moving_time_sim_s": 6.200000000000005,
+            "arrival_position_error_m": 0.22365853340957914,
+            "minimum_circle_obstacle_clearance_m": 0.13758393456693466,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Inspect storage",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 505,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 1.8117495969975304,
+            "moving_time_sim_s": 11.03999999999994,
+            "arrival_position_error_m": 0.19191277771780488,
+            "minimum_circle_obstacle_clearance_m": 0.23122676451190746,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Go to dock",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 286,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.9161875768826103,
+            "moving_time_sim_s": 6.000000000000004,
+            "arrival_position_error_m": 0.18656218743457845,
+            "minimum_circle_obstacle_clearance_m": 0.2317029347494944,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": null,
+      "contact_observation": {
+        "samples": 0,
+        "pairs": 0,
+        "robot_environment_pairs": 0,
+        "available": false,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "519d6cd4fb6451584bf3833a0d77a3879e8afe798f3257f6cf3bdf7527d6e30f",
+      "trace_sha256": {
+        "resources.jsonl": "9950c61e04f10f79db85d91a7e9d8131959e1b5fb528e47d615ae880dc0274a3"
+      }
+    },
+    {
+      "condition": "fast_udp-off",
+      "world": "empty-210",
+      "planned_requests": 3,
+      "dispatched": 3,
+      "completed": 3,
+      "unattempted": 0,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 108,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.7176187122194982,
+            "moving_time_sim_s": 4.200000000000003,
+            "arrival_position_error_m": 0.2634477114556106,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Inspect storage",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 263,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.7114570500543054,
+            "moving_time_sim_s": 4.400000000000003,
+            "arrival_position_error_m": 0.22608308867072865,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Go to dock",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 257,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.44554809734051,
+            "moving_time_sim_s": 2.8000000000000016,
+            "arrival_position_error_m": 0.24125097356265596,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": null,
+      "contact_observation": {
+        "samples": 0,
+        "pairs": 0,
+        "robot_environment_pairs": 0,
+        "available": false,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "a976924740c00c032a4cfe41ef574f5cc8740db031237983c71fbfbeb81fe734",
+      "trace_sha256": {
+        "resources.jsonl": "4b500e8346262aa810401f653e53acc4a194ec9d6f586442d154af4733d896cd"
+      }
+    },
+    {
+      "condition": "fast_udp-on",
+      "world": "block-211",
+      "planned_requests": 3,
+      "dispatched": 3,
+      "completed": 3,
+      "unattempted": 0,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 180,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.8955951328259688,
+            "moving_time_sim_s": 5.480000000000004,
+            "arrival_position_error_m": 0.2310330068058361,
+            "minimum_circle_obstacle_clearance_m": 0.13723387167666626,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Inspect storage",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 483,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 1.7864586588412463,
+            "moving_time_sim_s": 10.759999999999946,
+            "arrival_position_error_m": 0.23025860381431149,
+            "minimum_circle_obstacle_clearance_m": 0.22496970884424575,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Go to dock",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 255,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.7738349624623967,
+            "moving_time_sim_s": 4.8800000000000034,
+            "arrival_position_error_m": 0.25274302049421504,
+            "minimum_circle_obstacle_clearance_m": 0.2504730598070817,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": {
+        "stage_counts": {
+          "actual_ros_writer_qos": 5,
+          "actual_writer_qos": 5,
+          "dds_publish_begin": 9069,
+          "send_resource_mutex_identified": 5,
+          "send_resource_wait_begin": 27540,
+          "send_resource_acquired": 27540,
+          "send_resource_releasing": 27540,
+          "dds_publish_end": 9069,
+          "dds_take": 4241,
+          "gz_publish_begin": 7282,
+          "gz_publish_end": 7282,
+          "native_ingress": 2454,
+          "native_decoded": 2454,
+          "native_ingress_end": 2454,
+          "preupdate_begin": 4828,
+          "actuator_published": 4828,
+          "expiry_state": 50,
+          "contact_sample": 19312,
+          "contact_pair": 14432,
+          "ground_truth_native": 1207,
+          "controller_compute_begin": 344,
+          "controller_created": 344,
+          "guard_tick_begin": 2454,
+          "guard_publish_begin": 2454,
+          "guard_publish_end": 2454,
+          "guard_tick_end": 2454,
+          "guard_receipt": 720,
+          "guard_processed": 720
+        },
+        "worst_matched_command": {
+          "sequence": 30,
+          "stages_boottime_ns": {
+            "guard_publish_begin": 1188654392760933,
+            "guard_publish_end": 1188654709022013,
+            "dds_take": 1188654709049193,
+            "gz_publish_begin": 1188654709078803,
+            "gz_publish_end": 1188654709148913,
+            "native_decoded": 1188654709383543
+          },
+          "nonzero_command": false
+        },
+        "send_resource_mutex": {
+          "acquisition_wait": {
+            "n": 27540,
+            "median_ns": 7650,
+            "p95_ns": 21150,
+            "p99_ns": 46080,
+            "max_ns": 995840370
+          },
+          "known_hold_duration": {
+            "n": 27540,
+            "median_ns": 39330,
+            "p95_ns": 235170,
+            "p99_ns": 631350,
+            "max_ns": 996013980
+          },
+          "unknown_hold_records": 0,
+          "long_events": [
+            {
+              "stage": "send_resource_releasing",
+              "boot_ns": 1188654708666873,
+              "mono_ns": 1188654708666873,
+              "thread_cpu_ns": 48680900,
+              "native_dropped": 0,
+              "pid": 348410,
+              "tid": 348698,
+              "held_ns": 333315090,
+              "duration_known": true
+            },
+            {
+              "stage": "send_resource_acquired",
+              "boot_ns": 1188654708720333,
+              "mono_ns": 1188654708720243,
+              "thread_cpu_ns": 25484400,
+              "native_dropped": 0,
+              "pid": 348410,
+              "tid": 348697,
+              "wait_ns": 326997990
+            },
+            {
+              "stage": "send_resource_acquired",
+              "boot_ns": 1188654708876303,
+              "mono_ns": 1188654708876303,
+              "thread_cpu_ns": 415571000,
+              "native_dropped": 0,
+              "pid": 348410,
+              "tid": 348410,
+              "wait_ns": 316032570
+            },
+            {
+              "stage": "send_resource_releasing",
+              "boot_ns": 1188704269462233,
+              "mono_ns": 1188704269462233,
+              "thread_cpu_ns": 596828900,
+              "native_dropped": 0,
+              "pid": 348437,
+              "tid": 348598,
+              "held_ns": 996013980,
+              "duration_known": true
+            },
+            {
+              "stage": "send_resource_acquired",
+              "boot_ns": 1188704269518753,
+              "mono_ns": 1188704269518663,
+              "thread_cpu_ns": 440235100,
+              "native_dropped": 0,
+              "pid": 348437,
+              "tid": 348600,
+              "wait_ns": 995840370
+            },
+            {
+              "stage": "send_resource_acquired",
+              "boot_ns": 1188704269570233,
+              "mono_ns": 1188704269570233,
+              "thread_cpu_ns": 740800,
+              "native_dropped": 0,
+              "pid": 348437,
+              "tid": 348573,
+              "wait_ns": 985185990
+            }
+          ],
+          "limit": "Observed selected participant mutex only; acquisition duration includes small tracing overhead and descheduling. Deep stacks may extend holds. A recorded owner is not retrospective proof of the historical event's owner."
+        },
+        "command_stream": {
+          "native_interarrival": {
+            "n": 2453,
+            "median_ns": 19996110,
+            "p95_ns": 20237220,
+            "p99_ns": 20430270,
+            "max_ns": 336037500
+          },
+          "native_gaps_over_200ms": 1,
+          "gaps_following_nonzero_command": {
+            "n": 1728,
+            "median_ns": 19994670,
+            "p95_ns": 20212290,
+            "p99_ns": 20307960,
+            "max_ns": 20733840
+          },
+          "gaps_over_200ms_following_nonzero": 0,
+          "nonzero_guard_begin_to_native": {
+            "n": 1728,
+            "median_ns": 574290,
+            "p95_ns": 709020,
+            "p99_ns": 807030,
+            "max_ns": 1086660
+          },
+          "native_latch_observed": false,
+          "native_state_reasons": {
+            "idle": 12,
+            "forwarding": 38
+          },
+          "limits": "Nonzero commanded velocity is not proof of actual motion. Gap counts are serial intervals, not independent trials; a missing state trace cannot establish absence of expiry."
+        },
+        "interarrival": {
+          "send_resource_wait_begin": {
+            "n": 27509,
+            "median_ns": 9942480,
+            "p95_ns": 80286300,
+            "p99_ns": 199960380,
+            "max_ns": 37771274520
+          },
+          "send_resource_acquired": {
+            "n": 27509,
+            "median_ns": 9941580,
+            "p95_ns": 80285940,
+            "p99_ns": 199956150,
+            "max_ns": 37771267770
+          },
+          "send_resource_releasing": {
+            "n": 27509,
+            "median_ns": 9934110,
+            "p95_ns": 80339220,
+            "p99_ns": 199960740,
+            "max_ns": 37771264890
+          },
+          "guard_tick_begin": {
+            "n": 2453,
+            "median_ns": 20000070,
+            "p95_ns": 20110230,
+            "p99_ns": 20174220,
+            "max_ns": 316955520
+          },
+          "guard_publish_begin": {
+            "n": 2453,
+            "median_ns": 19999260,
+            "p95_ns": 20130120,
+            "p99_ns": 20202930,
+            "max_ns": 316937610
+          },
+          "dds_publish_begin": {
+            "n": 9062,
+            "median_ns": 10084050,
+            "p95_ns": 80269470,
+            "p99_ns": 100050120,
+            "max_ns": 1400092650
+          },
+          "dds_publish_end": {
+            "n": 9062,
+            "median_ns": 10113030,
+            "p95_ns": 80286930,
+            "p99_ns": 100057500,
+            "max_ns": 1400085180
+          },
+          "guard_publish_end": {
+            "n": 2453,
+            "median_ns": 19996920,
+            "p95_ns": 20178900,
+            "p99_ns": 20298420,
+            "max_ns": 336021840
+          },
+          "guard_tick_end": {
+            "n": 2453,
+            "median_ns": 19996020,
+            "p95_ns": 20187000,
+            "p99_ns": 20313090,
+            "max_ns": 336090060
+          },
+          "dds_take": {
+            "n": 4237,
+            "median_ns": 20115450,
+            "p95_ns": 99978390,
+            "p99_ns": 100169010,
+            "max_ns": 2337195330
+          },
+          "gz_publish_begin": {
+            "n": 7280,
+            "median_ns": 10015470,
+            "p95_ns": 20111220,
+            "p99_ns": 20244960,
+            "max_ns": 348556590
+          },
+          "gz_publish_end": {
+            "n": 7280,
+            "median_ns": 10016910,
+            "p95_ns": 20117520,
+            "p99_ns": 20254860,
+            "max_ns": 348527520
+          },
+          "native_ingress": {
+            "n": 2453,
+            "median_ns": 19995570,
+            "p95_ns": 20237580,
+            "p99_ns": 20420460,
+            "max_ns": 336035700
+          },
+          "native_decoded": {
+            "n": 2453,
+            "median_ns": 19996110,
+            "p95_ns": 20237220,
+            "p99_ns": 20430270,
+            "max_ns": 336037500
+          },
+          "native_ingress_end": {
+            "n": 2453,
+            "median_ns": 19996110,
+            "p95_ns": 20238300,
+            "p99_ns": 20431530,
+            "max_ns": 336038040
+          },
+          "contact_sample": {
+            "n": 19311,
+            "median_ns": 7650,
+            "p95_ns": 10081080,
+            "p99_ns": 10249470,
+            "max_ns": 348490260
+          },
+          "contact_pair": {
+            "n": 14431,
+            "median_ns": 6750,
+            "p95_ns": 10122840,
+            "p99_ns": 10303380,
+            "max_ns": 348500340
+          },
+          "preupdate_begin": {
+            "n": 4827,
+            "median_ns": 9999810,
+            "p95_ns": 10033650,
+            "p99_ns": 10078650,
+            "max_ns": 348561180
+          },
+          "actuator_published": {
+            "n": 4827,
+            "median_ns": 9999900,
+            "p95_ns": 10056420,
+            "p99_ns": 10113660,
+            "max_ns": 348527070
+          },
+          "ground_truth_native": {
+            "n": 1206,
+            "median_ns": 39999870,
+            "p95_ns": 40271400,
+            "p99_ns": 40470480,
+            "max_ns": 43148340
+          },
+          "expiry_state": {
+            "n": 49,
+            "median_ns": 1009878750,
+            "p95_ns": 1010012670,
+            "p99_ns": 1010027070,
+            "max_ns": 1010027070
+          },
+          "controller_compute_begin": {
+            "n": 341,
+            "median_ns": 100000980,
+            "p95_ns": 100252260,
+            "p99_ns": 100400940,
+            "max_ns": 100435140
+          },
+          "controller_created": {
+            "n": 341,
+            "median_ns": 99999180,
+            "p95_ns": 100278360,
+            "p99_ns": 100422270,
+            "max_ns": 100514700
+          },
+          "guard_receipt": {
+            "n": 719,
+            "median_ns": 39938400,
+            "p95_ns": 80434080,
+            "p99_ns": 80591940,
+            "max_ns": 1400121090
+          },
+          "guard_processed": {
+            "n": 719,
+            "median_ns": 39933630,
+            "p95_ns": 80458650,
+            "p99_ns": 80623440,
+            "max_ns": 1400130180
+          }
+        },
+        "call_wall_duration": {
+          "dds_publish": {
+            "n": 9069,
+            "median_ns": 148320,
+            "p95_ns": 198000,
+            "p99_ns": 264690,
+            "max_ns": 316144980
+          },
+          "guard_publish": {
+            "n": 2454,
+            "median_ns": 219330,
+            "p95_ns": 294210,
+            "p99_ns": 360720,
+            "max_ns": 316261080
+          },
+          "guard_tick": {
+            "n": 2454,
+            "median_ns": 311940,
+            "p95_ns": 419670,
+            "p99_ns": 501300,
+            "max_ns": 316418490
+          },
+          "gz_publish": {
+            "n": 7282,
+            "median_ns": 43560,
+            "p95_ns": 67230,
+            "p99_ns": 85950,
+            "max_ns": 838440
+          }
+        },
+        "call_thread_cpu_duration": {
+          "dds_publish": {
+            "n": 9069,
+            "median_ns": 164300,
+            "p95_ns": 214400,
+            "p99_ns": 252500,
+            "max_ns": 1710400
+          },
+          "guard_publish": {
+            "n": 2454,
+            "median_ns": 243900,
+            "p95_ns": 324100,
+            "p99_ns": 377800,
+            "max_ns": 1579900
+          },
+          "guard_tick": {
+            "n": 2454,
+            "median_ns": 344800,
+            "p95_ns": 459100,
+            "p99_ns": 540800,
+            "max_ns": 1795800
+          },
+          "gz_publish": {
+            "n": 7282,
+            "median_ns": 47900,
+            "p95_ns": 73800,
+            "p99_ns": 92000,
+            "max_ns": 222200
+          }
+        },
+        "matched_command_edges": {
+          "guard_publish_begin->dds_take": {
+            "n": 2454,
+            "median_ns": 280800,
+            "p95_ns": 383310,
+            "p99_ns": 590760,
+            "max_ns": 316288260
+          },
+          "dds_take->gz_publish_begin": {
+            "n": 2454,
+            "median_ns": 25740,
+            "p95_ns": 41580,
+            "p99_ns": 54450,
+            "max_ns": 157320
+          },
+          "gz_publish_begin->native_decoded": {
+            "n": 2454,
+            "median_ns": 254520,
+            "p95_ns": 331020,
+            "p99_ns": 394740,
+            "max_ns": 3091320
+          },
+          "guard_publish_begin->native_decoded": {
+            "n": 2454,
+            "median_ns": 569790,
+            "p95_ns": 726120,
+            "p99_ns": 943740,
+            "max_ns": 316622610
+          }
+        },
+        "clock": "All computed deltas use Linux CLOCK_BOOTTIME, same kernel only",
+        "limits": [
+          "Publish begin/end measure API duration, not a DDS wire transmission timestamp.",
+          "DDS source/received timestamps are retained as realtime fields and never subtracted from BOOTTIME.",
+          "DDS take to Gazebo publish includes conversion and callback processing; transport begins at the publication API.",
+          "One guard epoch per session is required; analyze sessions separately.",
+          "Wall duration minus thread CPU includes blocking and descheduling; it does not uniquely identify either cause."
+        ]
+      },
+      "contact_observation": {
+        "samples": 19312,
+        "pairs": 14432,
+        "robot_environment_pairs": 0,
+        "available": true,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "e6baba634b236a76710f8d59a7d77b20739ea1124411a30c8eb20afe7b17cdad",
+      "trace_sha256": {
+        "native-348410.jsonl": "3d8e7fed2a27590e8cae157cd130500af7e25e7fb340f27ac01f177dd21d6d8e",
+        "native-348411.jsonl": "c3321ee738076dd7544154c532ed8c1c51bfc5a8e3c1fbcce7ff8699dabafbd8",
+        "native-348425.jsonl": "cf1651753e4ecc244d08697e813f3ca2067c0dd21629bf0a816c344c46103a01",
+        "native-348437.jsonl": "76c16055de64e2981da875396688d34a26cfbd8352c229956a444a327de200fe",
+        "native-348448.jsonl": "2d56f5f1a5facba9bc75c8f1ab52306c09d3b5f51b4c2f8cfe25c43b728fe235",
+        "native-348451.jsonl": "f6f0eaf4a29290e625fe2f25308fd3019eff4091f0b2ac74eb105603a8bc116e",
+        "python-348410.jsonl": "bf3e299f9de771b00528a286e7c84040b3de9a642452bd1a48cd64c4d3656491",
+        "resources.jsonl": "8aeb1c3379c8b1969ac867aa300e290f68c02d3b3c0e3b3a119789b5eb404bb8"
+      }
+    },
+    {
+      "condition": "fast_udp-on",
+      "world": "empty-210",
+      "planned_requests": 3,
+      "dispatched": 3,
+      "completed": 3,
+      "unattempted": 0,
+      "environment_failure": null,
+      "outcomes": [
+        {
+          "instruction": "Go to station",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 105,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.6945440892320502,
+            "moving_time_sim_s": 4.040000000000003,
+            "arrival_position_error_m": 0.2863026929915412,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Inspect storage",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 248,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.6598521026698382,
+            "moving_time_sim_s": 4.120000000000003,
+            "arrival_position_error_m": 0.2642304183485328,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        },
+        {
+          "instruction": "Go to dock",
+          "status": "completed",
+          "reason": "ok",
+          "truth_metrics": {
+            "available": true,
+            "truth_samples": 250,
+            "max_sample_gap_s": 0.04,
+            "path_length_m": 0.4123834342308908,
+            "moving_time_sim_s": 2.6800000000000015,
+            "arrival_position_error_m": 0.24114009625243119,
+            "minimum_circle_obstacle_clearance_m": null,
+            "boundary_sampling_note": "Measured samples inside mission interval; no extrapolation or missing-data imputation"
+          }
+        }
+      ],
+      "timing": {
+        "stage_counts": {
+          "actual_ros_writer_qos": 5,
+          "actual_writer_qos": 5,
+          "dds_publish_begin": 6993,
+          "send_resource_mutex_identified": 5,
+          "send_resource_wait_begin": 20952,
+          "send_resource_acquired": 20952,
+          "send_resource_releasing": 20952,
+          "dds_publish_end": 6993,
+          "dds_take": 3154,
+          "gz_publish_begin": 5839,
+          "gz_publish_end": 5839,
+          "native_ingress": 2002,
+          "native_decoded": 2002,
+          "native_ingress_end": 2002,
+          "preupdate_begin": 3837,
+          "actuator_published": 3837,
+          "expiry_state": 40,
+          "contact_sample": 15348,
+          "contact_pair": 11483,
+          "ground_truth_native": 959,
+          "controller_compute_begin": 218,
+          "controller_created": 218,
+          "guard_tick_begin": 2004,
+          "guard_publish_begin": 2004,
+          "guard_publish_end": 2004,
+          "guard_tick_end": 2004,
+          "guard_receipt": 465,
+          "guard_processed": 465
+        },
+        "worst_matched_command": {
+          "sequence": 593,
+          "stages_boottime_ns": {
+            "guard_publish_begin": 1187912359019523,
+            "guard_publish_end": 1187912359289343,
+            "dds_take": 1187912673673023,
+            "gz_publish_begin": 1187912673693813,
+            "gz_publish_end": 1187912673878763,
+            "native_decoded": 1187912673965523
+          },
+          "nonzero_command": false
+        },
+        "send_resource_mutex": {
+          "acquisition_wait": {
+            "n": 20952,
+            "median_ns": 8010,
+            "p95_ns": 25020,
+            "p99_ns": 73080,
+            "max_ns": 329195340
+          },
+          "known_hold_duration": {
+            "n": 20952,
+            "median_ns": 39600,
+            "p95_ns": 235620,
+            "p99_ns": 940950,
+            "max_ns": 333159750
+          },
+          "unknown_hold_records": 0,
+          "long_events": [
+            {
+              "stage": "send_resource_releasing",
+              "boot_ns": 1187912669715903,
+              "mono_ns": 1187912669715813,
+              "thread_cpu_ns": 373111800,
+              "native_dropped": 0,
+              "pid": 341553,
+              "tid": 341599,
+              "held_ns": 333159750,
+              "duration_known": true
+            },
+            {
+              "stage": "send_resource_acquired",
+              "boot_ns": 1187912669774223,
+              "mono_ns": 1187912669774223,
+              "thread_cpu_ns": 249769500,
+              "native_dropped": 0,
+              "pid": 341553,
+              "tid": 341597,
+              "wait_ns": 329195340
+            },
+            {
+              "stage": "send_resource_acquired",
+              "boot_ns": 1187912669897793,
+              "mono_ns": 1187912669897703,
+              "thread_cpu_ns": 308140100,
+              "native_dropped": 0,
+              "pid": 341553,
+              "tid": 341666,
+              "wait_ns": 328616370
+            }
+          ],
+          "limit": "Observed selected participant mutex only; acquisition duration includes small tracing overhead and descheduling. Deep stacks may extend holds. A recorded owner is not retrospective proof of the historical event's owner."
+        },
+        "command_stream": {
+          "native_interarrival": {
+            "n": 2001,
+            "median_ns": 19990440,
+            "p95_ns": 20305440,
+            "p99_ns": 20666070,
+            "max_ns": 334230300
+          },
+          "native_gaps_over_200ms": 1,
+          "gaps_following_nonzero_command": {
+            "n": 1097,
+            "median_ns": 19989540,
+            "p95_ns": 20285010,
+            "p99_ns": 20548170,
+            "max_ns": 23374440
+          },
+          "gaps_over_200ms_following_nonzero": 0,
+          "nonzero_guard_begin_to_native": {
+            "n": 1097,
+            "median_ns": 606510,
+            "p95_ns": 796410,
+            "p99_ns": 973620,
+            "max_ns": 3949560
+          },
+          "native_latch_observed": false,
+          "native_state_reasons": {
+            "idle": 15,
+            "forwarding": 25
+          },
+          "limits": "Nonzero commanded velocity is not proof of actual motion. Gap counts are serial intervals, not independent trials; a missing state trace cannot establish absence of expiry."
+        },
+        "interarrival": {
+          "send_resource_wait_begin": {
+            "n": 20921,
+            "median_ns": 9930420,
+            "p95_ns": 60157800,
+            "p99_ns": 199955250,
+            "max_ns": 25075930860
+          },
+          "send_resource_acquired": {
+            "n": 20921,
+            "median_ns": 9929610,
+            "p95_ns": 60156000,
+            "p99_ns": 199954620,
+            "max_ns": 25075920060
+          },
+          "send_resource_releasing": {
+            "n": 20921,
+            "median_ns": 9922320,
+            "p95_ns": 59977800,
+            "p99_ns": 199949940,
+            "max_ns": 25075915470
+          },
+          "guard_tick_begin": {
+            "n": 2003,
+            "median_ns": 19998900,
+            "p95_ns": 20150820,
+            "p99_ns": 20238840,
+            "max_ns": 20797110
+          },
+          "guard_publish_begin": {
+            "n": 2003,
+            "median_ns": 19997820,
+            "p95_ns": 20169720,
+            "p99_ns": 20280060,
+            "max_ns": 20747070
+          },
+          "dds_publish_begin": {
+            "n": 6986,
+            "median_ns": 10103220,
+            "p95_ns": 50060880,
+            "p99_ns": 100035000,
+            "max_ns": 1360051020
+          },
+          "dds_publish_end": {
+            "n": 6986,
+            "median_ns": 10128690,
+            "p95_ns": 50098860,
+            "p99_ns": 100041210,
+            "max_ns": 1359998460
+          },
+          "guard_publish_end": {
+            "n": 2003,
+            "median_ns": 19997550,
+            "p95_ns": 20224710,
+            "p99_ns": 20461230,
+            "max_ns": 23339610
+          },
+          "guard_tick_end": {
+            "n": 2003,
+            "median_ns": 19996290,
+            "p95_ns": 20233710,
+            "p99_ns": 20476170,
+            "max_ns": 23377590
+          },
+          "dds_take": {
+            "n": 3150,
+            "median_ns": 20107800,
+            "p95_ns": 99933750,
+            "p99_ns": 100195470,
+            "max_ns": 2329839720
+          },
+          "gz_publish_begin": {
+            "n": 5837,
+            "median_ns": 10019880,
+            "p95_ns": 20147670,
+            "p99_ns": 20319570,
+            "max_ns": 402621120
+          },
+          "gz_publish_end": {
+            "n": 5837,
+            "median_ns": 10024200,
+            "p95_ns": 20150010,
+            "p99_ns": 20328030,
+            "max_ns": 402611400
+          },
+          "native_ingress": {
+            "n": 2001,
+            "median_ns": 19989900,
+            "p95_ns": 20304360,
+            "p99_ns": 20663820,
+            "max_ns": 334231380
+          },
+          "native_decoded": {
+            "n": 2001,
+            "median_ns": 19990440,
+            "p95_ns": 20305440,
+            "p99_ns": 20666070,
+            "max_ns": 334230300
+          },
+          "native_ingress_end": {
+            "n": 2001,
+            "median_ns": 19989180,
+            "p95_ns": 20309130,
+            "p99_ns": 20665980,
+            "max_ns": 334230840
+          },
+          "contact_sample": {
+            "n": 15347,
+            "median_ns": 8010,
+            "p95_ns": 10107450,
+            "p99_ns": 10297980,
+            "max_ns": 402612660
+          },
+          "contact_pair": {
+            "n": 11482,
+            "median_ns": 6930,
+            "p95_ns": 10150470,
+            "p99_ns": 10343790,
+            "max_ns": 402618960
+          },
+          "preupdate_begin": {
+            "n": 3836,
+            "median_ns": 9999900,
+            "p95_ns": 10045170,
+            "p99_ns": 10122480,
+            "max_ns": 402621210
+          },
+          "actuator_published": {
+            "n": 3836,
+            "median_ns": 9999360,
+            "p95_ns": 10074510,
+            "p99_ns": 10153440,
+            "max_ns": 402610410
+          },
+          "ground_truth_native": {
+            "n": 958,
+            "median_ns": 39999420,
+            "p95_ns": 40315050,
+            "p99_ns": 40576230,
+            "max_ns": 45204930
+          },
+          "expiry_state": {
+            "n": 39,
+            "median_ns": 1009902150,
+            "p95_ns": 1010029860,
+            "p99_ns": 1010052630,
+            "max_ns": 1010052630
+          },
+          "guard_receipt": {
+            "n": 464,
+            "median_ns": 39895470,
+            "p95_ns": 80545230,
+            "p99_ns": 80853030,
+            "max_ns": 1359921240
+          },
+          "guard_processed": {
+            "n": 464,
+            "median_ns": 39898800,
+            "p95_ns": 80562060,
+            "p99_ns": 80872290,
+            "max_ns": 1359902160
+          },
+          "controller_compute_begin": {
+            "n": 215,
+            "median_ns": 100001160,
+            "p95_ns": 100281690,
+            "p99_ns": 100389330,
+            "max_ns": 100936620
+          },
+          "controller_created": {
+            "n": 215,
+            "median_ns": 100003140,
+            "p95_ns": 100280700,
+            "p99_ns": 100384200,
+            "max_ns": 101048760
+          }
+        },
+        "call_wall_duration": {
+          "dds_publish": {
+            "n": 6993,
+            "median_ns": 146160,
+            "p95_ns": 220860,
+            "p99_ns": 1099980,
+            "max_ns": 328760190
+          },
+          "guard_publish": {
+            "n": 2004,
+            "median_ns": 229320,
+            "p95_ns": 339570,
+            "p99_ns": 485190,
+            "max_ns": 3675780
+          },
+          "guard_tick": {
+            "n": 2004,
+            "median_ns": 331110,
+            "p95_ns": 483660,
+            "p99_ns": 656370,
+            "max_ns": 3805020
+          },
+          "gz_publish": {
+            "n": 5839,
+            "median_ns": 48240,
+            "p95_ns": 73170,
+            "p99_ns": 100440,
+            "max_ns": 1178010
+          }
+        },
+        "call_thread_cpu_duration": {
+          "dds_publish": {
+            "n": 6993,
+            "median_ns": 161800,
+            "p95_ns": 236400,
+            "p99_ns": 1168900,
+            "max_ns": 1943900
+          },
+          "guard_publish": {
+            "n": 2004,
+            "median_ns": 254700,
+            "p95_ns": 365000,
+            "p99_ns": 450700,
+            "max_ns": 1694100
+          },
+          "guard_tick": {
+            "n": 2004,
+            "median_ns": 366000,
+            "p95_ns": 522800,
+            "p99_ns": 645800,
+            "max_ns": 1869300
+          },
+          "gz_publish": {
+            "n": 5839,
+            "median_ns": 53100,
+            "p95_ns": 80100,
+            "p99_ns": 107400,
+            "max_ns": 603600
+          }
+        },
+        "matched_command_edges": {
+          "guard_publish_begin->dds_take": {
+            "n": 2002,
+            "median_ns": 309150,
+            "p95_ns": 462870,
+            "p99_ns": 35965710,
+            "max_ns": 314653500
+          },
+          "dds_take->gz_publish_begin": {
+            "n": 2002,
+            "median_ns": 28440,
+            "p95_ns": 47790,
+            "p99_ns": 67950,
+            "max_ns": 297810
+          },
+          "gz_publish_begin->native_decoded": {
+            "n": 2002,
+            "median_ns": 268200,
+            "p95_ns": 368550,
+            "p99_ns": 449280,
+            "max_ns": 2948130
+          },
+          "guard_publish_begin->native_decoded": {
+            "n": 2002,
+            "median_ns": 607230,
+            "p95_ns": 867510,
+            "p99_ns": 36207540,
+            "max_ns": 314946000
+          }
+        },
+        "clock": "All computed deltas use Linux CLOCK_BOOTTIME, same kernel only",
+        "limits": [
+          "Publish begin/end measure API duration, not a DDS wire transmission timestamp.",
+          "DDS source/received timestamps are retained as realtime fields and never subtracted from BOOTTIME.",
+          "DDS take to Gazebo publish includes conversion and callback processing; transport begins at the publication API.",
+          "One guard epoch per session is required; analyze sessions separately.",
+          "Wall duration minus thread CPU includes blocking and descheduling; it does not uniquely identify either cause."
+        ]
+      },
+      "contact_observation": {
+        "samples": 15348,
+        "pairs": 11483,
+        "robot_environment_pairs": 0,
+        "available": true,
+        "limit": "Record counts, not independent collisions. No records means unavailable."
+      },
+      "result_sha256": "9559b909b6c198bb501acda3ebccdebe003028e0954ced093ec977b28d8e40f7",
+      "trace_sha256": {
+        "native-341552.jsonl": "2d52e876f72c5731e7e93971c3e1c1f32e6c9dfcfbb3793be2144bb43f74470b",
+        "native-341553.jsonl": "f902bf5988a47ceca4378cc994e3dc00aa9495fbb7f9d482e5fa8589c60ae27a",
+        "native-341571.jsonl": "be2eed973baf71b1af645d67fab0bebd5caaafe5849407576a3edca680710640",
+        "native-341579.jsonl": "29da86019f23147570d762565775ce94f666f63057d6546a7730fb2c638828b9",
+        "native-341586.jsonl": "37d3c637f7eb4f107ae11d2e04247315694948147e2bf8959442c177edb81d05",
+        "native-341587.jsonl": "9fbb6543bcdffd979fc337bb94c024f0e614f750d2977a8e9a091072089745b5",
+        "python-341552.jsonl": "cd1f5f6cd95f5c28b4d52a03306d391f577bdcb948e3b5655f4cef00b9f4f6f1",
+        "resources.jsonl": "566d2b590cb446253476dda9270c8c7c376d40c9b0a08c37ed8f057aee48f3f6"
+      }
+    }
+  ],
+  "limits": [
+    "Development worlds only; not held-out efficacy evidence.",
+    "Missing/unattempted requests are not successful missions.",
+    "Report session tails separately; do not pool time series as independent worlds.",
+    "Deep tracing and harness remediation differ in v1/v2; consult remediation logs."
+  ]
+}

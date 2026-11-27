@@ -50,9 +50,83 @@ def main() -> None:
     bench = commands.add_parser("benchmark", help="Write reproducible benchmark JSON")
     bench.add_argument("--config", type=Path, required=True)
     bench.add_argument("--output", type=Path, required=True)
+    chat = commands.add_parser("chat", help="Serve the local multi-turn chat web UI")
+    chat.add_argument("--config", type=Path, required=True)
+    chat.add_argument("--port", type=int, help="Override the configured web UI port")
+    chat.add_argument("--no-browser", action="store_true", help="Do not open a browser tab")
+    chat_measure = commands.add_parser(
+        "chat-measure", help="Measure multi-turn prompt-cache latency against a chat config"
+    )
+    chat_measure.add_argument("--config", type=Path, required=True)
+    chat_measure.add_argument("--script", type=Path, required=True)
+    chat_measure.add_argument("--output", type=Path, required=True)
+    chat_measure.add_argument("--repeats", type=int, default=3)
+    chat_eval = commands.add_parser(
+        "chat-eval", help="Score the chat models on a frozen evaluation set"
+    )
+    chat_eval.add_argument("--config", type=Path, required=True)
+    chat_eval.add_argument("--dataset", type=Path, required=True)
+    chat_eval.add_argument("--output", type=Path, required=True)
+    chat_eval.add_argument("--repeats", type=int, default=3)
+    chat_eval.add_argument(
+        "--conditions",
+        default="text-chat,text-reasoning,vision,vision-on-text",
+        help="Comma-separated subset of: text-chat, text-reasoning, vision, vision-on-text",
+    )
+    distill = commands.add_parser(
+        "c2-distill", help="Collect reasoning-mode teacher answers for fast-mode fine-tuning"
+    )
+    distill.add_argument("--config", type=Path, required=True)
+    distill.add_argument("--prompts", type=Path, required=True)
+    distill.add_argument("--output", type=Path, required=True)
+    probe = commands.add_parser(
+        "c2-open-probe", help="Record fast-mode reply lengths on open-ended prompts"
+    )
+    probe.add_argument("--config", type=Path, required=True)
+    probe.add_argument("--prompts", type=Path, required=True)
+    probe.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.command == "train":
         print(train(TrainConfig.load(args.config), args.resume))
+        return
+    if args.command == "c2-distill":
+        from oakgpt.chat.app import ChatConfig
+        from oakgpt.finetuning.distill import run_distill
+
+        summary = run_distill(ChatConfig.load(args.config), args.config, args.prompts, args.output)
+        print(json.dumps({"kept": summary["kept"], "verdicts": summary["verdicts_by_category"]}))
+        return
+    if args.command == "c2-open-probe":
+        from oakgpt.chat.app import ChatConfig
+        from oakgpt.finetuning.distill import run_open_probe
+
+        report = run_open_probe(
+            ChatConfig.load(args.config), args.config, args.prompts, args.output
+        )
+        print(json.dumps({"generated_tokens_median": report["generated_tokens_median"]}))
+        return
+    if args.command in ("chat", "chat-measure", "chat-eval"):
+        from dataclasses import replace
+
+        from oakgpt.chat.app import ChatConfig, run_chat
+        from oakgpt.chat.measure import run_cache_study
+
+        config = ChatConfig.load(args.config)
+        if args.command == "chat":
+            if args.port is not None:
+                config = replace(config, web_port=args.port)
+            run_chat(config, open_browser=not args.no_browser)
+        elif args.command == "chat-eval":
+            from oakgpt.chat.evaluate import run_chat_eval
+
+            conditions = [name.strip() for name in args.conditions.split(",") if name.strip()]
+            summary = run_chat_eval(
+                config, args.config, args.dataset, args.output, args.repeats, conditions
+            )
+            print(json.dumps(summary, indent=2))
+        else:
+            summary = run_cache_study(config, args.config, args.script, args.output, args.repeats)
+            print(json.dumps(summary, indent=2))
         return
     backend, values = backend_from_config(args.config)
     settings = GenerationConfig(**values.get("generation", {}))

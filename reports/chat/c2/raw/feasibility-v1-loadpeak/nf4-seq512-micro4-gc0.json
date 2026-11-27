@@ -1,0 +1,35 @@
+{
+  "quantization": "nf4",
+  "sequence_length": 512,
+  "micro_batch": 4,
+  "gradient_checkpointing": false,
+  "labelled_tokens_per_row": 64,
+  "steps": 6,
+  "device_free_before_load": 5344591872,
+  "environment": {
+    "python": "3.11.6",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "torch": "2.9.1+cu126",
+    "cuda": "12.6",
+    "transformers": "4.57.1",
+    "bitsandbytes": "0.49.2",
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_total_bytes": 6441992192
+  },
+  "load_seconds": 8.46662799990736,
+  "after_load": {
+    "max_allocated": 2596758528,
+    "max_reserved": 3051356160,
+    "device_free": 2280652800,
+    "device_total": 6441992192
+  },
+  "trainable_parameters": 17432576,
+  "outcome": "out_of_memory",
+  "error": "CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 6.00 GiB of which 0 bytes is free. Of the allocated memory 12.65 GiB is allocated by PyTorch, and 29.94 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+  "peak": {
+    "max_allocated": 13587510784,
+    "max_reserved": 13618905088,
+    "device_free": 0,
+    "device_total": 6441992192
+  }
+}

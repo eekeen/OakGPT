@@ -9,6 +9,22 @@ from urllib.request import ProxyHandler, Request, build_opener
 from oakgpt.inference.base import GenerationConfig, TokenEvent
 
 
+def require_loopback_origin(url: str) -> str:
+    """Return the origin without a trailing slash, or reject anything but loopback HTTP."""
+    parsed = urlsplit(url)
+    if (
+        parsed.scheme != "http"
+        or parsed.hostname not in ("127.0.0.1", "localhost", "::1")
+        or parsed.username
+        or parsed.password
+        or parsed.path not in ("", "/")
+        or parsed.query
+        or parsed.fragment
+    ):
+        raise ValueError("llama.cpp URL must be a loopback HTTP origin")
+    return url.rstrip("/")
+
+
 class LlamaCppBackend:
     def __init__(
         self,
@@ -18,20 +34,10 @@ class LlamaCppBackend:
         identity: dict[str, Any] | None = None,
         json_schema: dict[str, Any] | None = None,
     ) -> None:
-        parsed = urlsplit(url)
-        if (
-            parsed.scheme != "http"
-            or parsed.hostname not in ("127.0.0.1", "localhost", "::1")
-            or parsed.username
-            or parsed.password
-            or parsed.path not in ("", "/")
-            or parsed.query
-            or parsed.fragment
-        ):
-            raise ValueError("llama.cpp URL must be a loopback HTTP origin")
+        url = require_loopback_origin(url)
         if prompt_format not in ("raw", "qwen3"):
             raise ValueError("prompt_format must be raw or qwen3")
-        self.url = url.rstrip("/")
+        self.url = url
         self.timeout = timeout
         self.prompt_format = prompt_format
         self.identity = identity or {}

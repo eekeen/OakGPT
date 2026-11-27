@@ -1,0 +1,19 @@
+{
+  "candidate": "cyclone",
+  "development_summary_sha256": "8af23553396aac7b10ef2a954819a08ce75a98656d4972fbc68ddc1de43f2445",
+  "all_backends_missions_completed": 36,
+  "planned_missions": 36,
+  "startup_failures": 0,
+  "basis": "Lower observed startup guard-to-native maximum in both development worlds; no mission-completion improvement demonstrated",
+  "selected_max_guard_to_native_ms": [
+    1.37493,
+    2.36979
+  ],
+  "limits": [
+    "Two reused development worlds only; single on/off session per backend/world",
+    "All traced worst Fast DDS/UDP delays were neutral commands; no traced nonzero-following gap >200 ms or expiry latch",
+    "Logging-off API/native latency and contact measurements unavailable",
+    "Historical 337 ms cause remains unproven",
+    "Held-out replication and actual-motion safety regressions required before Phase 4 decision"
+  ]
+}

@@ -16,6 +16,8 @@ def main():
     parser.add_argument("--split", choices=["development", "held_out"], required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--freeze", type=Path)
+    parser.add_argument("--clusters", type=int, default=4)
+    parser.add_argument("--exclude-generation", type=Path, nargs="*", default=[])
     args = parser.parse_args()
     if args.split == "held_out":
         if not args.freeze:
@@ -25,7 +27,19 @@ def main():
             if sha256(Path(name)) != digest:
                 raise ValueError("Frozen configuration/source changed: " + name)
         master = random.SystemRandom().randrange(1_000_000, 2_000_000_000)
-        seeds = random.Random(master).sample(range(1_000_000, 2_000_000_000), 4)
+        if not 1 <= args.clusters <= 100:
+            raise ValueError("Invalid cluster count")
+        excluded = {
+            seed
+            for path in args.exclude_generation
+            for seed in json.loads(path.read_text())["start_seeds"]
+        }
+        rng = random.Random(master)
+        while True:
+            seeds = rng.sample(range(1_000_000, 2_000_000_000), args.clusters)
+            if not excluded.intersection(seeds):
+                break
+
     else:
         master, seeds = None, [210, 211, 212]
     args.output.mkdir(parents=True, exist_ok=False)
@@ -61,6 +75,9 @@ def main():
             "split": args.split,
             "master_seed": master,
             "start_seeds": seeds,
+            "excluded_generation_sha256": {
+                str(path): sha256(path) for path in args.exclude_generation
+            },
             "freeze_sha256": sha256(args.freeze) if args.freeze else None,
             "generator_sha256": sha256(Path(__file__)),
             "protocol_sha256": sha256(Path("configs/robotics/phase32_protocol.json")),

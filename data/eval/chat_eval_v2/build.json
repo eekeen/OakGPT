@@ -1,0 +1,72 @@
+{
+  "version": "chat_eval_v2",
+  "pillow": "10.1.0",
+  "fonts": {
+    "arial": {
+      "file": "arial.ttf",
+      "sha256": "c9b76220a5be42ead4733611e417cd65c5fd8aeaa33eb56576ac378a37d130a1"
+    },
+    "arialbd": {
+      "file": "arialbd.ttf",
+      "sha256": "766f06ac8761f82f25d032a220e89438f6064591af9915061f20b949efdedf69"
+    },
+    "calibri": {
+      "file": "calibri.ttf",
+      "sha256": "198e8dac512206f27c9bdbfeb3d5b3e55a33de9dcf58d801823ef8c5ef5a76dc"
+    },
+    "consola": {
+      "file": "consola.ttf",
+      "sha256": "c6e6ce8119fdd47ec6a5449a08e2d2ad7f41ea03143aae193068ed9fa58eaebc"
+    },
+    "georgia": {
+      "file": "georgia.ttf",
+      "sha256": "38dffcaf1fac89492f7c56c600a14daf36ae42f7c21985cd4134ae113124a58f"
+    },
+    "segoeui": {
+      "file": "segoeui.ttf",
+      "sha256": "ba32a222b23d727267cf1aba4e5296fe84ce99b9d910915103fc085d7931bc88"
+    },
+    "segoeuib": {
+      "file": "segoeuib.ttf",
+      "sha256": "1b242874a2f57529060e770ba313e027a99d40b3c36e1c7e8b2dece16ad6ed88"
+    },
+    "segoesc": {
+      "file": "segoesc.ttf",
+      "sha256": "d0dfad2f6bbe7ff7c0f96a0c80a28bd4f4624f900573a61abd9d29406d3775d7"
+    },
+    "tahoma": {
+      "file": "tahoma.ttf",
+      "sha256": "b890858df485549d20fcb0a2c519dffe9c5c155d16b55e0b9252d6e66db555e5"
+    },
+    "times": {
+      "file": "times.ttf",
+      "sha256": "2cff2a03d8034801979dd6d16f09b9a825c3d710fcf068f2ebfbf0e1425c87cf"
+    },
+    "timesbd": {
+      "file": "timesbd.ttf",
+      "sha256": "621b4a765fef5d255d19530f4bf936104c6519f2e232a0eef1923474e5b9cf22"
+    },
+    "verdana": {
+      "file": "verdana.ttf",
+      "sha256": "6a8481fe107ee547893c018b13dba291c2020bec3de5da6525d9ac09f6bc2105"
+    }
+  },
+  "photo_processing": {
+    "max_side": 896,
+    "jpeg_quality": 85,
+    "metadata": "not copied"
+  },
+  "contamination": {
+    "references": {
+      "chat_eval_v1": {
+        "prompts": 67,
+        "eight_grams": 198
+      },
+      "c2_distill_v1": {
+        "prompts": 1076,
+        "eight_grams": 4787
+      }
+    },
+    "overlaps": []
+  }
+}
